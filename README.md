@@ -1,6 +1,14 @@
-# light
+# Dotkernel Light
 
-Minimal project to generate a simple website.
+Dotkernel Light is an application (skeleton) using Mezzio microframework and Laminas components. It's designed as a minimal project to generate a simple website, like a presentation site.
+
+> Check out our [demo](https://light.dotkernel.net/).
+
+## Documentation
+
+Documentation is available at: https://docs.dotkernel.org/light-documentation/
+
+## Badges
 
 ![OSS Lifecycle](https://img.shields.io/osslifecycle/dotkernel/light)
 ![PHP from Packagist (specify version)](https://img.shields.io/packagist/php-v/dotkernel/light/1.1.0)
