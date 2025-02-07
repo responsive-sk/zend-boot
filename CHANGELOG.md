@@ -1,5 +1,27 @@
 # Changelog
 
+## 1.1.1 - 2025-02-07
+
+### Changed
+
+* Issue [#28](https://github.com/dotkernel/light/issues/28): Bumped dependencies in `composer.json` by [@alexmerlin](https://github.com/alexmerlin) in [#29](https://github.com/dotkernel/light/pull/29)
+
+### Added
+
+* Added documentation link to README.md by [@arhimede](https://github.com/arhimede) in [#26](https://github.com/dotkernel/light/pull/26)
+
+### Deprecated
+
+* Nothing
+
+### Removed
+
+* Issue [#28](https://github.com/dotkernel/light/issues/28): Removed dependency `friendsofphp/proxy-manager-lts` from `composer.json` by [@alexmerlin](https://github.com/alexmerlin) in [#29](https://github.com/dotkernel/light/pull/29)
+
+### Fixed
+
+* Nothing
+
 ## 1.1.0 - 2025-01-22
 
 ### Changed
