@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Light\Page;
+namespace Light\App;
 
-use Light\Page\Handler\AboutUsHandler;
-use Light\Page\Handler\WhoWeAreHandler;
+use Light\App\Handler\IndexHandler;
 use Mezzio\Application;
 use Psr\Container\ContainerInterface;
 
@@ -18,8 +17,7 @@ class RoutesDelegator
         $app = $callback();
         assert($app instanceof Application);
 
-        $app->get('/page/about-us', [AboutUsHandler::class], 'page.about-us');
-        $app->get('/page/who-we-are', [WhoWeAreHandler::class], 'page.who-we-are');
+        $app->get('/', [IndexHandler::class], 'app.index');
 
         return $app;
     }

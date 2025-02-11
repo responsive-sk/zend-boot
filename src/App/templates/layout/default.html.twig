@@ -7,7 +7,9 @@
 
         <title>{% block title %}{% endblock %} | Dotkernel Light V1</title>
         {% block canonical %}
-            <link rel="canonical" href="{{ url(routeName ?? null) }}" />
+            {% if routeName is defined and routeName is not empty %}
+                <link rel="canonical" href="{{ url(routeName) }}" />
+            {% endif %}
         {% endblock %}
 
         <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/app/favicon/apple-touch-icon.png') }}">
@@ -46,16 +48,16 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="pageDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
                                     <div class="dropdown-menu" aria-labelledby="pageDropdown">
-                                        <a class="dropdown-item" href="{{ url('page', {action: 'home'}) }}">Home</a>
-                                        <a class="dropdown-item" href="{{ url('page', {action: 'about-us'}) }}">About Us</a>
-                                        <a class="dropdown-item" href="{{ url('page', {action: 'who-we-are'}) }}">Who We Are</a>
+                                        <a class="dropdown-item" href="{{ url('app.index') }}">Home</a>
+                                        <a class="dropdown-item" href="{{ url('page.about-us') }}">About Us</a>
+                                        <a class="dropdown-item" href="{{ url('page.who-we-are') }}">Who We Are</a>
                                     </div>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="https://github.com/dotkernel/light/" target="_blank">GitHub</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link disabled" href="{{ url('page', {action: 'index'}) }}">Disabled</a>
+                                    <a class="nav-link disabled" href="{{ url('app.index') }}">Disabled</a>
                                 </li>
                             </ul>
                         </div>

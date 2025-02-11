@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace LightTest\Unit\Page;
 
 use Light\Page\ConfigProvider;
-use Light\Page\Controller\PageController;
 use Light\Page\RoutesDelegator;
 use Light\Page\Service\PageService;
 use Light\Page\Service\PageServiceInterface;
@@ -49,7 +48,6 @@ class ConfigProviderTest extends TestCase
     {
         $this->assertArrayHasKey('factories', $this->config['dependencies']);
         $this->assertIsArray($this->config['dependencies']['factories']);
-        $this->assertArrayHasKey(PageController::class, $this->config['dependencies']['factories']);
         $this->assertArrayHasKey(PageService::class, $this->config['dependencies']['factories']);
     }
 

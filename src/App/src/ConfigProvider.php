@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Light\App;
 
+use Light\App\Factory\IndexHandlerFactory;
+use Light\App\Handler\IndexHandler;
+
 class ConfigProvider
 {
     public function __invoke(): array
@@ -16,7 +19,11 @@ class ConfigProvider
 
     public function getDependencies(): array
     {
-        return [];
+        return [
+            'factories' => [
+                IndexHandler::class => IndexHandlerFactory::class,
+            ],
+        ];
     }
 
     public function getTemplates(): array

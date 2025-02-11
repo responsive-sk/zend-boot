@@ -18,7 +18,7 @@ return [
         // generating responses.
         'error_handler' => [
             'template_404'   => 'error::404',
-            'template_error' => 'error::error',
+            'template_error' => 'error::500',
         ],
     ],
 ];
