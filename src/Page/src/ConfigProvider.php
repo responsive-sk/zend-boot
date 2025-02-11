@@ -11,6 +11,8 @@ use Light\Page\Handler\AboutUsHandler;
 use Light\Page\Handler\WhoWeAreHandler;
 use Light\Page\Service\PageService;
 use Light\Page\Service\PageServiceInterface;
+use Light\App\RoutesDelegator as AppRoutesDelegator;
+use Light\Page\RoutesDelegator as PageRoutesDelegator;
 use Mezzio\Application;
 
 class ConfigProvider
@@ -28,8 +30,8 @@ class ConfigProvider
         return [
             'delegators' => [
                 Application::class => [
-                    \Light\App\RoutesDelegator::class,
-                    RoutesDelegator::class,
+                    AppRoutesDelegator::class,
+                    PageRoutesDelegator::class,
                 ],
             ],
             'factories'  => [
