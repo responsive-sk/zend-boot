@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace Light\Page;
 
-use Light\App\RoutesDelegator as AppRoutesDelegator;
-use Light\Page\Factory\AboutUsHandlerFactory;
+use Light\Page\Factory\PageHandlerFactory;
 use Light\Page\Factory\PageServiceFactory;
-use Light\Page\Factory\WhoWeAreHandlerFactory;
-use Light\Page\Handler\AboutUsHandler;
-use Light\Page\Handler\WhoWeAreHandler;
-use Light\Page\RoutesDelegator as PageRoutesDelegator;
+use Light\Page\Handler\PageHandler;
+use Light\Page\RoutesDelegator;
 use Light\Page\Service\PageService;
 use Light\Page\Service\PageServiceInterface;
 use Mezzio\Application;
@@ -30,13 +27,11 @@ class ConfigProvider
         return [
             'delegators' => [
                 Application::class => [
-                    AppRoutesDelegator::class,
-                    PageRoutesDelegator::class,
+                    RoutesDelegator::class,
                 ],
             ],
             'factories'  => [
-                AboutUsHandler::class  => AboutUsHandlerFactory::class,
-                WhoWeAreHandler::class => WhoWeAreHandlerFactory::class,
+                PageHandler::class  => PageHandlerFactory::class,
                 PageService::class     => PageServiceFactory::class,
             ],
             'aliases'    => [

@@ -6,6 +6,7 @@ namespace Light\App;
 
 use Light\App\Factory\IndexHandlerFactory;
 use Light\App\Handler\IndexHandler;
+use Mezzio\Application;
 
 class ConfigProvider
 {
@@ -20,6 +21,11 @@ class ConfigProvider
     public function getDependencies(): array
     {
         return [
+            'delegators' => [
+                Application::class => [
+                    RoutesDelegator::class,
+                ],
+            ],
             'factories' => [
                 IndexHandler::class => IndexHandlerFactory::class,
             ],

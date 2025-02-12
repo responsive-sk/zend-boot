@@ -49,8 +49,8 @@
                                     <a class="nav-link dropdown-toggle" href="#" id="pageDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
                                     <div class="dropdown-menu" aria-labelledby="pageDropdown">
                                         <a class="dropdown-item" href="{{ url('app.index') }}">Home</a>
-                                        <a class="dropdown-item" href="{{ url('page.about-us') }}">About Us</a>
-                                        <a class="dropdown-item" href="{{ url('page.who-we-are') }}">Who We Are</a>
+                                        <a class="dropdown-item" href="{{ url('page', {action : 'about-us'}) }}">About Us</a>
+                                        <a class="dropdown-item" href="{{ url('page', {action : 'who-we-are'}) }}">Who We Are</a>
                                     </div>
                                 </li>
                                 <li class="nav-item">
