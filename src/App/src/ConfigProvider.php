@@ -26,7 +26,7 @@ class ConfigProvider
                     RoutesDelegator::class,
                 ],
             ],
-            'factories' => [
+            'factories'  => [
                 IndexHandler::class => IndexHandlerFactory::class,
             ],
         ];

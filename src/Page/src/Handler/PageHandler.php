@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Light\Page\Handler;
 
 use Laminas\Diactoros\Response\HtmlResponse;
@@ -21,7 +23,7 @@ class PageHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $actionTemplateMapping = [
-            'about-us' => 'page::about',
+            'about-us'   => 'page::about',
             'who-we-are' => 'page::who-we-are',
         ];
 

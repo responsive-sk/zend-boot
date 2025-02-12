@@ -31,8 +31,8 @@ class ConfigProvider
                 ],
             ],
             'factories'  => [
-                PageHandler::class  => PageHandlerFactory::class,
-                PageService::class     => PageServiceFactory::class,
+                PageHandler::class => PageHandlerFactory::class,
+                PageService::class => PageServiceFactory::class,
             ],
             'aliases'    => [
                 PageServiceInterface::class => PageService::class,
