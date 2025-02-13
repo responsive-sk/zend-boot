@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Light\Page\Factory;
 
 use Light\Page\Handler\PageHandler;
-use Mezzio\Handler\NotFoundHandler;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
@@ -24,9 +23,6 @@ class PageHandlerFactory
         $template = $container->get(TemplateRendererInterface::class);
         assert($template instanceof TemplateRendererInterface);
 
-        $notFoundHandler = $container->get(NotFoundHandler::class);
-        assert($notFoundHandler instanceof NotFoundHandler);
-
-        return new PageHandler($template, $notFoundHandler);
+        return new PageHandler($template);
     }
 }

@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace LightTest\Unit\Page;
 
+use Light\Page\Handler\PageHandler;
 use Light\Page\RoutesDelegator;
 use Mezzio\Application;
+use Mezzio\Router\Route;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
+
+use function sprintf;
 
 class RoutesDelegatorTest extends TestCase
 {
@@ -17,11 +21,37 @@ class RoutesDelegatorTest extends TestCase
      */
     public function testWillInvoke(): void
     {
-        $application = (new RoutesDelegator())(
-            $this->createMock(ContainerInterface::class),
+        $moduleName   = 'test';
+        $routeName    = 'test_route_name';
+        $routeUri     = sprintf('/%s/%s', $moduleName, $routeName);
+        $templateName = sprintf('%s::%s', $moduleName, $routeName);
+
+        $container = $this->createMock(ContainerInterface::class);
+        $app       = $this->createMock(Application::class);
+
+        $app->method('get')->willReturn($this->createMock(Route::class));
+        $app
+            ->expects($this->exactly(1))
+            ->method('get')
+            ->willReturnCallback(function (...$args) use ($routeUri, $templateName) {
+                $this->assertSame($routeUri, $args[0]);
+                $this->assertSame([[PageHandler::class]], [$args[1]]);
+                $this->assertSame($templateName, $args[2]);
+            });
+
+        $container->method('get')->with('config')->willReturn([
+            'routes' => [
+                $moduleName => [
+                    $routeName => $routeName,
+                ],
+            ],
+        ]);
+
+        $application  = (new RoutesDelegator())(
+            $container,
             '',
-            function () {
-                return $this->createMock(Application::class);
+            $callback = function () use ($app) {
+                return $app;
             }
         );
 

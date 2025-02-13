@@ -17,7 +17,7 @@ class RoutesDelegator
         $app = $callback();
         assert($app instanceof Application);
 
-        $app->get('/', [IndexHandler::class], 'app.index');
+        $app->get('/', [IndexHandler::class], 'app::index');
 
         return $app;
     }
