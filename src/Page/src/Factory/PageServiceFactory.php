@@ -10,6 +10,9 @@ use Psr\Container\ContainerInterface;
 
 class PageServiceFactory
 {
+    /**
+     * @param class-string $requestedName
+     */
     public function __invoke(ContainerInterface $container, string $requestedName): PageServiceInterface
     {
         return new PageService();

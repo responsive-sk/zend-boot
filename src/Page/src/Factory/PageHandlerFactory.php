@@ -15,6 +15,7 @@ use function assert;
 class PageHandlerFactory
 {
     /**
+     * @param class-string $requestedName
      * @throws NotFoundExceptionInterface
      * @throws ContainerExceptionInterface
      */

@@ -15,8 +15,9 @@ use function assert;
 class IndexHandlerFactory
 {
     /**
-     * @throws NotFoundExceptionInterface
+     * @param class-string $requestedName
      * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public function __invoke(ContainerInterface $container, string $requestedName): IndexHandler
     {
