@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Light\Page;
 
-use Light\Page\Controller\PageController;
-use Light\Page\Factory\PageControllerFactory;
+use Light\Page\Factory\PageHandlerFactory;
 use Light\Page\Factory\PageServiceFactory;
+use Light\Page\Handler\PageHandler;
+use Light\Page\RoutesDelegator;
 use Light\Page\Service\PageService;
 use Light\Page\Service\PageServiceInterface;
 use Mezzio\Application;
@@ -30,8 +31,8 @@ class ConfigProvider
                 ],
             ],
             'factories'  => [
-                PageController::class => PageControllerFactory::class,
-                PageService::class    => PageServiceFactory::class,
+                PageHandler::class => PageHandlerFactory::class,
+                PageService::class => PageServiceFactory::class,
             ],
             'aliases'    => [
                 PageServiceInterface::class => PageService::class,

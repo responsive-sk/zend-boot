@@ -15,4 +15,10 @@ return [
     'application' => [
         'url' => $baseUrl,
     ],
+    'routes'      => [
+        'page' => [
+            'about'      => 'about',
+            'who-we-are' => 'who-we-are',
+        ],
+    ],
 ];
