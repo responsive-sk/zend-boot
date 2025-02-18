@@ -30,7 +30,6 @@ Documentation is available at: https://docs.dotkernel.org/light-documentation/
     - [Composer](#composer)
     - [Choose a destination path for Dotkernel `light` installation](#choosing-an-installation-path-for-dotkernel-light)
     - [Installing Dotkernel light](#installing-dotkernel-light)
-    - [Configuration - First Run](#configuration---first-run)
     - [Testing (Running)](#running-the-application)
 
 ## Tools
