@@ -90,10 +90,6 @@ The next question is:
 
 You should enter `y` and press `Enter`.
 
-## Configuration - First Run
-
-- duplicate `config/autoload/local.php.dist` as `config/autoload/local.php`
-
 ## Development mode
 
 Run this command to enable dev mode by turning debug flag to `true` and turning configuration caching to `off`. It will also make sure that any existing config cache is cleared.
