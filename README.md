@@ -30,7 +30,6 @@ Documentation is available at: https://docs.dotkernel.org/light-documentation/
     - [Composer](#composer)
     - [Choose a destination path for Dotkernel `light` installation](#choosing-an-installation-path-for-dotkernel-light)
     - [Installing Dotkernel light](#installing-dotkernel-light)
-    - [Configuration - First Run](#configuration---first-run)
     - [Testing (Running)](#running-the-application)
 
 ## Tools
@@ -89,10 +88,6 @@ The next question is:
 `Remember this option for other packages of the same type? (Y/n)`
 
 You should enter `y` and press `Enter`.
-
-## Configuration - First Run
-
-- duplicate `config/autoload/local.php.dist` as `config/autoload/local.php`
 
 ## Development mode
 
