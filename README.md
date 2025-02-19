@@ -1,6 +1,6 @@
 # Dotkernel Light
 
-Dotkernel Light is an application (skeleton) using Mezzio microframework and Laminas components.
+Dotkernel Light is a PSR-15 compliant application (skeleton) using Mezzio microframework and Laminas components.
 It's designed as a minimal project to generate a simple website, like a presentation site.
 
 > Check out our [demo](https://light.dotkernel.net/).
