@@ -12,7 +12,7 @@ use Psr\Container\NotFoundExceptionInterface;
 
 use function assert;
 
-class PageHandlerFactory
+class GetPageViewHandlerFactory
 {
     /**
      * @param class-string $requestedName
