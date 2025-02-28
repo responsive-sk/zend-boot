@@ -1,22 +1,23 @@
 <?php
 
+/**
+ * Uncomment below configurations and customize extra providers according to your project's needs.
+ *
+ * Improve extra data processors by extending them via a custom class and configure it under *Provider.processor.class.
+ * Overwrite extra data processors by creating a custom class and configure it under *Provider.processor.class.
+ *
+ * Read more about providers/processors here: https://docs.dotkernel.org/dot-errorhandler/v4/extra/introduction/
+ */
+
 declare(strict_types=1);
 
 use Dot\ErrorHandler\Extra\ExtraProvider;
-use Dot\ErrorHandler\Extra\Processor\CookieProcessor;
-use Dot\ErrorHandler\Extra\Processor\HeaderProcessor;
-use Dot\ErrorHandler\Extra\Processor\ProcessorInterface;
-use Dot\ErrorHandler\Extra\Processor\RequestProcessor;
-use Dot\ErrorHandler\Extra\Processor\ServerProcessor;
-use Dot\ErrorHandler\Extra\Processor\SessionProcessor;
-use Dot\ErrorHandler\Extra\Processor\TraceProcessor;
 use Dot\ErrorHandler\Extra\Provider\CookieProvider;
 use Dot\ErrorHandler\Extra\Provider\HeaderProvider;
 use Dot\ErrorHandler\Extra\Provider\RequestProvider;
 use Dot\ErrorHandler\Extra\Provider\ServerProvider;
 use Dot\ErrorHandler\Extra\Provider\SessionProvider;
 use Dot\ErrorHandler\Extra\Provider\TraceProvider;
-use Dot\ErrorHandler\Extra\ReplacementStrategy;
 use Dot\Log\Formatter\Json;
 use Dot\Log\Logger;
 
@@ -26,53 +27,58 @@ return [
         'logger'                  => 'dot-log.default_logger',
         ExtraProvider::CONFIG_KEY => [
             CookieProvider::class  => [
-                'enabled'   => false,
-                'processor' => [
-                    'class'               => CookieProcessor::class,
-                    'replacementStrategy' => ReplacementStrategy::Full,
-                    'sensitiveParameters' => [
-                        ProcessorInterface::ALL,
-                    ],
-                ],
+                'enabled' => false,
+//                'processor' => [
+//                    'class'               => \Dot\ErrorHandler\Extra\Processor\CookieProcessor::class,
+//                    'replacementStrategy' => \Dot\ErrorHandler\Extra\ReplacementStrategy::Full,
+//                    'sensitiveParameters' => [
+//                        \Dot\ErrorHandler\Extra\Processor\ProcessorInterface::ALL,
+//                    ],
+//                ],
             ],
             HeaderProvider::class  => [
-                'enabled'   => false,
-                'processor' => [
-                    'class'               => HeaderProcessor::class,
-                    'replacementStrategy' => ReplacementStrategy::Full,
-                ],
+                'enabled' => false,
+//                'processor' => [
+//                    'class'               => \Dot\ErrorHandler\Extra\Processor\HeaderProcessor::class,
+//                    'replacementStrategy' => \Dot\ErrorHandler\Extra\ReplacementStrategy::Full,
+//                    'sensitiveParameters' => [],
+//                ],
             ],
             RequestProvider::class => [
-                'enabled'   => false,
-                'processor' => [
-                    'class'               => RequestProcessor::class,
-                    'replacementStrategy' => ReplacementStrategy::Full,
-                    'sensitiveParameters' => [
-                        'password',
-                    ],
-                ],
+                'enabled' => false,
+//                'processor' => [
+//                    'class'               => \Dot\ErrorHandler\Extra\Processor\RequestProcessor::class,
+//                    'replacementStrategy' => \Dot\ErrorHandler\Extra\ReplacementStrategy::Full,
+//                    'sensitiveParameters' => [
+//                        'password',
+//                    ],
+//                ],
             ],
             ServerProvider::class  => [
-                'enabled'   => false,
-                'processor' => [
-                    'class'               => ServerProcessor::class,
-                    'replacementStrategy' => ReplacementStrategy::Full,
-                    'sensitiveParameters' => [
-                        ProcessorInterface::ALL,
-                    ],
-                ],
+                'enabled' => true,
+//                'processor' => [
+//                    'class'               => \Dot\ErrorHandler\Extra\Processor\ServerProcessor::class,
+//                    'replacementStrategy' => \Dot\ErrorHandler\Extra\ReplacementStrategy::Full,
+//                    'sensitiveParameters' => [
+//                        \Dot\ErrorHandler\Extra\Processor\ProcessorInterface::ALL,
+//                    ],
+//                ],
             ],
             SessionProvider::class => [
-                'enabled'   => false,
-                'processor' => [
-                    'class' => SessionProcessor::class,
-                ],
+                'enabled' => false,
+//                'processor' => [
+//                    'class'               => \Dot\ErrorHandler\Extra\Processor\SessionProcessor::class,
+//                    'replacementStrategy' => \Dot\ErrorHandler\Extra\ReplacementStrategy::Full,
+//                    'sensitiveParameters' => [],
+//                ],
             ],
             TraceProvider::class   => [
-                'enabled'   => true,
-                'processor' => [
-                    'class' => TraceProcessor::class,
-                ],
+                'enabled' => true,
+//                'processor' => [
+//                    'class'               => \Dot\ErrorHandler\Extra\Processor\TraceProcessor::class,
+//                    'replacementStrategy' => \Dot\ErrorHandler\Extra\ReplacementStrategy::Full,
+//                    'sensitiveParameters' => [],
+//                ],
             ],
         ],
     ],
