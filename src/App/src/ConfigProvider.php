@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Light\App;
 
-use Light\App\Factory\IndexHandlerFactory;
-use Light\App\Handler\IndexHandler;
+use Light\App\Factory\GetIndexViewHandlerFactory;
+use Light\App\Handler\GetIndexViewHandler;
 use Mezzio\Application;
 
 class ConfigProvider
@@ -27,7 +27,7 @@ class ConfigProvider
                 ],
             ],
             'factories'  => [
-                IndexHandler::class => IndexHandlerFactory::class,
+                GetIndexViewHandler::class => GetIndexViewHandlerFactory::class,
             ],
         ];
     }

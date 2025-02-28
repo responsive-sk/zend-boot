@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Light\App;
 
-use Light\App\Handler\IndexHandler;
+use Light\App\Handler\GetIndexViewHandler;
 use Mezzio\Application;
 use Psr\Container\ContainerInterface;
 
@@ -17,7 +17,7 @@ class RoutesDelegator
         $app = $callback();
         assert($app instanceof Application);
 
-        $app->get('/', [IndexHandler::class], 'app::index');
+        $app->get('/', [GetIndexViewHandler::class], 'app::index');
 
         return $app;
     }
