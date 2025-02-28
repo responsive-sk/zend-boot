@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Light\Page\Factory;
 
-use Light\Page\Handler\PageHandler;
+use Light\Page\Handler\GetPageViewHandler;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
@@ -19,11 +19,11 @@ class PageHandlerFactory
      * @throws NotFoundExceptionInterface
      * @throws ContainerExceptionInterface
      */
-    public function __invoke(ContainerInterface $container, string $requestedName): PageHandler
+    public function __invoke(ContainerInterface $container, string $requestedName): GetPageViewHandler
     {
         $template = $container->get(TemplateRendererInterface::class);
         assert($template instanceof TemplateRendererInterface);
 
-        return new PageHandler($template);
+        return new GetPageViewHandler($template);
     }
 }

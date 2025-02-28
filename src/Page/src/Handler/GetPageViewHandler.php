@@ -11,7 +11,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class PageHandler implements RequestHandlerInterface
+class GetPageViewHandler implements RequestHandlerInterface
 {
     public function __construct(
         protected TemplateRendererInterface $template,

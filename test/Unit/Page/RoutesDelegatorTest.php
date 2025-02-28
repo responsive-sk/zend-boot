@@ -4,20 +4,24 @@ declare(strict_types=1);
 
 namespace LightTest\Unit\Page;
 
-use Light\Page\Handler\PageHandler;
+use Light\Page\Handler\GetPageViewHandler;
 use Light\Page\RoutesDelegator;
 use Mezzio\Application;
 use Mezzio\Router\Route;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 use function sprintf;
 
 class RoutesDelegatorTest extends TestCase
 {
     /**
+     * @throws ContainerExceptionInterface
      * @throws Exception
+     * @throws NotFoundExceptionInterface
      */
     public function testWillInvoke(): void
     {
@@ -35,7 +39,7 @@ class RoutesDelegatorTest extends TestCase
             ->method('get')
             ->willReturnCallback(function (...$args) use ($routeUri, $templateName) {
                 $this->assertSame($routeUri, $args[0]);
-                $this->assertSame([[PageHandler::class]], [$args[1]]);
+                $this->assertSame([GetPageViewHandler::class], [$args[1]]);
                 $this->assertSame($templateName, $args[2]);
             });
 

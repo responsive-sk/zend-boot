@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Light\Page;
 
-use Light\Page\Handler\PageHandler;
+use Light\Page\Handler\GetPageViewHandler;
 use Mezzio\Application;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
@@ -25,12 +25,12 @@ class RoutesDelegator
         assert($app instanceof Application);
 
         $routes = $container->get('config')['routes'] ?? [];
-        foreach ($routes as $moduleName => $moduleRoutes) {
+        foreach ($routes as $prefix => $moduleRoutes) {
             foreach ($moduleRoutes as $routeUri => $templateName) {
                 $app->get(
-                    sprintf('/%s/%s', $moduleName, $routeUri),
-                    [PageHandler::class],
-                    sprintf('%s::%s', $moduleName, $templateName)
+                    sprintf('/%s/%s', $prefix, $routeUri),
+                    GetPageViewHandler::class,
+                    sprintf('%s::%s', $prefix, $templateName)
                 );
             }
         }

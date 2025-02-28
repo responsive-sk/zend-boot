@@ -27,7 +27,7 @@
     },
     "require": {
         "php": "~8.2.0 || ~8.3.0 || ~8.4.0",
-        "dotkernel/dot-errorhandler": "^4.1.1",
+        "dotkernel/dot-errorhandler": "^4.2.0",
         "laminas/laminas-component-installer": "^3.5.0",
         "laminas/laminas-config-aggregator": "^1.17.0",
         "mezzio/mezzio": "^3.20.1",
@@ -66,7 +66,6 @@
         "development-disable": "laminas-development-mode disable",
         "development-enable": "laminas-development-mode enable",
         "development-status": "laminas-development-mode status",
-        "mezzio": "mezzio --ansi",
         "check": [
             "@cs-check",
             "@twig-cs-check",
