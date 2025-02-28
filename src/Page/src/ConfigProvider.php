@@ -6,8 +6,7 @@ namespace Light\Page;
 
 use Light\Page\Factory\PageHandlerFactory;
 use Light\Page\Factory\PageServiceFactory;
-use Light\Page\Handler\PageHandler;
-use Light\Page\RoutesDelegator;
+use Light\Page\Handler\GetPageViewHandler;
 use Light\Page\Service\PageService;
 use Light\Page\Service\PageServiceInterface;
 use Mezzio\Application;
@@ -31,8 +30,8 @@ class ConfigProvider
                 ],
             ],
             'factories'  => [
-                PageHandler::class => PageHandlerFactory::class,
-                PageService::class => PageServiceFactory::class,
+                GetPageViewHandler::class => PageHandlerFactory::class,
+                PageService::class        => PageServiceFactory::class,
             ],
             'aliases'    => [
                 PageServiceInterface::class => PageService::class,

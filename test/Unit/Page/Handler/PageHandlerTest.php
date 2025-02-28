@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace LightTest\Unit\Page\Handler;
 
 use Laminas\Diactoros\Response\HtmlResponse;
-use Light\Page\Handler\PageHandler;
+use Light\Page\Handler\GetPageViewHandler;
 use Mezzio\Router\RouteResult;
 use Mezzio\Template\TemplateRendererInterface;
 use PHPUnit\Framework\MockObject\Exception;
@@ -20,7 +20,7 @@ class PageHandlerTest extends TestCase
      */
     public function testWillInstantiate(): void
     {
-        $handler = $this->createMock(PageHandler::class);
+        $handler = $this->createMock(GetPageViewHandler::class);
 
         $this->assertContainsOnlyInstancesOf(RequestHandlerInterface::class, [$handler]);
     }
@@ -49,7 +49,7 @@ class PageHandlerTest extends TestCase
             ->with($routeName)
             ->willReturn('<p>' . $routeName . '</p>');
 
-        $handler = new PageHandler($template);
+        $handler = new GetPageViewHandler($template);
 
         $response = $handler->handle($request);
 
