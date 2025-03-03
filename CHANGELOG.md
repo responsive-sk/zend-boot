@@ -1,5 +1,37 @@
 # Changelog
 
+## 1.2.0 - 2025-03-03
+
+Implemented `PSR-15`-compliant request handlers, which replace request controllers.
+
+Since these files are meant to handle one single action, their names must reflect their responsibility.
+
+For this, we introduced a unified handler naming pattern used across the application: `HTTP Verb` + `Resource` + `Action` + `Extra (optional)` + `Handler`.
+
+### Changed
+
+* Issue [#42](https://github.com/dotkernel/light/issues/42): Refactored `PageHandler` to reflect naming standard by [@alexmerlin](https://github.com/alexmerlin) in [#43](https://github.com/dotkernel/light/pull/43)
+* Issue [#46](https://github.com/dotkernel/light/issues/46): Renamed `PageHandlerFactory` to `GetPageViewHandlerFactory` by [@alexmerlin](https://github.com/alexmerlin) in [#47](https://github.com/dotkernel/light/pull/47)
+* Update qodana_code_quality.yml by [@arhimede](https://github.com/arhimede) in [#34](https://github.com/dotkernel/light/pull/34)
+
+### Added
+
+* Issue [#44](https://github.com/dotkernel/light/issues/44): Added full config for `dot-errorhandler` by [@alexmerlin](https://github.com/alexmerlin) in [#45](https://github.com/dotkernel/light/pull/45)
+* Run `PHPStan` checks on `PHP 8.4` as well by [@alexmerlin](https://github.com/alexmerlin) in [#40](https://github.com/dotkernel/light/pull/40)
+
+### Deprecated
+
+* Nothing
+
+### Removed
+
+* Issue [#27](https://github.com/dotkernel/light/issues/27): Removed `dotkernel/dot-controller` and replaced with handlers by [@MarioRadu](https://github.com/MarioRadu) in [#33](https://github.com/dotkernel/light/pull/33)
+* Removed section "Configuration - First Run" from README.md by [@Howriq](https://github.com/Howriq) in [#38](https://github.com/dotkernel/light/pull/38)
+
+### Fixed
+
+* Nothing
+
 ## 1.1.1 - 2025-02-07
 
 ### Changed
