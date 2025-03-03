@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Light\Page;
 
-use Light\Page\Factory\PageHandlerFactory;
+use Light\Page\Factory\GetPageViewHandlerFactory;
 use Light\Page\Factory\PageServiceFactory;
 use Light\Page\Handler\GetPageViewHandler;
 use Light\Page\Service\PageService;
@@ -30,7 +30,7 @@ class ConfigProvider
                 ],
             ],
             'factories'  => [
-                GetPageViewHandler::class => PageHandlerFactory::class,
+                GetPageViewHandler::class => GetPageViewHandlerFactory::class,
                 PageService::class        => PageServiceFactory::class,
             ],
             'aliases'    => [

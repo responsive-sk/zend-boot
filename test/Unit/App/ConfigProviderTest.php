@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace LightTest\Unit\App;
 
 use Light\App\ConfigProvider;
-use Light\App\Handler\IndexHandler;
+use Light\App\Handler\GetIndexViewHandler;
 use PHPUnit\Framework\TestCase;
 
 class ConfigProviderTest extends TestCase
@@ -28,7 +28,7 @@ class ConfigProviderTest extends TestCase
     {
         $this->assertArrayHasKey('factories', $this->config['dependencies']);
         $this->assertIsArray($this->config['dependencies']['factories']);
-        $this->assertArrayHasKey(IndexHandler::class, $this->config['dependencies']['factories']);
+        $this->assertArrayHasKey(GetIndexViewHandler::class, $this->config['dependencies']['factories']);
     }
 
     public function testConfigHasTemplates(): void

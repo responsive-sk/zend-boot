@@ -10,7 +10,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class IndexHandler implements RequestHandlerInterface
+class GetIndexViewHandler implements RequestHandlerInterface
 {
     public function __construct(
         protected TemplateRendererInterface $template

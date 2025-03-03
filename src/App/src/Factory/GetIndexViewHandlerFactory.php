@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Light\Page\Factory;
+namespace Light\App\Factory;
 
-use Light\Page\Handler\GetPageViewHandler;
+use Light\App\Handler\GetIndexViewHandler;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
@@ -12,18 +12,18 @@ use Psr\Container\NotFoundExceptionInterface;
 
 use function assert;
 
-class PageHandlerFactory
+class GetIndexViewHandlerFactory
 {
     /**
      * @param class-string $requestedName
-     * @throws NotFoundExceptionInterface
      * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
-    public function __invoke(ContainerInterface $container, string $requestedName): GetPageViewHandler
+    public function __invoke(ContainerInterface $container, string $requestedName): GetIndexViewHandler
     {
         $template = $container->get(TemplateRendererInterface::class);
         assert($template instanceof TemplateRendererInterface);
 
-        return new GetPageViewHandler($template);
+        return new GetIndexViewHandler($template);
     }
 }
