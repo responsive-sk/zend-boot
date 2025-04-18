@@ -56,6 +56,8 @@
     "lightningcss": "^1.29.3",
     "npm": "^10.8.3",
     "npm-check": "^6.0.1",
+    "popper.js": "^1.16.1",
+    "vite-jsconfig-paths": "^2.0.1",
     "vite-plugin-bundle-css": "^0.1.1",
     "vite-plugin-css-injected-by-js": "^3.5.2",
     "vite-plugin-minify": "^2.1.0"

@@ -15,7 +15,7 @@ export default defineConfig({
                 },
                 {
                     src: 'App/assets/images/*',
-                    dest: 'images'
+                    dest: 'images/app/'
                 },
             ],
         }),
