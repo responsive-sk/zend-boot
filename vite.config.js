@@ -41,14 +41,10 @@ export default defineConfig({
     resolve: {
         alias: [
             {
-                find: /@(.*)/, replacement: join(resolve(__dirname, 'src/App/assets/'), "$1")
-            },
-            {
                 // this is required for the SCSS modules
                 find: /^~(.*)$/,
                 replacement: '$1',
             }
         ],
     },
-
 });
