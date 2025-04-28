@@ -1,11 +1,8 @@
 // Load jQuery and Bootstrap
-try {
-    window.$ = window.jQuery = require('jquery');
-    require('bootstrap');
-    require('bootstrap-fileinput');
-    require('bootstrap-slider');
-    require('jquery-mousewheel');
+// Import our custom CSS
+import '../scss/index.scss'
+import './components/_main'
+import 'bootstrap/dist/js/bootstrap.bundle';
+window.$ = window.jQuery = require('jquery');
 
-    window.toastr = require('toastr');
-} catch (e) {
-}
+// Import all of Bootstrap's JS
