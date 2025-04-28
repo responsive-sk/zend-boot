@@ -47,3 +47,7 @@ package-lock.json
 .project
 .buildpath
 .settings/
+
+#. DS_store crap files
+**/.DS_Store
+
