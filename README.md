@@ -99,7 +99,9 @@ composer development-enable
 
 - If not already done, remove the `.dist` extension from `config/autoload/development.local.php.dist`.
 
-## NPM Commands
+## Bundle Static Modules
+
+> Prerequisite software: Node.js v20 (minimum supported version)
 
 To install dependencies into the `node_modules` directory run this command.
 
@@ -107,19 +109,14 @@ To install dependencies into the `node_modules` directory run this command.
 npm install
 ```
 
-- If `npm install` fails, this could be caused by user permissions of npm. Recommendation is to install npm through `Node Version Manager`.
+> If `npm install` fails, this could be caused by user permissions of npm.
+Recommendation is to install npm through `Node Version Manager`.
 
-The watch command compiles the components then watches the files and recompiles when one of them changes.
+The build command compiles the components then monitors the source files and triggers their recompilation when one of them is changed.
 
 ```shell
-npm run watch
+npm run build
 ```  
-
-After all updates are done, this command compiles the assets locally, minifies them and makes them ready for production.
-
-```shell
-npm run prod
-```
 
 ## Running the application
 
