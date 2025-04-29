@@ -47,3 +47,6 @@ package-lock.json
 .project
 .buildpath
 .settings/
+
+# Ignore the file .DS_Store in all directories
+**/.DS_Store
