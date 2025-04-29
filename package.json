@@ -5,7 +5,6 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "preview": "php -S 0.0.0.0:8080 -t public",
     "build": "vite build --watch"
   },
   "repository": {
