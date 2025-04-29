@@ -99,7 +99,7 @@ composer development-enable
 
 - If not already done, remove the `.dist` extension from `config/autoload/development.local.php.dist`.
 
-## Bundle Static Modules
+## Bundling Static Modules
 
 > Prerequisite software: Node.js v20 (minimum supported version)
 
@@ -109,10 +109,14 @@ To install dependencies into the `node_modules` directory run this command.
 npm install
 ```
 
-> If `npm install` fails, this could be caused by user permissions of npm.
-Recommendation is to install npm through `Node Version Manager`.
+If `npm install` fails, this could be caused by user permissions of npm.
+We recommend installing npm through `Node Version Manager`.
 
-The build command compiles the components then monitors the source files and triggers their recompilation when one of them is changed.
+> You can skip the next step until you make changes in the `src/App/assets` folder
+
+The build command compiles the components from the `src/App/assets` folder into the `public` folder.
+
+> This command overwrites existing files in the `public` folder.
 
 ```shell
 npm run build
