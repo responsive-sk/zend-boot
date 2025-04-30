@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 // phpcs:disable PSR1.Files.SideEffects.FoundWithSymbols
 
+/**
+ * @param array{source: string, destination: string} $file
+ */
 function copyFile(array $file): void
 {
     if (is_readable($file['destination'])) {
