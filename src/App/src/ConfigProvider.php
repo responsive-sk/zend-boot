@@ -10,6 +10,12 @@ use Mezzio\Application;
 
 class ConfigProvider
 {
+    /**
+    @return array{
+     *     dependencies: array<mixed>,
+     *     templates: array<mixed>,
+     * }
+     */
     public function __invoke(): array
     {
         return [
@@ -18,6 +24,12 @@ class ConfigProvider
         ];
     }
 
+    /**
+     * @return array{
+     *     delegators: array<class-string, array<class-string>>,
+     *     factories: array<class-string, class-string>,
+     * }
+     */
     public function getDependencies(): array
     {
         return [
@@ -32,6 +44,16 @@ class ConfigProvider
         ];
     }
 
+    /**
+     * @return array{
+     *     paths: array{
+     *          app: array{literal-string&non-falsy-string},
+     *          error: array{literal-string&non-falsy-string},
+     *          layout: array{literal-string&non-falsy-string},
+     *          partial: array{literal-string&non-falsy-string},
+     *     }
+     * }
+     */
     public function getTemplates(): array
     {
         return [
