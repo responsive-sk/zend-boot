@@ -24,6 +24,7 @@ $aggregator = new ConfigAggregator([
                 'App\Handler\HomeHandler' => 'App\Handler\HomeHandlerFactory',
                 'App\Handler\BootstrapDemoHandler' => 'App\Handler\BootstrapDemoHandlerFactory',
                 'App\Handler\MainDemoHandler' => 'App\Handler\MainDemoHandlerFactory',
+                'App\Helper\AssetHelper' => 'App\Helper\AssetHelperFactory',
             ],
         ],
     ]),

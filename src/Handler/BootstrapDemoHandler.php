@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
+use App\Helper\AssetHelper;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -11,16 +12,37 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class BootstrapDemoHandler implements RequestHandlerInterface
 {
+    public function __construct(
+        private AssetHelper $assetHelper
+    ) {
+    }
+
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+        $themeInfo = $this->assetHelper->getThemeInfo('bootstrap');
+        $cssUrl = $this->assetHelper->css('bootstrap');
+        $jsUrl = $this->assetHelper->js('bootstrap');
+
         return new HtmlResponse('
             <!DOCTYPE html>
             <html lang="sk">
             <head>
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
-                <title>Bootstrap Theme Demo</title>
-                <link href="/themes/bootstrap/assets/main.css" rel="stylesheet">
+                <meta name="description" content="Bootstrap 5.3 téma demo pre Mezzio aplikáciu. Ukážka responzívnych komponentov, utility classes a JavaScript pluginov.">
+                <meta name="keywords" content="Bootstrap, Mezzio, responsive design, CSS framework, components">
+                <meta name="author" content="Mezzio Minimal App">
+                <title>Bootstrap Theme Demo - Mezzio Application</title>
+                <link href="' . $cssUrl . '" rel="stylesheet">
+                <style>
+                    /* Improved contrast for accessibility */
+                    .text-muted { color: #495057 !important; }
+                    .text-secondary { color: #495057 !important; }
+                    .card-text { color: #212529; }
+                    .list-group-item { color: #212529; }
+                    p { color: #212529; }
+                    .lead { color: #495057; }
+                </style>
             </head>
             <body>
                 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -44,15 +66,15 @@ class BootstrapDemoHandler implements RequestHandlerInterface
                                 <div class="card-body">
                                     <p class="lead">Toto je demo stránka s Bootstrap témou.</p>
                                     <p>Bootstrap poskytuje robustný framework pre rýchly vývoj responzívnych webových aplikácií.</p>
-                                    
-                                    <h4>Funkcie:</h4>
+
+                                    <h3>Funkcie:</h3>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">Responzívny grid systém</li>
                                         <li class="list-group-item">Predpripravené komponenty</li>
                                         <li class="list-group-item">JavaScript pluginy</li>
                                         <li class="list-group-item">Utility classes</li>
                                     </ul>
-                                    
+
                                     <div class="mt-3">
                                         <button type="button" class="btn btn-primary me-2">Primary Button</button>
                                         <button type="button" class="btn btn-secondary me-2">Secondary Button</button>
@@ -61,16 +83,18 @@ class BootstrapDemoHandler implements RequestHandlerInterface
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-md-4">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Info Panel</h5>
+                                    <h3>Info Panel</h3>
                                 </div>
                                 <div class="card-body">
-                                    <p><strong>Téma:</strong> Bootstrap 5.3</p>
+                                    <p><strong>Téma:</strong> ' . htmlspecialchars($themeInfo['name']) . '</p>
+                                    <p><strong>Verzia:</strong> ' . htmlspecialchars($themeInfo['version']) . '</p>
                                     <p><strong>Build:</strong> Vite</p>
-                                    <p><strong>Assets:</strong> /themes/bootstrap/</p>
+                                    <p><strong>CSS:</strong> ' . htmlspecialchars($cssUrl) . '</p>
+                                    <p><strong>JS:</strong> ' . htmlspecialchars($jsUrl) . '</p>
                                     <p><strong>Bezpečnosť:</strong> Len povolené cesty</p>
                                 </div>
                             </div>
@@ -78,7 +102,7 @@ class BootstrapDemoHandler implements RequestHandlerInterface
                     </div>
                 </div>
 
-                <script src="/themes/bootstrap/assets/main.js"></script>
+                <script src="' . $jsUrl . '"></script>
             </body>
             </html>
         ');

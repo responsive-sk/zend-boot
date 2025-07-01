@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /config/
+Disallow: /src/
+Disallow: /vendor/
+Disallow: /data/
+Allow: /
+
+Sitemap: https://your-domain.com/sitemap.xml

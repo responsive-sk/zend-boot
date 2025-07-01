@@ -46,11 +46,7 @@
         "build:themes:prod": "cd themes/bootstrap && pnpm run build:prod && cd ../main && pnpm run build:prod",
         "build:dev": "./build-dev.sh",
         "build:production": "./build-production.sh",
-        "build:production:package": "./build-to-directory.sh production",
-        "build:staging": "./build-to-directory.sh staging",
-        "build:release": "./build-to-directory.sh release archive",
-        "clean:themes": "rm -rf public/themes/*/assets/ public/themes/*/.vite/",
-        "clean:build": "rm -rf build/production build/staging"
+        "clean:themes": "rm -rf public/themes/*/assets/ public/themes/*/.vite/"
     },
     "config": {
         "sort-packages": true,

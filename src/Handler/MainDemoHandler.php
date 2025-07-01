@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
+use App\Helper\AssetHelper;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -11,16 +12,28 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class MainDemoHandler implements RequestHandlerInterface
 {
+    public function __construct(
+        private AssetHelper $assetHelper
+    ) {
+    }
+
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+        $themeInfo = $this->assetHelper->getThemeInfo('main');
+        $cssUrl = $this->assetHelper->css('main');
+        $jsUrl = $this->assetHelper->js('main');
+
         return new HtmlResponse('
             <!DOCTYPE html>
             <html lang="sk">
             <head>
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
-                <title>Main Theme Demo</title>
-                <link href="/themes/main/assets/main.css" rel="stylesheet">
+                <meta name="description" content="TailwindCSS + Alpine.js téma demo pre Mezzio aplikáciu. Utility-first CSS framework s reaktívnymi komponentmi.">
+                <meta name="keywords" content="TailwindCSS, Alpine.js, Mezzio, utility-first CSS, reactive components">
+                <meta name="author" content="Mezzio Minimal App">
+                <title>TailwindCSS + Alpine.js Demo - Mezzio Application</title>
+                <link href="' . $cssUrl . '" rel="stylesheet">
             </head>
             <body class="bg-gray-50">
                 <nav class="bg-white shadow-sm border-b border-gray-200">
@@ -45,8 +58,8 @@ class MainDemoHandler implements RequestHandlerInterface
                                 <h2 class="text-2xl font-bold text-gray-900 mb-4">TailwindCSS + Alpine.js Demo</h2>
                                 <p class="text-lg text-gray-600 mb-6">Toto je demo stránka s modernou main témou.</p>
                                 <p class="text-gray-600 mb-6">TailwindCSS poskytuje utility-first prístup pre rýchle a flexibilné štýlovanie, zatiaľ čo Alpine.js pridáva reaktivitu bez zložitosti.</p>
-                                
-                                <h4 class="text-lg font-semibold text-gray-900 mb-3">Funkcie:</h4>
+
+                                <h3 class="text-lg font-semibold text-gray-900 mb-3">Funkcie:</h3>
                                 <ul class="space-y-2 mb-6">
                                     <li class="flex items-center text-gray-600">
                                         <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -73,41 +86,49 @@ class MainDemoHandler implements RequestHandlerInterface
                                         Optimalizované pre výkon
                                     </li>
                                 </ul>
-                                
+
                                 <!-- Alpine.js Demo -->
                                 <div x-data="{ open: false }" class="mb-6">
                                     <button @click="open = !open" class="btn btn-primary">
                                         <span x-text="open ? \'Skryť demo\' : \'Zobraziť Alpine.js demo\'"></span>
                                     </button>
-                                    
+
                                     <div x-show="open" x-transition class="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                                        <h5 class="font-semibold text-blue-900 mb-2">Alpine.js v akcii!</h5>
+                                        <h4 class="font-semibold text-blue-900 mb-2">Alpine.js v akcii!</h4>
                                         <p class="text-blue-700">Toto je reaktívny komponent vytvorený s Alpine.js. Kliknutím na tlačidlo sa obsah zobrazí/skryje s plynulou animáciou.</p>
                                     </div>
                                 </div>
-                                
+
                                 <div class="flex space-x-3">
                                     <button class="btn btn-primary">Primary Button</button>
                                     <button class="btn btn-secondary">Secondary Button</button>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="lg:col-span-1">
                             <div class="card">
-                                <h5 class="text-lg font-semibold text-gray-900 mb-4">Info Panel</h5>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Info Panel</h3>
                                 <div class="space-y-3 text-sm">
                                     <div>
                                         <span class="font-medium text-gray-700">Téma:</span>
-                                        <span class="text-gray-600">TailwindCSS + Alpine.js</span>
+                                        <span class="text-gray-600">' . htmlspecialchars($themeInfo['name']) . '</span>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium text-gray-700">Verzia:</span>
+                                        <span class="text-gray-600">' . htmlspecialchars($themeInfo['version']) . '</span>
                                     </div>
                                     <div>
                                         <span class="font-medium text-gray-700">Build:</span>
                                         <span class="text-gray-600">Vite</span>
                                     </div>
                                     <div>
-                                        <span class="font-medium text-gray-700">Assets:</span>
-                                        <span class="text-gray-600">/themes/main/</span>
+                                        <span class="font-medium text-gray-700">CSS:</span>
+                                        <span class="text-gray-600">' . htmlspecialchars($cssUrl) . '</span>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium text-gray-700">JS:</span>
+                                        <span class="text-gray-600">' . htmlspecialchars($jsUrl) . '</span>
                                     </div>
                                     <div>
                                         <span class="font-medium text-gray-700">Bezpečnosť:</span>
@@ -119,7 +140,7 @@ class MainDemoHandler implements RequestHandlerInterface
                     </div>
                 </div>
 
-                <script src="/themes/main/assets/main.js"></script>
+                <script src="' . $jsUrl . '"></script>
             </body>
             </html>
         ');

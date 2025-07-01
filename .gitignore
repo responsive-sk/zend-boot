@@ -2,6 +2,10 @@
 /vendor/
 composer.lock
 
+# Theme node_modules
+themes/*/node_modules/
+themes/*/pnpm-lock.yaml
+
 # Cache and temporary files
 /data/cache/
 /data/config-cache.php
