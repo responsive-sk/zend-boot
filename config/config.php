@@ -22,6 +22,8 @@ $aggregator = new ConfigAggregator([
         'dependencies' => [
             'factories' => [
                 'App\Handler\HomeHandler' => 'App\Handler\HomeHandlerFactory',
+                'App\Handler\BootstrapDemoHandler' => 'App\Handler\BootstrapDemoHandlerFactory',
+                'App\Handler\MainDemoHandler' => 'App\Handler\MainDemoHandlerFactory',
             ],
         ],
     ]),
