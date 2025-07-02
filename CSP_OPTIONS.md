@@ -1,8 +1,8 @@
 # Content Security Policy Options
 
-## Current CSP (Alpine.js + Bootstrap Compatible)
+## Current CSP (Alpine.js + Bootstrap + Lorem Picsum Compatible)
 ```
-Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'
+Content-Security-Policy: base-uri 'self'; default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://picsum.photos; font-src 'self'; frame-ancestors 'none'; upgrade-insecure-requests
 ```
 
 ## Alternative CSP Options
@@ -40,6 +40,12 @@ Bootstrap needs `blob:` in `img-src` because it:
 - May generate blob URLs for dynamic images
 - Uses blob URLs for certain components
 - Creates temporary object URLs for image processing
+
+### Lorem Picsum Requirements
+Lorem Picsum needs `https://picsum.photos` in `img-src` because it:
+- Provides placeholder images from external domain
+- Used for portfolio showcase and demo content
+- Requires external domain access for image loading
 
 ## Security vs Functionality Trade-off
 

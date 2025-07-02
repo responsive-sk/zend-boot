@@ -305,15 +305,36 @@ class HomeHandler implements RequestHandlerInterface
                         position: relative;
                         height: 200px;
                         overflow: hidden;
-                    }
-                    .portfolio-image img {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: white;
+                        font-size: 1.2rem;
+                        font-weight: 600;
+                        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
                         transition: transform 0.3s ease;
                     }
-                    .portfolio-card:hover .portfolio-image img {
+                    .portfolio-image.hdm-boot {
+                        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    }
+                    .portfolio-image.slim4 {
+                        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                    }
+                    .portfolio-image.ephemeris {
+                        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+                    }
+                    .portfolio-card:hover .portfolio-image {
                         transform: scale(1.05);
+                    }
+                    .portfolio-image::before {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.1"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+                        animation: float 20s ease-in-out infinite;
                     }
                     .coming-soon-overlay {
                         position: absolute;
@@ -502,8 +523,8 @@ class HomeHandler implements RequestHandlerInterface
 
                         <div class="portfolio-grid">
                             <div class="portfolio-card">
-                                <div class="portfolio-image">
-                                    <img src="https://picsum.photos/400/250?random=1" alt="HDM Boot - Mezzio Framework" loading="lazy">
+                                <div class="portfolio-image hdm-boot">
+                                    <span>🚀 HDM Boot Framework</span>
                                 </div>
                                 <div class="portfolio-content">
                                     <h3>🚀 HDM Boot</h3>
@@ -518,8 +539,8 @@ class HomeHandler implements RequestHandlerInterface
                             </div>
 
                             <div class="portfolio-card">
-                                <div class="portfolio-image">
-                                    <img src="https://picsum.photos/400/250?random=2" alt="Slim4 Stack - Micro Framework" loading="lazy">
+                                <div class="portfolio-image slim4">
+                                    <span>⚡ Slim4 Stack</span>
                                 </div>
                                 <div class="portfolio-content">
                                     <h3>⚡ Slim4 Stack</h3>
@@ -534,8 +555,8 @@ class HomeHandler implements RequestHandlerInterface
                             </div>
 
                             <div class="portfolio-card coming-soon">
-                                <div class="portfolio-image">
-                                    <img src="https://picsum.photos/400/250?random=3" alt="Ephemeris Swiss Module" loading="lazy">
+                                <div class="portfolio-image hdm-boot">
+                                    <span>🇨🇭 Ephemeris Swiss</span>
                                     <div class="coming-soon-overlay">
                                         <span class="coming-soon-badge">🇨🇭 Coming Soon</span>
                                     </div>
@@ -639,7 +660,7 @@ class HomeHandler implements RequestHandlerInterface
                         </div>
 
                         <div class="github-links">
-                            <a href="https://github.com/responsive-sk/hdm-boot" class="github-link" target="_blank" rel="noopener">
+                            <a href="https://github.com/responsive-sk/ephemeris" class="github-link" target="_blank" rel="noopener">
                                 📦 HDM Boot Repository
                             </a>
                             <a href="https://github.com/responsive-sk" class="github-link secondary" target="_blank" rel="noopener">
