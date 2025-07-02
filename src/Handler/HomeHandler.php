@@ -25,10 +25,10 @@ class HomeHandler implements RequestHandlerInterface
             <head>
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
-                <meta name="description" content="HDM Boot - Pokročilý Laminas Mezzio framework s theme systémom, versioned assets a production-ready optimalizáciami. Naše nové baby projekt! 💖">
-                <meta name="keywords" content="HDM Boot, Laminas, Mezzio, PHP, Bootstrap, TailwindCSS, Alpine.js, theme system, responsive-sk, production-ready">
-                <meta name="author" content="Responsive.sk - HDM Boot Team">
-                <title>HDM Boot - Laminas Mezzio Theme System | Responsive.sk</title>
+                <meta name="description" content="Root4Boot - Pokročilý Laminas Mezzio framework s theme systémom, versioned assets a production-ready optimalizáciami. Naše nové baby projekt! 💖">
+                <meta name="keywords" content="Root4Boot, HDM Boot, Laminas, Mezzio, PHP, Bootstrap, TailwindCSS, Alpine.js, theme system, responsive-sk, production-ready">
+                <meta name="author" content="Root4Boot Team - Responsive.sk">
+                <title>Root4Boot - Laminas Mezzio Theme System | root4boot.com</title>
                 <link rel="icon" href="/favicon.ico" type="image/x-icon">
                 <style>
                     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -484,9 +484,13 @@ class HomeHandler implements RequestHandlerInterface
             <body>
                 <div class="hero">
                     <div class="hero-content">
-                        <h1>🚀 HDM Boot</h1>
-                        <p class="subtitle">Pokročilý Laminas Mezzio Framework</p>
-                        <p class="tagline">Naše nové baby projekt s láskou vytvorený tímom Responsive.sk 💖</p>
+                        <h1>root4boot.com</h1>
+                        <p class="subtitle">extreme Love</br>
+                        with Last in memory</br>
+                        or First Out ?</br>
+                        or just @ reverse stack ... ?</p>
+                        <p class="tagline">Naše nové minimal bejby zrodené z lásky k energii Otca a Mamky<br>
+                             _____ responsive.sk 💖 _____</p>
 
                         <div class="cta-buttons">
                             <a href="/bootstrap-demo" class="btn btn-primary">Bootstrap Demo</a>
@@ -497,7 +501,7 @@ class HomeHandler implements RequestHandlerInterface
 
                 <div class="container">
                     <div class="features">
-                        <h2>🎯 Prečo HDM Boot?</h2>
+                        <h2>🎯 Prečo Root4Boot?</h2>
                         <div class="feature-grid">
                             <div class="feature-card">
                                 <span class="feature-icon">⚡</span>
@@ -647,7 +651,7 @@ class HomeHandler implements RequestHandlerInterface
                             <div class="tech-category">
                                 <h3>🚀 Frameworks</h3>
                                 <div class="tech-badges">
-                                    <span class="tech-badge primary">Laminas Mezzio</span>
+                                    <span class="tech-badge primary">Zend Laminas Mezzio</span>
                                     <span class="tech-badge primary">Slim Framework</span>
                                     <span class="tech-badge coming-soon">Ephemeris Swiss 🇨🇭</span>
                                 </div>
@@ -676,7 +680,7 @@ class HomeHandler implements RequestHandlerInterface
 
                         <div class="github-links">
                             <a href="https://github.com/responsive-sk/ephemeris" class="github-link" target="_blank" rel="noopener">
-                                📦 HDM Boot Repository
+                                📦 Root4Boot Repository
                             </a>
                             <a href="https://github.com/responsive-sk" class="github-link secondary" target="_blank" rel="noopener">
                                 🏢 Responsive.sk Organization
@@ -686,10 +690,10 @@ class HomeHandler implements RequestHandlerInterface
                 </div>
 
                 <div class="footer">
-                    <p>Made with 💖 by <strong>Responsive.sk</strong> team | HDM Boot v2.0.0</p>
+                    <p>Made with 💖 by <strong>responsive.sk</strong> team | HDM Boot v2.0.0</p>
                     <p>Framework Agnostic • Swiss Precision 🇨🇭 • Production Ready</p>
                     <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">
-                        HDM Boot • Slim4 Stack • Ephemeris Swiss (Coming Soon)
+                        Root4Boot • HDM Boot • Slim4 Stack • Ephemeris Swiss (Coming Soon)
                     </p>
                 </div>
             </body>

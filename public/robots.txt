@@ -5,4 +5,4 @@ Disallow: /vendor/
 Disallow: /data/
 Allow: /
 
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://root4boot.com/sitemap.xml
