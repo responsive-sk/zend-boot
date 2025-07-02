@@ -101,7 +101,7 @@ class HomeHandler implements RequestHandlerInterface
                         box-shadow: 0 4px 15px rgba(0,0,0,0.2);
                     }
                     .btn-primary {
-                        background: #fff;
+                        background: #0f1419;
                         color: #667eea;
                         border: 2px solid #fff;
                     }
@@ -117,7 +117,7 @@ class HomeHandler implements RequestHandlerInterface
                         border: 2px solid #fff;
                     }
                     .btn-secondary:hover {
-                        background: #fff;
+                        background: #0f1419;
                         color: #667eea;
                         transform: translateY(-2px);
                         box-shadow: 0 6px 20px rgba(0,0,0,0.3);
@@ -128,7 +128,7 @@ class HomeHandler implements RequestHandlerInterface
                         padding: 60px 20px;
                     }
                     .features {
-                        background: #fff;
+                        background: #0f1419;
                         border-radius: 20px;
                         padding: 60px 40px;
                         margin: -50px auto 60px;
@@ -258,11 +258,11 @@ class HomeHandler implements RequestHandlerInterface
                         box-shadow: 0 6px 20px rgba(36, 41, 46, 0.4);
                     }
                     .github-link.secondary {
-                        background: #2c3e50;
+                        background: #0f1419;
                         box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3);
                     }
                     .github-link.secondary:hover {
-                        background: #1a252f;
+                        background: #0f1419;
                         box-shadow: 0 6px 20px rgba(44, 62, 80, 0.4);
                     }
                     .footer {
@@ -272,7 +272,7 @@ class HomeHandler implements RequestHandlerInterface
                         background: rgba(0,0,0,0.1);
                     }
                     .portfolio-section {
-                        background: #fff;
+                        background: #0f1419;
                         border-radius: 20px;
                         padding: 60px 40px;
                         margin: 60px auto;
@@ -298,7 +298,7 @@ class HomeHandler implements RequestHandlerInterface
                         margin-bottom: 40px;
                     }
                     .portfolio-card {
-                        background: #fff;
+                        background: #0f1419;
                         border-radius: 15px;
                         overflow: hidden;
                         box-shadow: 0 10px 30px rgba(0,0,0,0.1);
@@ -362,14 +362,14 @@ class HomeHandler implements RequestHandlerInterface
                         justify-content: center;
                     }
                     .coming-soon-badge {
-                        background: #fff;
-                        color: #2c3e50;
+                        background: #0f1419;
+                        color: #ffffff;
                         padding: 10px 20px;
                         border-radius: 25px;
                         font-weight: 700;
                         font-size: 1.1rem;
                         box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-                        border: 2px solid #2c3e50;
+                        border: 2px solid #1a252f;
                     }
                     .portfolio-content {
                         padding: 30px;
@@ -424,7 +424,7 @@ class HomeHandler implements RequestHandlerInterface
                         gap: 40px;
                     }
                     .comparison-card {
-                        background: #fff;
+                        background: #0f1419;
                         border-radius: 15px;
                         padding: 40px;
                         box-shadow: 0 10px 30px rgba(0,0,0,0.1);
@@ -489,7 +489,8 @@ class HomeHandler implements RequestHandlerInterface
                         with Last in memory</br>
                         or First Out ?</br>
                         or just @ reverse stack ... ?</p>
-                        <p class="tagline">Naše nové minimal bejby zrodené z lásky k energii Otca a Mamky<br>
+                        <p class="tagline">Minimal MonoRepo Agnostic Bejby <br>
+                        zrodené z lásky k energii Otca a Mamky<br>
                              _____ responsive.sk 💖 _____</p>
 
                         <div class="cta-buttons">
