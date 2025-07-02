@@ -13,6 +13,12 @@ class HomeHandler implements RequestHandlerInterface
 {
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+        // Get asset helper for image URLs
+        $assetHelper = new \App\Helper\AssetHelper();
+        $hdmBootImg = $assetHelper->image('main', 'php82');
+        $slim4Img = $assetHelper->image('main', 'javascript');
+        $ephemerisImg = $assetHelper->image('main', 'digital-marketing');
+
         return new HtmlResponse('
             <!DOCTYPE html>
             <html lang="sk">
@@ -215,15 +221,17 @@ class HomeHandler implements RequestHandlerInterface
                         box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
                     }
                     .tech-badge.coming-soon {
-                        background: linear-gradient(135deg, #ffc107, #fd7e14);
-                        box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+                        background: linear-gradient(135deg, #e67e22, #d35400);
+                        box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
                         position: relative;
                         animation: pulse 2s infinite;
+                        color: white;
+                        font-weight: 700;
                     }
                     @keyframes pulse {
-                        0% { box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3); }
-                        50% { box-shadow: 0 4px 25px rgba(255, 193, 7, 0.6); }
-                        100% { box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3); }
+                        0% { box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3); }
+                        50% { box-shadow: 0 4px 25px rgba(230, 126, 34, 0.6); }
+                        100% { box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3); }
                     }
                     .github-links {
                         display: flex;
@@ -250,12 +258,12 @@ class HomeHandler implements RequestHandlerInterface
                         box-shadow: 0 6px 20px rgba(36, 41, 46, 0.4);
                     }
                     .github-link.secondary {
-                        background: #667eea;
-                        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+                        background: #2c3e50;
+                        box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3);
                     }
                     .github-link.secondary:hover {
-                        background: #5a6fd8;
-                        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+                        background: #1a252f;
+                        box-shadow: 0 6px 20px rgba(44, 62, 80, 0.4);
                     }
                     .footer {
                         text-align: center;
@@ -306,35 +314,41 @@ class HomeHandler implements RequestHandlerInterface
                         height: 200px;
                         overflow: hidden;
                         display: flex;
-                        align-items: center;
-                        justify-content: center;
+                        align-items: flex-end;
+                        justify-content: flex-start;
+                        transition: transform 0.3s ease;
+                    }
+                    .portfolio-image::before {
+                    }
+                    .portfolio-image .image-label {
+                        position: relative;
+                        z-index: 2;
                         color: white;
                         font-size: 1.2rem;
                         font-weight: 600;
-                        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-                        transition: transform 0.3s ease;
+                        text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+                        padding: 20px;
+                        margin: 0;
                     }
                     .portfolio-image.hdm-boot {
-                        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                        background-image: url("' . $hdmBootImg . '");
+                        background-size: cover;
+                        background-position: center;
                     }
                     .portfolio-image.slim4 {
-                        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                        background-image: url("' . $slim4Img . '");
+                        background-size: cover;
+                        background-position: center;
                     }
                     .portfolio-image.ephemeris {
-                        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+                        background-image: url("' . $ephemerisImg . '");
+                        background-size: cover;
+                        background-position: center;
                     }
                     .portfolio-card:hover .portfolio-image {
                         transform: scale(1.05);
                     }
                     .portfolio-image::before {
-                        content: "";
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        background: url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.1"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-                        animation: float 20s ease-in-out infinite;
                     }
                     .coming-soon-overlay {
                         position: absolute;
@@ -349,12 +363,13 @@ class HomeHandler implements RequestHandlerInterface
                     }
                     .coming-soon-badge {
                         background: #fff;
-                        color: #667eea;
+                        color: #2c3e50;
                         padding: 10px 20px;
                         border-radius: 25px;
                         font-weight: 700;
                         font-size: 1.1rem;
                         box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                        border: 2px solid #2c3e50;
                     }
                     .portfolio-content {
                         padding: 30px;
@@ -524,7 +539,7 @@ class HomeHandler implements RequestHandlerInterface
                         <div class="portfolio-grid">
                             <div class="portfolio-card">
                                 <div class="portfolio-image hdm-boot">
-                                    <span>🚀 HDM Boot Framework</span>
+                                    <div class="image-label">🚀 HDM Boot Framework</div>
                                 </div>
                                 <div class="portfolio-content">
                                     <h3>🚀 HDM Boot</h3>
@@ -540,7 +555,7 @@ class HomeHandler implements RequestHandlerInterface
 
                             <div class="portfolio-card">
                                 <div class="portfolio-image slim4">
-                                    <span>⚡ Slim4 Stack</span>
+                                    <div class="image-label">⚡ Slim4 Stack</div>
                                 </div>
                                 <div class="portfolio-content">
                                     <h3>⚡ Slim4 Stack</h3>
@@ -555,8 +570,8 @@ class HomeHandler implements RequestHandlerInterface
                             </div>
 
                             <div class="portfolio-card coming-soon">
-                                <div class="portfolio-image hdm-boot">
-                                    <span>🇨🇭 Ephemeris Swiss</span>
+                                <div class="portfolio-image ephemeris">
+                                    <div class="image-label">🇨🇭 Ephemeris Swiss</div>
                                     <div class="coming-soon-overlay">
                                         <span class="coming-soon-badge">🇨🇭 Coming Soon</span>
                                     </div>

@@ -19,7 +19,7 @@ class AssetHelper
     public function asset(string $theme, string $asset): string
     {
         $manifest = $this->getManifest($theme);
-        
+
         if (isset($manifest[$asset])) {
             return $this->publicPath . '/' . $theme . '/' . $manifest[$asset]['file'];
         }
@@ -34,7 +34,7 @@ class AssetHelper
     public function css(string $theme, string $asset = 'main.js'): string
     {
         $manifest = $this->getManifest($theme);
-        
+
         if (isset($manifest[$asset]['css'])) {
             $cssFiles = $manifest[$asset]['css'];
             if (is_array($cssFiles) && !empty($cssFiles)) {
@@ -61,7 +61,7 @@ class AssetHelper
     {
         if (!isset($this->manifests[$theme])) {
             $manifestPath = __DIR__ . '/../../public/themes/' . $theme . '/.vite/manifest.json';
-            
+
             if (file_exists($manifestPath)) {
                 $content = file_get_contents($manifestPath);
                 $this->manifests[$theme] = json_decode($content, true) ?: [];
@@ -79,11 +79,11 @@ class AssetHelper
     public function getThemeInfo(string $theme): array
     {
         $packagePath = __DIR__ . '/../../themes/' . $theme . '/package.json';
-        
+
         if (file_exists($packagePath)) {
             $content = file_get_contents($packagePath);
             $package = json_decode($content, true) ?: [];
-            
+
             return [
                 'name' => $package['name'] ?? $theme,
                 'version' => $package['version'] ?? '1.0.0',
@@ -96,5 +96,40 @@ class AssetHelper
             'version' => '1.0.0',
             'description' => '',
         ];
+    }
+
+    /**
+     * Get image URL from theme assets
+     */
+    public function image(string $theme, string $imageName): string
+    {
+        $manifest = $this->getManifest($theme);
+
+        // Look for image in manifest
+        foreach ($manifest as $key => $asset) {
+            if (str_contains($key, $imageName) && isset($asset['file'])) {
+                return "/themes/{$theme}/" . $asset['file'];
+            }
+        }
+
+        // Fallback to direct path (for development)
+        return "/themes/{$theme}/assets/{$imageName}";
+    }
+
+    /**
+     * Get all images from theme manifest
+     */
+    public function getImages(string $theme): array
+    {
+        $manifest = $this->getManifest($theme);
+        $images = [];
+
+        foreach ($manifest as $key => $asset) {
+            if (isset($asset['file']) && preg_match('/\.(jpg|jpeg|png|gif|svg|webp)$/i', $asset['file'])) {
+                $images[basename($key, '.' . pathinfo($key, PATHINFO_EXTENSION))] = "/themes/{$theme}/" . $asset['file'];
+            }
+        }
+
+        return $images;
     }
 }
