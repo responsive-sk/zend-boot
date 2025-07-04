@@ -32,7 +32,7 @@ class ConfigProvider
         return [
             'factories' => [
                 // Services
-                Service\UserRepository::class => InvokableFactory::class,
+                Service\UserRepository::class => Service\UserRepositoryFactory::class,
                 Service\AuthenticationService::class => Service\AuthenticationServiceFactory::class,
                 
                 // Handlers
@@ -48,7 +48,7 @@ class ConfigProvider
                 Middleware\RequireRoleMiddleware::class => Middleware\RequireRoleMiddlewareFactory::class,
                 
                 // Authentication & Authorization
-                AuthenticationInterface::class => PhpSession::class,
+                AuthenticationInterface::class => Service\SimpleAuthenticationFactory::class,
                 AuthorizationInterface::class => LaminasRbac::class,
                 CsrfGuardInterface::class => SessionCsrfGuard::class,
             ],

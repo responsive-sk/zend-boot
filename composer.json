@@ -22,7 +22,8 @@
         "mezzio/mezzio-csrf": "^1.10",
         "mezzio/mezzio-fastroute": "^3.1",
         "mezzio/mezzio-session": "^1.16",
-        "mezzio/mezzio-session-ext": "^1.20"
+        "mezzio/mezzio-session-ext": "^1.20",
+        "mezzio/mezzio-template": "^2.11"
     },
     "require-dev": {
         "filp/whoops": "^2.15",

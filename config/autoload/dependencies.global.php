@@ -10,6 +10,14 @@ return [
     'dependencies' => [
         'factories' => [
             \App\Service\PathService::class => \App\Service\PathServiceFactory::class,
+            \Mezzio\Template\TemplateRendererInterface::class => \App\Template\PhpRendererFactory::class,
+
+            // Database services
+            'pdo.user' => \App\Database\PdoFactory::class,
+            'pdo.mark' => \App\Database\PdoFactory::class,
+            \App\Database\MigrationService::class => \App\Database\MigrationServiceFactory::class,
+
+            // Flysystem services
             'flysystem.public.filesystem' => function (ContainerInterface $container): Filesystem {
                 $config = $container->get('config');
                 $adapter = new LocalFilesystemAdapter($config['paths']['public']);

@@ -35,6 +35,12 @@ $aggregator = new ConfigAggregator([
     // Load dependencies configuration
     new ArrayProvider(require __DIR__ . '/autoload/dependencies.global.php'),
 
+    // Load templates configuration
+    new ArrayProvider(require __DIR__ . '/autoload/templates.global.php'),
+
+    // Load database configuration
+    new ArrayProvider(require __DIR__ . '/autoload/database.global.php'),
+
     // Load application config
     new ArrayProvider([
         'dependencies' => [

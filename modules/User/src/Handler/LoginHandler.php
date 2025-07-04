@@ -42,12 +42,9 @@ class LoginHandler implements RequestHandlerInterface
             if ($form->isValid()) {
                 $validatedData = $form->getData();
                 
-                // Attempt authentication
+                // Attempt authentication directly
                 $user = $this->authentication->authenticate(
-                    $request->withParsedBody([
-                        'username' => $validatedData['credential'],
-                        'password' => $validatedData['password'],
-                    ])
+                    $request->withParsedBody($validatedData)
                 );
 
                 if ($user) {
@@ -74,14 +71,14 @@ class LoginHandler implements RequestHandlerInterface
             }
         }
 
-        // Set CSRF token
+        // Get CSRF token
         $csrfToken = $request->getAttribute('csrf_token', '');
-        $form->get('csrf_token')->setValue($csrfToken);
 
         return new HtmlResponse($this->template->render('user::login', [
             'form' => $form,
             'error' => $error,
             'title' => 'Login',
+            'csrf_token' => $csrfToken,
         ]));
     }
 }

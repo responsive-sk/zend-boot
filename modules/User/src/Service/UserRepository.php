@@ -4,95 +4,87 @@ declare(strict_types=1);
 
 namespace User\Service;
 
+use PDO;
 use User\Entity\User;
 
 /**
- * Simple in-memory user repository for demo purposes
- * In production, this would be replaced with database implementation
+ * PDO-based user repository with SQLite database
  */
 class UserRepository
 {
-    private array $users = [];
-    private int $nextId = 1;
-
-    public function __construct()
-    {
-        // Create default admin user
-        $admin = new User(
-            'admin',
-            'admin@example.com',
-            password_hash('admin123', PASSWORD_DEFAULT),
-            ['admin', 'user']
-        );
-        $admin->setId($this->nextId++);
-        $this->users[$admin->getId()] = $admin;
-
-        // Create default user
-        $user = new User(
-            'user',
-            'user@example.com',
-            password_hash('user123', PASSWORD_DEFAULT),
-            ['user']
-        );
-        $user->setId($this->nextId++);
-        $this->users[$user->getId()] = $user;
+    public function __construct(
+        private PDO $pdo
+    ) {
     }
 
     public function findById(int $id): ?User
     {
-        return $this->users[$id] ?? null;
+        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE id = ?');
+        $stmt->execute([$id]);
+        $data = $stmt->fetch();
+
+        return $data ? $this->createUserFromData($data) : null;
     }
 
     public function findByUsername(string $username): ?User
     {
-        foreach ($this->users as $user) {
-            if ($user->getUsername() === $username) {
-                return $user;
-            }
-        }
-        return null;
+        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE username = ?');
+        $stmt->execute([$username]);
+        $data = $stmt->fetch();
+
+        return $data ? $this->createUserFromData($data) : null;
     }
 
     public function findByEmail(string $email): ?User
     {
-        foreach ($this->users as $user) {
-            if ($user->getEmail() === $email) {
-                return $user;
-            }
-        }
-        return null;
+        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE email = ?');
+        $stmt->execute([$email]);
+        $data = $stmt->fetch();
+
+        return $data ? $this->createUserFromData($data) : null;
     }
 
     public function save(User $user): User
     {
         if ($user->getId() === null) {
-            $user->setId($this->nextId++);
+            return $this->insert($user);
+        } else {
+            return $this->update($user);
         }
-        
-        $this->users[$user->getId()] = $user;
-        return $user;
     }
 
     public function delete(int $id): bool
     {
-        if (isset($this->users[$id])) {
-            unset($this->users[$id]);
-            return true;
-        }
-        return false;
+        $stmt = $this->pdo->prepare('DELETE FROM users WHERE id = ?');
+        return $stmt->execute([$id]);
     }
 
     public function findAll(): array
     {
-        return array_values($this->users);
+        $stmt = $this->pdo->query('SELECT * FROM users ORDER BY created_at DESC');
+        $users = [];
+
+        while ($data = $stmt->fetch()) {
+            $users[] = $this->createUserFromData($data);
+        }
+
+        return $users;
     }
 
     public function findByRole(string $role): array
     {
-        return array_values(array_filter(
-            $this->users,
-            fn(User $user) => $user->hasRole($role)
-        ));
+        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE roles LIKE ?');
+        $stmt->execute(['%"' . $role . '"%']);
+        $users = [];
+
+        while ($data = $stmt->fetch()) {
+            $user = $this->createUserFromData($data);
+            if ($user->hasRole($role)) {
+                $users[] = $user;
+            }
+        }
+
+        return $users;
     }
 
     public function usernameExists(string $username): bool
@@ -103,5 +95,68 @@ class UserRepository
     public function emailExists(string $email): bool
     {
         return $this->findByEmail($email) !== null;
+    }
+
+    private function insert(User $user): User
+    {
+        $sql = "
+            INSERT INTO users (username, email, password_hash, roles, is_active, created_at)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            $user->getUsername(),
+            $user->getEmail(),
+            $user->getPasswordHash(),
+            json_encode($user->getRoles()),
+            $user->isActive() ? 1 : 0,
+            $user->getCreatedAt()->format('Y-m-d H:i:s')
+        ]);
+
+        $user->setId((int) $this->pdo->lastInsertId());
+        return $user;
+    }
+
+    private function update(User $user): User
+    {
+        $sql = "
+            UPDATE users
+            SET username = ?, email = ?, password_hash = ?, roles = ?,
+                is_active = ?, last_login_at = ?, updated_at = CURRENT_TIMESTAMP
+            WHERE id = ?
+        ";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            $user->getUsername(),
+            $user->getEmail(),
+            $user->getPasswordHash(),
+            json_encode($user->getRoles()),
+            $user->isActive() ? 1 : 0,
+            $user->getLastLoginAt()?->format('Y-m-d H:i:s'),
+            $user->getId()
+        ]);
+
+        return $user;
+    }
+
+    private function createUserFromData(array $data): User
+    {
+        $user = new User(
+            $data['username'],
+            $data['email'],
+            $data['password_hash'],
+            json_decode($data['roles'], true) ?: []
+        );
+
+        $user->setId((int) $data['id']);
+        $user->setActive((bool) $data['is_active']);
+
+        if ($data['last_login_at']) {
+            $user->setLastLoginAt(new \DateTimeImmutable($data['last_login_at']));
+        }
+
+        return $user;
     }
 }
