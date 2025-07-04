@@ -1,0 +1,22 @@
+<?php
+
+declare(strict_types=1);
+
+return [
+    'session' => [
+        'cookie_name' => 'MEZZIO_SESSION',
+        'cookie_domain' => '',
+        'cookie_path' => '/',
+        'cookie_secure' => false, // Set to true in production with HTTPS
+        'cookie_httponly' => true,
+        'cookie_samesite' => 'Lax',
+        'cache_expire' => 180,
+        'cache_limiter' => 'nocache',
+        'persistent' => true,
+        'ini_settings' => [
+            'session.gc_maxlifetime' => 7200, // 2 hours
+            'session.gc_probability' => 1,
+            'session.gc_divisor' => 100,
+        ],
+    ],
+];
