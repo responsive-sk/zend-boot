@@ -33,8 +33,8 @@ $app->get('/bootstrap-demo', 'App\Handler\BootstrapDemoHandler', 'bootstrap-demo
 $app->get('/main-demo', 'App\Handler\MainDemoHandler', 'main-demo');
 
 // User module routes
-$app->route('/user/login', ['User\Handler\LoginHandler', 'User\Middleware\CsrfMiddleware'], ['GET', 'POST'], 'user.login');
-$app->route('/user/register', ['User\Handler\RegistrationHandler', 'User\Middleware\CsrfMiddleware'], ['GET', 'POST'], 'user.register');
+$app->route('/user/login', 'User\Handler\LoginHandler', ['GET', 'POST'], 'user.login');
+$app->route('/user/register', 'User\Handler\RegistrationHandler', ['GET', 'POST'], 'user.register');
 $app->get('/user/logout', 'User\Handler\LogoutHandler', 'user.logout');
 
 // Protected routes

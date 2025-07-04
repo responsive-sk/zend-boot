@@ -37,15 +37,13 @@ class LoginHandler implements RequestHandlerInterface
 
         if ($request->getMethod() === 'POST') {
             $data = $request->getParsedBody();
-            $form->setData($data);
 
-            if ($form->isValid()) {
-                $validatedData = $form->getData();
-                
+            // Simple validation
+            if (empty($data['credential']) || empty($data['password'])) {
+                $error = 'Please fill in all fields.';
+            } else {
                 // Attempt authentication directly
-                $user = $this->authentication->authenticate(
-                    $request->withParsedBody($validatedData)
-                );
+                $user = $this->authentication->authenticate($request);
 
                 if ($user) {
                     // Set session data
@@ -61,13 +59,11 @@ class LoginHandler implements RequestHandlerInterface
                     // Redirect to intended page or dashboard
                     $redirectUrl = $session->get('redirect_after_login', '/user/dashboard');
                     $session->unset('redirect_after_login');
-                    
+
                     return new RedirectResponse($redirectUrl);
                 } else {
                     $error = 'Invalid credentials. Please try again.';
                 }
-            } else {
-                $error = 'Please correct the errors below.';
             }
         }
 

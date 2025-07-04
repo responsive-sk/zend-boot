@@ -20,7 +20,7 @@ class SimpleAuthentication implements AuthenticationInterface
     public function authenticate(ServerRequestInterface $request): ?UserInterface
     {
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
-        
+
         if (!$session) {
             return null;
         }
@@ -36,8 +36,10 @@ class SimpleAuthentication implements AuthenticationInterface
 
         // Try to authenticate from request data
         $parsedBody = $request->getParsedBody();
+
         if (is_array($parsedBody) && isset($parsedBody['credential'], $parsedBody['password'])) {
-            return $this->authService->authenticate($parsedBody['credential'], $parsedBody['password']);
+            $authenticatedUser = $this->authService->authenticate($parsedBody['credential'], $parsedBody['password']);
+            return $authenticatedUser;
         }
 
         return null;
