@@ -41,6 +41,15 @@ class ConfigProvider
                 Handler\LogoutHandler::class => InvokableFactory::class,
                 Handler\DashboardHandler::class => Handler\DashboardHandlerFactory::class,
                 Handler\AdminHandler::class => Handler\AdminHandlerFactory::class,
+
+                // Simple handlers (using native PHP session)
+                Handler\SimpleLoginHandler::class => Handler\SimpleLoginHandlerFactory::class,
+                Handler\SimpleDashboardHandler::class => function($container) {
+                    return new Handler\SimpleDashboardHandler(
+                        $container->get(\Mezzio\Template\TemplateRendererInterface::class)
+                    );
+                },
+                Handler\SimpleLogoutHandler::class => InvokableFactory::class,
                 
                 // Middleware
                 Middleware\CsrfMiddleware::class => Middleware\CsrfMiddlewareFactory::class,
@@ -48,14 +57,24 @@ class ConfigProvider
                 Middleware\RequireRoleMiddleware::class => Middleware\RequireRoleMiddlewareFactory::class,
                 
                 // Authentication & Authorization
-                AuthenticationInterface::class => Service\SimpleAuthenticationFactory::class,
+                AuthenticationInterface::class => PhpSession::class,
+                PhpSession::class => function($container) {
+                    return new PhpSession(
+                        $container->get(Service\AuthenticationService::class),
+                        $container->get('config')['authentication'] ?? [],
+                        function() { return new \Laminas\Diactoros\Response\RedirectResponse('/user/login'); },
+                        function($identity, array $roles = [], array $details = []) {
+                            return new Service\AuthenticatedUser(
+                                new \User\Entity\User($identity, $details['email'] ?? '', '', $roles)
+                            );
+                        }
+                    );
+                },
                 AuthorizationInterface::class => LaminasRbac::class,
-                CsrfGuardInterface::class => SessionCsrfGuard::class,
             ],
             'aliases' => [
                 'authentication' => AuthenticationInterface::class,
                 'authorization' => AuthorizationInterface::class,
-                'csrf' => CsrfGuardInterface::class,
             ],
         ];
     }

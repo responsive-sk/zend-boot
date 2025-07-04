@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace User\Handler;
 
-use Mezzio\Authentication\AuthenticationInterface;
+use Mezzio\Authentication\Session\PhpSession;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Container\ContainerInterface;
 
@@ -14,7 +14,7 @@ class LoginHandlerFactory
     {
         return new LoginHandler(
             $container->get(TemplateRendererInterface::class),
-            $container->get(AuthenticationInterface::class)
+            $container->get(PhpSession::class)
         );
     }
 }

@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace User\Handler;
 
 use Laminas\Diactoros\Response\RedirectResponse;
-use Mezzio\Session\SessionMiddleware;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class LogoutHandler implements RequestHandlerInterface
+class SimpleLogoutHandler implements RequestHandlerInterface
 {
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
@@ -34,6 +33,6 @@ class LogoutHandler implements RequestHandlerInterface
         // Destroy session
         session_destroy();
 
-        return new RedirectResponse('/user/login');
+        return new RedirectResponse('/simple-login');
     }
 }

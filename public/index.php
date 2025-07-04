@@ -31,11 +31,20 @@ $app->pipe(\Mezzio\Router\Middleware\DispatchMiddleware::class);
 $app->get('/', 'App\Handler\HomeHandler', 'home');
 $app->get('/bootstrap-demo', 'App\Handler\BootstrapDemoHandler', 'bootstrap-demo');
 $app->get('/main-demo', 'App\Handler\MainDemoHandler', 'main-demo');
+$app->route('/debug', 'App\Handler\DebugHandler', ['GET', 'POST'], 'debug');
 
 // User module routes
-$app->route('/user/login', 'User\Handler\LoginHandler', ['GET', 'POST'], 'user.login');
+$app->route('/user/login', [
+    \Mezzio\Session\SessionMiddleware::class,
+    'User\Handler\LoginHandler'
+], ['GET', 'POST'], 'user.login');
 $app->route('/user/register', 'User\Handler\RegistrationHandler', ['GET', 'POST'], 'user.register');
 $app->get('/user/logout', 'User\Handler\LogoutHandler', 'user.logout');
+
+// Simple login routes (using native PHP session)
+$app->route('/simple-login', 'User\Handler\SimpleLoginHandler', ['GET', 'POST'], 'simple.login');
+$app->get('/simple-dashboard', 'User\Handler\SimpleDashboardHandler', 'simple.dashboard');
+$app->get('/simple-logout', 'User\Handler\SimpleLogoutHandler', 'simple.logout');
 
 // Protected routes
 $app->get('/user/dashboard', [

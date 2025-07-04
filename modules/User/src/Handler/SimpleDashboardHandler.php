@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace User\Handler;
 
 use Laminas\Diactoros\Response\HtmlResponse;
-use Mezzio\Authentication\UserInterface;
+use Laminas\Diactoros\Response\RedirectResponse;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class DashboardHandler implements RequestHandlerInterface
+class SimpleDashboardHandler implements RequestHandlerInterface
 {
     public function __construct(
         private TemplateRendererInterface $template
@@ -27,20 +27,15 @@ class DashboardHandler implements RequestHandlerInterface
 
         // Check if user is logged in
         if (!isset($_SESSION['user_id'])) {
-            return new \Laminas\Diactoros\Response\RedirectResponse('/user/login');
+            return new RedirectResponse('/simple-login');
         }
 
-        // Get flash message
-        $flashSuccess = $_SESSION['flash_success'] ?? null;
-        unset($_SESSION['flash_success']);
-
-        return new HtmlResponse($this->template->render('user::dashboard', [
+        return new HtmlResponse($this->template->render('user::simple-dashboard', [
             'title' => 'Dashboard',
             'user_id' => $_SESSION['user_id'],
             'username' => $_SESSION['username'],
             'roles' => $_SESSION['roles'] ?? [],
             'login_time' => $_SESSION['login_time'] ?? null,
-            'flash_success' => $flashSuccess,
         ]));
     }
 }

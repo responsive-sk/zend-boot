@@ -6,75 +6,77 @@ namespace User\Handler;
 
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
-use Mezzio\Authentication\AuthenticationInterface;
-use Mezzio\Session\SessionMiddleware;
+use Laminas\Diactoros\Uri;
+use Mezzio\Authentication\Session\PhpSession;
+use Mezzio\Authentication\UserInterface;
+use Mezzio\Session\SessionInterface;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use User\Form\LoginForm;
 
 class LoginHandler implements RequestHandlerInterface
 {
+    private const REDIRECT_ATTRIBUTE = 'authentication:redirect';
+
     public function __construct(
         private TemplateRendererInterface $template,
-        private AuthenticationInterface $authentication
+        private PhpSession $adapter
     ) {
     }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
-        
-        // Check if user is already logged in
-        $user = $this->authentication->authenticate($request);
-        if ($user) {
-            return new RedirectResponse('/user/dashboard');
+        $session = $request->getAttribute('session');
+        $redirect = $this->getRedirect($request, $session);
+
+        // Handle submitted credentials
+        if ('POST' === $request->getMethod()) {
+            return $this->handleLoginAttempt($request, $session, $redirect);
         }
 
-        $form = new LoginForm();
-        $error = null;
+        // Display initial login form
+        $session->set(self::REDIRECT_ATTRIBUTE, $redirect);
+        return new HtmlResponse($this->template->render('user::login', [
+            'error' => null,
+            'title' => 'Login',
+        ]));
+    }
 
-        if ($request->getMethod() === 'POST') {
-            $data = $request->getParsedBody();
+    private function getRedirect(ServerRequestInterface $request, SessionInterface $session): string
+    {
+        $redirect = $session->get(self::REDIRECT_ATTRIBUTE);
 
-            // Simple validation
-            if (empty($data['credential']) || empty($data['password'])) {
-                $error = 'Please fill in all fields.';
-            } else {
-                // Attempt authentication directly
-                $user = $this->authentication->authenticate($request);
-
-                if ($user) {
-                    // Set session data
-                    $session->set('user', [
-                        'identity' => $user->getIdentity(),
-                        'roles' => iterator_to_array($user->getRoles()),
-                        'details' => $user->getDetails(),
-                    ]);
-
-                    // Add flash message
-                    $session->set('flash_success', 'Welcome back, ' . $user->getIdentity() . '!');
-
-                    // Redirect to intended page or dashboard
-                    $redirectUrl = $session->get('redirect_after_login', '/user/dashboard');
-                    $session->unset('redirect_after_login');
-
-                    return new RedirectResponse($redirectUrl);
-                } else {
-                    $error = 'Invalid credentials. Please try again.';
-                }
+        if (!$redirect) {
+            $redirect = new Uri($request->getHeaderLine('Referer'));
+            if (in_array($redirect->getPath(), ['', '/login', '/user/login'], true)) {
+                $redirect = '/user/dashboard';
             }
         }
 
-        // Get CSRF token
-        $csrfToken = $request->getAttribute('csrf_token', '');
+        return (string) $redirect;
+    }
 
+    private function handleLoginAttempt(
+        ServerRequestInterface $request,
+        SessionInterface $session,
+        string $redirect
+    ): ResponseInterface {
+        // User session takes precedence over user/pass POST in
+        // the auth adapter so we remove the session prior
+        // to auth attempt
+        $session->unset(UserInterface::class);
+
+        // Login was successful
+        if ($this->adapter->authenticate($request)) {
+            $session->unset(self::REDIRECT_ATTRIBUTE);
+            return new RedirectResponse($redirect);
+        }
+
+        // Login failed
         return new HtmlResponse($this->template->render('user::login', [
-            'form' => $form,
-            'error' => $error,
+            'error' => 'Invalid credentials; please try again',
             'title' => 'Login',
-            'csrf_token' => $csrfToken,
         ]));
     }
 }

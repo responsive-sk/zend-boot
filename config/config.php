@@ -50,6 +50,9 @@ $aggregator = new ConfigAggregator([
                 'App\Handler\MainDemoHandler' => 'App\Handler\MainDemoHandlerFactory',
                 'App\Helper\AssetHelper' => 'App\Helper\AssetHelperFactory',
             ],
+            'invokables' => [
+                'App\Handler\DebugHandler' => 'App\Handler\DebugHandler',
+            ],
         ],
     ]),
 ], $cacheConfig['config_cache_path']);

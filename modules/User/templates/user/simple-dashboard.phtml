@@ -3,15 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= $escapeHtml($title ?? 'Dashboard') ?> - User Module</title>
+    <title><?= $escapeHtml($title ?? 'Dashboard') ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="/">User Dashboard</a>
+            <a class="navbar-brand" href="/">Simple Dashboard</a>
             <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="/user/logout">Logout</a>
+                <a class="nav-link" href="/simple-logout">Logout</a>
             </div>
         </div>
     </nav>
@@ -24,14 +24,10 @@
                         <h4 class="mb-0">Welcome, <?= $escapeHtml($username) ?>!</h4>
                     </div>
                     <div class="card-body">
-                        <?php if ($flash_success): ?>
-                            <div class="alert alert-success">
-                                <?= $escapeHtml($flash_success) ?>
-                            </div>
-                        <?php endif; ?>
-
-                        <p>You are successfully logged in to your dashboard.</p>
-
+                        <div class="alert alert-success">
+                            ✅ Login successful! You are now authenticated.
+                        </div>
+                        
                         <h5>Your Session Details:</h5>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
@@ -41,7 +37,7 @@
                                 <strong>Username:</strong> <?= $escapeHtml($username) ?>
                             </li>
                             <li class="list-group-item">
-                                <strong>Roles:</strong>
+                                <strong>Roles:</strong> 
                                 <?php foreach ($roles as $role): ?>
                                     <span class="badge bg-secondary me-1"><?= $escapeHtml($role) ?></span>
                                 <?php endforeach; ?>
@@ -65,17 +61,13 @@
                     <div class="card-body">
                         <div class="d-grid gap-2">
                             <a href="/" class="btn btn-outline-primary">Home Page</a>
-                            <?php if (in_array('admin', $roles)): ?>
-                                <a href="/user/admin" class="btn btn-outline-warning">Admin Panel</a>
-                            <?php endif; ?>
-                            <a href="/user/logout" class="btn btn-outline-danger">Logout</a>
+                            <a href="/debug" class="btn btn-outline-info">Debug Info</a>
+                            <a href="/simple-logout" class="btn btn-outline-danger">Logout</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
