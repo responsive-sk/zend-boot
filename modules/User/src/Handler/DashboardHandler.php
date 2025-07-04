@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace User\Handler;
 
 use Laminas\Diactoros\Response\HtmlResponse;
+use Laminas\Diactoros\Response\RedirectResponse;
 use Mezzio\Authentication\UserInterface;
 use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -20,26 +21,26 @@ class DashboardHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        // Start PHP session
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
+        // Get user from session (set by AuthenticationMiddleware)
+        $user = $request->getAttribute(UserInterface::class);
+
+        if (!$user) {
+            return new RedirectResponse('/user/login');
         }
 
-        // Check if user is logged in
-        if (!isset($_SESSION['user_id'])) {
-            return new \Laminas\Diactoros\Response\RedirectResponse('/user/login');
+        // Get session for flash messages
+        $session = $request->getAttribute('session');
+        $flashSuccess = $session ? $session->get('flash_success') : null;
+        if ($session && $flashSuccess) {
+            $session->unset('flash_success');
         }
-
-        // Get flash message
-        $flashSuccess = $_SESSION['flash_success'] ?? null;
-        unset($_SESSION['flash_success']);
 
         return new HtmlResponse($this->template->render('user::dashboard', [
             'title' => 'Dashboard',
-            'user_id' => $_SESSION['user_id'],
-            'username' => $_SESSION['username'],
-            'roles' => $_SESSION['roles'] ?? [],
-            'login_time' => $_SESSION['login_time'] ?? null,
+            'user' => $user,
+            'username' => $user->getIdentity(),
+            'roles' => iterator_to_array($user->getRoles()),
+            'userDetails' => $user->getDetails(),
             'flash_success' => $flashSuccess,
         ]));
     }

@@ -16,14 +16,14 @@ $aggregator = new ConfigAggregator([
 
     // Mezzio packages
     \Mezzio\Session\ConfigProvider::class,
-    \Mezzio\Session\Ext\ConfigProvider::class,
+    // \Mezzio\Session\Ext\ConfigProvider::class,  // Removed - causes auto session start
     \Mezzio\Authentication\ConfigProvider::class,
     \Mezzio\Authentication\Session\ConfigProvider::class,
     \Mezzio\Authorization\ConfigProvider::class,
     \Mezzio\Authorization\Rbac\ConfigProvider::class,
     \Mezzio\Csrf\ConfigProvider::class,
 
-    // User module
+    // User module (after Mezzio packages to override)
     \User\ConfigProvider::class,
 
     // Include cache configuration
@@ -40,6 +40,9 @@ $aggregator = new ConfigAggregator([
 
     // Load database configuration
     new ArrayProvider(require __DIR__ . '/autoload/database.global.php'),
+
+    // Load authentication configuration
+    new ArrayProvider(require __DIR__ . '/autoload/authentication.global.php'),
 
     // Load application config
     new ArrayProvider([

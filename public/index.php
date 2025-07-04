@@ -23,40 +23,13 @@ $app = $container->get(Application::class);
 $factory = $container->get(MiddlewareFactory::class);
 
 // Setup pipeline
-$app->pipe(\Mezzio\Session\SessionMiddleware::class);
 $app->pipe(\Mezzio\Router\Middleware\RouteMiddleware::class);
 $app->pipe(\Mezzio\Router\Middleware\DispatchMiddleware::class);
 
-// Setup routes
-$app->get('/', 'App\Handler\HomeHandler', 'home');
-$app->get('/bootstrap-demo', 'App\Handler\BootstrapDemoHandler', 'bootstrap-demo');
-$app->get('/main-demo', 'App\Handler\MainDemoHandler', 'main-demo');
-$app->route('/debug', 'App\Handler\DebugHandler', ['GET', 'POST'], 'debug');
-
-// User module routes
-$app->route('/user/login', [
-    \Mezzio\Session\SessionMiddleware::class,
-    'User\Handler\LoginHandler'
-], ['GET', 'POST'], 'user.login');
-$app->route('/user/register', 'User\Handler\RegistrationHandler', ['GET', 'POST'], 'user.register');
-$app->get('/user/logout', 'User\Handler\LogoutHandler', 'user.logout');
-
-// Simple login routes (using native PHP session)
-$app->route('/simple-login', 'User\Handler\SimpleLoginHandler', ['GET', 'POST'], 'simple.login');
-$app->get('/simple-dashboard', 'User\Handler\SimpleDashboardHandler', 'simple.dashboard');
-$app->get('/simple-logout', 'User\Handler\SimpleLogoutHandler', 'simple.logout');
-
-// Protected routes
-$app->get('/user/dashboard', [
-    'User\Middleware\RequireLoginMiddleware',
-    'User\Handler\DashboardHandler'
-], 'user.dashboard');
-
-$app->get('/user/admin', [
-    'User\Middleware\RequireLoginMiddleware',
-    'User\Middleware\RequireRoleMiddleware',
-    'User\Handler\AdminHandler'
-], 'user.admin');
+// Load routes from separate files
+(require __DIR__ . '/../config/routes/app.php')($app);
+(require __DIR__ . '/../config/routes/user.php')($app);
+(require __DIR__ . '/../config/routes/debug.php')($app);
 
 // Run the application
 $app->run();

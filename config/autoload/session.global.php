@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 return [
     'session' => [
-        'cookie_name' => 'PHPSESSID',
+        'cookie_name' => 'mezzio',
         'cookie_domain' => '',
         'cookie_path' => '/',
         'cookie_secure' => false,

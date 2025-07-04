@@ -34,6 +34,11 @@ class ConfigProvider
                 // Services
                 Service\UserRepository::class => Service\UserRepositoryFactory::class,
                 Service\AuthenticationService::class => Service\AuthenticationServiceFactory::class,
+                Service\MezzioUserRepository::class => function($container) {
+                    return new Service\MezzioUserRepository(
+                        $container->get(Service\AuthenticationService::class)
+                    );
+                },
                 
                 // Handlers
                 Handler\LoginHandler::class => Handler\LoginHandlerFactory::class,
@@ -56,20 +61,8 @@ class ConfigProvider
                 Middleware\RequireLoginMiddleware::class => Middleware\RequireLoginMiddlewareFactory::class,
                 Middleware\RequireRoleMiddleware::class => Middleware\RequireRoleMiddlewareFactory::class,
                 
-                // Authentication & Authorization
-                AuthenticationInterface::class => PhpSession::class,
-                PhpSession::class => function($container) {
-                    return new PhpSession(
-                        $container->get(Service\AuthenticationService::class),
-                        $container->get('config')['authentication'] ?? [],
-                        function() { return new \Laminas\Diactoros\Response\RedirectResponse('/user/login'); },
-                        function($identity, array $roles = [], array $details = []) {
-                            return new Service\AuthenticatedUser(
-                                new \User\Entity\User($identity, $details['email'] ?? '', '', $roles)
-                            );
-                        }
-                    );
-                },
+                // Authorization
+                AuthorizationInterface::class => LaminasRbac::class,
                 AuthorizationInterface::class => LaminasRbac::class,
             ],
             'aliases' => [

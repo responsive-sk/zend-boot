@@ -32,13 +32,13 @@
 
                         <p>You are successfully logged in to your dashboard.</p>
 
-                        <h5>Your Session Details:</h5>
+                        <h5>Your Details:</h5>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <strong>User ID:</strong> <?= $escapeHtml($user_id) ?>
+                                <strong>Username:</strong> <?= $escapeHtml($username) ?>
                             </li>
                             <li class="list-group-item">
-                                <strong>Username:</strong> <?= $escapeHtml($username) ?>
+                                <strong>Email:</strong> <?= $escapeHtml($userDetails['email'] ?? 'N/A') ?>
                             </li>
                             <li class="list-group-item">
                                 <strong>Roles:</strong>
@@ -47,10 +47,10 @@
                                 <?php endforeach; ?>
                             </li>
                             <li class="list-group-item">
-                                <strong>Login Time:</strong> <?= $login_time ? date('Y-m-d H:i:s', $login_time) : 'N/A' ?>
+                                <strong>User ID:</strong> <?= $escapeHtml($userDetails['id'] ?? 'N/A') ?>
                             </li>
                             <li class="list-group-item">
-                                <strong>Session ID:</strong> <?= session_id() ?>
+                                <strong>Account Created:</strong> <?= $escapeHtml($userDetails['createdAt'] ?? 'N/A') ?>
                             </li>
                         </ul>
                     </div>

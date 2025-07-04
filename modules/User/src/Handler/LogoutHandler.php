@@ -14,25 +14,16 @@ class LogoutHandler implements RequestHandlerInterface
 {
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        // Start PHP session
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
+        // Get Mezzio session
+        $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
+
+        if ($session) {
+            // Clear all session data
+            $session->clear();
+
+            // Regenerate session ID
+            $session->regenerate();
         }
-
-        // Clear all session data
-        $_SESSION = [];
-
-        // Destroy session cookie
-        if (ini_get("session.use_cookies")) {
-            $params = session_get_cookie_params();
-            setcookie(session_name(), '', time() - 42000,
-                $params["path"], $params["domain"],
-                $params["secure"], $params["httponly"]
-            );
-        }
-
-        // Destroy session
-        session_destroy();
 
         return new RedirectResponse('/user/login');
     }

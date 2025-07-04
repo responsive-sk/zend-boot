@@ -113,7 +113,10 @@ class AuthenticatedUser implements UserInterface
 
     public function getDetails(): array
     {
-        return $this->user->toArray();
+        $details = $this->user->toArray();
+        // Ensure id is always present
+        $details['id'] = $this->user->getId();
+        return $details;
     }
 
     public function getUser(): User

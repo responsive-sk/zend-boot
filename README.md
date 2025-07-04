@@ -1,14 +1,18 @@
-# Mezzio Minimal Application
+# Mezzio User Management Application
 
-Minimálna Mezzio aplikácia vytvorená od základov s moderným PHP 8.4 a najlepšími praktikami.
+Kompletná Mezzio aplikácia s user managementom, autentifikáciou a modernou bezpečnosťou.
 
 ## 🚀 Funkcie
 
-- **Mezzio 3.21** - Moderný PHP middleware framework
-- **FastRoute** - Rýchly routing
-- **PSR-7/PSR-15** - HTTP message a middleware štandardy
-- **Dependency Injection** - Laminas ServiceManager
-- **Dev Tools** - PHPUnit, PHPStan, CodeSniffer, Rector
+- ✅ **User Authentication** - Session-based prihlásenie s Mezzio PhpSession
+- ✅ **Role-based Authorization** - RBAC systém s admin/user rolami
+- ✅ **SQLite Database** - Oddelené databázy pre users a application data
+- ✅ **CSRF Protection** - Kompletná bezpečnosť formulárov
+- ✅ **Path Traversal Protection** - Bezpečné file operácie s Flysystem
+- ✅ **Template System** - Jednoduchý PHP template renderer bez cache
+- ✅ **Migration System** - Automatická inicializácia databáz
+- ✅ **Bootstrap 5** - Responzívny UI framework
+- ✅ **Security Best Practices** - Password hashing, session security, XSS protection
 
 ## 📋 Požiadavky
 
@@ -25,21 +29,37 @@ cd mezzio-minimal
 # Nainštaluj dependencies
 composer install
 
-# Vytvor cache adresár
-mkdir -p data/cache
-```
+# Inicializuj databázy a vytvor default users
+php bin/migrate.php
 
-## 🏃‍♂️ Spustenie
-
-```bash
 # Spusti development server
-composer serve
-
-# Alebo manuálne
-php -S localhost:8080 -t public/ public/index.php
+php -S localhost:8080 -t public/
 ```
 
 Aplikácia bude dostupná na `http://localhost:8080`
+
+## 👤 Default Users
+
+| Username | Password | Roles | Popis |
+|----------|----------|-------|-------|
+| `admin` | `admin123` | admin, user | Plný administrátorský prístup |
+| `user` | `user123` | user | Štandardný používateľ |
+| `mark` | `mark123` | mark, user | Mark management prístup |
+
+## 🗺️ Dostupné Routes
+
+### Verejné Routes
+- `/` - Domovská stránka s Bootstrap demo
+- `/bootstrap-demo` - Bootstrap komponenty showcase
+- `/main-demo` - Hlavná aplikácia demo
+- `/user/login` - Prihlásenie používateľa
+- `/user/register` - Registrácia používateľa
+- `/debug` - Debug informácie (development)
+
+### Chránené Routes
+- `/user/dashboard` - User dashboard (vyžaduje prihlásenie)
+- `/user/admin` - Admin panel (vyžaduje admin rolu)
+- `/user/logout` - Odhlásenie
 
 ## 🧪 Development
 
@@ -71,30 +91,67 @@ composer serve
 ### Štruktúra projektu
 
 ```
-├── config/              # Konfigurácia
-│   ├── config.php      # Hlavná konfigurácia
-│   └── container.php   # DI container
-├── public/             # Web root
-│   └── index.php      # Entry point
-├── src/               # Aplikačný kód
-│   └── Handler/       # Request handlers
-├── tests/             # PHPUnit testy
-└── data/              # Cache a dáta
+├── public/              # Web root
+│   ├── index.php       # Application entry point
+│   └── assets/         # CSS, JS, images
+├── src/                # Core application
+│   ├── Handler/        # Request handlers
+│   ├── Helper/         # View helpers
+│   ├── Service/        # Business logic
+│   ├── Template/       # Template renderer
+│   └── Database/       # Database services
+├── modules/User/       # User management module
+│   ├── src/
+│   │   ├── Entity/     # User entity
+│   │   ├── Service/    # Authentication services
+│   │   ├── Handler/    # Login, dashboard handlers
+│   │   ├── Middleware/ # Auth & security middleware
+│   │   └── Form/       # Form validation
+│   ├── templates/      # User module templates
+│   └── test/           # Unit tests
+├── config/             # Configuration
+│   └── autoload/       # Auto-loaded configs
+├── data/               # SQLite databases
+├── docs/               # Documentation
+└── bin/                # CLI scripts
 ```
 
-## 📝 Pridanie novej route
+## 📚 Dokumentácia
 
-1. Vytvor handler v `src/Handler/`
-2. Vytvor factory pre handler
-3. Registruj factory v `config/config.php`
-4. Pridaj route v `public/index.php`
+- **[User Module Guide](docs/USER_MODULE.md)** - Kompletný návod na User modul
+- **[API Reference](docs/API_REFERENCE.md)** - Detailná API dokumentácia
+- **[Deployment Guide](docs/DEPLOYMENT.md)** - Production deployment návod
 
-## 🔧 Konfigurácia
+## 🔒 Bezpečnosť
 
-- **PHPUnit**: `phpunit.xml`
-- **PHPStan**: `phpstan.neon`
-- **CodeSniffer**: `phpcs.xml`
-- **Rector**: `rector.php`
+- **Password Hashing** - PHP password_hash() s bcrypt
+- **Session Security** - HTTPOnly cookies, session regeneration
+- **CSRF Protection** - Tokeny pre všetky formuláre
+- **Path Traversal Protection** - Centralizovaná validácia ciest
+- **SQL Injection Protection** - Prepared statements
+- **XSS Protection** - Template escaping
+
+## 🧪 Testovanie
+
+```bash
+# Spusti všetky testy
+composer test
+
+# Test s coverage
+composer test-coverage
+
+# Špecifické testy
+./vendor/bin/phpunit modules/User/test/
+```
+
+## 📝 Poznámky
+
+- Aplikácia používa **PSR-7** HTTP messages
+- **PSR-15** middleware pattern
+- **PSR-11** dependency injection
+- **Mezzio authentication** podľa oficiálnej dokumentácie
+- Kód dodržiava **PSR-12** coding štandardy
+- **SQLite** pre development, **PostgreSQL/MySQL** pre production
 
 ## 📄 Licencia
 
