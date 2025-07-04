@@ -38,6 +38,9 @@ $aggregator = new ConfigAggregator([
     // Load templates configuration
     new ArrayProvider(require __DIR__ . '/autoload/templates.global.php'),
 
+    // Load session configuration
+    new ArrayProvider(require __DIR__ . '/autoload/session.global.php'),
+
     // Load database configuration
     new ArrayProvider(require __DIR__ . '/autoload/database.global.php'),
 

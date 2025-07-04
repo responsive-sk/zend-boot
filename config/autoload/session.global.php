@@ -3,6 +3,15 @@
 declare(strict_types=1);
 
 return [
+    'dependencies' => [
+        'factories' => [
+            // Register SessionPersistenceInterface manually (without Session Ext)
+            \Mezzio\Session\SessionPersistenceInterface::class => function($container) {
+                return new \App\Session\SimpleSessionPersistence();
+            },
+        ],
+    ],
+
     'session' => [
         'cookie_name' => 'mezzio',
         'cookie_domain' => '',
