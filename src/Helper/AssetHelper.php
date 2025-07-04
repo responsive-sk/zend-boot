@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace App\Helper;
 
+use App\Service\PathService;
+
 class AssetHelper
 {
     private array $manifests = [];
 
     public function __construct(
+        private PathService $pathService,
         private string $publicPath = '/themes'
     ) {
     }
@@ -60,12 +63,18 @@ class AssetHelper
     private function getManifest(string $theme): array
     {
         if (!isset($this->manifests[$theme])) {
-            $manifestPath = __DIR__ . '/../../public/themes/' . $theme . '/.vite/manifest.json';
+            try {
+                // Bezpečne validuje cestu k manifest súboru
+                $manifestPath = $this->pathService->getPublicFilePath("themes/{$theme}/.vite/manifest.json");
 
-            if (file_exists($manifestPath)) {
-                $content = file_get_contents($manifestPath);
-                $this->manifests[$theme] = json_decode($content, true) ?: [];
-            } else {
+                if (file_exists($manifestPath)) {
+                    $content = file_get_contents($manifestPath);
+                    $this->manifests[$theme] = json_decode($content, true) ?: [];
+                } else {
+                    $this->manifests[$theme] = [];
+                }
+            } catch (\RuntimeException $e) {
+                // Ak cesta nie je bezpečná, vráti prázdny manifest
                 $this->manifests[$theme] = [];
             }
         }
@@ -78,17 +87,22 @@ class AssetHelper
      */
     public function getThemeInfo(string $theme): array
     {
-        $packagePath = __DIR__ . '/../../themes/' . $theme . '/package.json';
+        try {
+            // Bezpečne validuje cestu k package.json
+            $packagePath = $this->pathService->getThemeFilePath("{$theme}/package.json");
 
-        if (file_exists($packagePath)) {
-            $content = file_get_contents($packagePath);
-            $package = json_decode($content, true) ?: [];
+            if (file_exists($packagePath)) {
+                $content = file_get_contents($packagePath);
+                $package = json_decode($content, true) ?: [];
 
-            return [
-                'name' => $package['name'] ?? $theme,
-                'version' => $package['version'] ?? '1.0.0',
-                'description' => $package['description'] ?? '',
-            ];
+                return [
+                    'name' => $package['name'] ?? $theme,
+                    'version' => $package['version'] ?? '1.0.0',
+                    'description' => $package['description'] ?? '',
+                ];
+            }
+        } catch (\RuntimeException $e) {
+            // Ak cesta nie je bezpečná, vráti default hodnoty
         }
 
         return [

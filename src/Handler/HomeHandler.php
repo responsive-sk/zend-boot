@@ -11,13 +11,17 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class HomeHandler implements RequestHandlerInterface
 {
+    public function __construct(
+        private \App\Helper\AssetHelper $assetHelper
+    ) {
+    }
+
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         // Get asset helper for image URLs
-        $assetHelper = new \App\Helper\AssetHelper();
-        $hdmBootImg = $assetHelper->image('main', 'php82');
-        $slim4Img = $assetHelper->image('main', 'javascript');
-        $ephemerisImg = $assetHelper->image('main', 'digital-marketing');
+        $hdmBootImg = $this->assetHelper->image('main', 'php82');
+        $slim4Img = $this->assetHelper->image('main', 'javascript');
+        $ephemerisImg = $this->assetHelper->image('main', 'digital-marketing');
 
         return new HtmlResponse('
             <!DOCTYPE html>

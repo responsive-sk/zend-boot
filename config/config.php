@@ -17,6 +17,12 @@ $aggregator = new ConfigAggregator([
     // Include cache configuration
     new ArrayProvider($cacheConfig),
 
+    // Load paths configuration
+    new ArrayProvider(require __DIR__ . '/autoload/paths.global.php'),
+
+    // Load dependencies configuration
+    new ArrayProvider(require __DIR__ . '/autoload/dependencies.global.php'),
+
     // Load application config
     new ArrayProvider([
         'dependencies' => [
