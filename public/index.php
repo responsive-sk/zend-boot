@@ -23,6 +23,7 @@ $app = $container->get(Application::class);
 $factory = $container->get(MiddlewareFactory::class);
 
 // Setup pipeline
+$app->pipe(\Mezzio\Session\SessionMiddleware::class);
 $app->pipe(\Mezzio\Router\Middleware\RouteMiddleware::class);
 $app->pipe(\Mezzio\Router\Middleware\DispatchMiddleware::class);
 

@@ -36,7 +36,8 @@
     "autoload": {
         "psr-4": {
             "App\\": "src/",
-            "User\\": "modules/User/src/"
+            "User\\": "modules/User/src/",
+            "Mark\\": "modules/Mark/src/"
         }
     },
     "scripts": {

@@ -97,6 +97,29 @@ class UserRepository
         return $users;
     }
 
+    /**
+     * @return array<User>
+     */
+    public function findRecentlyActive(int $limit = 10): array
+    {
+        $stmt = $this->pdo->prepare('
+            SELECT * FROM users
+            WHERE last_login_at IS NOT NULL
+            ORDER BY last_login_at DESC
+            LIMIT ?
+        ');
+        $stmt->execute([$limit]);
+
+        $users = [];
+        while ($data = $stmt->fetch()) {
+            if ($data !== false) {
+                $users[] = $this->createUserFromData($data);
+            }
+        }
+
+        return $users;
+    }
+
     public function usernameExists(string $username): bool
     {
         return $this->findByUsername($username) !== null;

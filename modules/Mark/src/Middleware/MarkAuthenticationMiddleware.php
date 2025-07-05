@@ -28,8 +28,12 @@ class MarkAuthenticationMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $session = $request->getAttribute('session');
-        assert($session instanceof SessionInterface);
-        
+
+        if (!$session instanceof SessionInterface) {
+            // Session not available, redirect to mark login
+            return new RedirectResponse('/mark/login?error=session_required');
+        }
+
         // Check if mark user is authenticated
         $markUserId = $session->get('mark_user_id');
         
