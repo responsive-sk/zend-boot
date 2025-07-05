@@ -48,9 +48,10 @@ class SimpleSessionPersistence implements SessionPersistenceInterface
     {
         // Use existing session ID or generate new one
         if (session_status() === PHP_SESSION_ACTIVE) {
-            return session_id();
+            $sessionId = session_id();
+            return $sessionId !== false ? $sessionId : bin2hex(random_bytes(16));
         }
-        
+
         return bin2hex(random_bytes(16));
     }
 }

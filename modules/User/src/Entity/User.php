@@ -10,11 +10,15 @@ class User
     private string $username;
     private string $email;
     private string $passwordHash;
+    /** @var array<string> */
     private array $roles = [];
     private bool $isActive = true;
     private \DateTimeImmutable $createdAt;
     private ?\DateTimeImmutable $lastLoginAt = null;
 
+    /**
+     * @param array<string> $roles
+     */
     public function __construct(
         string $username,
         string $email,
@@ -73,11 +77,17 @@ class User
         return password_verify($password, $this->passwordHash);
     }
 
+    /**
+     * @return array<string>
+     */
     public function getRoles(): array
     {
         return $this->roles;
     }
 
+    /**
+     * @param array<string> $roles
+     */
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
@@ -125,6 +135,9 @@ class User
         $this->lastLoginAt = $lastLoginAt;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [

@@ -8,6 +8,7 @@ use App\Service\PathService;
 
 class AssetHelper
 {
+    /** @var array<string, mixed> */
     private array $manifests = [];
 
     public function __construct(
@@ -59,6 +60,7 @@ class AssetHelper
 
     /**
      * Load and cache manifest file
+     * @return array<string, mixed>
      */
     private function getManifest(string $theme): array
     {
@@ -69,7 +71,11 @@ class AssetHelper
 
                 if (file_exists($manifestPath)) {
                     $content = file_get_contents($manifestPath);
-                    $this->manifests[$theme] = json_decode($content, true) ?: [];
+                    if ($content !== false) {
+                        $this->manifests[$theme] = json_decode($content, true) ?: [];
+                    } else {
+                        $this->manifests[$theme] = [];
+                    }
                 } else {
                     $this->manifests[$theme] = [];
                 }

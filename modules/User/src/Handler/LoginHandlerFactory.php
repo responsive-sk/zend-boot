@@ -12,9 +12,12 @@ class LoginHandlerFactory
 {
     public function __invoke(ContainerInterface $container): LoginHandler
     {
-        return new LoginHandler(
-            $container->get(TemplateRendererInterface::class),
-            $container->get(PhpSession::class)
-        );
+        $template = $container->get(TemplateRendererInterface::class);
+        $adapter = $container->get(PhpSession::class);
+
+        assert($template instanceof TemplateRendererInterface);
+        assert($adapter instanceof PhpSession);
+
+        return new LoginHandler($template, $adapter);
     }
 }

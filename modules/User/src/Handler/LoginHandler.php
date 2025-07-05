@@ -28,6 +28,8 @@ class LoginHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $session = $request->getAttribute('session');
+        assert($session instanceof SessionInterface);
+
         $redirect = $this->getRedirect($request, $session);
 
         // Handle submitted credentials

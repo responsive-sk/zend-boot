@@ -17,6 +17,9 @@ use User\Service;
 
 class ConfigProvider
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function __invoke(): array
     {
         return [
@@ -27,6 +30,9 @@ class ConfigProvider
         ];
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getDependencies(): array
     {
         return [
@@ -63,7 +69,6 @@ class ConfigProvider
                 
                 // Authorization
                 AuthorizationInterface::class => LaminasRbac::class,
-                AuthorizationInterface::class => LaminasRbac::class,
             ],
             'aliases' => [
                 'authentication' => AuthenticationInterface::class,
@@ -72,6 +77,9 @@ class ConfigProvider
         ];
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getTemplates(): array
     {
         return [
@@ -81,6 +89,9 @@ class ConfigProvider
         ];
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getAuthenticationConfig(): array
     {
         return [
@@ -90,6 +101,9 @@ class ConfigProvider
         ];
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getAuthorizationConfig(): array
     {
         return [

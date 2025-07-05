@@ -59,18 +59,26 @@ class UserRepository
         return $stmt->execute([$id]);
     }
 
+    /**
+     * @return array<User>
+     */
     public function findAll(): array
     {
         $stmt = $this->pdo->query('SELECT * FROM users ORDER BY created_at DESC');
         $users = [];
 
         while ($data = $stmt->fetch()) {
-            $users[] = $this->createUserFromData($data);
+            if ($data !== false) {
+                $users[] = $this->createUserFromData($data);
+            }
         }
 
         return $users;
     }
 
+    /**
+     * @return array<User>
+     */
     public function findByRole(string $role): array
     {
         $stmt = $this->pdo->prepare('SELECT * FROM users WHERE roles LIKE ?');
@@ -78,9 +86,11 @@ class UserRepository
         $users = [];
 
         while ($data = $stmt->fetch()) {
-            $user = $this->createUserFromData($data);
-            if ($user->hasRole($role)) {
-                $users[] = $user;
+            if ($data !== false) {
+                $user = $this->createUserFromData($data);
+                if ($user->hasRole($role)) {
+                    $users[] = $user;
+                }
             }
         }
 

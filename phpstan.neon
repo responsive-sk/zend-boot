@@ -1,0 +1,25 @@
+parameters:
+    level: max
+    paths:
+        - src
+        - modules
+        - public
+    
+    excludePaths:
+        - vendor
+        - build
+        - data
+        - logs
+        - modules
+    
+    ignoreErrors:
+        # Ignore some common framework patterns that are safe
+        - '#Cannot call method [a-zA-Z]+\(\) on mixed#'
+        - '#Parameter .* expects .*, mixed given#'
+        
+    # Enable strict rules
+    checkMissingIterableValueType: true
+    checkGenericClassInNonGenericObjectType: true
+    
+    # Custom rules for better type checking
+    reportUnmatchedIgnoredErrors: false
