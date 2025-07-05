@@ -39,8 +39,19 @@ class SystemStatsService
 
     private function getTotalUsers(): int
     {
+        // Count regular users from user.db
         $stmt = $this->userPdo->query('SELECT COUNT(*) FROM users');
-        return (int) $stmt->fetchColumn();
+        $regularUsers = (int) $stmt->fetchColumn();
+
+        // Count mark users from mark.db
+        try {
+            $stmt = $this->markPdo->query('SELECT COUNT(*) FROM mark_users');
+            $markUsers = (int) $stmt->fetchColumn();
+        } catch (\Exception $e) {
+            $markUsers = 0;
+        }
+
+        return $regularUsers + $markUsers;
     }
 
     private function getTotalMarks(): int
@@ -93,10 +104,12 @@ class SystemStatsService
     {
         $sizes = [];
         
+        // Use actual database paths (currently in data/ directory)
+        $rootPath = dirname($this->pathService->storage());
         $databases = [
-            'user' => $this->pathService->storage('user.db'),
-            'mark' => $this->pathService->storage('mark.db'),
-            'system' => $this->pathService->storage('system.db'),
+            'user' => $rootPath . '/../data/user.db',
+            'mark' => $rootPath . '/../data/mark.db',
+            'system' => $rootPath . '/../data/system.db',
         ];
         
         foreach ($databases as $name => $path) {

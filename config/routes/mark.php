@@ -148,8 +148,13 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
         \Mark\Handler\LoginHandler::class,
     ]);
     
-    $app->post('/mark/logout', [
+    $app->get('/mark/logout', [
         $markAuthMiddleware,
         \Mark\Handler\LogoutHandler::class,
     ], 'mark.logout');
+
+    $app->post('/mark/logout', [
+        $markAuthMiddleware,
+        \Mark\Handler\LogoutHandler::class,
+    ]);
 };

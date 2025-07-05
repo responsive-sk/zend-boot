@@ -6,7 +6,7 @@ namespace Mark\Handler;
 
 use Psr\Container\ContainerInterface;
 use Mezzio\Template\TemplateRendererInterface;
-use User\Service\UserRepository;
+use Mark\Service\MarkUserRepository;
 
 class LoginHandlerFactory
 {
@@ -14,7 +14,7 @@ class LoginHandlerFactory
     {
         return new LoginHandler(
             $container->get(TemplateRendererInterface::class),
-            $container->get(UserRepository::class)
+            $container->get(MarkUserRepository::class)
         );
     }
 }

@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use User\Entity\User;
+use Mark\Entity\MarkUser;
 
 /**
  * HDM Boot Protocol - Supermark Authorization Middleware
@@ -23,15 +23,13 @@ class SupermarkAuthorizationMiddleware implements MiddlewareInterface
     {
         $markUser = $request->getAttribute('mark_user');
         
-        if (!$markUser instanceof User) {
+        if (!$markUser instanceof MarkUser) {
             // Should not happen if MarkAuthenticationMiddleware ran first
             return new HtmlResponse('Access denied: Authentication required', 403);
         }
-        
-        $userRoles = $markUser->getRoles();
-        
+
         // Check if user has supermark role
-        if (!in_array('supermark', $userRoles, true)) {
+        if (!$markUser->isSupermark()) {
             return new HtmlResponse(
                 $this->renderAccessDeniedPage($markUser),
                 403
@@ -42,7 +40,7 @@ class SupermarkAuthorizationMiddleware implements MiddlewareInterface
         return $handler->handle($request);
     }
 
-    private function renderAccessDeniedPage(User $markUser): string
+    private function renderAccessDeniedPage(MarkUser $markUser): string
     {
         $username = htmlspecialchars($markUser->getUsername());
         $roles = implode(', ', $markUser->getRoles());

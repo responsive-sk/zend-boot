@@ -10,7 +10,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use User\Service\UserRepository;
+use Mark\Service\MarkUserRepository;
 
 /**
  * HDM Boot Protocol - Mark Authentication Middleware
@@ -21,7 +21,7 @@ use User\Service\UserRepository;
 class MarkAuthenticationMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private UserRepository $userRepository
+        private MarkUserRepository $markUserRepository
     ) {
     }
 
@@ -42,8 +42,8 @@ class MarkAuthenticationMiddleware implements MiddlewareInterface
             return new RedirectResponse('/mark/login');
         }
         
-        // Get mark user from database
-        $markUser = $this->userRepository->findById((int) $markUserId);
+        // Get mark user from mark database
+        $markUser = $this->markUserRepository->findById((int) $markUserId);
         
         if (!$markUser || !$markUser->isActive()) {
             // Mark user not found or inactive, clear session and redirect
@@ -52,24 +52,15 @@ class MarkAuthenticationMiddleware implements MiddlewareInterface
             return new RedirectResponse('/mark/login');
         }
         
-        // Verify user has mark roles
-        $userRoles = $markUser->getRoles();
-        $markRoles = ['mark', 'editor', 'supermark'];
-        
-        $hasMarkRole = false;
-        foreach ($markRoles as $markRole) {
-            if (in_array($markRole, $userRoles, true)) {
-                $hasMarkRole = true;
-                break;
-            }
-        }
-        
-        if (!$hasMarkRole) {
+        // Verify user is a mark user (all users in mark.db should be mark users)
+        if (!$markUser->isMarkUser()) {
             // User doesn't have mark roles, deny access
             $session->unset('mark_user_id');
             $session->unset('mark_user_roles');
             return new RedirectResponse('/mark/login?error=insufficient_privileges');
         }
+
+        $userRoles = $markUser->getRoles();
         
         // Store mark user and roles in request for handlers
         $request = $request->withAttribute('mark_user', $markUser);

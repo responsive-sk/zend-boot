@@ -11,7 +11,7 @@ use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use User\Service\UserRepository;
+use Mark\Service\MarkUserRepository;
 
 /**
  * HDM Boot Protocol - Mark Login Handler
@@ -22,7 +22,7 @@ class LoginHandler implements RequestHandlerInterface
 {
     public function __construct(
         private TemplateRendererInterface $template,
-        private UserRepository $userRepository
+        private MarkUserRepository $markUserRepository
     ) {
     }
 
@@ -60,8 +60,8 @@ class LoginHandler implements RequestHandlerInterface
             return new HtmlResponse($this->renderLoginForm('Please enter username and password'));
         }
 
-        // Find user
-        $user = $this->userRepository->findByUsername($username);
+        // Find mark user in mark.db
+        $user = $this->markUserRepository->findByUsername($username);
         
         if (!$user || !$user->isActive()) {
             return new HtmlResponse($this->renderLoginForm('Invalid credentials'));
@@ -72,21 +72,12 @@ class LoginHandler implements RequestHandlerInterface
             return new HtmlResponse($this->renderLoginForm('Invalid credentials'));
         }
 
-        // Check if user has mark roles
-        $userRoles = $user->getRoles();
-        $markRoles = ['mark', 'editor', 'supermark'];
-        
-        $hasMarkRole = false;
-        foreach ($markRoles as $markRole) {
-            if (in_array($markRole, $userRoles, true)) {
-                $hasMarkRole = true;
-                break;
-            }
-        }
-
-        if (!$hasMarkRole) {
+        // All users in mark.db should be mark users, but double-check
+        if (!$user->isMarkUser()) {
             return new HtmlResponse($this->renderLoginForm('Access denied: Mark privileges required'));
         }
+
+        $userRoles = $user->getRoles();
 
         // Login successful - set mark session
         $session->set('mark_user_id', $user->getId());
@@ -95,7 +86,7 @@ class LoginHandler implements RequestHandlerInterface
 
         // Update last login
         $user->setLastLoginAt(new \DateTimeImmutable());
-        $this->userRepository->save($user);
+        $this->markUserRepository->save($user);
 
         return new RedirectResponse('/mark/dashboard');
     }

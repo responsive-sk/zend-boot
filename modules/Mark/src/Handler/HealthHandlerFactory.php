@@ -6,16 +6,14 @@ namespace Mark\Handler;
 
 use Psr\Container\ContainerInterface;
 use Mezzio\Template\TemplateRendererInterface;
-use Mark\Service\MarkUserRepository;
 use Mark\Service\SystemStatsService;
 
-class DashboardHandlerFactory
+class HealthHandlerFactory
 {
-    public function __invoke(ContainerInterface $container): DashboardHandler
+    public function __invoke(ContainerInterface $container): HealthHandler
     {
-        return new DashboardHandler(
+        return new HealthHandler(
             $container->get(TemplateRendererInterface::class),
-            $container->get(MarkUserRepository::class),
             $container->get(SystemStatsService::class)
         );
     }

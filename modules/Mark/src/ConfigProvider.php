@@ -69,10 +69,8 @@ class ConfigProvider
                 Handler\Api\HealthHandler::class => Handler\Api\HealthHandlerFactory::class,
                 
                 // Mark Services
-                Service\MarkAuthenticationService::class => Service\MarkAuthenticationServiceFactory::class,
-                Service\MarkRepository::class => Service\MarkRepositoryFactory::class,
+                Service\MarkUserRepository::class => Service\MarkUserRepositoryFactory::class,
                 Service\SystemStatsService::class => Service\SystemStatsServiceFactory::class,
-                Service\MarkPermissionService::class => Service\MarkPermissionServiceFactory::class,
             ],
         ];
     }

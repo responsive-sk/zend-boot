@@ -9,8 +9,8 @@ use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use User\Entity\User;
-use User\Service\UserRepository;
+use Mark\Entity\MarkUser;
+use Mark\Service\MarkUserRepository;
 use Mark\Service\SystemStatsService;
 
 /**
@@ -23,7 +23,7 @@ class DashboardHandler implements RequestHandlerInterface
 {
     public function __construct(
         private TemplateRendererInterface $template,
-        private UserRepository $userRepository,
+        private MarkUserRepository $markUserRepository,
         private SystemStatsService $statsService
     ) {
     }
@@ -32,7 +32,7 @@ class DashboardHandler implements RequestHandlerInterface
     {
         $markUser = $request->getAttribute('mark_user');
 
-        if (!$markUser instanceof User) {
+        if (!$markUser instanceof MarkUser) {
             return new HtmlResponse('Mark user not found in request', 500);
         }
 
@@ -45,7 +45,7 @@ class DashboardHandler implements RequestHandlerInterface
             $stats = $this->statsService->getSystemStats();
 
             // Get recent activity
-            $recentUsers = $this->userRepository->findRecentlyActive(10);
+            $recentUsers = $this->markUserRepository->findRecentlyActive(10);
 
             // Prepare dashboard data
             $dashboardData = [
@@ -58,15 +58,7 @@ class DashboardHandler implements RequestHandlerInterface
                 'title' => 'Mark Dashboard - HDM Boot Protocol',
             ];
 
-            // Temporary simple response for testing
-            $html = '<h1>Mark Dashboard - HDM Boot Protocol</h1>';
-            $html .= '<p>Welcome, ' . htmlspecialchars($markUser->getUsername()) . '</p>';
-            $html .= '<p>Roles: ' . implode(', ', $userRoles) . '</p>';
-            $html .= '<p>Stats: ' . json_encode($stats) . '</p>';
-
-            return new HtmlResponse($html);
-
-            // return new HtmlResponse($this->template->render('mark::dashboard', $dashboardData));
+            return new HtmlResponse($this->template->render('mark::dashboard', $dashboardData));
 
         } catch (\Exception $e) {
             return new HtmlResponse(
