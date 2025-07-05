@@ -23,6 +23,9 @@ class UserRepository
         $stmt->execute([$id]);
         $data = $stmt->fetch();
 
+        if (!$data || !is_array($data)) {
+            return null;
+        }
         return $data ? $this->createUserFromData($data) : null;
     }
 
@@ -32,6 +35,9 @@ class UserRepository
         $stmt->execute([$username]);
         $data = $stmt->fetch();
 
+        if (!$data || !is_array($data)) {
+            return null;
+        }
         return $data ? $this->createUserFromData($data) : null;
     }
 
@@ -41,6 +47,9 @@ class UserRepository
         $stmt->execute([$email]);
         $data = $stmt->fetch();
 
+        if (!$data || !is_array($data)) {
+            return null;
+        }
         return $data ? $this->createUserFromData($data) : null;
     }
 
@@ -71,7 +80,7 @@ class UserRepository
         $users = [];
 
         while ($data = $stmt->fetch()) {
-            if ($data !== false) {
+            if ($data !== false && is_array($data)) {
                 $users[] = $this->createUserFromData($data);
             }
         }
