@@ -11,6 +11,8 @@ $aggregator = new ConfigAggregator([
     \Mezzio\Router\FastRouteRouter\ConfigProvider::class,
     \Mezzio\Router\ConfigProvider::class,
     \Mezzio\ConfigProvider::class,
+\Mezzio\LaminasView\ConfigProvider::class,
+Laminas\Form\ConfigProvider::class,
     \Laminas\HttpHandlerRunner\ConfigProvider::class,
     \Laminas\Diactoros\ConfigProvider::class,
 
