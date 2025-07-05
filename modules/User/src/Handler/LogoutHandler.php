@@ -18,13 +18,17 @@ class LogoutHandler implements RequestHandlerInterface
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
         if ($session) {
-            // Clear all session data
-            $session->clear();
+if ($session && is_object($session)) {
+    // Clear all session data
+    if (method_exists($session, 'clear')) {
+        $session->clear();
+    }
 
-            // Regenerate session ID
-            $session->regenerate();
-        }
-
+    // Regenerate session ID
+    if (method_exists($session, 'regenerate')) {
+        $session->regenerate();
+    }
+}
         return new RedirectResponse('/user/login');
     }
 }

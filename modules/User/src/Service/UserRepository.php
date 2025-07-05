@@ -179,19 +179,39 @@ class UserRepository
 
     private function createUserFromData(array $data): User
     {
+        // Validate required fields
+        if (!isset($data['username']) || !is_string($data['username'])) {
+            throw new \InvalidArgumentException('Username is required and must be a string');
+        }
+        if (!isset($data['email']) || !is_string($data['email'])) {
+            throw new \InvalidArgumentException('Email is required and must be a string');
+        }
+        if (!isset($data['password_hash']) || !is_string($data['password_hash'])) {
+            throw new \InvalidArgumentException('Password hash is required and must be a string');
+        }
+        if (!isset($data['id']) || !is_numeric($data['id'])) {
+            throw new \InvalidArgumentException('ID is required and must be numeric');
+        }
+
+        // Parse roles safely
+        $rolesJson = $data['roles'] ?? '[]';
+        if (!is_string($rolesJson)) {
+            $rolesJson = '[]';
+        }
+        $roles = json_decode($rolesJson, true);
+        if (!is_array($roles)) {
+            $roles = [];
+        }
+
         $user = new User(
             $data['username'],
             $data['email'],
             $data['password_hash'],
-            json_decode($data['roles'], true) ?: []
+            $roles
         );
 
         $user->setId((int) $data['id']);
-        $user->setActive((bool) $data['is_active']);
-
-        if ($data['last_login_at']) {
-            $user->setLastLoginAt(new \DateTimeImmutable($data['last_login_at']));
-        }
+        $user->setActive((bool) ($data['is_active'] ?? false));
 
         return $user;
     }

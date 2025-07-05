@@ -197,11 +197,31 @@ class MarkUserRepository
     }
 
     /**
+    /**
      * @param array<string, mixed> $data
      */
     private function createMarkUserFromData(array $data): MarkUser
     {
-        $roles = json_decode($data['roles'], true);
+        // Validate required fields
+        if (!isset($data['username']) || !is_string($data['username'])) {
+            throw new \InvalidArgumentException('Username is required and must be a string');
+        }
+        if (!isset($data['email']) || !is_string($data['email'])) {
+            throw new \InvalidArgumentException('Email is required and must be a string');
+        }
+        if (!isset($data['password_hash']) || !is_string($data['password_hash'])) {
+            throw new \InvalidArgumentException('Password hash is required and must be a string');
+        }
+        if (!isset($data['id']) || !is_numeric($data['id'])) {
+            throw new \InvalidArgumentException('ID is required and must be numeric');
+        }
+
+        // Parse roles safely
+        $rolesJson = $data['roles'] ?? '[]';
+        if (!is_string($rolesJson)) {
+            $rolesJson = '[]';
+        }
+        $roles = json_decode($rolesJson, true);
         if (!is_array($roles)) {
             $roles = [];
         }
@@ -214,10 +234,15 @@ class MarkUserRepository
         );
 
         $user->setId((int) $data['id']);
-        $user->setIsActive((bool) $data['is_active']);
+        $user->setIsActive((bool) ($data['is_active'] ?? false));
 
-        if ($data['last_login_at']) {
-            $user->setLastLoginAt(new \DateTimeImmutable($data['last_login_at']));
+        // Handle last login date safely
+        if (isset($data['last_login_at']) && is_string($data['last_login_at']) && !empty($data['last_login_at'])) {
+            try {
+                $user->setLastLoginAt(new \DateTimeImmutable($data['last_login_at']));
+            } catch (\Exception $e) {
+                // Invalid date format, skip setting last login
+            }
         }
 
         return $user;
