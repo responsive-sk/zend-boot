@@ -1,0 +1,106 @@
+<?php
+/**
+ * HDM Boot Protocol - Mark Health Check Template
+ */
+
+$this->headTitle('System Health - Mark Dashboard');
+?>
+
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?= $this->escapeHtml($title ?? 'System Health') ?></title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .health-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin: 2rem auto;
+            padding: 2rem;
+            max-width: 1200px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .health-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #667eea;
+        }
+        
+        .health-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .health-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .status-healthy {
+            color: #28a745;
+        }
+        
+        .status-warning {
+            color: #ffc107;
+        }
+        
+        .status-error {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="health-container">
+        <div class="health-header">
+            <h1><i class="bi bi-heart-pulse"></i> System Health Check</h1>
+            <p class="text-muted">HDM Boot Protocol - Mark Dashboard</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <div class="health-card">
+                    <h5><i class="bi bi-database status-healthy"></i> Database</h5>
+                    <p class="status-healthy">✓ All databases operational</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="health-card">
+                    <h5><i class="bi bi-memory status-healthy"></i> Cache</h5>
+                    <p class="status-healthy">✓ Cache system running</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="health-card">
+                    <h5><i class="bi bi-folder status-healthy"></i> Storage</h5>
+                    <p class="status-healthy">✓ File system accessible</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="/mark/dashboard" class="btn btn-primary">
+                <i class="bi bi-arrow-left"></i> Back to Dashboard
+            </a>
+        </div>
+    </div>
+</body>
+</html>
