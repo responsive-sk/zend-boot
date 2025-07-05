@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Mark\Service;
 
 use Psr\Container\ContainerInterface;
-use App\Service\HdmPathService;
+use App\Service\PathServiceInterface;
 
 class SystemStatsServiceFactory
 {
@@ -15,7 +15,7 @@ class SystemStatsServiceFactory
             $container->get('pdo.user'),
             $container->get('pdo.mark'),
             $container->get('pdo.system'),
-            $container->get(HdmPathService::class)
+            $container->get(PathServiceInterface::class)
         );
     }
 }
