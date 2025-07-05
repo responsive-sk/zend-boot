@@ -35,6 +35,22 @@ class RegistrationHandler implements RequestHandlerInterface
 
             if ($form->isValid()) {
                 $validatedData = $form->getData();
+            
+            // Validate that we have array data
+            if (!is_array($validatedData)) {
+                throw new \RuntimeException('Form data must be an array');
+            }
+            
+            // Validate required fields
+            if (!isset($validatedData['username']) || !is_string($validatedData['username'])) {
+                throw new \RuntimeException('Username is required and must be a string');
+            }
+            if (!isset($validatedData['email']) || !is_string($validatedData['email'])) {
+                throw new \RuntimeException('Email is required and must be a string');
+            }
+            if (!isset($validatedData['password']) || !is_string($validatedData['password'])) {
+                throw new \RuntimeException('Password is required and must be a string');
+            }
 
                 try {
                     // Register new user

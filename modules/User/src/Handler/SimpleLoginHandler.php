@@ -38,6 +38,11 @@ class SimpleLoginHandler implements RequestHandlerInterface
             $data = $request->getParsedBody();
 
             if (empty($data['credential']) || empty($data['password'])) {
+        
+        // Validate that we have array data
+        if (!is_array($data)) {
+            $data = [];
+        }
                 $error = 'Please fill in all fields.';
             } else {
                 // Attempt authentication
