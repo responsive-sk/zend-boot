@@ -14,7 +14,7 @@ return [
             
             // Legacy aliases for backward compatibility - use factory
 
-            \Mezzio\Template\TemplateRendererInterface::class => \App\Template\PhpRendererFactory::class,
+            \Mezzio\Template\TemplateRendererInterface::class => \Mezzio\LaminasView\LaminasViewRendererFactory::class,
 
             // Database services
             'pdo.user' => \App\Database\PdoFactory::class,

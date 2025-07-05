@@ -56,6 +56,8 @@ class ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f
             'Mezzio\\Template\\' => 16,
             'Mezzio\\Session\\' => 15,
             'Mezzio\\Router\\' => 14,
+            'Mezzio\\LaminasView\\' => 19,
+            'Mezzio\\Helper\\' => 14,
             'Mezzio\\Csrf\\' => 12,
             'Mezzio\\Authorization\\Rbac\\' => 26,
             'Mezzio\\Authorization\\' => 21,
@@ -70,16 +72,21 @@ class ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f
             'League\\Flysystem\\Local\\' => 23,
             'League\\Flysystem\\InMemory\\' => 26,
             'League\\Flysystem\\' => 17,
+            'Laminas\\View\\' => 13,
             'Laminas\\Validator\\' => 18,
+            'Laminas\\Translator\\' => 19,
             'Laminas\\Stratigility\\' => 21,
             'Laminas\\Stdlib\\' => 15,
             'Laminas\\ServiceManager\\' => 23,
             'Laminas\\Permissions\\Rbac\\' => 25,
+            'Laminas\\Json\\' => 13,
             'Laminas\\InputFilter\\' => 20,
+            'Laminas\\I18n\\' => 13,
             'Laminas\\Hydrator\\' => 17,
             'Laminas\\HttpHandlerRunner\\' => 26,
             'Laminas\\Form\\' => 13,
             'Laminas\\Filter\\' => 15,
+            'Laminas\\EventManager\\' => 21,
             'Laminas\\Escaper\\' => 16,
             'Laminas\\Diactoros\\' => 18,
             'Laminas\\DevelopmentMode\\' => 24,
@@ -157,6 +164,14 @@ class ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f
             0 => __DIR__ . '/..' . '/mezzio/mezzio-fastroute/src',
             1 => __DIR__ . '/..' . '/mezzio/mezzio-router/src',
         ),
+        'Mezzio\\LaminasView\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mezzio/mezzio-laminasviewrenderer/src',
+        ),
+        'Mezzio\\Helper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mezzio/mezzio-helpers/src',
+        ),
         'Mezzio\\Csrf\\' => 
         array (
             0 => __DIR__ . '/..' . '/mezzio/mezzio-csrf/src',
@@ -201,9 +216,17 @@ class ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f
         array (
             0 => __DIR__ . '/..' . '/league/flysystem/src',
         ),
+        'Laminas\\View\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laminas/laminas-view/src',
+        ),
         'Laminas\\Validator\\' => 
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-validator/src',
+        ),
+        'Laminas\\Translator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laminas/laminas-translator/src',
         ),
         'Laminas\\Stratigility\\' => 
         array (
@@ -221,9 +244,17 @@ class ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-permissions-rbac/src',
         ),
+        'Laminas\\Json\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laminas/laminas-json/src',
+        ),
         'Laminas\\InputFilter\\' => 
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-inputfilter/src',
+        ),
+        'Laminas\\I18n\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laminas/laminas-i18n/src',
         ),
         'Laminas\\Hydrator\\' => 
         array (
@@ -240,6 +271,10 @@ class ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f
         'Laminas\\Filter\\' => 
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-filter/src',
+        ),
+        'Laminas\\EventManager\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laminas/laminas-eventmanager/src',
         ),
         'Laminas\\Escaper\\' => 
         array (
