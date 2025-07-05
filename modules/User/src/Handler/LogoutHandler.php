@@ -17,19 +17,18 @@ class LogoutHandler implements RequestHandlerInterface
         // Get Mezzio session
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
-        if ($session) {
-if ($session && is_object($session)) {
-    // Clear all session data
-    if (method_exists($session, 'clear')) {
-        $session->clear();
-    }
+        if ($session && is_object($session)) {
+            // Clear all session data
+            if (method_exists($session, 'clear')) {
+                $session->clear();
+            }
 
-    // Regenerate session ID
-    if (method_exists($session, 'regenerate')) {
-        $session->regenerate();
-    }
-}
+            // Regenerate session ID
+            if (method_exists($session, 'regenerate')) {
+                $session->regenerate();
+            }
+        }
+        
         return new RedirectResponse('/user/login');
     }
-}
 }
