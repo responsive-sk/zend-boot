@@ -9,7 +9,10 @@ use Psr\Container\ContainerInterface;
 return [
     'dependencies' => [
         'factories' => [
+            // HDM Boot Protocol - Path services
             \App\Service\PathService::class => \App\Service\PathServiceFactory::class,
+            \App\Service\HdmPathService::class => \App\Service\HdmPathServiceFactory::class,
+
             \Mezzio\Template\TemplateRendererInterface::class => \App\Template\PhpRendererFactory::class,
 
             // Database services
