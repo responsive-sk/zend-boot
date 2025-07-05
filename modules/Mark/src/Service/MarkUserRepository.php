@@ -198,11 +198,16 @@ class MarkUserRepository
      */
     private function createMarkUserFromData(array $data): MarkUser
     {
+        $roles = json_decode($data['roles'], true);
+        if (!is_array($roles)) {
+            $roles = [];
+        }
+
         $user = new MarkUser(
             $data['username'],
             $data['email'],
             $data['password_hash'],
-            json_decode($data['roles'], true) ?: []
+            $roles
         );
 
         $user->setId((int) $data['id']);

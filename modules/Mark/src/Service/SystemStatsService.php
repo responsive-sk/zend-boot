@@ -41,12 +41,19 @@ class SystemStatsService
     {
         // Count regular users from user.db
         $stmt = $this->userPdo->query('SELECT COUNT(*) FROM users');
+        if ($stmt === false) {
+            throw new \RuntimeException('Failed to execute user count query');
+        }
         $regularUsers = (int) $stmt->fetchColumn();
 
         // Count mark users from mark.db
         try {
             $stmt = $this->markPdo->query('SELECT COUNT(*) FROM mark_users');
-            $markUsers = (int) $stmt->fetchColumn();
+            if ($stmt === false) {
+                $markUsers = 0;
+            } else {
+                $markUsers = (int) $stmt->fetchColumn();
+            }
         } catch (\Exception $e) {
             $markUsers = 0;
         }

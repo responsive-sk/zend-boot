@@ -53,8 +53,12 @@ class LoginHandler implements RequestHandlerInterface
     private function handleLoginAttempt(ServerRequestInterface $request, SessionInterface $session): ResponseInterface
     {
         $body = $request->getParsedBody();
-        $username = $body['username'] ?? '';
-        $password = $body['password'] ?? '';
+        if (!is_array($body)) {
+            return new HtmlResponse($this->renderLoginForm('Invalid request data'));
+        }
+
+        $username = is_string($body['username'] ?? null) ? $body['username'] : '';
+        $password = is_string($body['password'] ?? null) ? $body['password'] : '';
 
         if (empty($username) || empty($password)) {
             return new HtmlResponse($this->renderLoginForm('Please enter username and password'));

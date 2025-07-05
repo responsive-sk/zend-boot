@@ -10,7 +10,6 @@ parameters:
         - build
         - data
         - logs
-        - modules
     
     ignoreErrors:
         # Ignore some common framework patterns that are safe

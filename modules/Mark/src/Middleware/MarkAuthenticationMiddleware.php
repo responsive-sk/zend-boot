@@ -43,6 +43,11 @@ class MarkAuthenticationMiddleware implements MiddlewareInterface
         }
         
         // Get mark user from mark database
+        if (!is_numeric($markUserId)) {
+            $session->unset('mark_user_id');
+            return new RedirectResponse('/mark/login');
+        }
+
         $markUser = $this->markUserRepository->findById((int) $markUserId);
         
         if (!$markUser || !$markUser->isActive()) {

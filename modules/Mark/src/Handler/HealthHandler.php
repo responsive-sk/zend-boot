@@ -98,22 +98,27 @@ class HealthHandler implements RequestHandlerInterface
      * @param array<string, mixed> $stats
      * @return array<string, mixed>
      */
+    /**
+     * @param array<string, mixed> $stats
+     * @return array<string, mixed>
+     */
     private function getDatabaseHealth(array $stats): array
     {
         $dbSizes = $stats['database_sizes'] ?? [];
-        
+        assert(is_array($dbSizes));
+
         return [
             'user_db' => [
-                'size' => $this->formatBytes($dbSizes['user'] ?? 0),
-                'status' => ($dbSizes['user'] ?? 0) > 0 ? 'active' : 'empty',
+                'size' => $this->formatBytes(is_int($dbSizes['user'] ?? null) ? $dbSizes['user'] : 0),
+                'status' => (is_int($dbSizes['user'] ?? null) ? $dbSizes['user'] : 0) > 0 ? 'active' : 'empty',
             ],
             'mark_db' => [
-                'size' => $this->formatBytes($dbSizes['mark'] ?? 0),
-                'status' => ($dbSizes['mark'] ?? 0) > 0 ? 'active' : 'empty',
+                'size' => $this->formatBytes(is_int($dbSizes['mark'] ?? null) ? $dbSizes['mark'] : 0),
+                'status' => (is_int($dbSizes['mark'] ?? null) ? $dbSizes['mark'] : 0) > 0 ? 'active' : 'empty',
             ],
             'system_db' => [
-                'size' => $this->formatBytes($dbSizes['system'] ?? 0),
-                'status' => ($dbSizes['system'] ?? 0) > 0 ? 'active' : 'empty',
+                'size' => $this->formatBytes(is_int($dbSizes['system'] ?? null) ? $dbSizes['system'] : 0),
+                'status' => (is_int($dbSizes['system'] ?? null) ? $dbSizes['system'] : 0) > 0 ? 'active' : 'empty',
             ],
         ];
     }

@@ -39,34 +39,37 @@ class ConfigProvider
                 // Mark Handlers - Dashboard & System
                 Handler\DashboardHandler::class => Handler\DashboardHandlerFactory::class,
                 Handler\HealthHandler::class => Handler\HealthHandlerFactory::class,
-                Handler\LogsHandler::class => Handler\LogsHandlerFactory::class,
-                Handler\DatabaseHandler::class => Handler\DatabaseHandlerFactory::class,
-                Handler\SettingsHandler::class => Handler\SettingsHandlerFactory::class,
+                // TODO: Implement these handlers
+                // Handler\LogsHandler::class => Handler\LogsHandlerFactory::class,
+                // Handler\DatabaseHandler::class => Handler\DatabaseHandlerFactory::class,
+                // Handler\SettingsHandler::class => Handler\SettingsHandlerFactory::class,
                 
+                // TODO: Implement these handlers
                 // Mark Handlers - User Management
-                Handler\UserManagementHandler::class => Handler\UserManagementHandlerFactory::class,
-                Handler\UserEditHandler::class => Handler\UserEditHandlerFactory::class,
-                Handler\UserDeleteHandler::class => Handler\UserDeleteHandlerFactory::class,
-                
+                // Handler\UserManagementHandler::class => Handler\UserManagementHandlerFactory::class,
+                // Handler\UserEditHandler::class => Handler\UserEditHandlerFactory::class,
+                // Handler\UserDeleteHandler::class => Handler\UserDeleteHandlerFactory::class,
+
                 // Mark Handlers - Mark Management
-                Handler\MarkManagementHandler::class => Handler\MarkManagementHandlerFactory::class,
-                Handler\MarkCreateHandler::class => Handler\MarkCreateHandlerFactory::class,
-                Handler\MarkEditHandler::class => Handler\MarkEditHandlerFactory::class,
-                Handler\MarkDeleteHandler::class => Handler\MarkDeleteHandlerFactory::class,
-                
+                // Handler\MarkManagementHandler::class => Handler\MarkManagementHandlerFactory::class,
+                // Handler\MarkCreateHandler::class => Handler\MarkCreateHandlerFactory::class,
+                // Handler\MarkEditHandler::class => Handler\MarkEditHandlerFactory::class,
+                // Handler\MarkDeleteHandler::class => Handler\MarkDeleteHandlerFactory::class,
+
                 // Mark Handlers - System Management
-                Handler\CacheHandler::class => Handler\CacheHandlerFactory::class,
-                Handler\CacheClearHandler::class => Handler\CacheClearHandlerFactory::class,
-                Handler\BackupHandler::class => Handler\BackupHandlerFactory::class,
-                Handler\BackupCreateHandler::class => Handler\BackupCreateHandlerFactory::class,
+                // Handler\CacheHandler::class => Handler\CacheHandlerFactory::class,
+                // Handler\CacheClearHandler::class => Handler\CacheClearHandlerFactory::class,
+                // Handler\BackupHandler::class => Handler\BackupHandlerFactory::class,
+                // Handler\BackupCreateHandler::class => Handler\BackupCreateHandlerFactory::class,
                 
                 // Mark Handlers - Authentication
                 Handler\LoginHandler::class => Handler\LoginHandlerFactory::class,
                 Handler\LogoutHandler::class => Handler\LogoutHandlerFactory::class,
                 
+                // TODO: Implement API handlers
                 // Mark API Handlers
-                Handler\Api\StatsHandler::class => Handler\Api\StatsHandlerFactory::class,
-                Handler\Api\HealthHandler::class => Handler\Api\HealthHandlerFactory::class,
+                // Handler\Api\StatsHandler::class => Handler\Api\StatsHandlerFactory::class,
+                // Handler\Api\HealthHandler::class => Handler\Api\HealthHandlerFactory::class,
                 
                 // Mark Services
                 Service\MarkUserRepository::class => Service\MarkUserRepositoryFactory::class,
