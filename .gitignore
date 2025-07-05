@@ -1,0 +1,47 @@
+# Dependencies
+/vendor/
+/node_modules/
+
+# Build artifacts
+/build/
+/dist/
+
+# Data files
+/data/*.db
+/data/cache/
+/data/logs/
+/data/sessions/
+/data/uploads/
+
+# Logs
+*.log
+/logs/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Temporary files
+*.tmp
+*.temp
+/tmp/
+
+# PHPUnit
+/phpunit.xml
+/.phpunit.result.cache
+
+# Composer
+composer.phar
+
+# Cache
+/cache/
+*.cache
