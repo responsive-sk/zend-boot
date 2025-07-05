@@ -119,6 +119,9 @@ class MigrationService
         }
     }
 
+    /**
+     * @param array<string> $roles
+     */
     private function createDefaultUser(string $username, string $email, string $password, array $roles): void
     {
         $sql = "

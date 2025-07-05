@@ -18,7 +18,7 @@ class PhpRenderer implements TemplateRendererInterface
      */
     public function __construct(array $config = [])
     {
-        if (isset($config['paths'])) {
+        if (isset($config['paths']) && is_array($config['paths'])) {
             $this->paths = $config['paths'];
         }
     }
@@ -59,7 +59,10 @@ class PhpRenderer implements TemplateRendererInterface
         return $this->paths;
     }
 
-    public function addDefaultParam(string $templateName, string $param, $value): void
+    /**
+     * @param mixed $value
+     */
+    public function addDefaultParam(string $templateName, string $param, mixed $value): void
     {
         if (!isset($this->defaultParams[$templateName])) {
             $this->defaultParams[$templateName] = [];

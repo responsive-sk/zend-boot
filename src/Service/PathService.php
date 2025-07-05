@@ -14,7 +14,6 @@ class PathService
     private array $paths;
     private Filesystem $publicFs;
     private Filesystem $themesFs;
-    private Filesystem $uploadsFs;
 
     /**
      * @param array<string, mixed> $appConfig
@@ -23,12 +22,13 @@ class PathService
         array $appConfig,
         Filesystem $publicFilesystem,
         Filesystem $themesFilesystem,
-        Filesystem $uploadsFilesystem
+        Filesystem $uploadsFilesystem // @phpstan-ignore-line unused parameter for interface compatibility
     ) {
-        $this->paths = $appConfig['paths'];
+        $paths = $appConfig['paths'] ?? [];
+        assert(is_array($paths));
+        $this->paths = $paths;
         $this->publicFs = $publicFilesystem;
         $this->themesFs = $themesFilesystem;
-        $this->uploadsFs = $uploadsFilesystem;
     }
 
     public function getRootPath(): string

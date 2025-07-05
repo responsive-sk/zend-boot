@@ -17,10 +17,9 @@ class HdmPathService
 {
     /** @var array<string, string> */
     private array $paths;
-    
+
     private Filesystem $publicFs;
     private Filesystem $themesFs;
-    private Filesystem $uploadsFs;
 
     /**
      * @param array<string, mixed> $appConfig
@@ -29,12 +28,13 @@ class HdmPathService
         array $appConfig,
         Filesystem $publicFilesystem,
         Filesystem $themesFilesystem,
-        Filesystem $uploadsFilesystem
+        Filesystem $uploadsFilesystem // @phpstan-ignore-line unused parameter for interface compatibility
     ) {
-        $this->paths = $appConfig['paths'] ?? [];
+        $paths = $appConfig['paths'] ?? [];
+        assert(is_array($paths));
+        $this->paths = $paths;
         $this->publicFs = $publicFilesystem;
         $this->themesFs = $themesFilesystem;
-        $this->uploadsFs = $uploadsFilesystem;
         
         $this->validateConfiguration();
     }
@@ -130,6 +130,9 @@ class HdmPathService
     public function path(string $relativePath): string
     {
         $basePath = $this->paths['root'] ?? getcwd();
+        if ($basePath === false) {
+            throw new \RuntimeException('Unable to determine current working directory');
+        }
         return $this->securePath($basePath, $relativePath);
     }
 
