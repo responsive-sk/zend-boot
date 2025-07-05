@@ -12,7 +12,8 @@ class MigrationServiceFactory
     {
         return new MigrationService(
             $container->get('pdo.user'),
-            $container->get('pdo.mark')
+            $container->get('pdo.mark'),
+            $container->get('pdo.system')
         );
     }
 }

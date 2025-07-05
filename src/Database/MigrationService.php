@@ -10,15 +10,21 @@ class MigrationService
 {
     public function __construct(
         private PDO $userPdo,
-        private PDO $markPdo
+        private PDO $markPdo,
+        private PDO $systemPdo
     ) {
     }
 
     public function migrate(): void
     {
+        echo "🚀 Starting database migrations...\n\n";
+
         $this->createUserTables();
         $this->createMarkTables();
+        $this->createSystemTables();
         $this->seedDefaultData();
+
+        echo "\n✅ All migrations completed successfully!\n";
     }
 
     private function createUserTables(): void
@@ -69,6 +75,16 @@ class MigrationService
         $this->markPdo->exec('CREATE INDEX IF NOT EXISTS idx_marks_category ON marks(category)');
         $this->markPdo->exec('CREATE INDEX IF NOT EXISTS idx_marks_status ON marks(status)');
         $this->markPdo->exec('CREATE INDEX IF NOT EXISTS idx_marks_priority ON marks(priority)');
+
+        echo "✅ Mark tables created\n";
+    }
+
+    private function createSystemTables(): void
+    {
+        echo "📦 Creating system tables...\n";
+
+        $migration = new SystemMigration($this->systemPdo);
+        $migration->migrate();
     }
 
     private function seedDefaultData(): void

@@ -15,6 +15,7 @@ return [
             // Database services
             'pdo.user' => \App\Database\PdoFactory::class,
             'pdo.mark' => \App\Database\PdoFactory::class,
+            'pdo.system' => \App\Database\PdoFactory::class,
             \App\Database\MigrationService::class => \App\Database\MigrationServiceFactory::class,
 
             // Flysystem services

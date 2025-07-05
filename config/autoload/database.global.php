@@ -9,8 +9,12 @@ return [
             'database' => __DIR__ . '/../../data/user.db',
         ],
         'mark' => [
-            'driver' => 'sqlite', 
+            'driver' => 'sqlite',
             'database' => __DIR__ . '/../../data/mark.db',
+        ],
+        'system' => [
+            'driver' => 'sqlite',
+            'database' => __DIR__ . '/../../data/system.db',
         ],
     ],
 ];
