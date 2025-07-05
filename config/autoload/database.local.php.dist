@@ -1,0 +1,57 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Production Database Configuration Template
+ * 
+ * Copy this file to database.local.php and configure for your environment
+ * This file should NOT be committed to version control
+ */
+
+return [
+    'database' => [
+        'user' => [
+            'driver' => $_ENV['DB_DRIVER'] ?? 'mysql',
+            'host' => $_ENV['DB_HOST'] ?? 'localhost',
+            'port' => (int) ($_ENV['DB_PORT'] ?? 3306),
+            'database' => $_ENV['DB_NAME'] ?? 'mezzio_users',
+            'username' => $_ENV['DB_USER'] ?? 'app_user',
+            'password' => $_ENV['DB_PASS'] ?? '',
+            'charset' => 'utf8mb4',
+            'options' => [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES => false,
+            ],
+        ],
+        'mark' => [
+            'driver' => $_ENV['DB_DRIVER'] ?? 'mysql',
+            'host' => $_ENV['DB_HOST'] ?? 'localhost',
+            'port' => (int) ($_ENV['DB_PORT'] ?? 3306),
+            'database' => $_ENV['DB_MARK_NAME'] ?? 'mezzio_mark',
+            'username' => $_ENV['DB_USER'] ?? 'app_user',
+            'password' => $_ENV['DB_PASS'] ?? '',
+            'charset' => 'utf8mb4',
+            'options' => [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES => false,
+            ],
+        ],
+        'system' => [
+            'driver' => $_ENV['DB_DRIVER'] ?? 'mysql',
+            'host' => $_ENV['DB_HOST'] ?? 'localhost',
+            'port' => (int) ($_ENV['DB_PORT'] ?? 3306),
+            'database' => $_ENV['DB_SYSTEM_NAME'] ?? 'mezzio_system',
+            'username' => $_ENV['DB_USER'] ?? 'app_user',
+            'password' => $_ENV['DB_PASS'] ?? '',
+            'charset' => 'utf8mb4',
+            'options' => [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES => false,
+            ],
+        ],
+    ],
+];

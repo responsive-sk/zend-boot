@@ -45,3 +45,10 @@ composer.phar
 # Cache
 /cache/
 *.cache
+
+# Production build
+build/
+*.tar.gz
+*.sha256
+DEPLOYMENT_INSTRUCTIONS.txt
+composer.lock.backup

@@ -1,0 +1,47 @@
+<?php
+
+declare(strict_types=1);
+
+use Monolog\Handler\StreamHandler;
+use Monolog\Handler\RotatingFileHandler;
+use Monolog\Logger;
+use Monolog\Level;
+
+/**
+ * Production Logging Configuration Template
+ * 
+ * Copy this file to logging.local.php and configure for your environment
+ * This file should NOT be committed to version control
+ */
+
+return [
+    'dependencies' => [
+        'factories' => [
+            'logger' => function () {
+                $logger = new Logger('mezzio-app');
+                
+                // Application log
+                $logger->pushHandler(new RotatingFileHandler(
+                    $_ENV['LOG_PATH'] ?? __DIR__ . '/../../logs/application.log',
+                    30, // Keep 30 days
+                    Level::Info
+                ));
+                
+                // Error log
+                $logger->pushHandler(new RotatingFileHandler(
+                    $_ENV['ERROR_LOG_PATH'] ?? __DIR__ . '/../../logs/error.log',
+                    30, // Keep 30 days
+                    Level::Error
+                ));
+                
+                return $logger;
+            },
+        ],
+    ],
+    
+    'logging' => [
+        'level' => $_ENV['LOG_LEVEL'] ?? 'info',
+        'path' => $_ENV['LOG_PATH'] ?? __DIR__ . '/../../logs',
+        'max_files' => (int) ($_ENV['LOG_MAX_FILES'] ?? 30),
+    ],
+];
