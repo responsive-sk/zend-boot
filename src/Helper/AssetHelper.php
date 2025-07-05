@@ -24,8 +24,11 @@ class AssetHelper
     {
         $manifest = $this->getManifest($theme);
 
-        if (isset($manifest[$asset])) {
-            return $this->publicPath . '/' . $theme . '/' . $manifest[$asset]['file'];
+        if (isset($manifest[$asset]) && is_array($manifest[$asset]) && isset($manifest[$asset]['file'])) {
+            $file = $manifest[$asset]['file'];
+            if (is_string($file)) {
+                return $this->publicPath . '/' . $theme . '/' . $file;
+            }
         }
 
         // Fallback for development mode without hash
@@ -39,9 +42,9 @@ class AssetHelper
     {
         $manifest = $this->getManifest($theme);
 
-        if (isset($manifest[$asset]['css'])) {
+        if (isset($manifest[$asset]) && is_array($manifest[$asset]) && isset($manifest[$asset]['css'])) {
             $cssFiles = $manifest[$asset]['css'];
-            if (is_array($cssFiles) && !empty($cssFiles)) {
+            if (is_array($cssFiles) && !empty($cssFiles) && is_string($cssFiles[0])) {
                 return $this->publicPath . '/' . $theme . '/' . $cssFiles[0];
             }
         }
@@ -72,7 +75,8 @@ class AssetHelper
                 if (file_exists($manifestPath)) {
                     $content = file_get_contents($manifestPath);
                     if ($content !== false) {
-                        $this->manifests[$theme] = json_decode($content, true) ?: [];
+                        $decoded = json_decode($content, true);
+                        $this->manifests[$theme] = is_array($decoded) ? $decoded : [];
                     } else {
                         $this->manifests[$theme] = [];
                     }
@@ -85,11 +89,14 @@ class AssetHelper
             }
         }
 
-        return $this->manifests[$theme];
+        $manifest = $this->manifests[$theme];
+        assert(is_array($manifest));
+        return $manifest;
     }
 
     /**
      * Get all theme info including version
+     * @return array<string, string>
      */
     public function getThemeInfo(string $theme): array
     {
@@ -99,12 +106,19 @@ class AssetHelper
 
             if (file_exists($packagePath)) {
                 $content = file_get_contents($packagePath);
-                $package = json_decode($content, true) ?: [];
+                if ($content === false) {
+                    throw new \RuntimeException("Unable to read package.json");
+                }
+
+                $package = json_decode($content, true);
+                if (!is_array($package)) {
+                    $package = [];
+                }
 
                 return [
-                    'name' => $package['name'] ?? $theme,
-                    'version' => $package['version'] ?? '1.0.0',
-                    'description' => $package['description'] ?? '',
+                    'name' => is_string($package['name'] ?? null) ? $package['name'] : $theme,
+                    'version' => is_string($package['version'] ?? null) ? $package['version'] : '1.0.0',
+                    'description' => is_string($package['description'] ?? null) ? $package['description'] : '',
                 ];
             }
         } catch (\RuntimeException $e) {
@@ -127,7 +141,7 @@ class AssetHelper
 
         // Look for image in manifest
         foreach ($manifest as $key => $asset) {
-            if (str_contains($key, $imageName) && isset($asset['file'])) {
+            if (str_contains($key, $imageName) && is_array($asset) && isset($asset['file']) && is_string($asset['file'])) {
                 return "/themes/{$theme}/" . $asset['file'];
             }
         }
@@ -138,6 +152,7 @@ class AssetHelper
 
     /**
      * Get all images from theme manifest
+     * @return array<string>
      */
     public function getImages(string $theme): array
     {
@@ -145,8 +160,11 @@ class AssetHelper
         $images = [];
 
         foreach ($manifest as $key => $asset) {
-            if (isset($asset['file']) && preg_match('/\.(jpg|jpeg|png|gif|svg|webp)$/i', $asset['file'])) {
-                $images[basename($key, '.' . pathinfo($key, PATHINFO_EXTENSION))] = "/themes/{$theme}/" . $asset['file'];
+            if (is_array($asset) && isset($asset['file']) && is_string($asset['file'])) {
+                $file = $asset['file'];
+                if (preg_match('/\.(jpg|jpeg|png|gif|svg|webp)$/i', $file)) {
+                    $images[basename($key, '.' . pathinfo($key, PATHINFO_EXTENSION))] = "/themes/{$theme}/" . $file;
+                }
             }
         }
 

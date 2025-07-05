@@ -26,9 +26,19 @@ class PhpRenderer implements TemplateRendererInterface
     /**
      * @param array<string, mixed> $params
      */
+    /**
+     * @param mixed $params
+     */
     public function render(string $name, $params = []): string
     {
-        $params = array_merge($this->defaultParams, $params);
+        // Ensure params is array
+        if (!is_array($params)) {
+            $params = [];
+        }
+
+        $defaultParams = $this->defaultParams;
+        assert(is_array($defaultParams));
+        $params = array_merge($defaultParams, $params);
 
         // Parse template name (namespace::template)
         if (strpos($name, '::') !== false) {
@@ -54,6 +64,9 @@ class PhpRenderer implements TemplateRendererInterface
         $this->paths[$namespace][] = rtrim($path, '/');
     }
 
+    /**
+     * @return array<string, array<string>>
+     */
     public function getPaths(): array
     {
         return $this->paths;
@@ -73,8 +86,10 @@ class PhpRenderer implements TemplateRendererInterface
     private function findTemplate(string $namespace, string $template): ?string
     {
         $paths = $this->paths[$namespace] ?? $this->paths[''] ?? [];
+        assert(is_array($paths));
 
         foreach ($paths as $path) {
+            assert(is_string($path));
             $templatePath = $path . '/' . $template;
 
             // Try with .phtml extension if not provided
@@ -90,6 +105,9 @@ class PhpRenderer implements TemplateRendererInterface
         return null;
     }
 
+    /**
+     * @param array<string, mixed> $params
+     */
     private function renderTemplate(string $templatePath, array $params): string
     {
         // Extract variables for template
@@ -102,6 +120,12 @@ class PhpRenderer implements TemplateRendererInterface
 
         ob_start();
         include $templatePath;
-        return ob_get_clean();
+        $content = ob_get_clean();
+
+        if ($content === false) {
+            throw new \RuntimeException('Failed to capture template output');
+        }
+
+        return $content;
     }
 }
