@@ -14,6 +14,10 @@ class FormHelper
      */
     public function openTag($form): string
     {
+        if (!is_object($form) || !method_exists($form, 'getAttributes')) {
+            return '<form>';
+        }
+
         $attributes = $form->getAttributes();
         $method = $attributes['method'] ?? 'POST';
         $action = $attributes['action'] ?? '';
