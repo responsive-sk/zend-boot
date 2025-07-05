@@ -17,7 +17,7 @@ class DebugHandler implements RequestHandlerInterface
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
         // Test session operations
-        if ($session) {
+        if ($session && is_object($session) && method_exists($session, 'set')) {
             $session->set('debug_test', 'Session is working!');
             $session->set('timestamp', date('Y-m-d H:i:s'));
         }
@@ -26,8 +26,8 @@ class DebugHandler implements RequestHandlerInterface
             'method' => $request->getMethod(),
             'uri' => (string) $request->getUri(),
             'session_available' => $session ? 'YES' : 'NO',
-            'session_data' => $session ? $session->toArray() : 'N/A',
-            'session_id' => $session ? $session->getId() : 'N/A',
+            'session_data' => ($session && is_object($session) && method_exists($session, 'toArray')) ? $session->toArray() : 'N/A',
+            'session_id' => ($session && is_object($session) && method_exists($session, 'getId')) ? $session->getId() : 'N/A',
             'cookies' => $request->getCookieParams(),
             'parsed_body' => $request->getParsedBody(),
         ];

@@ -66,7 +66,10 @@ class RegistrationHandler implements RequestHandlerInterface
                     );
 
                     // Add flash message
-                    $session->set('flash_success', 'Registration successful! You can now log in.');
+            // Add flash message
+            if ($session && is_object($session) && method_exists($session, 'set')) {
+                $session->set('flash_success', 'Registration successful! You can now log in.');
+            }
 
                     return new RedirectResponse('/user/login');
                 } catch (\InvalidArgumentException $e) {

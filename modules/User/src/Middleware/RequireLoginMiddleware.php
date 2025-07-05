@@ -27,7 +27,7 @@ class RequireLoginMiddleware implements MiddlewareInterface
         if (!$user) {
             // Store the original URL for redirect after login
             $session = $request->getAttribute('session');
-            if ($session) {
+            if ($session && is_object($session) && method_exists($session, 'set')) {
                 $session->set('redirect_after_login', (string) $request->getUri());
             }
 
