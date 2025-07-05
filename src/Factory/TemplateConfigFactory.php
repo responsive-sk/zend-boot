@@ -4,21 +4,30 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
-use App\Service\HdmPathService;
+use App\Service\UnifiedPathService;
+use League\Flysystem\Filesystem;
+use League\Flysystem\Local\LocalFilesystemAdapter;
 
 /**
  * HDM Boot Protocol - Template Configuration Factory
  * 
- * Provides secure template paths using HdmPathService
+ * Provides secure template paths using UnifiedPathService
  * Eliminates un-secure path traversal (../../)
  */
 class TemplateConfigFactory
 {
-    private HdmPathService $pathService;
+    private UnifiedPathService $pathService;
 
     public function __construct()
     {
-        $this->pathService = new HdmPathService();
+        // Create minimal config for UnifiedPathService
+        $config = ['paths' => ['root' => getcwd()]];
+        
+        // Create dummy filesystems for constructor
+        $dummyAdapter = new LocalFilesystemAdapter('.');
+        $dummyFs = new Filesystem($dummyAdapter);
+        
+        $this->pathService = new UnifiedPathService($config, $dummyFs, $dummyFs, $dummyFs);
     }
 
     /**

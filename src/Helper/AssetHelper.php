@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Helper;
 
-use App\Service\PathService;
+use App\Service\PathServiceInterface;
 
 class AssetHelper
 {
@@ -12,7 +12,7 @@ class AssetHelper
     private array $manifests = [];
 
     public function __construct(
-        private PathService $pathService,
+        private PathServiceInterface $pathService,
         private string $publicPath = '/themes'
     ) {
     }

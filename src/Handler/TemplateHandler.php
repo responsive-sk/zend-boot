@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
-use App\Service\PathService;
+use App\Service\PathServiceInterface;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -12,7 +12,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class TemplateHandler implements RequestHandlerInterface
 {
-    public function __construct(private PathService $pathService)
+    public function __construct(private PathServiceInterface $pathService)
     {
     }
 

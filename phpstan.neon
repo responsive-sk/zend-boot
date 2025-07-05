@@ -1,5 +1,5 @@
 parameters:
-    level: max
+    level: 9
     paths:
         - src
         - modules
@@ -10,6 +10,10 @@ parameters:
         - build
         - data
         - logs
-    checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: false
+        - var
+    ignoreErrors:
+        -
+            identifier: missingType.iterableValue
+        -
+            identifier: missingType.generics
     reportUnmatchedIgnoredErrors: false

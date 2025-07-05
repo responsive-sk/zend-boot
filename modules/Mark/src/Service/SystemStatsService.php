@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Mark\Service;
 
 use PDO;
-use App\Service\HdmPathService;
+use App\Service\PathServiceInterface;
 
 /**
  * HDM Boot Protocol - System Statistics Service
@@ -18,7 +18,7 @@ class SystemStatsService
         private PDO $userPdo,
         private PDO $markPdo,
         private PDO $systemPdo,
-        private HdmPathService $pathService
+        private PathServiceInterface $pathService
     ) {
     }
 
