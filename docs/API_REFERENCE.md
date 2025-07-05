@@ -306,6 +306,34 @@ public function __construct(array $config = [])
 
 #### Template Helpers
 
+#### Template Troubleshooting
+
+**Common Issues:**
+
+1. **Template not found error**
+   ```
+   RuntimeException: Template 'namespace::template' not found
+   ```
+   - Check if template path is configured in `templates.global.php`
+   - Verify template file exists with `.phtml` extension
+   - Ensure namespace matches configuration
+
+2. **Mark module templates**
+   ```php
+   // In templates.global.php
+   'mark' => [__DIR__ . '/../../modules/Mark/templates/mark'],
+   ```
+
+3. **Template syntax**
+   ```php
+   // Correct - use function
+   <?= $escapeHtml($value) ?>
+   
+   // Incorrect - method call
+   <?= $this->escapeHtml($value) ?>
+   ```
+
+
 ```php
 // V template súboroch
 $escapeHtml($value)  // HTML escaping

@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.0] - 2025-07-01
 
+## [2.0.1] - 2025-07-05
+
+### 🐛 Fixed - Mark Module Template System
+- **CRITICAL FIX**: Resolved `Template 'mark::login' not found` error on `/mark/login` route
+- Fixed PhpRenderer template resolution logic that was failing with `realpath()` checks
+- Simplified template finding algorithm to prioritize file existence over complex path validation
+- Added Mark module template paths to `templates.global.php` configuration
+- Updated LoginHandler to use correct namespace syntax (`mark::login` instead of `mark-login`)
+- Ensured template uses `$escapeHtml()` function instead of `$this->escapeHtml()` method
+
+### 🎨 Improved - Mark Login Template
+- Enhanced Mark login page with modern Bootstrap 5 design
+- Added HDM Boot Protocol branding and security-focused styling
+- Implemented proper form validation and error display
+- Added responsive design with gradient background and glassmorphism effects
+
+### 📚 Documentation
+- Updated template system documentation with Mark module integration
+- Added troubleshooting guide for template resolution issues
+
+
 ### 🚀 Added - Production Build System
 - Ultra-optimized build scripts (`build-production.sh`, `build-to-directory.sh`, `build-dev.sh`)
 - Build directory structure (`build/production/`, `build/staging/`, `build/releases/`)
