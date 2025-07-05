@@ -9,7 +9,7 @@ use PDO;
 
 /**
  * HDM Boot Protocol - Mark User Repository
- * 
+ *
  * Manages mark users in mark.db (separate from regular users)
  */
 class MarkUserRepository
@@ -23,12 +23,12 @@ class MarkUserRepository
     {
         $stmt = $this->markPdo->prepare('SELECT * FROM mark_users WHERE id = ?');
         $stmt->execute([$id]);
-        
+
         $data = $stmt->fetch();
         if ($data === false || !is_array($data)) {
             return null;
         }
-        
+
         return $this->createMarkUserFromData($data);
     }
 
@@ -36,12 +36,12 @@ class MarkUserRepository
     {
         $stmt = $this->markPdo->prepare('SELECT * FROM mark_users WHERE username = ?');
         $stmt->execute([$username]);
-        
+
         $data = $stmt->fetch();
         if ($data === false || !is_array($data)) {
             return null;
         }
-        
+
         return $this->createMarkUserFromData($data);
     }
 
@@ -49,12 +49,12 @@ class MarkUserRepository
     {
         $stmt = $this->markPdo->prepare('SELECT * FROM mark_users WHERE email = ?');
         $stmt->execute([$email]);
-        
+
         $data = $stmt->fetch();
         if ($data === false || !is_array($data)) {
             return null;
         }
-        
+
         return $this->createMarkUserFromData($data);
     }
 
@@ -65,9 +65,9 @@ class MarkUserRepository
     {
         $stmt = $this->markPdo->query('SELECT * FROM mark_users ORDER BY created_at DESC');
         $users = [];
-    if ($stmt === false) {
-        throw new \RuntimeException('Failed to execute query for finding all mark users');
-    }
+        if ($stmt === false) {
+            throw new \RuntimeException('Failed to execute query for finding all mark users');
+        }
 
         while ($data = $stmt->fetch()) {
             if ($data !== false && is_array($data)) {
@@ -111,14 +111,14 @@ class MarkUserRepository
             LIMIT ?
         ');
         $stmt->execute([$limit]);
-        
+
         $users = [];
         while ($data = $stmt->fetch()) {
             if ($data !== false && is_array($data)) {
                 $users[] = $this->createMarkUserFromData($data);
             }
         }
-        
+
         return $users;
     }
 
@@ -184,7 +184,7 @@ class MarkUserRepository
     {
         $stmt = $this->markPdo->prepare('SELECT COUNT(*) FROM mark_users WHERE username = ?');
         $stmt->execute([$username]);
-        
+
         return $stmt->fetchColumn() > 0;
     }
 
@@ -192,7 +192,7 @@ class MarkUserRepository
     {
         $stmt = $this->markPdo->prepare('SELECT COUNT(*) FROM mark_users WHERE email = ?');
         $stmt->execute([$email]);
-        
+
         return $stmt->fetchColumn() > 0;
     }
 

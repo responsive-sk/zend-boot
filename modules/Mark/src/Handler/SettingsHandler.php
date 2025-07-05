@@ -13,14 +13,15 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * HDM Boot Protocol - Mark Settings Handler
- * 
+ *
  * System settings management for mark users
  */
 class SettingsHandler implements RequestHandlerInterface
 {
     public function __construct(
         private TemplateRendererInterface $template
-    ) {}
+    ) {
+    }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

@@ -26,7 +26,7 @@ class UserRepository
         if (!$data || !is_array($data)) {
             return null;
         }
-        return $data ? $this->createUserFromData($data) : null;
+        return $this->createUserFromData($data);
     }
 
     public function findByUsername(string $username): ?User
@@ -38,7 +38,7 @@ class UserRepository
         if (!$data || !is_array($data)) {
             return null;
         }
-        return $data ? $this->createUserFromData($data) : null;
+        return $this->createUserFromData($data);
     }
 
     public function findByEmail(string $email): ?User
@@ -50,7 +50,7 @@ class UserRepository
         if (!$data || !is_array($data)) {
             return null;
         }
-        return $data ? $this->createUserFromData($data) : null;
+        return $this->createUserFromData($data);
     }
 
     public function save(User $user): User
@@ -74,9 +74,9 @@ class UserRepository
     public function findAll(): array
     {
         $stmt = $this->pdo->query('SELECT * FROM users ORDER BY created_at DESC');
-    if ($stmt === false) {
-        throw new \RuntimeException('Failed to execute query for finding all users');
-    }
+        if ($stmt === false) {
+            throw new \RuntimeException('Failed to execute query for finding all users');
+        }
         $users = [];
 
         while ($data = $stmt->fetch()) {

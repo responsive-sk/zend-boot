@@ -12,14 +12,15 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * HDM Boot Protocol - Mark Management Handler
- * 
+ *
  * Mark user management for supermark users
  */
 class MarkManagementHandler implements RequestHandlerInterface
 {
     public function __construct(
         private TemplateRendererInterface $template
-    ) {}
+    ) {
+    }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

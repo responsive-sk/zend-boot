@@ -13,7 +13,7 @@ class RequireRoleMiddlewareFactory
     {
         $authorization = $container->get(AuthorizationInterface::class);
         assert($authorization instanceof AuthorizationInterface);
-        
+
         return new RequireRoleMiddleware($authorization);
     }
 }

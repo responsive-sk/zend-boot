@@ -13,7 +13,7 @@ class MainDemoHandlerFactory
     {
         $assetHelper = $container->get(AssetHelper::class);
         assert($assetHelper instanceof AssetHelper);
-        
+
         return new MainDemoHandler($assetHelper);
     }
 }

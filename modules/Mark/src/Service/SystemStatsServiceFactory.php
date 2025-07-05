@@ -14,16 +14,16 @@ class SystemStatsServiceFactory
     {
         $userPdo = $container->get('pdo.user');
         assert($userPdo instanceof PDO);
-        
+
         $markPdo = $container->get('pdo.mark');
         assert($markPdo instanceof PDO);
-        
+
         $systemPdo = $container->get('pdo.system');
         assert($systemPdo instanceof PDO);
-        
+
         $pathService = $container->get(PathServiceInterface::class);
         assert($pathService instanceof PathServiceInterface);
-        
+
         return new SystemStatsService($userPdo, $markPdo, $systemPdo, $pathService);
     }
 }

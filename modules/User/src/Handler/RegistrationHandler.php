@@ -31,7 +31,7 @@ class RegistrationHandler implements RequestHandlerInterface
 
         if ($request->getMethod() === 'POST') {
             $data = $request->getParsedBody();
-            
+
             // Ensure we have array data for form
             if (!is_array($data)) {
                 $data = [];
@@ -40,22 +40,22 @@ class RegistrationHandler implements RequestHandlerInterface
 
             if ($form->isValid()) {
                 $validatedData = $form->getData();
-            
+
             // Validate that we have array data
-            if (!is_array($validatedData)) {
-                throw new \RuntimeException('Form data must be an array');
-            }
-            
+                if (!is_array($validatedData)) {
+                    throw new \RuntimeException('Form data must be an array');
+                }
+
             // Validate required fields
-            if (!isset($validatedData['username']) || !is_string($validatedData['username'])) {
-                throw new \RuntimeException('Username is required and must be a string');
-            }
-            if (!isset($validatedData['email']) || !is_string($validatedData['email'])) {
-                throw new \RuntimeException('Email is required and must be a string');
-            }
-            if (!isset($validatedData['password']) || !is_string($validatedData['password'])) {
-                throw new \RuntimeException('Password is required and must be a string');
-            }
+                if (!isset($validatedData['username']) || !is_string($validatedData['username'])) {
+                    throw new \RuntimeException('Username is required and must be a string');
+                }
+                if (!isset($validatedData['email']) || !is_string($validatedData['email'])) {
+                    throw new \RuntimeException('Email is required and must be a string');
+                }
+                if (!isset($validatedData['password']) || !is_string($validatedData['password'])) {
+                    throw new \RuntimeException('Password is required and must be a string');
+                }
 
                 try {
                     // Register new user
@@ -67,9 +67,9 @@ class RegistrationHandler implements RequestHandlerInterface
 
                     // Add flash message
             // Add flash message
-            if ($session && is_object($session) && method_exists($session, 'set')) {
-                $session->set('flash_success', 'Registration successful! You can now log in.');
-            }
+                    if ($session && is_object($session) && method_exists($session, 'set')) {
+                        $session->set('flash_success', 'Registration successful! You can now log in.');
+                    }
 
                     return new RedirectResponse('/user/login');
                 } catch (\InvalidArgumentException $e) {

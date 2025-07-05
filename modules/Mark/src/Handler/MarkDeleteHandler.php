@@ -11,7 +11,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * HDM Boot Protocol - Mark Delete Handler
- * 
+ *
  * Mark user deletion for supermark users
  */
 class MarkDeleteHandler implements RequestHandlerInterface

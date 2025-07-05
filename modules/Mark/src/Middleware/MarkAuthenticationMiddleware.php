@@ -14,7 +14,7 @@ use Mark\Service\MarkUserRepository;
 
 /**
  * HDM Boot Protocol - Mark Authentication Middleware
- * 
+ *
  * Ensures only mark users (mark, editor, supermark roles) can access mark routes
  * Separate from user authentication for security isolation
  */
@@ -36,12 +36,12 @@ class MarkAuthenticationMiddleware implements MiddlewareInterface
 
         // Check if mark user is authenticated
         $markUserId = $session->get('mark_user_id');
-        
+
         if (!$markUserId) {
             // Not authenticated as mark user, redirect to mark login
             return new RedirectResponse('/mark/login');
         }
-        
+
         // Get mark user from mark database
         if (!is_numeric($markUserId)) {
             $session->unset('mark_user_id');
@@ -49,14 +49,14 @@ class MarkAuthenticationMiddleware implements MiddlewareInterface
         }
 
         $markUser = $this->markUserRepository->findById((int) $markUserId);
-        
+
         if (!$markUser || !$markUser->isActive()) {
             // Mark user not found or inactive, clear session and redirect
             $session->unset('mark_user_id');
             $session->unset('mark_user_roles');
             return new RedirectResponse('/mark/login');
         }
-        
+
         // Verify user is a mark user (all users in mark.db should be mark users)
         if (!$markUser->isMarkUser()) {
             // User doesn't have mark roles, deny access
@@ -66,14 +66,14 @@ class MarkAuthenticationMiddleware implements MiddlewareInterface
         }
 
         $userRoles = $markUser->getRoles();
-        
+
         // Store mark user and roles in request for handlers
         $request = $request->withAttribute('mark_user', $markUser);
         $request = $request->withAttribute('mark_user_roles', $userRoles);
-        
+
         // Update last activity
         $session->set('mark_last_activity', time());
-        
+
         return $handler->handle($request);
     }
 }

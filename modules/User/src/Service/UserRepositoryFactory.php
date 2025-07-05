@@ -13,7 +13,7 @@ class UserRepositoryFactory
     {
         $pdo = $container->get('pdo.user');
         assert($pdo instanceof PDO);
-        
+
         return new UserRepository($pdo);
     }
 }

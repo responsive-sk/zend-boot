@@ -12,7 +12,7 @@ class SimpleAuthenticationFactory
     {
         $authService = $container->get(AuthenticationService::class);
         assert($authService instanceof AuthenticationService);
-        
+
         return new SimpleAuthentication($authService);
     }
 }

@@ -13,7 +13,7 @@ class DashboardHandlerFactory
     {
         $template = $container->get(TemplateRendererInterface::class);
         assert($template instanceof TemplateRendererInterface);
-        
+
         return new DashboardHandler($template);
     }
 }

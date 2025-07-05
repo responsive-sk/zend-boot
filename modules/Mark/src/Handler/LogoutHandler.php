@@ -18,13 +18,13 @@ class LogoutHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $session = $request->getAttribute('session');
-        
+
         if ($session instanceof SessionInterface) {
             // Clear mark session data
             $session->unset('mark_user_id');
             $session->unset('mark_user_roles');
             $session->unset('mark_last_activity');
-            
+
             // Regenerate session ID for security
             $session->regenerate();
         }

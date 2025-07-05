@@ -9,7 +9,7 @@ use App\Service\PathServiceInterface;
 
 /**
  * HDM Boot Protocol - System Statistics Service
- * 
+ *
  * Provides system statistics for mark dashboard
  */
 class SystemStatsService
@@ -65,8 +65,10 @@ class SystemStatsService
     {
         try {
             $stmt = $this->markPdo->query('SELECT COUNT(*) FROM marks');
-            if ($stmt === false) return 0;
-        return (int) $stmt->fetchColumn();
+            if ($stmt === false) {
+                return 0;
+            }
+            return (int) $stmt->fetchColumn();
         } catch (\Exception $e) {
             // Table might not exist yet
             return 0;
@@ -78,12 +80,12 @@ class SystemStatsService
         $rootPath = $this->pathService->storage();
         $freeBytes = disk_free_space($rootPath);
         $totalBytes = disk_total_space($rootPath);
-        
+
         if ($freeBytes !== false && $totalBytes !== false) {
             $usedBytes = $totalBytes - $freeBytes;
             return round(($usedBytes / $totalBytes) * 100, 1);
         }
-        
+
         return 0.0;
     }
 
@@ -114,7 +116,7 @@ class SystemStatsService
     private function getDatabaseSizes(): array
     {
         $sizes = [];
-        
+
         // Use actual database paths (currently in data/ directory)
         $rootPath = dirname($this->pathService->storage());
         $databases = [
@@ -122,7 +124,7 @@ class SystemStatsService
             'mark' => $rootPath . '/../data/mark.db',
             'system' => $rootPath . '/../data/system.db',
         ];
-        
+
         foreach ($databases as $name => $path) {
             if (file_exists($path)) {
                 $size = filesize($path);
@@ -131,7 +133,7 @@ class SystemStatsService
                 $sizes[$name] = 0;
             }
         }
-        
+
         return $sizes;
     }
 }

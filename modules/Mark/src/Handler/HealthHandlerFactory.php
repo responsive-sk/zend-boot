@@ -14,10 +14,10 @@ class HealthHandlerFactory
     {
         $template = $container->get(TemplateRendererInterface::class);
         assert($template instanceof TemplateRendererInterface);
-        
+
         $statsService = $container->get(SystemStatsService::class);
         assert($statsService instanceof SystemStatsService);
-        
+
         return new HealthHandler($template, $statsService);
     }
 }

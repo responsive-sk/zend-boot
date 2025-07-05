@@ -9,7 +9,7 @@ use League\Flysystem\FilesystemException;
 
 /**
  * HDM Boot Protocol - Unified Path Service
- * 
+ *
  * PILLAR III: Secure Path Resolution
  * Combines legacy PathService + HdmPathService functionality
  * Single source of truth for all path operations
@@ -35,7 +35,7 @@ class UnifiedPathService implements PathServiceInterface
         $this->publicFs = $publicFs;
         $this->themesFs = $themesFs;
         $this->uploadsFs = $uploadsFs;
-        
+
         // Ensure required directories exist
         $this->ensureDirectoriesExist();
     }
@@ -236,10 +236,10 @@ class UnifiedPathService implements PathServiceInterface
         // Get absolute base path
         $rootPath = $this->getRootPath();
         $fullBasePath = $rootPath . DIRECTORY_SEPARATOR . $basePath;
-        
+
         // Normalize path
         $normalizedPath = realpath($fullBasePath) ?: $fullBasePath;
-        
+
         // Ensure directory exists
         if (!is_dir($normalizedPath)) {
             mkdir($normalizedPath, 0755, true);
@@ -262,13 +262,13 @@ class UnifiedPathService implements PathServiceInterface
     {
         // Remove path traversal attempts
         $filename = str_replace(['../', '..\\', '../', '..\\'], '', $filename);
-        
+
         // Remove null bytes
         $filename = str_replace("\0", '', $filename);
-        
+
         // Normalize directory separators
         $filename = str_replace('\\', '/', $filename);
-        
+
         return ltrim($filename, '/');
     }
 
@@ -279,7 +279,7 @@ class UnifiedPathService implements PathServiceInterface
     {
         $requiredDirs = [
             'var/storage',
-            'var/logs', 
+            'var/logs',
             'var/cache',
             'var/sessions',
             'var/uploads',

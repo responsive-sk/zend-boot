@@ -10,7 +10,7 @@ use League\Flysystem\Local\LocalFilesystemAdapter;
 
 /**
  * HDM Boot Protocol - Template Configuration Factory
- * 
+ *
  * Provides secure template paths using UnifiedPathService
  * Eliminates un-secure path traversal (../../)
  */
@@ -22,11 +22,11 @@ class TemplateConfigFactory
     {
         // Create minimal config for UnifiedPathService
         $config = ['paths' => ['root' => getcwd()]];
-        
+
         // Create dummy filesystems for constructor
         $dummyAdapter = new LocalFilesystemAdapter('.');
         $dummyFs = new Filesystem($dummyAdapter);
-        
+
         $this->pathService = new UnifiedPathService($config, $dummyFs, $dummyFs, $dummyFs);
     }
 
@@ -41,13 +41,13 @@ class TemplateConfigFactory
                 'paths' => [
                     // Default templates path - SECURE
                     '' => [$this->pathService->templates()],
-                    
+
                     // User module templates - SECURE
                     'user' => [$this->pathService->moduleTemplates('User', 'user')],
-                    
+
                     // Mark module templates - SECURE
                     'mark' => [$this->pathService->moduleTemplates('Mark', 'mark')],
-                    
+
                     // App templates - SECURE
                     'app' => [$this->pathService->appTemplates()],
                 ],

@@ -28,7 +28,7 @@ class LogoutHandler implements RequestHandlerInterface
                 $session->regenerate();
             }
         }
-        
+
         return new RedirectResponse('/user/login');
     }
 }

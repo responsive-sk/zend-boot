@@ -14,10 +14,10 @@ class SimpleLoginHandlerFactory
     {
         $template = $container->get(TemplateRendererInterface::class);
         assert($template instanceof TemplateRendererInterface);
-        
+
         $authService = $container->get(AuthenticationService::class);
         assert($authService instanceof AuthenticationService);
-        
+
         return new SimpleLoginHandler($template, $authService);
     }
 }

@@ -6,7 +6,7 @@ namespace App\Boot;
 
 /**
  * HDM Boot Protocol - Environment Handler
- * 
+ *
  * Handles environment setup and validation
  */
 class EnvironmentHandler
@@ -63,21 +63,21 @@ class EnvironmentHandler
     private static function configureErrorReporting(): void
     {
         $environment = $_ENV['APP_ENV'] ?? 'production';
-        
+
         switch ($environment) {
             case 'development':
             case 'dev':
                 error_reporting(E_ALL);
                 ini_set('display_errors', '1');
                 break;
-                
+
             case 'testing':
             case 'test':
                 error_reporting(E_ALL);
                 ini_set('display_errors', '0');
                 ini_set('log_errors', '1');
                 break;
-                
+
             case 'production':
             case 'prod':
             default:

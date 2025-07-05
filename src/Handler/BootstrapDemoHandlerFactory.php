@@ -13,7 +13,7 @@ class BootstrapDemoHandlerFactory
     {
         $assetHelper = $container->get(AssetHelper::class);
         assert($assetHelper instanceof AssetHelper);
-        
+
         return new BootstrapDemoHandler($assetHelper);
     }
 }

@@ -8,7 +8,7 @@ use PDO;
 
 /**
  * Mark Database Migration
- * 
+ *
  * HDM Boot Protocol Compliant - Mark System Database
  * Creates mark.db with mark management tables
  */
@@ -74,7 +74,7 @@ class MarkMigration
                 updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         ";
-        
+
         $this->pdo->exec($sql);
 
         // Create indexes separately
@@ -100,7 +100,7 @@ class MarkMigration
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         ";
-        
+
         $this->pdo->exec($sql);
         echo "  🏷️ Mark categories table created\n";
     }
@@ -121,7 +121,7 @@ class MarkMigration
                 FOREIGN KEY (granted_by) REFERENCES users(id) ON DELETE SET NULL
             )
         ";
-        
+
         $this->pdo->exec($sql);
         echo "  🔐 Mark permissions table created\n";
     }
@@ -135,7 +135,7 @@ class MarkMigration
 
         if ($categoryCount == 0) {
             echo "  🌱 Seeding default mark categories...\n";
-            
+
             $defaultCategories = [
                 ['general', 'General marks', '#007bff', 'fas fa-bookmark'],
                 ['important', 'Important marks', '#dc3545', 'fas fa-exclamation'],

@@ -6,7 +6,7 @@ namespace App\Service;
 
 /**
  * HDM Boot Protocol - Path Service Interface
- * 
+ *
  * Common interface for all path services
  */
 interface PathServiceInterface

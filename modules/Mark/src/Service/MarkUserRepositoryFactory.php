@@ -13,7 +13,7 @@ class MarkUserRepositoryFactory
     {
         $markPdo = $container->get('pdo.mark');
         assert($markPdo instanceof PDO);
-        
+
         return new MarkUserRepository($markPdo);
     }
 }

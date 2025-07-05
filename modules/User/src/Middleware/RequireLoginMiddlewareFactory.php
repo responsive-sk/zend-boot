@@ -13,7 +13,7 @@ class RequireLoginMiddlewareFactory
     {
         $authentication = $container->get(AuthenticationInterface::class);
         assert($authentication instanceof AuthenticationInterface);
-        
+
         return new RequireLoginMiddleware($authentication);
     }
 }
