@@ -10,8 +10,9 @@ class AuthenticationServiceFactory
 {
     public function __invoke(ContainerInterface $container): AuthenticationService
     {
-        return new AuthenticationService(
-            $container->get(UserRepository::class)
-        );
+        $userRepository = $container->get(UserRepository::class);
+        assert($userRepository instanceof UserRepository);
+        
+        return new AuthenticationService($userRepository);
     }
 }
