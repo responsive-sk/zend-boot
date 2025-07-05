@@ -11,9 +11,9 @@ class RequireRoleMiddlewareFactory
 {
     public function __invoke(ContainerInterface $container): RequireRoleMiddleware
     {
-        return new RequireRoleMiddleware(
-            $container->get(AuthorizationInterface::class),
-            ['admin'] // Default to admin role
-        );
+        $authorization = $container->get(AuthorizationInterface::class);
+        assert($authorization instanceof AuthorizationInterface);
+        
+        return new RequireRoleMiddleware($authorization);
     }
 }

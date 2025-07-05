@@ -11,8 +11,9 @@ class DashboardHandlerFactory
 {
     public function __invoke(ContainerInterface $container): DashboardHandler
     {
-        return new DashboardHandler(
-            $container->get(TemplateRendererInterface::class)
-        );
+        $template = $container->get(TemplateRendererInterface::class);
+        assert($template instanceof TemplateRendererInterface);
+        
+        return new DashboardHandler($template);
     }
 }

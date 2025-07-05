@@ -12,9 +12,12 @@ class SimpleLoginHandlerFactory
 {
     public function __invoke(ContainerInterface $container): SimpleLoginHandler
     {
-        return new SimpleLoginHandler(
-            $container->get(TemplateRendererInterface::class),
-            $container->get(AuthenticationService::class)
-        );
+        $template = $container->get(TemplateRendererInterface::class);
+        assert($template instanceof TemplateRendererInterface);
+        
+        $authService = $container->get(AuthenticationService::class);
+        assert($authService instanceof AuthenticationService);
+        
+        return new SimpleLoginHandler($template, $authService);
     }
 }

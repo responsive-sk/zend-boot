@@ -11,8 +11,9 @@ class RequireLoginMiddlewareFactory
 {
     public function __invoke(ContainerInterface $container): RequireLoginMiddleware
     {
-        return new RequireLoginMiddleware(
-            $container->get(AuthenticationInterface::class)
-        );
+        $authentication = $container->get(AuthenticationInterface::class);
+        assert($authentication instanceof AuthenticationInterface);
+        
+        return new RequireLoginMiddleware($authentication);
     }
 }

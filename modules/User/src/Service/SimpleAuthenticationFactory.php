@@ -10,8 +10,9 @@ class SimpleAuthenticationFactory
 {
     public function __invoke(ContainerInterface $container): SimpleAuthentication
     {
-        return new SimpleAuthentication(
-            $container->get(AuthenticationService::class)
-        );
+        $authService = $container->get(AuthenticationService::class);
+        assert($authService instanceof AuthenticationService);
+        
+        return new SimpleAuthentication($authService);
     }
 }
