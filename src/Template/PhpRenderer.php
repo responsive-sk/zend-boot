@@ -80,6 +80,9 @@ class PhpRenderer implements TemplateRendererInterface
         if (!isset($this->defaultParams[$templateName])) {
             $this->defaultParams[$templateName] = [];
         }
+        
+        // Ensure we have array structure for PHPStan
+        assert(is_array($this->defaultParams[$templateName]));
         $this->defaultParams[$templateName][$param] = $value;
     }
 
