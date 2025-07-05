@@ -2,17 +2,12 @@
 
 declare(strict_types=1);
 
-return [
-    'templates' => [
-        'paths' => [
-            // Default templates path
-            '' => [__DIR__ . '/../../templates'],
-            
-            // User module templates
-            'user' => [__DIR__ . '/../../modules/User/templates/user'],
-            
-            // App templates
-            'app' => [__DIR__ . '/../../templates/app'],
-        ],
-    ],
-];
+use App\Factory\TemplateConfigFactory;
+
+// HDM Boot Protocol - Secure Template Configuration
+// SECURITY FIX: Eliminated un-secure path traversal (../../)
+// Using TemplateConfigFactory with HdmPathService for safe paths
+
+$templateFactory = new TemplateConfigFactory();
+
+return $templateFactory->getConfig();
