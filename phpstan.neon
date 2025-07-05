@@ -1,0 +1,15 @@
+parameters:
+    level: max
+    paths:
+        - src
+        - modules
+        - config
+        - public
+    excludePaths:
+        - vendor
+        - build
+        - data
+        - logs
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+    reportUnmatchedIgnoredErrors: false

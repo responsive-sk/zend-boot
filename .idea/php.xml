@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MessDetectorOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PHPCSFixerOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PHPCodeSnifferOptionsConfiguration">
+    <option name="highlightLevel" value="WARNING" />
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PhpCodeSniffer">
+    <phpcs_settings>
+      <PhpCSConfiguration beautifier_path="$PROJECT_DIR$/vendor/bin/phpcbf" tool_path="$PROJECT_DIR$/vendor/bin/phpcs" />
+    </phpcs_settings>
+  </component>
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/nikic/fast-route" />
+      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/fig/http-message-util" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-server-handler" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-httphandlerrunner" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-stdlib" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-server-middleware" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-config-aggregator" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-escaper" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-diactoros" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-servicemanager" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-stratigility" />
+      <path value="$PROJECT_DIR$/vendor/mezzio/mezzio-template" />
+      <path value="$PROJECT_DIR$/vendor/mezzio/mezzio" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/mezzio/mezzio-router" />
+      <path value="$PROJECT_DIR$/vendor/mezzio/mezzio-fastroute" />
+      <path value="$PROJECT_DIR$/vendor/webimpress/safe-writer" />
+      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/brick/varexporter" />
+      <path value="$PROJECT_DIR$/build/production/vendor/laminas/laminas-stratigility" />
+      <path value="$PROJECT_DIR$/build/production/vendor/webimpress/safe-writer" />
+      <path value="$PROJECT_DIR$/build/production/vendor/laminas/laminas-diactoros" />
+      <path value="$PROJECT_DIR$/build/production/vendor/nikic/fast-route" />
+      <path value="$PROJECT_DIR$/build/production/vendor/laminas/laminas-config-aggregator" />
+      <path value="$PROJECT_DIR$/build/production/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/build/production/vendor/laminas/laminas-escaper" />
+      <path value="$PROJECT_DIR$/build/production/vendor/mezzio/mezzio-template" />
+      <path value="$PROJECT_DIR$/build/production/vendor/mezzio/mezzio" />
+      <path value="$PROJECT_DIR$/build/production/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/build/production/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/build/production/vendor/mezzio/mezzio-router" />
+      <path value="$PROJECT_DIR$/build/production/vendor/fig/http-message-util" />
+      <path value="$PROJECT_DIR$/build/production/vendor/mezzio/mezzio-fastroute" />
+      <path value="$PROJECT_DIR$/build/production/vendor/psr/http-server-middleware" />
+      <path value="$PROJECT_DIR$/build/production/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/build/production/vendor/brick/varexporter" />
+      <path value="$PROJECT_DIR$/build/production/vendor/psr/http-server-handler" />
+      <path value="$PROJECT_DIR$/build/production/vendor/laminas/laminas-stdlib" />
+      <path value="$PROJECT_DIR$/build/production/vendor/composer" />
+      <path value="$PROJECT_DIR$/build/production/vendor/laminas/laminas-servicemanager" />
+      <path value="$PROJECT_DIR$/build/production/vendor/laminas/laminas-httphandlerrunner" />
+      <path value="$PROJECT_DIR$/build/production/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/league/mime-type-detection" />
+      <path value="$PROJECT_DIR$/vendor/league/flysystem-local" />
+      <path value="$PROJECT_DIR$/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/vendor/mezzio/mezzio-authentication-session" />
+      <path value="$PROJECT_DIR$/vendor/mezzio/mezzio-authorization" />
+      <path value="$PROJECT_DIR$/vendor/mezzio/mezzio-authorization-rbac" />
+      <path value="$PROJECT_DIR$/vendor/mezzio/mezzio-session" />
+      <path value="$PROJECT_DIR$/vendor/mezzio/mezzio-authentication" />
+      <path value="$PROJECT_DIR$/vendor/dflydev/fig-cookies" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-validator" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-filter" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-inputfilter" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-permissions-rbac" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-form" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-hydrator" />
+      <path value="$PROJECT_DIR$/vendor/mezzio/mezzio-csrf" />
+      <path value="$PROJECT_DIR$/build/vendor/mezzio/mezzio-session" />
+      <path value="$PROJECT_DIR$/build/vendor/mezzio/mezzio-fastroute" />
+      <path value="$PROJECT_DIR$/build/vendor/dflydev/fig-cookies" />
+      <path value="$PROJECT_DIR$/build/vendor/mezzio/mezzio-template" />
+      <path value="$PROJECT_DIR$/build/vendor/mezzio/mezzio-authorization-rbac" />
+      <path value="$PROJECT_DIR$/build/vendor/mezzio/mezzio-csrf" />
+      <path value="$PROJECT_DIR$/build/vendor/mezzio/mezzio" />
+      <path value="$PROJECT_DIR$/build/vendor/mezzio/mezzio-authentication-session" />
+      <path value="$PROJECT_DIR$/build/vendor/laminas/laminas-config-aggregator" />
+      <path value="$PROJECT_DIR$/build/vendor/laminas/laminas-httphandlerrunner" />
+      <path value="$PROJECT_DIR$/build/vendor/laminas/laminas-diactoros" />
+      <path value="$PROJECT_DIR$/build/vendor/laminas/laminas-escaper" />
+      <path value="$PROJECT_DIR$/build/vendor/laminas/laminas-filter" />
+      <path value="$PROJECT_DIR$/build/vendor/laminas/laminas-hydrator" />
+      <path value="$PROJECT_DIR$/build/vendor/laminas/laminas-stdlib" />
+      <path value="$PROJECT_DIR$/build/vendor/laminas/laminas-servicemanager" />
+      <path value="$PROJECT_DIR$/build/vendor/laminas/laminas-permissions-rbac" />
+      <path value="$PROJECT_DIR$/build/vendor/laminas/laminas-stratigility" />
+      <path value="$PROJECT_DIR$/build/vendor/laminas/laminas-validator" />
+      <path value="$PROJECT_DIR$/build/vendor/laminas/laminas-inputfilter" />
+      <path value="$PROJECT_DIR$/build/vendor/laminas/laminas-form" />
+      <path value="$PROJECT_DIR$/build/vendor/composer" />
+      <path value="$PROJECT_DIR$/build/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/build/vendor/webimpress/safe-writer" />
+      <path value="$PROJECT_DIR$/build/vendor/psr/http-server-handler" />
+      <path value="$PROJECT_DIR$/build/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/build/vendor/brick/varexporter" />
+      <path value="$PROJECT_DIR$/build/vendor/psr/http-server-middleware" />
+      <path value="$PROJECT_DIR$/build/vendor/fig/http-message-util" />
+      <path value="$PROJECT_DIR$/build/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/build/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/build/vendor/mezzio/mezzio-authentication" />
+      <path value="$PROJECT_DIR$/build/vendor/league/flysystem-local" />
+      <path value="$PROJECT_DIR$/build/vendor/mezzio/mezzio-authorization" />
+      <path value="$PROJECT_DIR$/build/vendor/mezzio/mezzio-router" />
+      <path value="$PROJECT_DIR$/build/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/build/vendor/nikic/fast-route" />
+      <path value="$PROJECT_DIR$/build/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/build/vendor/league/mime-type-detection" />
+      <path value="$PROJECT_DIR$/vendor/phpstan/phpstan" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/vendor/squizlabs/php_codesniffer" />
+      <path value="$PROJECT_DIR$/vendor/league/flysystem-memory" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-development-mode" />
+      <path value="$PROJECT_DIR$/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/rector/rector" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-invoker" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/cli-parser" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/lines-of-code" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
+    </include_path>
+  </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.0">
+    <option name="suggestChangeDefaultLanguageLevel" value="false" />
+  </component>
+  <component name="PhpStan">
+    <PhpStan_settings>
+      <PhpStanConfiguration tool_path="$PROJECT_DIR$/vendor/bin/phpstan" />
+    </PhpStan_settings>
+  </component>
+  <component name="PhpStanOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PhpUnit">
+    <phpunit_settings>
+      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/build/production/vendor/autoload.php" />
+      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/build/vendor/autoload.php" />
+      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/phpunit.xml" custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" use_configuration_file="true" />
+    </phpunit_settings>
+  </component>
+  <component name="PsalmOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+</project>

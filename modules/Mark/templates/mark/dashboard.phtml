@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= htmlspecialchars($title) ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .mark-header { background: linear-gradient(135deg, #dc3545, #6f42c1); color: white; }
+        .stats-card { transition: transform 0.2s; }
+        .stats-card:hover { transform: translateY(-2px); }
+        .role-badge { font-size: 0.8em; }
+        .system-status { border-left: 4px solid #28a745; }
+        .warning-status { border-left: 4px solid #ffc107; }
+        .danger-status { border-left: 4px solid #dc3545; }
+    </style>
+</head>
+<body class="bg-light">
+
+<!-- Mark Header -->
+<header class="mark-header py-3 mb-4">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col">
+                <h1 class="h3 mb-0">
+                    <i class="fas fa-shield-alt me-2"></i>
+                    HDM Boot Protocol - Mark Dashboard
+                </h1>
+                <small class="opacity-75">System Administration & Management</small>
+            </div>
+            <div class="col-auto">
+                <div class="d-flex align-items-center">
+                    <span class="me-3">
+                        <i class="fas fa-user me-1"></i>
+                        <?= htmlspecialchars($mark_user->getUsername()) ?>
+                        <?php foreach ($user_roles as $role): ?>
+                            <span class="badge bg-light text-dark role-badge ms-1"><?= htmlspecialchars($role) ?></span>
+                        <?php endforeach; ?>
+                    </span>
+                    <a href="/mark/logout" class="btn btn-outline-light btn-sm">
+                        <i class="fas fa-sign-out-alt me-1"></i>Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    
+    <!-- System Status Overview -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card stats-card system-status">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h6 class="card-title text-muted">Total Users</h6>
+                            <h3 class="mb-0"><?= $stats['total_users'] ?? 0 ?></h3>
+                        </div>
+                        <div class="text-primary">
+                            <i class="fas fa-users fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card stats-card system-status">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h6 class="card-title text-muted">Total Marks</h6>
+                            <h3 class="mb-0"><?= $stats['total_marks'] ?? 0 ?></h3>
+                        </div>
+                        <div class="text-success">
+                            <i class="fas fa-bookmark fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card stats-card <?= ($stats['disk_usage'] ?? 0) > 80 ? 'danger-status' : 'system-status' ?>">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h6 class="card-title text-muted">Disk Usage</h6>
+                            <h3 class="mb-0"><?= $stats['disk_usage'] ?? 0 ?>%</h3>
+                        </div>
+                        <div class="text-warning">
+                            <i class="fas fa-hdd fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card stats-card system-status">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h6 class="card-title text-muted">System Health</h6>
+                            <h3 class="mb-0 text-success">
+                                <i class="fas fa-check-circle"></i> OK
+                            </h3>
+                        </div>
+                        <div class="text-success">
+                            <i class="fas fa-heartbeat fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-bolt me-2"></i>Quick Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-2">
+                            <a href="/mark/users" class="btn btn-outline-primary w-100">
+                                <i class="fas fa-users me-2"></i>Manage Users
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="/mark/marks" class="btn btn-outline-success w-100">
+                                <i class="fas fa-bookmark me-2"></i>Manage Marks
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="/mark/health" class="btn btn-outline-info w-100">
+                                <i class="fas fa-heartbeat me-2"></i>System Health
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="/mark/logs" class="btn btn-outline-warning w-100">
+                                <i class="fas fa-file-alt me-2"></i>System Logs
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <?php if ($is_supermark): ?>
+                    <hr>
+                    <h6 class="text-danger"><i class="fas fa-crown me-2"></i>Supermark Actions</h6>
+                    <div class="row">
+                        <div class="col-md-3 mb-2">
+                            <a href="/mark/database" class="btn btn-outline-danger w-100">
+                                <i class="fas fa-database me-2"></i>Database
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="/mark/settings" class="btn btn-outline-danger w-100">
+                                <i class="fas fa-cog me-2"></i>Settings
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="/mark/backups" class="btn btn-outline-danger w-100">
+                                <i class="fas fa-archive me-2"></i>Backups
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="/mark/cache" class="btn btn-outline-secondary w-100">
+                                <i class="fas fa-memory me-2"></i>Cache
+                            </a>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-clock me-2"></i>Recent User Activity</h5>
+                </div>
+                <div class="card-body">
+                    <?php if (empty($recent_users)): ?>
+                        <p class="text-muted">No recent activity</p>
+                    <?php else: ?>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Roles</th>
+                                        <th>Last Login</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($recent_users as $user): ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($user->getUsername()) ?></td>
+                                        <td>
+                                            <?php foreach ($user->getRoles() as $role): ?>
+                                                <span class="badge bg-secondary me-1"><?= htmlspecialchars($role) ?></span>
+                                            <?php endforeach; ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($user->getLastLoginAt()): ?>
+                                                <?= $user->getLastLoginAt()->format('Y-m-d H:i') ?>
+                                            <?php else: ?>
+                                                <span class="text-muted">Never</span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($user->isActive()): ?>
+                                                <span class="badge bg-success">Active</span>
+                                            <?php else: ?>
+                                                <span class="badge bg-danger">Inactive</span>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>System Info</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-6">Protocol:</dt>
+                        <dd class="col-sm-6">HDM Boot v1.0</dd>
+                        
+                        <dt class="col-sm-6">PHP Version:</dt>
+                        <dd class="col-sm-6"><?= PHP_VERSION ?></dd>
+                        
+                        <dt class="col-sm-6">Database:</dt>
+                        <dd class="col-sm-6">SQLite (3 DBs)</dd>
+                        
+                        <dt class="col-sm-6">Cache:</dt>
+                        <dd class="col-sm-6">File System</dd>
+                        
+                        <dt class="col-sm-6">Session:</dt>
+                        <dd class="col-sm-6">File System</dd>
+                    </dl>
+                    
+                    <hr>
+                    <small class="text-muted">
+                        <i class="fas fa-shield-alt me-1"></i>
+                        Secure mark-only access
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
