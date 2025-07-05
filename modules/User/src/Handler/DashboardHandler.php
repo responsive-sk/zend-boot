@@ -24,16 +24,22 @@ class DashboardHandler implements RequestHandlerInterface
         // Get user from session (set by AuthenticationMiddleware)
         $user = $request->getAttribute(UserInterface::class);
 
-        if (!$user) {
+        if (!$user || !($user instanceof UserInterface)) {
             return new RedirectResponse('/user/login');
         }
 
         // Get session for flash messages
         $session = $request->getAttribute('session');
-        $flashSuccess = $session ? $session->get('flash_success') : null;
-        if ($session && $flashSuccess) {
-            $session->unset('flash_success');
-        }
+$session = $request->getAttribute('session');
+$flashSuccess = null;
+
+// Validate session object and get flash message
+if ($session && is_object($session) && method_exists($session, 'get')) {
+    $flashSuccess = $session->get('flash_success');
+    if ($flashSuccess && method_exists($session, 'unset')) {
+        $session->unset('flash_success');
+    }
+}
 
         return new HtmlResponse($this->template->render('user::dashboard', [
             'title' => 'Dashboard',
