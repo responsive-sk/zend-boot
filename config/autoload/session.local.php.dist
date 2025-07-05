@@ -1,0 +1,37 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Production Session Configuration Template
+ * 
+ * Copy this file to session.local.php and configure for your environment
+ * This file should NOT be committed to version control
+ */
+
+return [
+    'session' => [
+        'cookie_name' => $_ENV['SESSION_NAME'] ?? 'MEZZIO_SESSION',
+        'cookie_secure' => (bool) ($_ENV['SESSION_SECURE'] ?? true),        // HTTPS only in production
+        'cookie_httponly' => true,
+        'cookie_samesite' => 'Strict',
+        'cookie_lifetime' => (int) ($_ENV['SESSION_LIFETIME'] ?? 3600),     // 1 hour
+        'cookie_path' => '/',
+        'cookie_domain' => $_ENV['SESSION_DOMAIN'] ?? '',
+        
+        'ini_settings' => [
+            // Redis session storage for production
+            'session.save_handler' => $_ENV['SESSION_HANDLER'] ?? 'redis',
+            'session.save_path' => $_ENV['REDIS_SESSION_PATH'] ?? 'tcp://127.0.0.1:6379',
+            'session.gc_maxlifetime' => (int) ($_ENV['SESSION_LIFETIME'] ?? 3600),
+            'session.gc_probability' => 1,
+            'session.gc_divisor' => 100,
+            'session.use_strict_mode' => 1,
+            'session.use_cookies' => 1,
+            'session.use_only_cookies' => 1,
+            'session.cookie_secure' => (bool) ($_ENV['SESSION_SECURE'] ?? true),
+            'session.cookie_httponly' => 1,
+            'session.cookie_samesite' => 'Strict',
+        ],
+    ],
+];

@@ -1,11 +1,36 @@
 #!/bin/bash
 
-# Production Build Script for Mezzio Minimal with Theme System
-# Optimizes for production deployment with versioned assets
+# HDM Boot Protocol - Production Build Script
+# 
+# This script prepares the application for production deployment
+# by optimizing dependencies, clearing development files, and
+# creating a production-ready package.
 
 set -e
 
-echo "🚀 Starting production build for Mezzio Minimal..."
+# Configuration
+BUILD_DIR="${BUILD_DIR:-./build}"
+PACKAGE_NAME="${PACKAGE_NAME:-mezzio-hdm-boot-protocol}"
+VERSION="${VERSION:-$(date +%Y%m%d_%H%M%S)}"
+EXCLUDE_PATTERNS=(
+    ".git"
+    ".gitignore"
+    "node_modules"
+    "tests"
+    "phpunit.xml"
+    "phpcs.xml"
+    "phpstan.neon"
+    ".phpunit.result.cache"
+    "composer.lock"
+    "*.log"
+    "data/cache/*"
+    "data/sessions/*"
+    "config/autoload/*.local.php"
+    ".env"
+    "build"
+    "docs/screenshots"
+    "*.md"
+)
 
 # Colors for output
 RED='\033[0;31m'
@@ -14,193 +39,308 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# Function to print colored output
-print_status() {
-    echo -e "${BLUE}[INFO]${NC} $1"
+# Logging function
+log() {
+    echo -e "${BLUE}[$(date +'%Y-%m-%d %H:%M:%S')]${NC} $1"
 }
 
-print_success() {
+error() {
+    echo -e "${RED}[ERROR]${NC} $1" >&2
+}
+
+success() {
     echo -e "${GREEN}[SUCCESS]${NC} $1"
 }
 
-print_warning() {
+warning() {
     echo -e "${YELLOW}[WARNING]${NC} $1"
 }
 
-print_error() {
-    echo -e "${RED}[ERROR]${NC} $1"
+# Clean previous build
+clean_build() {
+    log "Cleaning previous build..."
+    
+    if [ -d "$BUILD_DIR" ]; then
+        rm -rf "$BUILD_DIR"
+    fi
+    
+    mkdir -p "$BUILD_DIR"
+    success "Build directory cleaned"
 }
 
-# 1. Backup original files
-print_status "Backing up original files..."
-cp composer.json composer.full.json 2>/dev/null || true
-
-# 2. Clean previous builds
-print_status "Cleaning previous builds..."
-rm -rf public/themes/*/assets/
-rm -rf public/themes/*/.vite/
-
-# 3. Install PHP dependencies for production
-print_status "Installing PHP dependencies for production..."
-composer install --no-dev --optimize-autoloader --no-interaction
-
-# 4. Build themes with versioned assets
-print_status "Building Bootstrap theme..."
-cd themes/bootstrap
-if [ ! -d "node_modules" ]; then
-    print_status "Installing Bootstrap theme dependencies..."
-    pnpm install
-fi
-pnpm run build:prod
-cd ../..
-
-print_status "Building Main theme..."
-cd themes/main
-if [ ! -d "node_modules" ]; then
-    print_status "Installing Main theme dependencies..."
-    pnpm install
-fi
-pnpm run build:prod
-cd ../..
-
-# 5. Ultra-optimize vendor directory
-print_status "Ultra-optimizing vendor directory..."
-find vendor/ -type d -name "docs" -exec rm -rf {} + 2>/dev/null || true
-find vendor/ -type d -name "test" -exec rm -rf {} + 2>/dev/null || true
-find vendor/ -type d -name "tests" -exec rm -rf {} + 2>/dev/null || true
-find vendor/ -type d -name "examples" -exec rm -rf {} + 2>/dev/null || true
-find vendor/ -type d -name "demo" -exec rm -rf {} + 2>/dev/null || true
-find vendor/ -type d -name "benchmark" -exec rm -rf {} + 2>/dev/null || true
-find vendor/ -name "*.md" -delete 2>/dev/null || true
-find vendor/ -name "*.txt" -delete 2>/dev/null || true
-find vendor/ -name "LICENSE*" -delete 2>/dev/null || true
-find vendor/ -name "README*" -delete 2>/dev/null || true
-find vendor/ -name "CHANGELOG*" -delete 2>/dev/null || true
-find vendor/ -name "CONTRIBUTING*" -delete 2>/dev/null || true
-find vendor/ -name ".git*" -delete 2>/dev/null || true
-find vendor/ -name "phpunit.xml*" -delete 2>/dev/null || true
-find vendor/ -name "composer.json" -delete 2>/dev/null || true
-find vendor/ -name "composer.lock" -delete 2>/dev/null || true
-find vendor/ -name ".github" -type d -exec rm -rf {} + 2>/dev/null || true
-find vendor/ -name ".travis*" -delete 2>/dev/null || true
-find vendor/ -name ".scrutinizer*" -delete 2>/dev/null || true
-find vendor/ -name "psalm.xml*" -delete 2>/dev/null || true
-find vendor/ -name "infection.json*" -delete 2>/dev/null || true
-find vendor/ -type d -empty -delete 2>/dev/null || true
-
-# Remove specific heavy files that are not needed in production
-find vendor/ -name "*.phar" -delete 2>/dev/null || true
-find vendor/ -name "*.exe" -delete 2>/dev/null || true
-
-# 6. Remove development files and git
-print_status "Removing development files and git repository..."
-rm -rf tests/ 2>/dev/null || true
-rm -f phpstan.neon rector.php phpcs.xml 2>/dev/null || true
-rm -rf .git/ 2>/dev/null || true
-rm -f .gitignore .gitattributes 2>/dev/null || true
-# Remove .htaccess from directories that block PHP built-in server
-rm -f config/.htaccess src/.htaccess vendor/.htaccess themes/.htaccess 2>/dev/null || true
-
-# 7. Clean theme directories and build files
-print_status "Cleaning theme source files and build tools for production..."
-rm -rf themes/*/node_modules 2>/dev/null || true
-rm -f themes/*/pnpm-lock.yaml 2>/dev/null || true
-rm -f themes/*/package-lock.json 2>/dev/null || true
-rm -f build-*.sh 2>/dev/null || true
-rm -f composer.full.json 2>/dev/null || true
-
-# 8. Generate optimized autoloader
-print_status "Generating optimized autoloader..."
-composer dump-autoload --optimize --no-dev --classmap-authoritative
-
-# 9. Set production permissions
-print_status "Setting production permissions..."
-# Set directory permissions
-find . -type d -exec chmod 755 {} \; 2>/dev/null || true
-# Set file permissions
-find . -type f -exec chmod 644 {} \; 2>/dev/null || true
-# Make public directory accessible
-chmod 755 public/ 2>/dev/null || true
-chmod 644 public/index.php 2>/dev/null || true
-# Ensure .htaccess files are readable
-find . -name ".htaccess" -exec chmod 644 {} \; 2>/dev/null || true
-# Create and set data directory permissions
-mkdir -p data 2>/dev/null || true
-chmod 755 data/ 2>/dev/null || true
-
-# 10. Optimize built assets
-print_status "Optimizing built assets..."
-# Remove source maps in production
-find public/themes/ -name "*.map" -delete 2>/dev/null || true
-# Remove .vite directory if not needed (keep manifest.json)
-find public/themes/ -name ".vite" -type d | while read dir; do
-    if [ -f "$dir/manifest.json" ]; then
-        # Keep only manifest.json, remove other files
-        find "$dir" -type f ! -name "manifest.json" -delete 2>/dev/null || true
+# Install production dependencies
+install_production_dependencies() {
+    log "Installing production dependencies..."
+    
+    # Backup current composer.lock
+    if [ -f "composer.lock" ]; then
+        cp composer.lock composer.lock.backup
     fi
-done
+    
+    # Install production dependencies
+    composer install --no-dev --optimize-autoloader --no-interaction
+    
+    success "Production dependencies installed"
+}
 
-# 11. Generate build info
-print_status "Generating build information..."
-BUILD_DATE=$(date '+%Y-%m-%d %H:%M:%S')
-BUILD_HASH=$(git rev-parse --short HEAD 2>/dev/null || echo "unknown")
+# Copy application files
+copy_application_files() {
+    log "Copying application files..."
+    
+    # Create rsync exclude pattern
+    local exclude_args=""
+    for pattern in "${EXCLUDE_PATTERNS[@]}"; do
+        exclude_args="$exclude_args --exclude=$pattern"
+    done
+    
+    # Copy files using rsync
+    rsync -av $exclude_args ./ "$BUILD_DIR/"
+    
+    success "Application files copied"
+}
 
-cat > BUILD_INFO.txt << EOF
-Production Build Information
-============================
-Build Date: $BUILD_DATE
-Git Hash: $BUILD_HASH
-PHP Version: $(php -v | head -n 1)
+# Create production configuration templates
+create_production_configs() {
+    log "Creating production configuration templates..."
+    
+    # Ensure config templates exist in build
+    if [ ! -f "$BUILD_DIR/config/autoload/database.local.php.dist" ]; then
+        warning "database.local.php.dist not found in build"
+    fi
+    
+    if [ ! -f "$BUILD_DIR/config/autoload/session.local.php.dist" ]; then
+        warning "session.local.php.dist not found in build"
+    fi
+    
+    if [ ! -f "$BUILD_DIR/.env.dist" ]; then
+        warning ".env.dist not found in build"
+    fi
+    
+    success "Production configuration templates ready"
+}
 
-Theme Assets:
-$(find public/themes -name "*.css" -o -name "*.js" | sort)
+# Optimize autoloader
+optimize_autoloader() {
+    log "Optimizing autoloader..."
+    
+    cd "$BUILD_DIR"
+    composer dump-autoload --optimize --no-dev
+    cd - > /dev/null
+    
+    success "Autoloader optimized"
+}
 
-Manifest Files:
-$(find public/themes -name "manifest.json" | sort)
+# Create necessary directories
+create_directories() {
+    log "Creating necessary directories..."
+    
+    mkdir -p "$BUILD_DIR/logs"
+    mkdir -p "$BUILD_DIR/data/cache"
+    mkdir -p "$BUILD_DIR/data/sessions"
+    
+    # Create .gitkeep files to preserve empty directories
+    touch "$BUILD_DIR/logs/.gitkeep"
+    touch "$BUILD_DIR/data/cache/.gitkeep"
+    touch "$BUILD_DIR/data/sessions/.gitkeep"
+    
+    success "Directories created"
+}
 
-Size Information:
-- Vendor size: $(du -sh vendor/ | cut -f1)
-- Public themes: $(du -sh public/themes/ | cut -f1)
-- Total size: $(du -sh . | cut -f1)
+# Set production file permissions
+set_production_permissions() {
+    log "Setting production file permissions..."
+    
+    # Set directory permissions
+    find "$BUILD_DIR" -type d -exec chmod 755 {} \;
+    
+    # Set file permissions
+    find "$BUILD_DIR" -type f -exec chmod 644 {} \;
+    
+    # Make scripts executable
+    chmod +x "$BUILD_DIR/bin/"*.sh
+    
+    # Protect sensitive configuration templates
+    chmod 600 "$BUILD_DIR/config/autoload/"*.dist
+    chmod 600 "$BUILD_DIR/.env.dist"
+    
+    success "Production permissions set"
+}
 
-Features:
-✅ Versioned assets with hash for cache busting
-✅ Optimized vendor directory (removed docs, tests, examples)
-✅ Git repository removed (major size reduction)
-✅ Development files removed (build scripts, configs)
-✅ Production-ready permissions
-✅ Theme manifests for dynamic asset loading
-✅ Long-term cache strategy ready
-✅ Apache .htaccess security configuration
+# Create deployment package
+create_package() {
+    log "Creating deployment package..."
+    
+    local package_file="${PACKAGE_NAME}_${VERSION}.tar.gz"
+    
+    # Create tarball
+    tar -czf "$package_file" -C "$BUILD_DIR" .
+    
+    # Create checksum
+    sha256sum "$package_file" > "${package_file}.sha256"
+    
+    success "Package created: $package_file"
+    success "Checksum created: ${package_file}.sha256"
+    
+    # Display package info
+    echo ""
+    echo "=== Package Information ==="
+    echo "File: $package_file"
+    echo "Size: $(du -h "$package_file" | cut -f1)"
+    echo "SHA256: $(cat "${package_file}.sha256" | cut -d' ' -f1)"
+    echo "=========================="
+}
 
-Security:
-🔒 No git history exposed
-🔒 No development tools in production
-🔒 Directory access protection (.htaccess)
-🔒 Security headers (XSS, CSRF, Clickjacking protection)
-🔒 Minimal attack surface
+# Create deployment instructions
+create_deployment_instructions() {
+    log "Creating deployment instructions..."
+    
+    cat > "DEPLOYMENT_INSTRUCTIONS.txt" << EOF
+HDM Boot Protocol - Production Deployment Instructions
+=====================================================
 
-Ready for production deployment!
+Package: ${PACKAGE_NAME}_${VERSION}.tar.gz
+Created: $(date)
+
+Prerequisites:
+- PHP 8.1+ with required extensions
+- Web server (Nginx/Apache)
+- Database server (MySQL/PostgreSQL)
+- Redis server (for sessions)
+
+Deployment Steps:
+
+1. Extract package to web directory:
+   tar -xzf ${PACKAGE_NAME}_${VERSION}.tar.gz -C /var/www/mezzio-app
+
+2. Copy and configure environment:
+   cp .env.dist .env
+   # Edit .env with your settings
+
+3. Copy and configure database:
+   cp config/autoload/database.local.php.dist config/autoload/database.local.php
+   # Edit database.local.php with your database settings
+
+4. Copy and configure sessions:
+   cp config/autoload/session.local.php.dist config/autoload/session.local.php
+   # Edit session.local.php with your session settings
+
+5. Set proper permissions:
+   chown -R www-data:www-data /var/www/mezzio-app
+   chmod 775 /var/www/mezzio-app/data /var/www/mezzio-app/logs
+
+6. Run deployment script:
+   sudo /var/www/mezzio-app/bin/deploy.sh
+
+7. Configure web server to point to /var/www/mezzio-app/public
+
+8. Set up monitoring:
+   # Add to crontab:
+   */5 * * * * /var/www/mezzio-app/bin/monitor.sh
+
+Health Check:
+- URL: http://your-domain.com/health.php
+- Should return JSON with status "ok"
+
+Support:
+- Documentation: docs/
+- Health monitoring: bin/monitor.sh
+- Deployment: bin/deploy.sh
+
 EOF
 
-# 12. Show results
-echo ""
-print_success "Production build completed successfully!"
-echo ""
-echo "📊 Build Summary:"
-echo "   - Build Date: $BUILD_DATE"
-echo "   - Git Hash: $BUILD_HASH"
-echo "   - Vendor size: $(du -sh vendor/ | cut -f1)"
-echo "   - Public themes: $(du -sh public/themes/ | cut -f1)"
-echo "   - Total size: $(du -sh . | cut -f1)"
-echo "   - Theme assets: $(find public/themes -name "*.css" -o -name "*.js" | wc -l) files"
-echo ""
-print_success "✅ Versioned assets with hash for long-term caching"
-print_success "✅ Git repository removed (major size reduction)"
-print_success "✅ Apache .htaccess security configuration"
-print_success "✅ Ultra-optimized for production deployment"
-print_success "✅ AssetHelper ready for dynamic asset loading"
-echo ""
-print_warning "📄 See BUILD_INFO.txt for detailed information"
-echo ""
-print_success "🚀 Ready for production deployment!"
+    success "Deployment instructions created: DEPLOYMENT_INSTRUCTIONS.txt"
+}
+
+# Restore development environment
+restore_development() {
+    log "Restoring development environment..."
+    
+    # Restore composer.lock if it was backed up
+    if [ -f "composer.lock.backup" ]; then
+        mv composer.lock.backup composer.lock
+    fi
+    
+    # Reinstall development dependencies
+    composer install
+    
+    success "Development environment restored"
+}
+
+# Validate build
+validate_build() {
+    log "Validating build..."
+    
+    local errors=0
+    
+    # Check required files
+    local required_files=(
+        "public/index.php"
+        "config/config.php"
+        "vendor/autoload.php"
+        "bin/deploy.sh"
+        "bin/monitor.sh"
+        "public/health.php"
+    )
+    
+    for file in "${required_files[@]}"; do
+        if [ ! -f "$BUILD_DIR/$file" ]; then
+            error "Required file missing: $file"
+            errors=$((errors + 1))
+        fi
+    done
+    
+    # Check required directories
+    local required_dirs=(
+        "config/autoload"
+        "modules"
+        "src"
+        "vendor"
+        "logs"
+        "data"
+    )
+    
+    for dir in "${required_dirs[@]}"; do
+        if [ ! -d "$BUILD_DIR/$dir" ]; then
+            error "Required directory missing: $dir"
+            errors=$((errors + 1))
+        fi
+    done
+    
+    if [ $errors -eq 0 ]; then
+        success "Build validation passed"
+    else
+        error "Build validation failed with $errors errors"
+        exit 1
+    fi
+}
+
+# Main build function
+main() {
+    log "Starting HDM Boot Protocol production build..."
+    
+    clean_build
+    install_production_dependencies
+    copy_application_files
+    create_production_configs
+    optimize_autoloader
+    create_directories
+    set_production_permissions
+    validate_build
+    create_package
+    create_deployment_instructions
+    restore_development
+    
+    success "Production build completed successfully!"
+    
+    echo ""
+    echo "=== Build Summary ==="
+    echo "Build directory: $BUILD_DIR"
+    echo "Package: ${PACKAGE_NAME}_${VERSION}.tar.gz"
+    echo "Instructions: DEPLOYMENT_INSTRUCTIONS.txt"
+    echo "==================="
+    echo ""
+    echo "Ready for production deployment!"
+}
+
+# Run main function
+main "$@"
