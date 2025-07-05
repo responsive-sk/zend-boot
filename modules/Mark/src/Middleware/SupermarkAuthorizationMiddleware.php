@@ -13,7 +13,7 @@ use Mark\Entity\MarkUser;
 
 /**
  * HDM Boot Protocol - Supermark Authorization Middleware
- * 
+ *
  * Ensures only supermark users can access critical system functions
  * Additional security layer for sensitive operations
  */
@@ -22,7 +22,7 @@ class SupermarkAuthorizationMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $markUser = $request->getAttribute('mark_user');
-        
+
         if (!$markUser instanceof MarkUser) {
             // Should not happen if MarkAuthenticationMiddleware ran first
             return new HtmlResponse('Access denied: Authentication required', 403);
@@ -35,7 +35,7 @@ class SupermarkAuthorizationMiddleware implements MiddlewareInterface
                 403
             );
         }
-        
+
         // User is supermark, allow access
         return $handler->handle($request);
     }
@@ -44,7 +44,7 @@ class SupermarkAuthorizationMiddleware implements MiddlewareInterface
     {
         $username = htmlspecialchars($markUser->getUsername());
         $roles = implode(', ', $markUser->getRoles());
-        
+
         return <<<HTML
 <!DOCTYPE html>
 <html lang="en">

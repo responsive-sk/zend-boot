@@ -6,7 +6,7 @@ namespace Mark\Entity;
 
 /**
  * HDM Boot Protocol - Mark User Entity
- * 
+ *
  * Mark users stored in mark.db (separate from regular users)
  * Roles: mark, editor, supermark
  */

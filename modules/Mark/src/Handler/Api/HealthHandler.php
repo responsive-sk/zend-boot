@@ -11,7 +11,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * HDM Boot Protocol - Mark API Health Handler
- * 
+ *
  * API endpoint for system health check
  */
 class HealthHandler implements RequestHandlerInterface

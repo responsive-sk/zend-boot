@@ -15,13 +15,13 @@ class DashboardHandlerFactory
     {
         $template = $container->get(TemplateRendererInterface::class);
         assert($template instanceof TemplateRendererInterface);
-        
+
         $markUserRepository = $container->get(MarkUserRepository::class);
         assert($markUserRepository instanceof MarkUserRepository);
-        
+
         $statsService = $container->get(SystemStatsService::class);
         assert($statsService instanceof SystemStatsService);
-        
+
         return new DashboardHandler($template, $markUserRepository, $statsService);
     }
 }

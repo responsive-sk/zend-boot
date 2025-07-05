@@ -11,7 +11,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * HDM Boot Protocol - Mark Cache Clear Handler
- * 
+ *
  * Cache clearing for mark users
  */
 class CacheClearHandler implements RequestHandlerInterface

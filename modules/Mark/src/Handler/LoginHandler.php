@@ -15,7 +15,7 @@ use Mark\Service\MarkUserRepository;
 
 /**
  * HDM Boot Protocol - Mark Login Handler
- * 
+ *
  * Separate login for mark users (mark, editor, supermark roles)
  */
 class LoginHandler implements RequestHandlerInterface
@@ -29,7 +29,7 @@ class LoginHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $session = $request->getAttribute('session');
-        
+
         if (!$session instanceof SessionInterface) {
             return new HtmlResponse('Session required', 500);
         }
@@ -46,7 +46,7 @@ class LoginHandler implements RequestHandlerInterface
 
         // Show login form
         $error = $request->getQueryParams()['error'] ?? null;
-        
+
         return new HtmlResponse($this->template->render('mark::login', [
             'title' => 'Mark Login',
             'error' => $error,
@@ -60,7 +60,7 @@ class LoginHandler implements RequestHandlerInterface
             return new HtmlResponse($this->template->render('mark::login', [
             'title' => 'Mark Login',
             'error' => 'Invalid request data',
-        ]));
+            ]));
         }
 
         $username = is_string($body['username'] ?? null) ? $body['username'] : '';
@@ -70,17 +70,17 @@ class LoginHandler implements RequestHandlerInterface
             return new HtmlResponse($this->template->render('mark::login', [
             'title' => 'Mark Login',
             'error' => 'Please enter username and password',
-        ]));
+            ]));
         }
 
         // Find mark user in mark.db
         $user = $this->markUserRepository->findByUsername($username);
-        
+
         if (!$user || !$user->isActive()) {
             return new HtmlResponse($this->template->render('mark::login', [
             'title' => 'Mark Login',
             'error' => 'Invalid credentials',
-        ]));
+            ]));
         }
 
         // Verify password
@@ -88,7 +88,7 @@ class LoginHandler implements RequestHandlerInterface
             return new HtmlResponse($this->template->render('mark::login', [
             'title' => 'Mark Login',
             'error' => 'Invalid credentials',
-        ]));
+            ]));
         }
 
         // All users in mark.db should be mark users, but double-check
@@ -96,7 +96,7 @@ class LoginHandler implements RequestHandlerInterface
             return new HtmlResponse($this->template->render('mark::login', [
             'title' => 'Mark Login',
             'error' => 'Access denied: Mark privileges required',
-        ]));
+            ]));
         }
 
         $userRoles = $user->getRoles();
@@ -112,5 +112,4 @@ class LoginHandler implements RequestHandlerInterface
 
         return new RedirectResponse('/mark/dashboard');
     }
-
 }

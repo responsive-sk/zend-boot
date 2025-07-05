@@ -13,13 +13,13 @@ class UnifiedPathServiceFactory
     {
         $config = $container->get('config');
         assert(is_array($config));
-        
+
         $publicFs = $container->get('flysystem.public.filesystem');
         assert($publicFs instanceof Filesystem);
-        
+
         $themesFs = $container->get('flysystem.themes.filesystem');
         assert($themesFs instanceof Filesystem);
-        
+
         $uploadsFs = $container->get('flysystem.uploads.filesystem');
         assert($uploadsFs instanceof Filesystem);
 

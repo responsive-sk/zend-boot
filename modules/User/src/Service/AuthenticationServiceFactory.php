@@ -12,7 +12,7 @@ class AuthenticationServiceFactory
     {
         $userRepository = $container->get(UserRepository::class);
         assert($userRepository instanceof UserRepository);
-        
+
         return new AuthenticationService($userRepository);
     }
 }

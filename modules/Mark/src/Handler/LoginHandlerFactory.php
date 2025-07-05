@@ -14,10 +14,10 @@ class LoginHandlerFactory
     {
         $template = $container->get(TemplateRendererInterface::class);
         assert($template instanceof TemplateRendererInterface);
-        
+
         $markUserRepository = $container->get(MarkUserRepository::class);
         assert($markUserRepository instanceof MarkUserRepository);
-        
+
         return new LoginHandler($template, $markUserRepository);
     }
 }

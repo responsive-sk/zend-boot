@@ -8,7 +8,7 @@ use PDO;
 
 /**
  * System Database Migration
- * 
+ *
  * Creates system.db with core system modules:
  * - Cache management
  * - System logs
@@ -29,7 +29,7 @@ class SystemMigration
         $this->createTemplateCacheTable();
         $this->createConfigCacheTable();
         $this->createSystemSettingsTable();
-        
+
         echo "✅ System database migration completed\n";
     }
 
@@ -67,7 +67,7 @@ class SystemMigration
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         ";
-        
+
         $this->pdo->exec($sql);
 
         // Create indexes separately
@@ -91,7 +91,7 @@ class SystemMigration
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         ";
-        
+
         $this->pdo->exec($sql);
         echo "  🎨 Template cache table created\n";
     }
@@ -128,9 +128,9 @@ class SystemMigration
                 updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         ";
-        
+
         $this->pdo->exec($sql);
-        
+
         // Insert default system settings
         $this->insertDefaultSettings();
         echo "  🔧 System settings table created\n";

@@ -10,7 +10,7 @@ use Psr\Container\ContainerInterface;
 
 /**
  * HDM Boot Protocol - Application Bootstrap
- * 
+ *
  * Centralized application initialization and configuration
  * Keeps index.php clean and moves all logic here
  */
@@ -40,7 +40,7 @@ class ApplicationBootstrap
     {
         $this->setupMiddlewarePipeline();
         $this->loadRoutes();
-        
+
         return $this->app;
     }
 
@@ -51,10 +51,10 @@ class ApplicationBootstrap
     {
         // Session middleware - must be first for authentication
         $this->app->pipe(\Mezzio\Session\SessionMiddleware::class);
-        
+
         // Router middleware
         $this->app->pipe(\Mezzio\Router\Middleware\RouteMiddleware::class);
-        
+
         // Dispatch middleware - must be last
         $this->app->pipe(\Mezzio\Router\Middleware\DispatchMiddleware::class);
     }
@@ -66,7 +66,7 @@ class ApplicationBootstrap
     {
         $routeConfigs = [
             'app' => __DIR__ . '/../../config/routes/app.php',
-            'user' => __DIR__ . '/../../config/routes/user.php', 
+            'user' => __DIR__ . '/../../config/routes/user.php',
             'mark' => __DIR__ . '/../../config/routes/mark.php',
             'debug' => __DIR__ . '/../../config/routes/debug.php',
         ];
@@ -84,14 +84,14 @@ class ApplicationBootstrap
     private function loadRouteConfig(string $name, string $configPath): void
     {
         $routeLoader = require $configPath;
-        
+
         // Different route configs have different signatures
         switch ($name) {
             case 'mark':
                 // Mark routes need factory and container
                 $routeLoader($this->app, $this->factory, $this->container);
                 break;
-                
+
             case 'app':
             case 'user':
             case 'debug':

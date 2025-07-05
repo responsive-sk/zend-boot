@@ -14,7 +14,7 @@ use Mark\Service\SystemStatsService;
 
 /**
  * HDM Boot Protocol - Health Handler
- * 
+ *
  * System health monitoring for mark users
  */
 class HealthHandler implements RequestHandlerInterface
@@ -28,7 +28,7 @@ class HealthHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $markUser = $request->getAttribute('mark_user');
-        
+
         if (!$markUser instanceof MarkUser) {
             return new HtmlResponse('Mark user not found in request', 500);
         }
@@ -36,7 +36,7 @@ class HealthHandler implements RequestHandlerInterface
         try {
             // Get comprehensive system health data
             $healthData = $this->getSystemHealthData();
-            
+
             // Prepare template data
             $templateData = [
                 'mark_user' => $markUser,
@@ -46,9 +46,8 @@ class HealthHandler implements RequestHandlerInterface
                 'health_data' => $healthData,
                 'title' => 'System Health - HDM Boot Protocol',
             ];
-            
+
             return new HtmlResponse($this->template->render('mark::health', $templateData));
-            
         } catch (\Exception $e) {
             return new HtmlResponse(
                 'Health Check Error: ' . $e->getMessage(),
@@ -63,7 +62,7 @@ class HealthHandler implements RequestHandlerInterface
     private function getSystemHealthData(): array
     {
         $stats = $this->statsService->getSystemStats();
-        
+
         return [
             'overall_status' => $this->calculateOverallStatus($stats),
             'database_health' => $this->getDatabaseHealth($stats),
@@ -82,7 +81,7 @@ class HealthHandler implements RequestHandlerInterface
         $diskUsage = $stats['disk_usage'] ?? 0;
         $totalUsers = $stats['total_users'] ?? 0;
         $logEntries = $stats['log_entries'] ?? 0;
-        
+
         if ($diskUsage > 90) {
             return 'critical';
         } elseif ($diskUsage > 80 || $logEntries > 1000) {
@@ -130,7 +129,7 @@ class HealthHandler implements RequestHandlerInterface
     private function getDiskHealth(array $stats): array
     {
         $diskUsage = $stats['disk_usage'] ?? 0;
-        
+
         return [
             'usage_percent' => $diskUsage,
             'status' => $diskUsage > 90 ? 'critical' : ($diskUsage > 80 ? 'warning' : 'healthy'),
@@ -145,7 +144,7 @@ class HealthHandler implements RequestHandlerInterface
     private function getCacheHealth(array $stats): array
     {
         $cacheFiles = $stats['cache_files'] ?? 0;
-        
+
         return [
             'file_count' => $cacheFiles,
             'status' => $cacheFiles > 100 ? 'warning' : 'healthy',
@@ -174,26 +173,26 @@ class HealthHandler implements RequestHandlerInterface
     private function getRecommendations(array $stats): array
     {
         $recommendations = [];
-        
+
         $diskUsage = $stats['disk_usage'] ?? 0;
         if ($diskUsage > 80) {
             $recommendations[] = 'Consider cleaning up old files or expanding disk space';
         }
-        
+
         $cacheFiles = $stats['cache_files'] ?? 0;
         if ($cacheFiles > 100) {
             $recommendations[] = 'Run cache cleanup to improve performance';
         }
-        
+
         $logEntries = $stats['log_entries'] ?? 0;
         if ($logEntries > 1000) {
             $recommendations[] = 'Archive old log entries to maintain performance';
         }
-        
+
         if (empty($recommendations)) {
             $recommendations[] = 'System is running optimally';
         }
-        
+
         return $recommendations;
     }
 

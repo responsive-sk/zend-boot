@@ -14,10 +14,10 @@ class AdminHandlerFactory
     {
         $template = $container->get(TemplateRendererInterface::class);
         assert($template instanceof TemplateRendererInterface);
-        
+
         $userRepository = $container->get(UserRepository::class);
         assert($userRepository instanceof UserRepository);
-        
+
         return new AdminHandler($template, $userRepository);
     }
 }

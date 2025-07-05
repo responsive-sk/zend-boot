@@ -8,7 +8,7 @@ use Psr\Container\ContainerInterface;
 
 /**
  * HDM Boot Protocol - Container Builder
- * 
+ *
  * Centralized container building and configuration
  */
 class ContainerBuilder
@@ -30,7 +30,7 @@ class ContainerBuilder
         }
 
         $container = require $this->configPath;
-        
+
         if (!$container instanceof ContainerInterface) {
             throw new \RuntimeException('Container config must return ContainerInterface instance');
         }

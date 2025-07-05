@@ -9,7 +9,7 @@ use Psr\Container\ContainerInterface;
 
 /**
  * HDM Boot Protocol - Application Factory
- * 
+ *
  * Main factory for creating fully configured application
  * This is the single entry point for application creation
  */
@@ -30,7 +30,7 @@ class ApplicationFactory
 
         // Bootstrap application
         $bootstrap = new ApplicationBootstrap($container);
-        
+
         return $bootstrap->bootstrap();
     }
 
@@ -46,7 +46,7 @@ class ApplicationFactory
 
         // Bootstrap application
         $bootstrap = new ApplicationBootstrap($container);
-        
+
         return $bootstrap->bootstrap();
     }
 
@@ -58,7 +58,7 @@ class ApplicationFactory
         // Don't setup web environment for testing
         $container = ContainerBuilder::buildDefault();
         $bootstrap = new ApplicationBootstrap($container);
-        
+
         return $bootstrap->bootstrap();
     }
 }

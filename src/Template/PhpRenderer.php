@@ -73,9 +73,9 @@ class PhpRenderer implements TemplateRendererInterface
     }
 
     /**
-     * @param mixed $value
+     * @param $value
      */
-    public function addDefaultParam(string $templateName, string $param, mixed $value): void
+    public function addDefaultParam(string $templateName, string $param, $value): void
     {
         if (!isset($this->defaultParams[$templateName])) {
             $this->defaultParams[$templateName] = [];
@@ -86,7 +86,6 @@ class PhpRenderer implements TemplateRendererInterface
     private function findTemplate(string $namespace, string $template): ?string
     {
         $paths = $this->paths[$namespace] ?? $this->paths[''] ?? [];
-        assert(is_array($paths));
 
         foreach ($paths as $path) {
             assert(is_string($path));

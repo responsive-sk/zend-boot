@@ -20,7 +20,8 @@ class SimpleLoginHandler implements RequestHandlerInterface
     public function __construct(
         private TemplateRendererInterface $template,
         private AuthenticationService $authService
-    ) {}
+    ) {
+    }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
@@ -33,7 +34,7 @@ class SimpleLoginHandler implements RequestHandlerInterface
 
         if ($request->getMethod() === 'POST') {
             $data = $request->getParsedBody();
-            
+
             // Validate that we have array data
             if (!is_array($data)) {
                 $data = [];

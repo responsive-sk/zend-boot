@@ -11,7 +11,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * HDM Boot Protocol - Mark API Stats Handler
- * 
+ *
  * API endpoint for system statistics
  */
 class StatsHandler implements RequestHandlerInterface

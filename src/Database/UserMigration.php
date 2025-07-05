@@ -8,7 +8,7 @@ use PDO;
 
 /**
  * User Database Migration
- * 
+ *
  * HDM Boot Protocol Compliant - User System Database
  * Creates user.db with user management tables
  */
@@ -25,7 +25,7 @@ class UserMigration
         $this->createUserSessionsTable();
         $this->createUserPermissionsTable();
         $this->seedDefaultUsers();
-        
+
         echo "✅ User database migration completed\n";
     }
 
@@ -112,7 +112,7 @@ class UserMigration
 
         if ($userCount == 0) {
             echo "  🌱 Seeding default users...\n";
-            
+
             // Create default users (HDM Boot Protocol compliant)
             $this->createDefaultUser(
                 'admin',

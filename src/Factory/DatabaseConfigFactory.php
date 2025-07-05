@@ -10,7 +10,7 @@ use League\Flysystem\Local\LocalFilesystemAdapter;
 
 /**
  * HDM Boot Protocol - Database Configuration Factory
- * 
+ *
  * Provides secure database paths using UnifiedPathService
  * Eliminates un-secure path traversal (../../)
  */
@@ -22,11 +22,11 @@ class DatabaseConfigFactory
     {
         // Create minimal config for UnifiedPathService
         $config = ['paths' => ['root' => getcwd()]];
-        
+
         // Create dummy filesystems for constructor
         $dummyAdapter = new LocalFilesystemAdapter('.');
         $dummyFs = new Filesystem($dummyAdapter);
-        
+
         $this->pathService = new UnifiedPathService($config, $dummyFs, $dummyFs, $dummyFs);
     }
 

@@ -15,7 +15,7 @@ use Mark\Service\SystemStatsService;
 
 /**
  * HDM Boot Protocol - Mark Dashboard Handler
- * 
+ *
  * System dashboard accessible only to mark users
  * Provides system overview and management tools
  */
@@ -59,7 +59,6 @@ class DashboardHandler implements RequestHandlerInterface
             ];
 
             return new HtmlResponse($this->template->render('mark::dashboard', $dashboardData));
-
         } catch (\Exception $e) {
             return new HtmlResponse(
                 'Dashboard Error: ' . $e->getMessage() . '<br>File: ' . $e->getFile() . ':' . $e->getLine(),

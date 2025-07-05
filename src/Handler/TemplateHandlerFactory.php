@@ -13,7 +13,7 @@ class TemplateHandlerFactory
     {
         $pathService = $container->get(PathServiceInterface::class);
         assert($pathService instanceof PathServiceInterface);
-        
+
         return new TemplateHandler($pathService);
     }
 }

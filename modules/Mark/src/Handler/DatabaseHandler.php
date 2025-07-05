@@ -12,14 +12,15 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * HDM Boot Protocol - Mark Database Handler
- * 
+ *
  * Database management for mark users
  */
 class DatabaseHandler implements RequestHandlerInterface
 {
     public function __construct(
         private TemplateRendererInterface $template
-    ) {}
+    ) {
+    }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

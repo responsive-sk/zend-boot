@@ -13,13 +13,13 @@ class MigrationServiceFactory
     {
         $userPdo = $container->get('pdo.user');
         assert($userPdo instanceof PDO);
-        
+
         $markPdo = $container->get('pdo.mark');
         assert($markPdo instanceof PDO);
-        
+
         $systemPdo = $container->get('pdo.system');
         assert($systemPdo instanceof PDO);
-        
+
         return new MigrationService($userPdo, $markPdo, $systemPdo);
     }
 }

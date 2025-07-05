@@ -13,7 +13,7 @@ class MarkAuthenticationMiddlewareFactory
     {
         $markUserRepository = $container->get(MarkUserRepository::class);
         assert($markUserRepository instanceof MarkUserRepository);
-        
+
         return new MarkAuthenticationMiddleware($markUserRepository);
     }
 }
