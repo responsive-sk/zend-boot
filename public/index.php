@@ -29,6 +29,7 @@ $app->pipe(\Mezzio\Router\Middleware\DispatchMiddleware::class);
 // Load routes from separate files
 (require __DIR__ . '/../config/routes/app.php')($app);
 (require __DIR__ . '/../config/routes/user.php')($app);
+(require __DIR__ . '/../config/routes/mark.php')($app, $factory, $container);
 (require __DIR__ . '/../config/routes/debug.php')($app);
 
 // Run the application

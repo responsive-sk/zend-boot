@@ -26,6 +26,9 @@ $aggregator = new ConfigAggregator([
     // User module (after Mezzio packages to override)
     \User\ConfigProvider::class,
 
+    // Mark module (HDM Boot Protocol - mark users only)
+    \Mark\ConfigProvider::class,
+
     // Include cache configuration
     new ArrayProvider($cacheConfig),
 
