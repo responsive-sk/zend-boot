@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Session;
 
-use Mezzio\Session\LazySession;
+use Mezzio\Session\Session;
 use Mezzio\Session\SessionInterface;
 use Mezzio\Session\SessionPersistenceInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -24,9 +24,9 @@ class SimpleSessionPersistence implements SessionPersistenceInterface
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        
-        // Create LazySession with current session data
-        return new LazySession($_SESSION ?? [], $this->generateSessionId());
+
+        // Create Session with current session data and session ID
+        return new Session($_SESSION ?? [], $this->generateSessionId());
     }
 
     public function persistSession(SessionInterface $session, ResponseInterface $response): ResponseInterface
