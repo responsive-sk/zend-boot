@@ -8,9 +8,14 @@ use Mezzio\Template\TemplateRendererInterface;
 
 class PhpRenderer implements TemplateRendererInterface
 {
+    /** @var array<string, array<string>> */
     private array $paths = [];
+    /** @var array<string, mixed> */
     private array $defaultParams = [];
 
+    /**
+     * @param array<string, mixed> $config
+     */
     public function __construct(array $config = [])
     {
         if (isset($config['paths'])) {
@@ -18,6 +23,9 @@ class PhpRenderer implements TemplateRendererInterface
         }
     }
 
+    /**
+     * @param array<string, mixed> $params
+     */
     public function render(string $name, $params = []): string
     {
         $params = array_merge($this->defaultParams, $params);

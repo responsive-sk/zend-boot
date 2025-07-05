@@ -12,18 +12,24 @@ class PdoFactory
     public function __invoke(ContainerInterface $container, string $requestedName): PDO
     {
         $config = $container->get('config');
+        assert(is_array($config));
+
+        if (!isset($config['database']) || !is_array($config['database'])) {
+            throw new \InvalidArgumentException('Database configuration not found');
+        }
+
         $dbConfig = $config['database'];
         
         // Extract database name from service name (e.g., 'pdo.user' -> 'user')
         $dbName = str_replace('pdo.', '', $requestedName);
         
-        if (!isset($dbConfig[$dbName])) {
+        if (!isset($dbConfig[$dbName]) || !is_array($dbConfig[$dbName])) {
             throw new \InvalidArgumentException("Database configuration for '{$dbName}' not found");
         }
-        
+
         $dbSettings = $dbConfig[$dbName];
         
-        if ($dbSettings['driver'] === 'sqlite') {
+        if (isset($dbSettings['driver']) && $dbSettings['driver'] === 'sqlite') {
             $dsn = 'sqlite:' . $dbSettings['database'];
             
             // Ensure directory exists
@@ -42,6 +48,7 @@ class PdoFactory
             return $pdo;
         }
         
-        throw new \InvalidArgumentException("Unsupported database driver: {$dbSettings['driver']}");
+        $driver = $dbSettings['driver'] ?? 'unknown';
+        throw new \InvalidArgumentException("Unsupported database driver: {$driver}");
     }
 }

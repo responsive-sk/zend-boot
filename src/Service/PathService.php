@@ -10,11 +10,15 @@ use League\Flysystem\UnableToReadFile;
 
 class PathService
 {
+    /** @var array<string, string> */
     private array $paths;
     private Filesystem $publicFs;
     private Filesystem $themesFs;
     private Filesystem $uploadsFs;
 
+    /**
+     * @param array<string, mixed> $appConfig
+     */
     public function __construct(
         array $appConfig,
         Filesystem $publicFilesystem,
