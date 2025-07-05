@@ -1,0 +1,39 @@
+Production Build Information
+============================
+Build Date: 2025-07-05 15:32:25
+Git Hash: unknown
+PHP Version: PHP 8.4.8 (cli) (built: Jun  4 2025 15:27:29) (NTS)
+
+Theme Assets:
+public/themes/bootstrap/assets/main-D30XL3Ms.css
+public/themes/bootstrap/assets/main-Df2FmC7f.js
+public/themes/main/assets/main-C21t6xC-.css
+public/themes/main/assets/main-Dqtkb_pL.js
+
+Manifest Files:
+public/themes/bootstrap/.vite/manifest.json
+public/themes/main/.vite/manifest.json
+
+Size Information:
+- Vendor size: 8,6M
+- Public themes: 728K
+- Total size: 29M
+
+Features:
+✅ Versioned assets with hash for cache busting
+✅ Optimized vendor directory (removed docs, tests, examples)
+✅ Git repository removed (major size reduction)
+✅ Development files removed (build scripts, configs)
+✅ Production-ready permissions
+✅ Theme manifests for dynamic asset loading
+✅ Long-term cache strategy ready
+✅ Apache .htaccess security configuration
+
+Security:
+🔒 No git history exposed
+🔒 No development tools in production
+🔒 Directory access protection (.htaccess)
+🔒 Security headers (XSS, CSRF, Clickjacking protection)
+🔒 Minimal attack surface
+
+Ready for production deployment!
