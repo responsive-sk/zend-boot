@@ -31,7 +31,7 @@ class DebugHandler implements RequestHandlerInterface
             'cookies' => $request->getCookieParams(),
             'parsed_body' => $request->getParsedBody(),
         ];
-        
+
         $html = '<!DOCTYPE html>
 <html>
 <head>
@@ -73,7 +73,7 @@ class DebugHandler implements RequestHandlerInterface
     </div>
 </body>
 </html>';
-        
+
         return new HtmlResponse($html);
     }
 }

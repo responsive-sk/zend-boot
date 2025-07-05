@@ -23,20 +23,20 @@ class RequireLoginMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $user = $this->authentication->authenticate($request);
-        
+
         if (!$user) {
             // Store the original URL for redirect after login
             $session = $request->getAttribute('session');
             if ($session) {
                 $session->set('redirect_after_login', (string) $request->getUri());
             }
-            
+
             return new RedirectResponse($this->redirectPath);
         }
 
         // Add user to request attributes for easy access in handlers
         $request = $request->withAttribute(UserInterface::class, $user);
-        
+
         return $handler->handle($request);
     }
 }

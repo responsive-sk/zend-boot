@@ -48,7 +48,7 @@ class PathService
 
     /**
      * Bezpečne validuje cestu a vráti absolútnu cestu
-     * 
+     *
      * @throws \RuntimeException
      */
     public function getPublicFilePath(string $relativePath): string
@@ -58,7 +58,7 @@ class PathService
 
     /**
      * Bezpečne validuje cestu k téme
-     * 
+     *
      * @throws \RuntimeException
      */
     public function getThemeFilePath(string $relativePath): string
@@ -68,7 +68,7 @@ class PathService
 
     /**
      * Bezpečne validuje cestu k upload súborom
-     * 
+     *
      * @throws \RuntimeException
      */
     public function getUploadFilePath(string $relativePath): string
@@ -87,9 +87,11 @@ class PathService
         $relativePath = ltrim($relativePath, '/\\');
 
         // Kontrola na nebezpečné znaky
-        if (str_contains($relativePath, '..') ||
+        if (
+            str_contains($relativePath, '..') ||
             str_contains($relativePath, '\\') ||
-            preg_match('/[<>:"|?*]/', $relativePath)) {
+            preg_match('/[<>:"|?*]/', $relativePath)
+        ) {
             throw new \RuntimeException('Neplatná cesta: ' . $relativePath);
         }
 
@@ -140,7 +142,7 @@ class PathService
 
     /**
      * Bezpečne číta súbor z public adresára
-     * 
+     *
      * @throws FilesystemException
      */
     public function readPublicFile(string $path): string
@@ -154,7 +156,7 @@ class PathService
 
     /**
      * Bezpečne číta súbor z themes adresára
-     * 
+     *
      * @throws FilesystemException
      */
     public function readThemeFile(string $path): string
@@ -197,7 +199,7 @@ class PathService
     {
         // Validuje cestu
         $this->validatePath($relativePath, $this->paths['public']);
-        
+
         // Vráti normalizovanú URL cestu
         return '/' . ltrim(str_replace('\\', '/', $relativePath), '/');
     }
@@ -209,7 +211,7 @@ class PathService
     {
         // Validuje cestu
         $this->validatePath($relativePath, $this->paths['themes']);
-        
+
         // Vráti normalizovanú URL cestu
         return '/themes/' . ltrim(str_replace('\\', '/', $relativePath), '/');
     }

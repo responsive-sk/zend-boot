@@ -29,8 +29,10 @@ class HomeHandler implements RequestHandlerInterface
             <head>
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
-                <meta name="description" content="Root4Boot - Pokročilý Laminas Mezzio framework s theme systémom, versioned assets a production-ready optimalizáciami. Naše nové baby projekt! 💖">
-                <meta name="keywords" content="Root4Boot, HDM Boot, Laminas, Mezzio, PHP, Bootstrap, TailwindCSS, Alpine.js, theme system, responsive-sk, production-ready">
+                <meta name="description" content="Root4Boot - Pokročilý Laminas Mezzio framework s theme systémom,
+                    versioned assets a production-ready optimalizáciami. Naše nové baby projekt! 💖">
+                <meta name="keywords" content="Root4Boot, HDM Boot, Laminas, Mezzio, PHP, Bootstrap,
+                    TailwindCSS, Alpine.js, theme system, responsive-sk, production-ready">
                 <meta name="author" content="Root4Boot Team - Responsive.sk">
                 <title>Root4Boot - Laminas Mezzio Theme System | root4boot.com</title>
                 <link rel="icon" href="/favicon.ico" type="image/x-icon">

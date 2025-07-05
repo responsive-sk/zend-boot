@@ -36,7 +36,7 @@ class SimpleLoginHandler implements RequestHandlerInterface
 
         if ($request->getMethod() === 'POST') {
             $data = $request->getParsedBody();
-            
+
             if (empty($data['credential']) || empty($data['password'])) {
                 $error = 'Please fill in all fields.';
             } else {
@@ -49,7 +49,7 @@ class SimpleLoginHandler implements RequestHandlerInterface
                     $_SESSION['username'] = $user->getIdentity();
                     $_SESSION['roles'] = iterator_to_array($user->getRoles());
                     $_SESSION['login_time'] = time();
-                    
+
                     // Regenerate session ID for security
                     session_regenerate_id(true);
 

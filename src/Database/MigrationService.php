@@ -36,9 +36,9 @@ class MigrationService
                 updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         ";
-        
+
         $this->userPdo->exec($sql);
-        
+
         // Create indexes
         $this->userPdo->exec('CREATE INDEX IF NOT EXISTS idx_users_username ON users(username)');
         $this->userPdo->exec('CREATE INDEX IF NOT EXISTS idx_users_email ON users(email)');
@@ -61,9 +61,9 @@ class MigrationService
                 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
             )
         ";
-        
+
         $this->markPdo->exec($sql);
-        
+
         // Create indexes
         $this->markPdo->exec('CREATE INDEX IF NOT EXISTS idx_marks_user_id ON marks(user_id)');
         $this->markPdo->exec('CREATE INDEX IF NOT EXISTS idx_marks_category ON marks(category)');
@@ -77,7 +77,7 @@ class MigrationService
         $stmt = $this->userPdo->prepare('SELECT COUNT(*) FROM users');
         $stmt->execute();
         $userCount = $stmt->fetchColumn();
-        
+
         if ($userCount == 0) {
             // Create default users
             $this->createDefaultUser(
@@ -86,14 +86,14 @@ class MigrationService
                 'admin123',
                 ['admin', 'user']
             );
-            
+
             $this->createDefaultUser(
                 'user',
                 'user@example.com',
                 'user123',
                 ['user']
             );
-            
+
             $this->createDefaultUser(
                 'mark',
                 'mark@example.com',
@@ -109,7 +109,7 @@ class MigrationService
             INSERT INTO users (username, email, password_hash, roles, is_active)
             VALUES (?, ?, ?, ?, 1)
         ";
-        
+
         $stmt = $this->userPdo->prepare($sql);
         $stmt->execute([
             $username,

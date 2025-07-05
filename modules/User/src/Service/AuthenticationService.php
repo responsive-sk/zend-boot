@@ -18,7 +18,7 @@ class AuthenticationService implements UserRepositoryInterface
     public function authenticate(string $credential, ?string $password = null): ?UserInterface
     {
         // Find user by username or email
-        $user = $this->userRepository->findByUsername($credential) 
+        $user = $this->userRepository->findByUsername($credential)
             ?? $this->userRepository->findByEmail($credential);
 
         if (!$user || !$user->isActive()) {
@@ -38,7 +38,7 @@ class AuthenticationService implements UserRepositoryInterface
 
     public function findByCredential(string $credential): ?User
     {
-        return $this->userRepository->findByUsername($credential) 
+        return $this->userRepository->findByUsername($credential)
             ?? $this->userRepository->findByEmail($credential);
     }
 
@@ -54,7 +54,7 @@ class AuthenticationService implements UserRepositoryInterface
 
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
         $user = new User($username, $email, $passwordHash, $roles);
-        
+
         return $this->userRepository->save($user);
     }
 
@@ -74,53 +74,5 @@ class AuthenticationService implements UserRepositoryInterface
     {
         $user->setActive(true);
         $this->userRepository->save($user);
-    }
-}
-
-/**
- * Wrapper class to implement Mezzio UserInterface
- */
-class AuthenticatedUser implements UserInterface
-{
-    public function __construct(
-        private User $user
-    ) {
-    }
-
-    public function getIdentity(): string
-    {
-        return $this->user->getUsername();
-    }
-
-    public function getRoles(): iterable
-    {
-        return $this->user->getRoles();
-    }
-
-    public function getDetail(string $name, $default = null)
-    {
-        return match ($name) {
-            'id' => $this->user->getId(),
-            'username' => $this->user->getUsername(),
-            'email' => $this->user->getEmail(),
-            'roles' => $this->user->getRoles(),
-            'isActive' => $this->user->isActive(),
-            'createdAt' => $this->user->getCreatedAt(),
-            'lastLoginAt' => $this->user->getLastLoginAt(),
-            default => $default,
-        };
-    }
-
-    public function getDetails(): array
-    {
-        $details = $this->user->toArray();
-        // Ensure id is always present
-        $details['id'] = $this->user->getId();
-        return $details;
-    }
-
-    public function getUser(): User
-    {
-        return $this->user;
     }
 }

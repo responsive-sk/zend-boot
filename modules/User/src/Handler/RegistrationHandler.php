@@ -35,7 +35,7 @@ class RegistrationHandler implements RequestHandlerInterface
 
             if ($form->isValid()) {
                 $validatedData = $form->getData();
-                
+
                 try {
                     // Register new user
                     $user = $this->authService->registerUser(
@@ -46,9 +46,8 @@ class RegistrationHandler implements RequestHandlerInterface
 
                     // Add flash message
                     $session->set('flash_success', 'Registration successful! You can now log in.');
-                    
+
                     return new RedirectResponse('/user/login');
-                    
                 } catch (\InvalidArgumentException $e) {
                     $error = $e->getMessage();
                 } catch (\Exception $e) {

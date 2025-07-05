@@ -40,12 +40,12 @@ class ConfigProvider
                 // Services
                 Service\UserRepository::class => Service\UserRepositoryFactory::class,
                 Service\AuthenticationService::class => Service\AuthenticationServiceFactory::class,
-                Service\MezzioUserRepository::class => function($container) {
+                Service\MezzioUserRepository::class => function ($container) {
                     return new Service\MezzioUserRepository(
                         $container->get(Service\AuthenticationService::class)
                     );
                 },
-                
+
                 // Handlers
                 Handler\LoginHandler::class => Handler\LoginHandlerFactory::class,
                 Handler\RegistrationHandler::class => Handler\RegistrationHandlerFactory::class,
@@ -55,18 +55,18 @@ class ConfigProvider
 
                 // Simple handlers (using native PHP session)
                 Handler\SimpleLoginHandler::class => Handler\SimpleLoginHandlerFactory::class,
-                Handler\SimpleDashboardHandler::class => function($container) {
+                Handler\SimpleDashboardHandler::class => function ($container) {
                     return new Handler\SimpleDashboardHandler(
                         $container->get(\Mezzio\Template\TemplateRendererInterface::class)
                     );
                 },
                 Handler\SimpleLogoutHandler::class => InvokableFactory::class,
-                
+
                 // Middleware
                 Middleware\CsrfMiddleware::class => Middleware\CsrfMiddlewareFactory::class,
                 Middleware\RequireLoginMiddleware::class => Middleware\RequireLoginMiddlewareFactory::class,
                 Middleware\RequireRoleMiddleware::class => Middleware\RequireRoleMiddlewareFactory::class,
-                
+
                 // Authorization
                 AuthorizationInterface::class => LaminasRbac::class,
             ],

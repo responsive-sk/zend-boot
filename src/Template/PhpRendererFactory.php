@@ -12,9 +12,9 @@ class PhpRendererFactory
     {
         $config = $container->get('config');
         $templateConfig = $config['templates'] ?? [];
-        
+
         $renderer = new PhpRenderer($templateConfig);
-        
+
         // Add template paths
         if (isset($templateConfig['paths'])) {
             foreach ($templateConfig['paths'] as $namespace => $paths) {
@@ -23,7 +23,7 @@ class PhpRendererFactory
                 }
             }
         }
-        
+
         return $renderer;
     }
 }

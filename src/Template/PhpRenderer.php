@@ -29,7 +29,7 @@ class PhpRenderer implements TemplateRendererInterface
     public function render(string $name, $params = []): string
     {
         $params = array_merge($this->defaultParams, $params);
-        
+
         // Parse template name (namespace::template)
         if (strpos($name, '::') !== false) {
             [$namespace, $template] = explode('::', $name, 2);
@@ -70,20 +70,20 @@ class PhpRenderer implements TemplateRendererInterface
     private function findTemplate(string $namespace, string $template): ?string
     {
         $paths = $this->paths[$namespace] ?? $this->paths[''] ?? [];
-        
+
         foreach ($paths as $path) {
             $templatePath = $path . '/' . $template;
-            
+
             // Try with .phtml extension if not provided
             if (!pathinfo($templatePath, PATHINFO_EXTENSION)) {
                 $templatePath .= '.phtml';
             }
-            
+
             if (file_exists($templatePath)) {
                 return $templatePath;
             }
         }
-        
+
         return null;
     }
 
@@ -93,38 +93,12 @@ class PhpRenderer implements TemplateRendererInterface
         extract($params, EXTR_SKIP);
 
         // Helper functions for templates
-        $escapeHtml = function($value): string {
+        $escapeHtml = function ($value): string {
             return htmlspecialchars((string) $value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
         };
 
         ob_start();
         include $templatePath;
         return ob_get_clean();
-    }
-}
-
-/**
- * Simple form helper for templates
- */
-class FormHelper
-{
-    public function openTag($form): string
-    {
-        $attributes = $form->getAttributes();
-        $method = $attributes['method'] ?? 'POST';
-        $action = $attributes['action'] ?? '';
-        $class = $attributes['class'] ?? '';
-        
-        return sprintf(
-            '<form method="%s" action="%s" class="%s">',
-            htmlspecialchars($method),
-            htmlspecialchars($action),
-            htmlspecialchars($class)
-        );
-    }
-
-    public function closeTag(): string
-    {
-        return '</form>';
     }
 }

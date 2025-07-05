@@ -23,7 +23,7 @@ class AdminHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $user = $request->getAttribute(UserInterface::class);
-        
+
         if (!$user) {
             throw new \RuntimeException('User not found in request attributes');
         }

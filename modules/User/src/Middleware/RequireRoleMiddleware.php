@@ -23,7 +23,7 @@ class RequireRoleMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $user = $request->getAttribute(UserInterface::class);
-        
+
         if (!$user) {
             return new HtmlResponse('Unauthorized: No user found', 401);
         }
