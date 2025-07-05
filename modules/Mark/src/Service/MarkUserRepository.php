@@ -25,7 +25,7 @@ class MarkUserRepository
         $stmt->execute([$id]);
         
         $data = $stmt->fetch();
-        if ($data === false) {
+        if ($data === false || !is_array($data)) {
             return null;
         }
         
@@ -38,7 +38,7 @@ class MarkUserRepository
         $stmt->execute([$username]);
         
         $data = $stmt->fetch();
-        if ($data === false) {
+        if ($data === false || !is_array($data)) {
             return null;
         }
         
@@ -51,7 +51,7 @@ class MarkUserRepository
         $stmt->execute([$email]);
         
         $data = $stmt->fetch();
-        if ($data === false) {
+        if ($data === false || !is_array($data)) {
             return null;
         }
         
@@ -70,7 +70,7 @@ class MarkUserRepository
     }
 
         while ($data = $stmt->fetch()) {
-            if ($data !== false) {
+            if ($data !== false && is_array($data)) {
                 $users[] = $this->createMarkUserFromData($data);
             }
         }
@@ -88,7 +88,7 @@ class MarkUserRepository
         $users = [];
 
         while ($data = $stmt->fetch()) {
-            if ($data !== false) {
+            if ($data !== false && is_array($data)) {
                 $user = $this->createMarkUserFromData($data);
                 if ($user->hasRole($role)) {
                     $users[] = $user;
@@ -114,7 +114,7 @@ class MarkUserRepository
         
         $users = [];
         while ($data = $stmt->fetch()) {
-            if ($data !== false) {
+            if ($data !== false && is_array($data)) {
                 $users[] = $this->createMarkUserFromData($data);
             }
         }

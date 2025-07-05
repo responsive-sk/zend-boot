@@ -98,6 +98,9 @@ class SystemStatsService
     {
         try {
             $stmt = $this->systemPdo->query('SELECT COUNT(*) FROM system_logs');
+            if ($stmt === false) {
+                return 0;
+            }
             return (int) $stmt->fetchColumn();
         } catch (\Exception $e) {
             // Table might not exist yet
@@ -122,7 +125,8 @@ class SystemStatsService
         
         foreach ($databases as $name => $path) {
             if (file_exists($path)) {
-                $sizes[$name] = filesize($path);
+                $size = filesize($path);
+                $sizes[$name] = $size !== false ? $size : 0;
             } else {
                 $sizes[$name] = 0;
             }

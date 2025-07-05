@@ -47,38 +47,56 @@ class LoginHandler implements RequestHandlerInterface
         // Show login form
         $error = $request->getQueryParams()['error'] ?? null;
         
-        return new HtmlResponse($this->renderLoginForm($error));
+        return new HtmlResponse($this->template->render('mark::login', [
+            'title' => 'Mark Login',
+            'error' => $error,
+        ]));
     }
 
     private function handleLoginAttempt(ServerRequestInterface $request, SessionInterface $session): ResponseInterface
     {
         $body = $request->getParsedBody();
         if (!is_array($body)) {
-            return new HtmlResponse($this->renderLoginForm('Invalid request data'));
+            return new HtmlResponse($this->template->render('mark::login', [
+            'title' => 'Mark Login',
+            'error' => 'Invalid request data',
+        ]));
         }
 
         $username = is_string($body['username'] ?? null) ? $body['username'] : '';
         $password = is_string($body['password'] ?? null) ? $body['password'] : '';
 
         if (empty($username) || empty($password)) {
-            return new HtmlResponse($this->renderLoginForm('Please enter username and password'));
+            return new HtmlResponse($this->template->render('mark::login', [
+            'title' => 'Mark Login',
+            'error' => 'Please enter username and password',
+        ]));
         }
 
         // Find mark user in mark.db
         $user = $this->markUserRepository->findByUsername($username);
         
         if (!$user || !$user->isActive()) {
-            return new HtmlResponse($this->renderLoginForm('Invalid credentials'));
+            return new HtmlResponse($this->template->render('mark::login', [
+            'title' => 'Mark Login',
+            'error' => 'Invalid credentials',
+        ]));
         }
 
         // Verify password
         if (!password_verify($password, $user->getPasswordHash())) {
-            return new HtmlResponse($this->renderLoginForm('Invalid credentials'));
+            return new HtmlResponse($this->template->render('mark::login', [
+            'title' => 'Mark Login',
+            'error' => 'Invalid credentials',
+        ]));
         }
 
         // All users in mark.db should be mark users, but double-check
         if (!$user->isMarkUser()) {
-            return new HtmlResponse($this->renderLoginForm('Access denied: Mark privileges required'));
+            return new HtmlResponse($this->template->render('mark::login', [
+            'title' => 'Mark Login',
+            'error' => 'Access denied: Mark privileges required',
+        ]));
         }
 
         $userRoles = $user->getRoles();
