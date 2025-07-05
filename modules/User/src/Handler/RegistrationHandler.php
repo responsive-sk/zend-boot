@@ -31,6 +31,11 @@ class RegistrationHandler implements RequestHandlerInterface
 
         if ($request->getMethod() === 'POST') {
             $data = $request->getParsedBody();
+            
+            // Ensure we have array data for form
+            if (!is_array($data)) {
+                $data = [];
+            }
             $form->setData($data);
 
             if ($form->isValid()) {

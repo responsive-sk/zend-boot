@@ -49,14 +49,13 @@ class LoginHandler implements RequestHandlerInterface
     {
         $redirect = $session->get(self::REDIRECT_ATTRIBUTE);
 
-        if (!$redirect) {
-            $redirect = new Uri($request->getHeaderLine('Referer'));
-            if (in_array($redirect->getPath(), ['', '/login', '/user/login'], true)) {
-                $redirect = '/user/dashboard';
-            }
+        $refererUri = new Uri($request->getHeaderLine('Referer'));
+        if (in_array($refererUri->getPath(), ['', '/login', '/user/login'], true)) {
+            $redirect = '/user/dashboard';
+        } else {
+            $redirect = (string) $refererUri;
         }
-
-        return (string) $redirect;
+        return $redirect;
     }
 
     private function handleLoginAttempt(
