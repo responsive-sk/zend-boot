@@ -65,6 +65,9 @@ class UserRepository
     public function findAll(): array
     {
         $stmt = $this->pdo->query('SELECT * FROM users ORDER BY created_at DESC');
+    if ($stmt === false) {
+        throw new \RuntimeException('Failed to execute query for finding all users');
+    }
         $users = [];
 
         while ($data = $stmt->fetch()) {

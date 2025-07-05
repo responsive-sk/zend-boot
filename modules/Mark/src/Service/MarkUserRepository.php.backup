@@ -65,9 +65,6 @@ class MarkUserRepository
     {
         $stmt = $this->markPdo->query('SELECT * FROM mark_users ORDER BY created_at DESC');
         $users = [];
-    if ($stmt === false) {
-        throw new \RuntimeException('Failed to execute query for finding all mark users');
-    }
 
         while ($data = $stmt->fetch()) {
             if ($data !== false) {

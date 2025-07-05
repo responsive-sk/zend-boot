@@ -65,7 +65,8 @@ class SystemStatsService
     {
         try {
             $stmt = $this->markPdo->query('SELECT COUNT(*) FROM marks');
-            return (int) $stmt->fetchColumn();
+            if ($stmt === false) return 0;
+        return (int) $stmt->fetchColumn();
         } catch (\Exception $e) {
             // Table might not exist yet
             return 0;
