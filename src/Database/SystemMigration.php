@@ -64,16 +64,18 @@ class SystemMigration
                 context TEXT,
                 module TEXT,
                 trace_id TEXT,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                
-                -- INDEX idx_level (level),
-                -- INDEX idx_module (module),
-                -- INDEX idx_created (created_at),
-                -- INDEX idx_trace (trace_id)
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         ";
         
         $this->pdo->exec($sql);
+
+        // Create indexes separately
+        $this->pdo->exec('CREATE INDEX IF NOT EXISTS idx_system_logs_level ON system_logs(level)');
+        $this->pdo->exec('CREATE INDEX IF NOT EXISTS idx_system_logs_module ON system_logs(module)');
+        $this->pdo->exec('CREATE INDEX IF NOT EXISTS idx_system_logs_created ON system_logs(created_at)');
+        $this->pdo->exec('CREATE INDEX IF NOT EXISTS idx_system_logs_trace ON system_logs(trace_id)');
+
         echo "  📝 System logs table created\n";
     }
 
@@ -86,11 +88,7 @@ class SystemMigration
                 compiled_content TEXT NOT NULL,
                 source_hash TEXT NOT NULL,
                 expires_at INTEGER,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                
-                -- INDEX idx_template (template_name),
-                -- INDEX idx_hash (source_hash),
-                -- INDEX idx_expires (expires_at)
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         ";
         
@@ -108,14 +106,10 @@ class SystemMigration
                 environment TEXT NOT NULL DEFAULT 'production',
                 expires_at INTEGER,
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                
-                -- INDEX idx_key (config_key),
-                -- INDEX idx_env (environment),
-                -- INDEX idx_expires (expires_at)
+                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         ";
-        
+
         $this->pdo->exec($sql);
         echo "  ⚙️ Config cache table created\n";
     }
@@ -131,10 +125,7 @@ class SystemMigration
                 description TEXT,
                 is_public BOOLEAN DEFAULT 0,
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                
-                -- INDEX idx_key (setting_key),
-                -- INDEX idx_public (is_public)
+                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         ";
         
