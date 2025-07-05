@@ -11,8 +11,9 @@ class MainDemoHandlerFactory
 {
     public function __invoke(ContainerInterface $container): MainDemoHandler
     {
-        return new MainDemoHandler(
-            $container->get(AssetHelper::class)
-        );
+        $assetHelper = $container->get(AssetHelper::class);
+        assert($assetHelper instanceof AssetHelper);
+        
+        return new MainDemoHandler($assetHelper);
     }
 }

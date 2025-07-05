@@ -11,8 +11,9 @@ class TemplateHandlerFactory
 {
     public function __invoke(ContainerInterface $container): TemplateHandler
     {
-        return new TemplateHandler(
-            $container->get(PathServiceInterface::class)
-        );
+        $pathService = $container->get(PathServiceInterface::class);
+        assert($pathService instanceof PathServiceInterface);
+        
+        return new TemplateHandler($pathService);
     }
 }

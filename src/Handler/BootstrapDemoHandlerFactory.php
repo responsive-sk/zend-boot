@@ -11,8 +11,9 @@ class BootstrapDemoHandlerFactory
 {
     public function __invoke(ContainerInterface $container): BootstrapDemoHandler
     {
-        return new BootstrapDemoHandler(
-            $container->get(AssetHelper::class)
-        );
+        $assetHelper = $container->get(AssetHelper::class);
+        assert($assetHelper instanceof AssetHelper);
+        
+        return new BootstrapDemoHandler($assetHelper);
     }
 }
