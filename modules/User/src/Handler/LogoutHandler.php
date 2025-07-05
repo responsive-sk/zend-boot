@@ -32,3 +32,4 @@ if ($session && is_object($session)) {
         return new RedirectResponse('/user/login');
     }
 }
+}
