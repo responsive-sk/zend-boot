@@ -11,8 +11,9 @@ class HomeHandlerFactory
 {
     public function __invoke(ContainerInterface $container): HomeHandler
     {
-        return new HomeHandler(
-            $container->get(AssetHelper::class)
-        );
+        $assetHelper = $container->get(AssetHelper::class);
+        assert($assetHelper instanceof AssetHelper);
+        
+        return new HomeHandler($assetHelper);
     }
 }

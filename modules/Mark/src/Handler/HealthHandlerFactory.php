@@ -4,17 +4,20 @@ declare(strict_types=1);
 
 namespace Mark\Handler;
 
-use Psr\Container\ContainerInterface;
-use Mezzio\Template\TemplateRendererInterface;
 use Mark\Service\SystemStatsService;
+use Mezzio\Template\TemplateRendererInterface;
+use Psr\Container\ContainerInterface;
 
 class HealthHandlerFactory
 {
     public function __invoke(ContainerInterface $container): HealthHandler
     {
-        return new HealthHandler(
-            $container->get(TemplateRendererInterface::class),
-            $container->get(SystemStatsService::class)
-        );
+        $template = $container->get(TemplateRendererInterface::class);
+        assert($template instanceof TemplateRendererInterface);
+        
+        $statsService = $container->get(SystemStatsService::class);
+        assert($statsService instanceof SystemStatsService);
+        
+        return new HealthHandler($template, $statsService);
     }
 }

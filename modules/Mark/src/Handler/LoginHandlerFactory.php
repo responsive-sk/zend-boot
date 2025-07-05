@@ -4,17 +4,20 @@ declare(strict_types=1);
 
 namespace Mark\Handler;
 
-use Psr\Container\ContainerInterface;
-use Mezzio\Template\TemplateRendererInterface;
 use Mark\Service\MarkUserRepository;
+use Mezzio\Template\TemplateRendererInterface;
+use Psr\Container\ContainerInterface;
 
 class LoginHandlerFactory
 {
     public function __invoke(ContainerInterface $container): LoginHandler
     {
-        return new LoginHandler(
-            $container->get(TemplateRendererInterface::class),
-            $container->get(MarkUserRepository::class)
-        );
+        $template = $container->get(TemplateRendererInterface::class);
+        assert($template instanceof TemplateRendererInterface);
+        
+        $markUserRepository = $container->get(MarkUserRepository::class);
+        assert($markUserRepository instanceof MarkUserRepository);
+        
+        return new LoginHandler($template, $markUserRepository);
     }
 }

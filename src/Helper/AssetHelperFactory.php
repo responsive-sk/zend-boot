@@ -11,9 +11,9 @@ class AssetHelperFactory
 {
     public function __invoke(ContainerInterface $container): AssetHelper
     {
-        return new AssetHelper(
-            $container->get(PathServiceInterface::class),
-            '/themes'
-        );
+        $pathService = $container->get(PathServiceInterface::class);
+        assert($pathService instanceof PathServiceInterface);
+        
+        return new AssetHelper($pathService, '/themes');
     }
 }
