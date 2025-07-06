@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /home/ian/Desktop/06/mezzio-minimal/src</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../_css/bootstrap.min.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../_css/nv.d3.min.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../_css/style.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../index.html">/home/ian/Desktop/06/mezzio-minimal</a></li>
+         <li class="breadcrumb-item"><a href="index.html">src</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Boot/ApplicationBootstrap.php.html#17">App\Boot\ApplicationBootstrap</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/ApplicationFactory.php.html#16">App\Boot\ApplicationFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/ContainerBuilder.php.html#14">App\Boot\ContainerBuilder</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/EnvironmentHandler.php.html#12">App\Boot\EnvironmentHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/MarkMigration.php.html#15">App\Database\MarkMigration</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/MigrationService.php.html#9">App\Database\MigrationService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/MigrationServiceFactory.php.html#10">App\Database\MigrationServiceFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/PdoFactory.php.html#10">App\Database\PdoFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/SystemMigration.php.html#18">App\Database\SystemMigration</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/UserMigration.php.html#15">App\Database\UserMigration</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Factory/DatabaseConfigFactory.php.html#17">App\Factory\DatabaseConfigFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Factory/TemplateConfigFactory.php.html#17">App\Factory\TemplateConfigFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Handler/BootstrapDemoHandler.php.html#13">App\Handler\BootstrapDemoHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Handler/BootstrapDemoHandlerFactory.php.html#10">App\Handler\BootstrapDemoHandlerFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Handler/DebugHandler.php.html#13">App\Handler\DebugHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Handler/HomeHandler.php.html#12">App\Handler\HomeHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Handler/HomeHandlerFactory.php.html#10">App\Handler\HomeHandlerFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Handler/MainDemoHandler.php.html#13">App\Handler\MainDemoHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Handler/MainDemoHandlerFactory.php.html#10">App\Handler\MainDemoHandlerFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Handler/TemplateHandler.php.html#13">App\Handler\TemplateHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Handler/TemplateHandlerFactory.php.html#10">App\Handler\TemplateHandlerFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Helper/AssetHelper.php.html#9">App\Helper\AssetHelper</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Helper/AssetHelperFactory.php.html#10">App\Helper\AssetHelperFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/UnifiedPathServiceFactory.php.html#10">App\Service\UnifiedPathServiceFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Session/SimpleSessionPersistence.php.html#19">App\Session\SimpleSessionPersistence</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Template/FormHelper.php.html#10">App\Template\FormHelper</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Template/PhpRendererFactory.php.html#9">App\Template\PhpRendererFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Template/PhpRenderer.php.html#10">App\Template\PhpRenderer</a></td><td class="text-right">56%</td></tr>
+       <tr><td><a href="Service/UnifiedPathService.php.html#17">App\Service\UnifiedPathService</a></td><td class="text-right">63%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Helper/AssetHelper.php.html#9">App\Helper\AssetHelper</a></td><td class="text-right">1640</td></tr>
+       <tr><td><a href="Boot/EnvironmentHandler.php.html#12">App\Boot\EnvironmentHandler</a></td><td class="text-right">380</td></tr>
+       <tr><td><a href="Boot/ApplicationBootstrap.php.html#17">App\Boot\ApplicationBootstrap</a></td><td class="text-right">240</td></tr>
+       <tr><td><a href="Database/MarkMigration.php.html#15">App\Database\MarkMigration</a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="Handler/DebugHandler.php.html#13">App\Handler\DebugHandler</a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="Service/UnifiedPathService.php.html#17">App\Service\UnifiedPathService</a></td><td class="text-right">95</td></tr>
+       <tr><td><a href="Database/SystemMigration.php.html#18">App\Database\SystemMigration</a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="Database/MigrationService.php.html#9">App\Database\MigrationService</a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Database/PdoFactory.php.html#10">App\Database\PdoFactory</a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Database/UserMigration.php.html#15">App\Database\UserMigration</a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Factory/TemplateConfigFactory.php.html#17">App\Factory\TemplateConfigFactory</a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Session/SimpleSessionPersistence.php.html#19">App\Session\SimpleSessionPersistence</a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Template/PhpRenderer.php.html#10">App\Template\PhpRenderer</a></td><td class="text-right">67</td></tr>
+       <tr><td><a href="Template/PhpRendererFactory.php.html#9">App\Template\PhpRendererFactory</a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Boot/ContainerBuilder.php.html#14">App\Boot\ContainerBuilder</a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Boot/ApplicationFactory.php.html#16">App\Boot\ApplicationFactory</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Handler/TemplateHandler.php.html#13">App\Handler\TemplateHandler</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Template/FormHelper.php.html#10">App\Template\FormHelper</a></td><td class="text-right">20</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Boot/ApplicationBootstrap.php.html#23"><abbr title="App\Boot\ApplicationBootstrap::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/ApplicationBootstrap.php.html#39"><abbr title="App\Boot\ApplicationBootstrap::bootstrap">bootstrap</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/ApplicationBootstrap.php.html#50"><abbr title="App\Boot\ApplicationBootstrap::setupMiddlewarePipeline">setupMiddlewarePipeline</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/ApplicationBootstrap.php.html#65"><abbr title="App\Boot\ApplicationBootstrap::loadRoutes">loadRoutes</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/ApplicationBootstrap.php.html#84"><abbr title="App\Boot\ApplicationBootstrap::loadRouteConfig">loadRouteConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/ApplicationBootstrap.php.html#108"><abbr title="App\Boot\ApplicationBootstrap::getApplication">getApplication</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/ApplicationBootstrap.php.html#116"><abbr title="App\Boot\ApplicationBootstrap::getContainer">getContainer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/ApplicationBootstrap.php.html#124"><abbr title="App\Boot\ApplicationBootstrap::getMiddlewareFactory">getMiddlewareFactory</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/ApplicationFactory.php.html#21"><abbr title="App\Boot\ApplicationFactory::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/ApplicationFactory.php.html#40"><abbr title="App\Boot\ApplicationFactory::createWithContainer">createWithContainer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/ApplicationFactory.php.html#56"><abbr title="App\Boot\ApplicationFactory::createForTesting">createForTesting</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/ContainerBuilder.php.html#18"><abbr title="App\Boot\ContainerBuilder::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/ContainerBuilder.php.html#26"><abbr title="App\Boot\ContainerBuilder::build">build</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/ContainerBuilder.php.html#44"><abbr title="App\Boot\ContainerBuilder::buildWithConfig">buildWithConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/ContainerBuilder.php.html#53"><abbr title="App\Boot\ContainerBuilder::buildDefault">buildDefault</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/EnvironmentHandler.php.html#18"><abbr title="App\Boot\EnvironmentHandler::setupWebEnvironment">setupWebEnvironment</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/EnvironmentHandler.php.html#37"><abbr title="App\Boot\EnvironmentHandler::isBuiltInServer">isBuiltInServer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/EnvironmentHandler.php.html#45"><abbr title="App\Boot\EnvironmentHandler::isPhpScript">isPhpScript</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/EnvironmentHandler.php.html#54"><abbr title="App\Boot\EnvironmentHandler::changeToProjectRoot">changeToProjectRoot</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/EnvironmentHandler.php.html#63"><abbr title="App\Boot\EnvironmentHandler::configureErrorReporting">configureErrorReporting</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/EnvironmentHandler.php.html#94"><abbr title="App\Boot\EnvironmentHandler::getEnvironment">getEnvironment</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/EnvironmentHandler.php.html#102"><abbr title="App\Boot\EnvironmentHandler::isDevelopment">isDevelopment</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/EnvironmentHandler.php.html#110"><abbr title="App\Boot\EnvironmentHandler::isProduction">isProduction</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Boot/EnvironmentHandler.php.html#118"><abbr title="App\Boot\EnvironmentHandler::isTesting">isTesting</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/MarkMigration.php.html#17"><abbr title="App\Database\MarkMigration::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/MarkMigration.php.html#22"><abbr title="App\Database\MarkMigration::migrate">migrate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/MarkMigration.php.html#34"><abbr title="App\Database\MarkMigration::createMarkUsersTable">createMarkUsersTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/MarkMigration.php.html#61"><abbr title="App\Database\MarkMigration::createMarksTable">createMarksTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/MarkMigration.php.html#90"><abbr title="App\Database\MarkMigration::createMarkCategoriesTable">createMarkCategoriesTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/MarkMigration.php.html#108"><abbr title="App\Database\MarkMigration::createMarkPermissionsTable">createMarkPermissionsTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/MarkMigration.php.html#129"><abbr title="App\Database\MarkMigration::seedDefaultCategories">seedDefaultCategories</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/MarkMigration.php.html#164"><abbr title="App\Database\MarkMigration::seedDefaultMarkUsers">seedDefaultMarkUsers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/MarkMigration.php.html#205"><abbr title="App\Database\MarkMigration::createDefaultMarkUser">createDefaultMarkUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/MigrationService.php.html#11"><abbr title="App\Database\MigrationService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/MigrationService.php.html#18"><abbr title="App\Database\MigrationService::migrate">migrate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/MigrationService.php.html#30"><abbr title="App\Database\MigrationService::createUserTables">createUserTables</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/MigrationService.php.html#54"><abbr title="App\Database\MigrationService::createMarkTables">createMarkTables</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/MigrationService.php.html#82"><abbr title="App\Database\MigrationService::createSystemTables">createSystemTables</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/MigrationService.php.html#90"><abbr title="App\Database\MigrationService::seedDefaultData">seedDefaultData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/MigrationService.php.html#125"><abbr title="App\Database\MigrationService::createDefaultUser">createDefaultUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/MigrationServiceFactory.php.html#12"><abbr title="App\Database\MigrationServiceFactory::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/PdoFactory.php.html#12"><abbr title="App\Database\PdoFactory::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/SystemMigration.php.html#20"><abbr title="App\Database\SystemMigration::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/SystemMigration.php.html#25"><abbr title="App\Database\SystemMigration::migrate">migrate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/SystemMigration.php.html#36"><abbr title="App\Database\SystemMigration::createCacheTable">createCacheTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/SystemMigration.php.html#57"><abbr title="App\Database\SystemMigration::createSystemLogsTable">createSystemLogsTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/SystemMigration.php.html#82"><abbr title="App\Database\SystemMigration::createTemplateCacheTable">createTemplateCacheTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/SystemMigration.php.html#99"><abbr title="App\Database\SystemMigration::createConfigCacheTable">createConfigCacheTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/SystemMigration.php.html#117"><abbr title="App\Database\SystemMigration::createSystemSettingsTable">createSystemSettingsTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/SystemMigration.php.html#139"><abbr title="App\Database\SystemMigration::insertDefaultSettings">insertDefaultSettings</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/UserMigration.php.html#17"><abbr title="App\Database\UserMigration::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/UserMigration.php.html#22"><abbr title="App\Database\UserMigration::migrate">migrate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/UserMigration.php.html#32"><abbr title="App\Database\UserMigration::createUsersTable">createUsersTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/UserMigration.php.html#58"><abbr title="App\Database\UserMigration::createUserSessionsTable">createUserSessionsTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/UserMigration.php.html#81"><abbr title="App\Database\UserMigration::createUserPermissionsTable">createUserPermissionsTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/UserMigration.php.html#106"><abbr title="App\Database\UserMigration::seedDefaultUsers">seedDefaultUsers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/UserMigration.php.html#147"><abbr title="App\Database\UserMigration::createDefaultUser">createDefaultUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Factory/DatabaseConfigFactory.php.html#21"><abbr title="App\Factory\DatabaseConfigFactory::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Factory/DatabaseConfigFactory.php.html#37"><abbr title="App\Factory\DatabaseConfigFactory::getConfig">getConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Factory/DatabaseConfigFactory.php.html#62"><abbr title="App\Factory\DatabaseConfigFactory::getUserDatabasePath">getUserDatabasePath</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Factory/DatabaseConfigFactory.php.html#70"><abbr title="App\Factory\DatabaseConfigFactory::getMarkDatabasePath">getMarkDatabasePath</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Factory/DatabaseConfigFactory.php.html#78"><abbr title="App\Factory\DatabaseConfigFactory::getSystemDatabasePath">getSystemDatabasePath</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Factory/DatabaseConfigFactory.php.html#87"><abbr title="App\Factory\DatabaseConfigFactory::getAllDatabasePaths">getAllDatabasePaths</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Factory/TemplateConfigFactory.php.html#21"><abbr title="App\Factory\TemplateConfigFactory::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Factory/TemplateConfigFactory.php.html#37"><abbr title="App\Factory\TemplateConfigFactory::getConfig">getConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Factory/TemplateConfigFactory.php.html#62"><abbr title="App\Factory\TemplateConfigFactory::getAllTemplatePaths">getAllTemplatePaths</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Factory/TemplateConfigFactory.php.html#75"><abbr title="App\Factory\TemplateConfigFactory::getTemplatePath">getTemplatePath</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Handler/BootstrapDemoHandler.php.html#15"><abbr title="App\Handler\BootstrapDemoHandler::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Handler/BootstrapDemoHandler.php.html#20"><abbr title="App\Handler\BootstrapDemoHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Handler/BootstrapDemoHandlerFactory.php.html#12"><abbr title="App\Handler\BootstrapDemoHandlerFactory::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Handler/DebugHandler.php.html#15"><abbr title="App\Handler\DebugHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Handler/HomeHandler.php.html#14"><abbr title="App\Handler\HomeHandler::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Handler/HomeHandler.php.html#19"><abbr title="App\Handler\HomeHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Handler/HomeHandlerFactory.php.html#12"><abbr title="App\Handler\HomeHandlerFactory::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Handler/MainDemoHandler.php.html#15"><abbr title="App\Handler\MainDemoHandler::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Handler/MainDemoHandler.php.html#20"><abbr title="App\Handler\MainDemoHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Handler/MainDemoHandlerFactory.php.html#12"><abbr title="App\Handler\MainDemoHandlerFactory::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Handler/TemplateHandler.php.html#15"><abbr title="App\Handler\TemplateHandler::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Handler/TemplateHandler.php.html#19"><abbr title="App\Handler\TemplateHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Handler/TemplateHandlerFactory.php.html#12"><abbr title="App\Handler\TemplateHandlerFactory::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Helper/AssetHelper.php.html#14"><abbr title="App\Helper\AssetHelper::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Helper/AssetHelper.php.html#23"><abbr title="App\Helper\AssetHelper::asset">asset</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Helper/AssetHelper.php.html#41"><abbr title="App\Helper\AssetHelper::css">css</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Helper/AssetHelper.php.html#59"><abbr title="App\Helper\AssetHelper::js">js</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Helper/AssetHelper.php.html#68"><abbr title="App\Helper\AssetHelper::getManifest">getManifest</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Helper/AssetHelper.php.html#101"><abbr title="App\Helper\AssetHelper::getThemeInfo">getThemeInfo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Helper/AssetHelper.php.html#138"><abbr title="App\Helper\AssetHelper::image">image</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Helper/AssetHelper.php.html#157"><abbr title="App\Helper\AssetHelper::getImages">getImages</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Helper/AssetHelperFactory.php.html#12"><abbr title="App\Helper\AssetHelperFactory::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/UnifiedPathService.php.html#75"><abbr title="App\Service\UnifiedPathService::sessions">sessions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/UnifiedPathService.php.html#83"><abbr title="App\Service\UnifiedPathService::uploads">uploads</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/UnifiedPathService.php.html#128"><abbr title="App\Service\UnifiedPathService::getPublicPath">getPublicPath</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/UnifiedPathService.php.html#136"><abbr title="App\Service\UnifiedPathService::getThemesPath">getThemesPath</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/UnifiedPathService.php.html#144"><abbr title="App\Service\UnifiedPathService::getPublicFilePath">getPublicFilePath</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/UnifiedPathService.php.html#152"><abbr title="App\Service\UnifiedPathService::getThemeFilePath">getThemeFilePath</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/UnifiedPathService.php.html#160"><abbr title="App\Service\UnifiedPathService::getUploadFilePath">getUploadFilePath</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/UnifiedPathService.php.html#168"><abbr title="App\Service\UnifiedPathService::readPublicFile">readPublicFile</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/UnifiedPathService.php.html#180"><abbr title="App\Service\UnifiedPathService::readThemeFile">readThemeFile</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/UnifiedPathService.php.html#192"><abbr title="App\Service\UnifiedPathService::publicFileExists">publicFileExists</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/UnifiedPathService.php.html#204"><abbr title="App\Service\UnifiedPathService::themeFileExists">themeFileExists</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/UnifiedPathService.php.html#216"><abbr title="App\Service\UnifiedPathService::getPublicUrl">getPublicUrl</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/UnifiedPathService.php.html#224"><abbr title="App\Service\UnifiedPathService::getThemeUrl">getThemeUrl</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/UnifiedPathService.php.html#300"><abbr title="App\Service\UnifiedPathService::path">path</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Service/UnifiedPathServiceFactory.php.html#12"><abbr title="App\Service\UnifiedPathServiceFactory::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Session/SimpleSessionPersistence.php.html#21"><abbr title="App\Session\SimpleSessionPersistence::initializeSessionFromRequest">initializeSessionFromRequest</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Session/SimpleSessionPersistence.php.html#32"><abbr title="App\Session\SimpleSessionPersistence::persistSession">persistSession</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Session/SimpleSessionPersistence.php.html#47"><abbr title="App\Session\SimpleSessionPersistence::generateSessionId">generateSessionId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Template/FormHelper.php.html#15"><abbr title="App\Template\FormHelper::openTag">openTag</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Template/FormHelper.php.html#34"><abbr title="App\Template\FormHelper::closeTag">closeTag</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Template/PhpRenderer.php.html#117"><abbr title="App\Template\PhpRenderer::renderTemplate">renderTemplate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Template/PhpRendererFactory.php.html#11"><abbr title="App\Template\PhpRendererFactory::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Template/PhpRenderer.php.html#93"><abbr title="App\Template\PhpRenderer::findTemplate">findTemplate</abbr></a></td><td class="text-right">37%</td></tr>
+       <tr><td><a href="Template/PhpRenderer.php.html#20"><abbr title="App\Template\PhpRenderer::__construct">__construct</abbr></a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="Template/PhpRenderer.php.html#33"><abbr title="App\Template\PhpRenderer::render">render</abbr></a></td><td class="text-right">63%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Handler/DebugHandler.php.html#15"><abbr title="App\Handler\DebugHandler::handle">handle</abbr></a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="Boot/EnvironmentHandler.php.html#63"><abbr title="App\Boot\EnvironmentHandler::configureErrorReporting">configureErrorReporting</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Database/PdoFactory.php.html#12"><abbr title="App\Database\PdoFactory::__invoke">__invoke</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Helper/AssetHelper.php.html#101"><abbr title="App\Helper\AssetHelper::getThemeInfo">getThemeInfo</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Helper/AssetHelper.php.html#41"><abbr title="App\Helper\AssetHelper::css">css</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Template/PhpRendererFactory.php.html#11"><abbr title="App\Template\PhpRendererFactory::__invoke">__invoke</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Boot/ApplicationBootstrap.php.html#84"><abbr title="App\Boot\ApplicationBootstrap::loadRouteConfig">loadRouteConfig</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Helper/AssetHelper.php.html#68"><abbr title="App\Helper\AssetHelper::getManifest">getManifest</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Helper/AssetHelper.php.html#138"><abbr title="App\Helper\AssetHelper::image">image</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Helper/AssetHelper.php.html#157"><abbr title="App\Helper\AssetHelper::getImages">getImages</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Factory/TemplateConfigFactory.php.html#75"><abbr title="App\Factory\TemplateConfigFactory::getTemplatePath">getTemplatePath</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Helper/AssetHelper.php.html#23"><abbr title="App\Helper\AssetHelper::asset">asset</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Boot/ApplicationBootstrap.php.html#65"><abbr title="App\Boot\ApplicationBootstrap::loadRoutes">loadRoutes</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Boot/ContainerBuilder.php.html#26"><abbr title="App\Boot\ContainerBuilder::build">build</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Boot/EnvironmentHandler.php.html#18"><abbr title="App\Boot\EnvironmentHandler::setupWebEnvironment">setupWebEnvironment</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Database/MarkMigration.php.html#129"><abbr title="App\Database\MarkMigration::seedDefaultCategories">seedDefaultCategories</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Handler/TemplateHandler.php.html#19"><abbr title="App\Handler\TemplateHandler::handle">handle</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Session/SimpleSessionPersistence.php.html#32"><abbr title="App\Session\SimpleSessionPersistence::persistSession">persistSession</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Session/SimpleSessionPersistence.php.html#47"><abbr title="App\Session\SimpleSessionPersistence::generateSessionId">generateSessionId</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Template/FormHelper.php.html#15"><abbr title="App\Template\FormHelper::openTag">openTag</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Template/PhpRenderer.php.html#93"><abbr title="App\Template\PhpRenderer::findTemplate">findTemplate</abbr></a></td><td class="text-right">7</td></tr>
+       <tr><td><a href="Template/PhpRenderer.php.html#33"><abbr title="App\Template\PhpRenderer::render">render</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Boot/ApplicationFactory.php.html#21"><abbr title="App\Boot\ApplicationFactory::create">create</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Boot/ApplicationFactory.php.html#40"><abbr title="App\Boot\ApplicationFactory::createWithContainer">createWithContainer</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Boot/EnvironmentHandler.php.html#45"><abbr title="App\Boot\EnvironmentHandler::isPhpScript">isPhpScript</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Database/MarkMigration.php.html#164"><abbr title="App\Database\MarkMigration::seedDefaultMarkUsers">seedDefaultMarkUsers</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Database/MigrationService.php.html#90"><abbr title="App\Database\MigrationService::seedDefaultData">seedDefaultData</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Database/SystemMigration.php.html#139"><abbr title="App\Database\SystemMigration::insertDefaultSettings">insertDefaultSettings</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Database/UserMigration.php.html#106"><abbr title="App\Database\UserMigration::seedDefaultUsers">seedDefaultUsers</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Service/UnifiedPathService.php.html#168"><abbr title="App\Service\UnifiedPathService::readPublicFile">readPublicFile</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Service/UnifiedPathService.php.html#180"><abbr title="App\Service\UnifiedPathService::readThemeFile">readThemeFile</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Service/UnifiedPathService.php.html#192"><abbr title="App\Service\UnifiedPathService::publicFileExists">publicFileExists</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Service/UnifiedPathService.php.html#204"><abbr title="App\Service\UnifiedPathService::themeFileExists">themeFileExists</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Session/SimpleSessionPersistence.php.html#21"><abbr title="App\Session\SimpleSessionPersistence::initializeSessionFromRequest">initializeSessionFromRequest</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Template/PhpRenderer.php.html#117"><abbr title="App\Template\PhpRenderer::renderTemplate">renderTemplate</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Template/PhpRenderer.php.html#20"><abbr title="App\Template\PhpRenderer::__construct">__construct</abbr></a></td><td class="text-right">4</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 10.1.16</a> using <a href="https://www.php.net/" target="_top">PHP 8.4.8</a> and <a href="https://phpunit.de/">PHPUnit 10.5.47</a> at Sun Jul 6 16:18:34 UTC 2025.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../_js/jquery.min.js?v=10.1.16" type="text/javascript"></script>
+  <script src="../_js/d3.min.js?v=10.1.16" type="text/javascript"></script>
+  <script src="../_js/nv.d3.min.js?v=10.1.16" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([27,0,0,0,0,0,1,1,0,0,0,0], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([111,0,0,0,1,0,1,1,0,0,0,14], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,15,"<a href=\"Boot\/ApplicationBootstrap.php.html#17\">App\\Boot\\ApplicationBootstrap<\/a>"],[0,5,"<a href=\"Boot\/ApplicationFactory.php.html#16\">App\\Boot\\ApplicationFactory<\/a>"],[0,6,"<a href=\"Boot\/ContainerBuilder.php.html#14\">App\\Boot\\ContainerBuilder<\/a>"],[0,19,"<a href=\"Boot\/EnvironmentHandler.php.html#12\">App\\Boot\\EnvironmentHandler<\/a>"],[0,12,"<a href=\"Database\/MarkMigration.php.html#15\">App\\Database\\MarkMigration<\/a>"],[0,8,"<a href=\"Database\/MigrationService.php.html#9\">App\\Database\\MigrationService<\/a>"],[0,1,"<a href=\"Database\/MigrationServiceFactory.php.html#10\">App\\Database\\MigrationServiceFactory<\/a>"],[0,8,"<a href=\"Database\/PdoFactory.php.html#10\">App\\Database\\PdoFactory<\/a>"],[0,9,"<a href=\"Database\/SystemMigration.php.html#18\">App\\Database\\SystemMigration<\/a>"],[0,8,"<a href=\"Database\/UserMigration.php.html#15\">App\\Database\\UserMigration<\/a>"],[0,6,"<a href=\"Factory\/DatabaseConfigFactory.php.html#17\">App\\Factory\\DatabaseConfigFactory<\/a>"],[0,8,"<a href=\"Factory\/TemplateConfigFactory.php.html#17\">App\\Factory\\TemplateConfigFactory<\/a>"],[0,2,"<a href=\"Handler\/BootstrapDemoHandler.php.html#13\">App\\Handler\\BootstrapDemoHandler<\/a>"],[0,1,"<a href=\"Handler\/BootstrapDemoHandlerFactory.php.html#10\">App\\Handler\\BootstrapDemoHandlerFactory<\/a>"],[0,11,"<a href=\"Handler\/DebugHandler.php.html#13\">App\\Handler\\DebugHandler<\/a>"],[0,2,"<a href=\"Handler\/HomeHandler.php.html#12\">App\\Handler\\HomeHandler<\/a>"],[0,1,"<a href=\"Handler\/HomeHandlerFactory.php.html#10\">App\\Handler\\HomeHandlerFactory<\/a>"],[0,2,"<a href=\"Handler\/MainDemoHandler.php.html#13\">App\\Handler\\MainDemoHandler<\/a>"],[0,1,"<a href=\"Handler\/MainDemoHandlerFactory.php.html#10\">App\\Handler\\MainDemoHandlerFactory<\/a>"],[0,4,"<a href=\"Handler\/TemplateHandler.php.html#13\">App\\Handler\\TemplateHandler<\/a>"],[0,1,"<a href=\"Handler\/TemplateHandlerFactory.php.html#10\">App\\Handler\\TemplateHandlerFactory<\/a>"],[0,40,"<a href=\"Helper\/AssetHelper.php.html#9\">App\\Helper\\AssetHelper<\/a>"],[0,1,"<a href=\"Helper\/AssetHelperFactory.php.html#10\">App\\Helper\\AssetHelperFactory<\/a>"],[63.33333333333333,35,"<a href=\"Service\/UnifiedPathService.php.html#17\">App\\Service\\UnifiedPathService<\/a>"],[0,1,"<a href=\"Service\/UnifiedPathServiceFactory.php.html#10\">App\\Service\\UnifiedPathServiceFactory<\/a>"],[0,8,"<a href=\"Session\/SimpleSessionPersistence.php.html#19\">App\\Session\\SimpleSessionPersistence<\/a>"],[0,4,"<a href=\"Template\/FormHelper.php.html#10\">App\\Template\\FormHelper<\/a>"],[56.09756097560976,23,"<a href=\"Template\/PhpRenderer.php.html#10\">App\\Template\\PhpRenderer<\/a>"],[0,7,"<a href=\"Template\/PhpRendererFactory.php.html#9\">App\\Template\\PhpRendererFactory<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,1,"<a href=\"Boot\/ApplicationBootstrap.php.html#23\">App\\Boot\\ApplicationBootstrap::__construct<\/a>"],[0,1,"<a href=\"Boot\/ApplicationBootstrap.php.html#39\">App\\Boot\\ApplicationBootstrap::bootstrap<\/a>"],[0,1,"<a href=\"Boot\/ApplicationBootstrap.php.html#50\">App\\Boot\\ApplicationBootstrap::setupMiddlewarePipeline<\/a>"],[0,3,"<a href=\"Boot\/ApplicationBootstrap.php.html#65\">App\\Boot\\ApplicationBootstrap::loadRoutes<\/a>"],[0,6,"<a href=\"Boot\/ApplicationBootstrap.php.html#84\">App\\Boot\\ApplicationBootstrap::loadRouteConfig<\/a>"],[0,1,"<a href=\"Boot\/ApplicationBootstrap.php.html#108\">App\\Boot\\ApplicationBootstrap::getApplication<\/a>"],[0,1,"<a href=\"Boot\/ApplicationBootstrap.php.html#116\">App\\Boot\\ApplicationBootstrap::getContainer<\/a>"],[0,1,"<a href=\"Boot\/ApplicationBootstrap.php.html#124\">App\\Boot\\ApplicationBootstrap::getMiddlewareFactory<\/a>"],[0,2,"<a href=\"Boot\/ApplicationFactory.php.html#21\">App\\Boot\\ApplicationFactory::create<\/a>"],[0,2,"<a href=\"Boot\/ApplicationFactory.php.html#40\">App\\Boot\\ApplicationFactory::createWithContainer<\/a>"],[0,1,"<a href=\"Boot\/ApplicationFactory.php.html#56\">App\\Boot\\ApplicationFactory::createForTesting<\/a>"],[0,1,"<a href=\"Boot\/ContainerBuilder.php.html#18\">App\\Boot\\ContainerBuilder::__construct<\/a>"],[0,3,"<a href=\"Boot\/ContainerBuilder.php.html#26\">App\\Boot\\ContainerBuilder::build<\/a>"],[0,1,"<a href=\"Boot\/ContainerBuilder.php.html#44\">App\\Boot\\ContainerBuilder::buildWithConfig<\/a>"],[0,1,"<a href=\"Boot\/ContainerBuilder.php.html#53\">App\\Boot\\ContainerBuilder::buildDefault<\/a>"],[0,3,"<a href=\"Boot\/EnvironmentHandler.php.html#18\">App\\Boot\\EnvironmentHandler::setupWebEnvironment<\/a>"],[0,1,"<a href=\"Boot\/EnvironmentHandler.php.html#37\">App\\Boot\\EnvironmentHandler::isBuiltInServer<\/a>"],[0,2,"<a href=\"Boot\/EnvironmentHandler.php.html#45\">App\\Boot\\EnvironmentHandler::isPhpScript<\/a>"],[0,1,"<a href=\"Boot\/EnvironmentHandler.php.html#54\">App\\Boot\\EnvironmentHandler::changeToProjectRoot<\/a>"],[0,8,"<a href=\"Boot\/EnvironmentHandler.php.html#63\">App\\Boot\\EnvironmentHandler::configureErrorReporting<\/a>"],[0,1,"<a href=\"Boot\/EnvironmentHandler.php.html#94\">App\\Boot\\EnvironmentHandler::getEnvironment<\/a>"],[0,1,"<a href=\"Boot\/EnvironmentHandler.php.html#102\">App\\Boot\\EnvironmentHandler::isDevelopment<\/a>"],[0,1,"<a href=\"Boot\/EnvironmentHandler.php.html#110\">App\\Boot\\EnvironmentHandler::isProduction<\/a>"],[0,1,"<a href=\"Boot\/EnvironmentHandler.php.html#118\">App\\Boot\\EnvironmentHandler::isTesting<\/a>"],[0,1,"<a href=\"Database\/MarkMigration.php.html#17\">App\\Database\\MarkMigration::__construct<\/a>"],[0,1,"<a href=\"Database\/MarkMigration.php.html#22\">App\\Database\\MarkMigration::migrate<\/a>"],[0,1,"<a href=\"Database\/MarkMigration.php.html#34\">App\\Database\\MarkMigration::createMarkUsersTable<\/a>"],[0,1,"<a href=\"Database\/MarkMigration.php.html#61\">App\\Database\\MarkMigration::createMarksTable<\/a>"],[0,1,"<a href=\"Database\/MarkMigration.php.html#90\">App\\Database\\MarkMigration::createMarkCategoriesTable<\/a>"],[0,1,"<a href=\"Database\/MarkMigration.php.html#108\">App\\Database\\MarkMigration::createMarkPermissionsTable<\/a>"],[0,3,"<a href=\"Database\/MarkMigration.php.html#129\">App\\Database\\MarkMigration::seedDefaultCategories<\/a>"],[0,2,"<a href=\"Database\/MarkMigration.php.html#164\">App\\Database\\MarkMigration::seedDefaultMarkUsers<\/a>"],[0,1,"<a href=\"Database\/MarkMigration.php.html#205\">App\\Database\\MarkMigration::createDefaultMarkUser<\/a>"],[0,1,"<a href=\"Database\/MigrationService.php.html#11\">App\\Database\\MigrationService::__construct<\/a>"],[0,1,"<a href=\"Database\/MigrationService.php.html#18\">App\\Database\\MigrationService::migrate<\/a>"],[0,1,"<a href=\"Database\/MigrationService.php.html#30\">App\\Database\\MigrationService::createUserTables<\/a>"],[0,1,"<a href=\"Database\/MigrationService.php.html#54\">App\\Database\\MigrationService::createMarkTables<\/a>"],[0,1,"<a href=\"Database\/MigrationService.php.html#82\">App\\Database\\MigrationService::createSystemTables<\/a>"],[0,2,"<a href=\"Database\/MigrationService.php.html#90\">App\\Database\\MigrationService::seedDefaultData<\/a>"],[0,1,"<a href=\"Database\/MigrationService.php.html#125\">App\\Database\\MigrationService::createDefaultUser<\/a>"],[0,1,"<a href=\"Database\/MigrationServiceFactory.php.html#12\">App\\Database\\MigrationServiceFactory::__invoke<\/a>"],[0,8,"<a href=\"Database\/PdoFactory.php.html#12\">App\\Database\\PdoFactory::__invoke<\/a>"],[0,1,"<a href=\"Database\/SystemMigration.php.html#20\">App\\Database\\SystemMigration::__construct<\/a>"],[0,1,"<a href=\"Database\/SystemMigration.php.html#25\">App\\Database\\SystemMigration::migrate<\/a>"],[0,1,"<a href=\"Database\/SystemMigration.php.html#36\">App\\Database\\SystemMigration::createCacheTable<\/a>"],[0,1,"<a href=\"Database\/SystemMigration.php.html#57\">App\\Database\\SystemMigration::createSystemLogsTable<\/a>"],[0,1,"<a href=\"Database\/SystemMigration.php.html#82\">App\\Database\\SystemMigration::createTemplateCacheTable<\/a>"],[0,1,"<a href=\"Database\/SystemMigration.php.html#99\">App\\Database\\SystemMigration::createConfigCacheTable<\/a>"],[0,1,"<a href=\"Database\/SystemMigration.php.html#117\">App\\Database\\SystemMigration::createSystemSettingsTable<\/a>"],[0,2,"<a href=\"Database\/SystemMigration.php.html#139\">App\\Database\\SystemMigration::insertDefaultSettings<\/a>"],[0,1,"<a href=\"Database\/UserMigration.php.html#17\">App\\Database\\UserMigration::__construct<\/a>"],[0,1,"<a href=\"Database\/UserMigration.php.html#22\">App\\Database\\UserMigration::migrate<\/a>"],[0,1,"<a href=\"Database\/UserMigration.php.html#32\">App\\Database\\UserMigration::createUsersTable<\/a>"],[0,1,"<a href=\"Database\/UserMigration.php.html#58\">App\\Database\\UserMigration::createUserSessionsTable<\/a>"],[0,1,"<a href=\"Database\/UserMigration.php.html#81\">App\\Database\\UserMigration::createUserPermissionsTable<\/a>"],[0,2,"<a href=\"Database\/UserMigration.php.html#106\">App\\Database\\UserMigration::seedDefaultUsers<\/a>"],[0,1,"<a href=\"Database\/UserMigration.php.html#147\">App\\Database\\UserMigration::createDefaultUser<\/a>"],[0,1,"<a href=\"Factory\/DatabaseConfigFactory.php.html#21\">App\\Factory\\DatabaseConfigFactory::__construct<\/a>"],[0,1,"<a href=\"Factory\/DatabaseConfigFactory.php.html#37\">App\\Factory\\DatabaseConfigFactory::getConfig<\/a>"],[0,1,"<a href=\"Factory\/DatabaseConfigFactory.php.html#62\">App\\Factory\\DatabaseConfigFactory::getUserDatabasePath<\/a>"],[0,1,"<a href=\"Factory\/DatabaseConfigFactory.php.html#70\">App\\Factory\\DatabaseConfigFactory::getMarkDatabasePath<\/a>"],[0,1,"<a href=\"Factory\/DatabaseConfigFactory.php.html#78\">App\\Factory\\DatabaseConfigFactory::getSystemDatabasePath<\/a>"],[0,1,"<a href=\"Factory\/DatabaseConfigFactory.php.html#87\">App\\Factory\\DatabaseConfigFactory::getAllDatabasePaths<\/a>"],[0,1,"<a href=\"Factory\/TemplateConfigFactory.php.html#21\">App\\Factory\\TemplateConfigFactory::__construct<\/a>"],[0,1,"<a href=\"Factory\/TemplateConfigFactory.php.html#37\">App\\Factory\\TemplateConfigFactory::getConfig<\/a>"],[0,1,"<a href=\"Factory\/TemplateConfigFactory.php.html#62\">App\\Factory\\TemplateConfigFactory::getAllTemplatePaths<\/a>"],[0,5,"<a href=\"Factory\/TemplateConfigFactory.php.html#75\">App\\Factory\\TemplateConfigFactory::getTemplatePath<\/a>"],[0,1,"<a href=\"Handler\/BootstrapDemoHandler.php.html#15\">App\\Handler\\BootstrapDemoHandler::__construct<\/a>"],[0,1,"<a href=\"Handler\/BootstrapDemoHandler.php.html#20\">App\\Handler\\BootstrapDemoHandler::handle<\/a>"],[0,1,"<a href=\"Handler\/BootstrapDemoHandlerFactory.php.html#12\">App\\Handler\\BootstrapDemoHandlerFactory::__invoke<\/a>"],[0,11,"<a href=\"Handler\/DebugHandler.php.html#15\">App\\Handler\\DebugHandler::handle<\/a>"],[0,1,"<a href=\"Handler\/HomeHandler.php.html#14\">App\\Handler\\HomeHandler::__construct<\/a>"],[0,1,"<a href=\"Handler\/HomeHandler.php.html#19\">App\\Handler\\HomeHandler::handle<\/a>"],[0,1,"<a href=\"Handler\/HomeHandlerFactory.php.html#12\">App\\Handler\\HomeHandlerFactory::__invoke<\/a>"],[0,1,"<a href=\"Handler\/MainDemoHandler.php.html#15\">App\\Handler\\MainDemoHandler::__construct<\/a>"],[0,1,"<a href=\"Handler\/MainDemoHandler.php.html#20\">App\\Handler\\MainDemoHandler::handle<\/a>"],[0,1,"<a href=\"Handler\/MainDemoHandlerFactory.php.html#12\">App\\Handler\\MainDemoHandlerFactory::__invoke<\/a>"],[0,1,"<a href=\"Handler\/TemplateHandler.php.html#15\">App\\Handler\\TemplateHandler::__construct<\/a>"],[0,3,"<a href=\"Handler\/TemplateHandler.php.html#19\">App\\Handler\\TemplateHandler::handle<\/a>"],[0,1,"<a href=\"Handler\/TemplateHandlerFactory.php.html#12\">App\\Handler\\TemplateHandlerFactory::__invoke<\/a>"],[0,1,"<a href=\"Helper\/AssetHelper.php.html#14\">App\\Helper\\AssetHelper::__construct<\/a>"],[0,5,"<a href=\"Helper\/AssetHelper.php.html#23\">App\\Helper\\AssetHelper::asset<\/a>"],[0,7,"<a href=\"Helper\/AssetHelper.php.html#41\">App\\Helper\\AssetHelper::css<\/a>"],[0,1,"<a href=\"Helper\/AssetHelper.php.html#59\">App\\Helper\\AssetHelper::js<\/a>"],[0,6,"<a href=\"Helper\/AssetHelper.php.html#68\">App\\Helper\\AssetHelper::getManifest<\/a>"],[0,8,"<a href=\"Helper\/AssetHelper.php.html#101\">App\\Helper\\AssetHelper::getThemeInfo<\/a>"],[0,6,"<a href=\"Helper\/AssetHelper.php.html#138\">App\\Helper\\AssetHelper::image<\/a>"],[0,6,"<a href=\"Helper\/AssetHelper.php.html#157\">App\\Helper\\AssetHelper::getImages<\/a>"],[0,1,"<a href=\"Helper\/AssetHelperFactory.php.html#12\">App\\Helper\\AssetHelperFactory::__invoke<\/a>"],[100,2,"<a href=\"Service\/UnifiedPathService.php.html#28\">App\\Service\\UnifiedPathService::__construct<\/a>"],[100,1,"<a href=\"Service\/UnifiedPathService.php.html#51\">App\\Service\\UnifiedPathService::storage<\/a>"],[100,1,"<a href=\"Service\/UnifiedPathService.php.html#59\">App\\Service\\UnifiedPathService::logs<\/a>"],[100,1,"<a href=\"Service\/UnifiedPathService.php.html#67\">App\\Service\\UnifiedPathService::cache<\/a>"],[0,1,"<a href=\"Service\/UnifiedPathService.php.html#75\">App\\Service\\UnifiedPathService::sessions<\/a>"],[0,1,"<a href=\"Service\/UnifiedPathService.php.html#83\">App\\Service\\UnifiedPathService::uploads<\/a>"],[100,1,"<a href=\"Service\/UnifiedPathService.php.html#91\">App\\Service\\UnifiedPathService::templates<\/a>"],[100,1,"<a href=\"Service\/UnifiedPathService.php.html#99\">App\\Service\\UnifiedPathService::appTemplates<\/a>"],[100,1,"<a href=\"Service\/UnifiedPathService.php.html#107\">App\\Service\\UnifiedPathService::moduleTemplates<\/a>"],[100,2,"<a href=\"Service\/UnifiedPathService.php.html#119\">App\\Service\\UnifiedPathService::getRootPath<\/a>"],[0,1,"<a href=\"Service\/UnifiedPathService.php.html#128\">App\\Service\\UnifiedPathService::getPublicPath<\/a>"],[0,1,"<a href=\"Service\/UnifiedPathService.php.html#136\">App\\Service\\UnifiedPathService::getThemesPath<\/a>"],[0,1,"<a href=\"Service\/UnifiedPathService.php.html#144\">App\\Service\\UnifiedPathService::getPublicFilePath<\/a>"],[0,1,"<a href=\"Service\/UnifiedPathService.php.html#152\">App\\Service\\UnifiedPathService::getThemeFilePath<\/a>"],[0,1,"<a href=\"Service\/UnifiedPathService.php.html#160\">App\\Service\\UnifiedPathService::getUploadFilePath<\/a>"],[0,2,"<a href=\"Service\/UnifiedPathService.php.html#168\">App\\Service\\UnifiedPathService::readPublicFile<\/a>"],[0,2,"<a href=\"Service\/UnifiedPathService.php.html#180\">App\\Service\\UnifiedPathService::readThemeFile<\/a>"],[0,2,"<a href=\"Service\/UnifiedPathService.php.html#192\">App\\Service\\UnifiedPathService::publicFileExists<\/a>"],[0,2,"<a href=\"Service\/UnifiedPathService.php.html#204\">App\\Service\\UnifiedPathService::themeFileExists<\/a>"],[0,1,"<a href=\"Service\/UnifiedPathService.php.html#216\">App\\Service\\UnifiedPathService::getPublicUrl<\/a>"],[0,1,"<a href=\"Service\/UnifiedPathService.php.html#224\">App\\Service\\UnifiedPathService::getThemeUrl<\/a>"],[100,4,"<a href=\"Service\/UnifiedPathService.php.html#236\">App\\Service\\UnifiedPathService::resolvePath<\/a>"],[100,1,"<a href=\"Service\/UnifiedPathService.php.html#263\">App\\Service\\UnifiedPathService::sanitizeFilename<\/a>"],[100,2,"<a href=\"Service\/UnifiedPathService.php.html#280\">App\\Service\\UnifiedPathService::ensureDirectoriesExist<\/a>"],[0,1,"<a href=\"Service\/UnifiedPathService.php.html#300\">App\\Service\\UnifiedPathService::path<\/a>"],[0,1,"<a href=\"Service\/UnifiedPathServiceFactory.php.html#12\">App\\Service\\UnifiedPathServiceFactory::__invoke<\/a>"],[0,2,"<a href=\"Session\/SimpleSessionPersistence.php.html#21\">App\\Session\\SimpleSessionPersistence::initializeSessionFromRequest<\/a>"],[0,3,"<a href=\"Session\/SimpleSessionPersistence.php.html#32\">App\\Session\\SimpleSessionPersistence::persistSession<\/a>"],[0,3,"<a href=\"Session\/SimpleSessionPersistence.php.html#47\">App\\Session\\SimpleSessionPersistence::generateSessionId<\/a>"],[0,3,"<a href=\"Template\/FormHelper.php.html#15\">App\\Template\\FormHelper::openTag<\/a>"],[0,1,"<a href=\"Template\/FormHelper.php.html#34\">App\\Template\\FormHelper::closeTag<\/a>"],[50,3,"<a href=\"Template\/PhpRenderer.php.html#20\">App\\Template\\PhpRenderer::__construct<\/a>"],[63.63636363636363,5,"<a href=\"Template\/PhpRenderer.php.html#33\">App\\Template\\PhpRenderer::render<\/a>"],[100,3,"<a href=\"Template\/PhpRenderer.php.html#59\">App\\Template\\PhpRenderer::addPath<\/a>"],[100,4,"<a href=\"Template\/PhpRenderer.php.html#71\">App\\Template\\PhpRenderer::getPaths<\/a>"],[100,2,"<a href=\"Template\/PhpRenderer.php.html#85\">App\\Template\\PhpRenderer::addDefaultParam<\/a>"],[37.5,4,"<a href=\"Template\/PhpRenderer.php.html#93\">App\\Template\\PhpRenderer::findTemplate<\/a>"],[0,2,"<a href=\"Template\/PhpRenderer.php.html#117\">App\\Template\\PhpRenderer::renderTemplate<\/a>"],[0,7,"<a href=\"Template\/PhpRendererFactory.php.html#11\">App\\Template\\PhpRendererFactory::__invoke<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

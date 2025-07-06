@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /home/ian/Desktop/06/mezzio-minimal/modules/Mark</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../_css/bootstrap.min.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../_css/nv.d3.min.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../_css/style.css?v=10.1.16" rel="stylesheet" type="text/css">
+  <link href="../../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../../index.html">/home/ian/Desktop/06/mezzio-minimal</a></li>
+         <li class="breadcrumb-item"><a href="../index.html">modules</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Mark</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="src/ConfigProvider.php.html#13">Mark\ConfigProvider</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#13">Mark\Entity\MarkUser</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/Api/HealthHandler.php.html#17">Mark\Handler\Api\HealthHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/Api/StatsHandler.php.html#17">Mark\Handler\Api\StatsHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/BackupCreateHandler.php.html#17">Mark\Handler\BackupCreateHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/BackupHandler.php.html#18">Mark\Handler\BackupHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/CacheClearHandler.php.html#17">Mark\Handler\CacheClearHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/CacheHandler.php.html#18">Mark\Handler\CacheHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/DashboardHandler.php.html#22">Mark\Handler\DashboardHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/DashboardHandlerFactory.php.html#12">Mark\Handler\DashboardHandlerFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/DatabaseHandler.php.html#18">Mark\Handler\DatabaseHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/HealthHandler.php.html#20">Mark\Handler\HealthHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/HealthHandlerFactory.php.html#11">Mark\Handler\HealthHandlerFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/LoginHandler.php.html#21">Mark\Handler\LoginHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/LoginHandlerFactory.php.html#11">Mark\Handler\LoginHandlerFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/LogoutHandler.php.html#16">Mark\Handler\LogoutHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/LogoutHandlerFactory.php.html#9">Mark\Handler\LogoutHandlerFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/LogsHandler.php.html#18">Mark\Handler\LogsHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/MarkCreateHandler.php.html#19">Mark\Handler\MarkCreateHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/MarkDeleteHandler.php.html#17">Mark\Handler\MarkDeleteHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/MarkEditHandler.php.html#19">Mark\Handler\MarkEditHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/MarkManagementHandler.php.html#18">Mark\Handler\MarkManagementHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/SettingsHandler.php.html#19">Mark\Handler\SettingsHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/UserDeleteHandler.php.html#17">Mark\Handler\UserDeleteHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/UserEditHandler.php.html#18">Mark\Handler\UserEditHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/UserManagementHandler.php.html#18">Mark\Handler\UserManagementHandler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Middleware/MarkAuthenticationMiddleware.php.html#21">Mark\Middleware\MarkAuthenticationMiddleware</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Middleware/MarkAuthenticationMiddlewareFactory.php.html#10">Mark\Middleware\MarkAuthenticationMiddlewareFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Middleware/SupermarkAuthorizationMiddleware.php.html#20">Mark\Middleware\SupermarkAuthorizationMiddleware</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Middleware/SupermarkAuthorizationMiddlewareFactory.php.html#9">Mark\Middleware\SupermarkAuthorizationMiddlewareFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#15">Mark\Service\MarkUserRepository</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepositoryFactory.php.html#10">Mark\Service\MarkUserRepositoryFactory</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/SystemStatsService.php.html#15">Mark\Service\SystemStatsService</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/SystemStatsServiceFactory.php.html#11">Mark\Service\SystemStatsServiceFactory</a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#15">Mark\Service\MarkUserRepository</a></td><td class="text-right">2450</td></tr>
+       <tr><td><a href="src/Handler/HealthHandler.php.html#20">Mark\Handler\HealthHandler</a></td><td class="text-right">1190</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#13">Mark\Entity\MarkUser</a></td><td class="text-right">812</td></tr>
+       <tr><td><a href="src/Service/SystemStatsService.php.html#15">Mark\Service\SystemStatsService</a></td><td class="text-right">462</td></tr>
+       <tr><td><a href="src/Handler/LoginHandler.php.html#21">Mark\Handler\LoginHandler</a></td><td class="text-right">240</td></tr>
+       <tr><td><a href="src/Middleware/MarkAuthenticationMiddleware.php.html#21">Mark\Middleware\MarkAuthenticationMiddleware</a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="src/Handler/DashboardHandler.php.html#22">Mark\Handler\DashboardHandler</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="src/Middleware/SupermarkAuthorizationMiddleware.php.html#20">Mark\Middleware\SupermarkAuthorizationMiddleware</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="src/Handler/MarkCreateHandler.php.html#19">Mark\Handler\MarkCreateHandler</a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="src/Handler/MarkEditHandler.php.html#19">Mark\Handler\MarkEditHandler</a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="src/Handler/SettingsHandler.php.html#19">Mark\Handler\SettingsHandler</a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="src/Handler/LogoutHandler.php.html#16">Mark\Handler\LogoutHandler</a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="src/ConfigProvider.php.html#18"><abbr title="Mark\ConfigProvider::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/ConfigProvider.php.html#31"><abbr title="Mark\ConfigProvider::getDependencies">getDependencies</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/ConfigProvider.php.html#84"><abbr title="Mark\ConfigProvider::getTemplates">getTemplates</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/ConfigProvider.php.html#96"><abbr title="Mark\ConfigProvider::getMarkAuthenticationConfig">getMarkAuthenticationConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/ConfigProvider.php.html#112"><abbr title="Mark\ConfigProvider::getMarkAuthorizationConfig">getMarkAuthorizationConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#29"><abbr title="Mark\Entity\MarkUser::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#43"><abbr title="Mark\Entity\MarkUser::getId">getId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#48"><abbr title="Mark\Entity\MarkUser::setId">setId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#53"><abbr title="Mark\Entity\MarkUser::getUsername">getUsername</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#58"><abbr title="Mark\Entity\MarkUser::setUsername">setUsername</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#64"><abbr title="Mark\Entity\MarkUser::getEmail">getEmail</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#69"><abbr title="Mark\Entity\MarkUser::setEmail">setEmail</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#75"><abbr title="Mark\Entity\MarkUser::getPasswordHash">getPasswordHash</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#80"><abbr title="Mark\Entity\MarkUser::setPasswordHash">setPasswordHash</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#89"><abbr title="Mark\Entity\MarkUser::getRoles">getRoles</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#97"><abbr title="Mark\Entity\MarkUser::setRoles">setRoles</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#103"><abbr title="Mark\Entity\MarkUser::hasRole">hasRole</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#108"><abbr title="Mark\Entity\MarkUser::addRole">addRole</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#116"><abbr title="Mark\Entity\MarkUser::removeRole">removeRole</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#122"><abbr title="Mark\Entity\MarkUser::isActive">isActive</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#127"><abbr title="Mark\Entity\MarkUser::setIsActive">setIsActive</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#133"><abbr title="Mark\Entity\MarkUser::getCreatedAt">getCreatedAt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#138"><abbr title="Mark\Entity\MarkUser::getLastLoginAt">getLastLoginAt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#143"><abbr title="Mark\Entity\MarkUser::setLastLoginAt">setLastLoginAt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#149"><abbr title="Mark\Entity\MarkUser::getUpdatedAt">getUpdatedAt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#157"><abbr title="Mark\Entity\MarkUser::isSupermark">isSupermark</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#165"><abbr title="Mark\Entity\MarkUser::isEditor">isEditor</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#173"><abbr title="Mark\Entity\MarkUser::isMarkUser">isMarkUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#187"><abbr title="Mark\Entity\MarkUser::toArray">toArray</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/Api/HealthHandler.php.html#19"><abbr title="Mark\Handler\Api\HealthHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/Api/StatsHandler.php.html#19"><abbr title="Mark\Handler\Api\StatsHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/BackupCreateHandler.php.html#19"><abbr title="Mark\Handler\BackupCreateHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/BackupHandler.php.html#20"><abbr title="Mark\Handler\BackupHandler::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/BackupHandler.php.html#25"><abbr title="Mark\Handler\BackupHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/CacheClearHandler.php.html#19"><abbr title="Mark\Handler\CacheClearHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/CacheHandler.php.html#20"><abbr title="Mark\Handler\CacheHandler::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/CacheHandler.php.html#25"><abbr title="Mark\Handler\CacheHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/DashboardHandler.php.html#24"><abbr title="Mark\Handler\DashboardHandler::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/DashboardHandler.php.html#31"><abbr title="Mark\Handler\DashboardHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/DashboardHandlerFactory.php.html#14"><abbr title="Mark\Handler\DashboardHandlerFactory::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/DatabaseHandler.php.html#20"><abbr title="Mark\Handler\DatabaseHandler::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/DatabaseHandler.php.html#25"><abbr title="Mark\Handler\DatabaseHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/HealthHandler.php.html#22"><abbr title="Mark\Handler\HealthHandler::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/HealthHandler.php.html#28"><abbr title="Mark\Handler\HealthHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/HealthHandler.php.html#62"><abbr title="Mark\Handler\HealthHandler::getSystemHealthData">getSystemHealthData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/HealthHandler.php.html#79"><abbr title="Mark\Handler\HealthHandler::calculateOverallStatus">calculateOverallStatus</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/HealthHandler.php.html#104"><abbr title="Mark\Handler\HealthHandler::getDatabaseHealth">getDatabaseHealth</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/HealthHandler.php.html#129"><abbr title="Mark\Handler\HealthHandler::getDiskHealth">getDiskHealth</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/HealthHandler.php.html#144"><abbr title="Mark\Handler\HealthHandler::getCacheHealth">getCacheHealth</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/HealthHandler.php.html#157"><abbr title="Mark\Handler\HealthHandler::getSystemInfo">getSystemInfo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/HealthHandler.php.html#173"><abbr title="Mark\Handler\HealthHandler::getRecommendations">getRecommendations</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/HealthHandler.php.html#199"><abbr title="Mark\Handler\HealthHandler::formatBytes">formatBytes</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/HealthHandlerFactory.php.html#13"><abbr title="Mark\Handler\HealthHandlerFactory::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/LoginHandler.php.html#23"><abbr title="Mark\Handler\LoginHandler::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/LoginHandler.php.html#29"><abbr title="Mark\Handler\LoginHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/LoginHandler.php.html#56"><abbr title="Mark\Handler\LoginHandler::handleLoginAttempt">handleLoginAttempt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/LoginHandlerFactory.php.html#13"><abbr title="Mark\Handler\LoginHandlerFactory::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/LogoutHandler.php.html#18"><abbr title="Mark\Handler\LogoutHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/LogoutHandlerFactory.php.html#11"><abbr title="Mark\Handler\LogoutHandlerFactory::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/LogsHandler.php.html#20"><abbr title="Mark\Handler\LogsHandler::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/LogsHandler.php.html#25"><abbr title="Mark\Handler\LogsHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/MarkCreateHandler.php.html#21"><abbr title="Mark\Handler\MarkCreateHandler::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/MarkCreateHandler.php.html#26"><abbr title="Mark\Handler\MarkCreateHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/MarkDeleteHandler.php.html#19"><abbr title="Mark\Handler\MarkDeleteHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/MarkEditHandler.php.html#21"><abbr title="Mark\Handler\MarkEditHandler::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/MarkEditHandler.php.html#26"><abbr title="Mark\Handler\MarkEditHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/MarkManagementHandler.php.html#20"><abbr title="Mark\Handler\MarkManagementHandler::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/MarkManagementHandler.php.html#25"><abbr title="Mark\Handler\MarkManagementHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/SettingsHandler.php.html#21"><abbr title="Mark\Handler\SettingsHandler::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/SettingsHandler.php.html#26"><abbr title="Mark\Handler\SettingsHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/UserDeleteHandler.php.html#19"><abbr title="Mark\Handler\UserDeleteHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/UserEditHandler.php.html#20"><abbr title="Mark\Handler\UserEditHandler::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/UserEditHandler.php.html#25"><abbr title="Mark\Handler\UserEditHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/UserManagementHandler.php.html#20"><abbr title="Mark\Handler\UserManagementHandler::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Handler/UserManagementHandler.php.html#25"><abbr title="Mark\Handler\UserManagementHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Middleware/MarkAuthenticationMiddleware.php.html#23"><abbr title="Mark\Middleware\MarkAuthenticationMiddleware::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Middleware/MarkAuthenticationMiddleware.php.html#28"><abbr title="Mark\Middleware\MarkAuthenticationMiddleware::process">process</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Middleware/MarkAuthenticationMiddlewareFactory.php.html#12"><abbr title="Mark\Middleware\MarkAuthenticationMiddlewareFactory::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Middleware/SupermarkAuthorizationMiddleware.php.html#22"><abbr title="Mark\Middleware\SupermarkAuthorizationMiddleware::process">process</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Middleware/SupermarkAuthorizationMiddleware.php.html#43"><abbr title="Mark\Middleware\SupermarkAuthorizationMiddleware::renderAccessDeniedPage">renderAccessDeniedPage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Middleware/SupermarkAuthorizationMiddlewareFactory.php.html#11"><abbr title="Mark\Middleware\SupermarkAuthorizationMiddlewareFactory::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#17"><abbr title="Mark\Service\MarkUserRepository::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#22"><abbr title="Mark\Service\MarkUserRepository::findById">findById</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#35"><abbr title="Mark\Service\MarkUserRepository::findByUsername">findByUsername</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#48"><abbr title="Mark\Service\MarkUserRepository::findByEmail">findByEmail</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#64"><abbr title="Mark\Service\MarkUserRepository::findAll">findAll</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#84"><abbr title="Mark\Service\MarkUserRepository::findByRole">findByRole</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#105"><abbr title="Mark\Service\MarkUserRepository::findRecentlyActive">findRecentlyActive</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#125"><abbr title="Mark\Service\MarkUserRepository::save">save</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#134"><abbr title="Mark\Service\MarkUserRepository::insert">insert</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#154"><abbr title="Mark\Service\MarkUserRepository::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#175"><abbr title="Mark\Service\MarkUserRepository::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#183"><abbr title="Mark\Service\MarkUserRepository::usernameExists">usernameExists</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#191"><abbr title="Mark\Service\MarkUserRepository::emailExists">emailExists</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#203"><abbr title="Mark\Service\MarkUserRepository::createMarkUserFromData">createMarkUserFromData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepositoryFactory.php.html#12"><abbr title="Mark\Service\MarkUserRepositoryFactory::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/SystemStatsService.php.html#17"><abbr title="Mark\Service\SystemStatsService::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/SystemStatsService.php.html#28"><abbr title="Mark\Service\SystemStatsService::getSystemStats">getSystemStats</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/SystemStatsService.php.html#40"><abbr title="Mark\Service\SystemStatsService::getTotalUsers">getTotalUsers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/SystemStatsService.php.html#64"><abbr title="Mark\Service\SystemStatsService::getTotalMarks">getTotalMarks</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/SystemStatsService.php.html#78"><abbr title="Mark\Service\SystemStatsService::getDiskUsage">getDiskUsage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/SystemStatsService.php.html#92"><abbr title="Mark\Service\SystemStatsService::getCacheFileCount">getCacheFileCount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/SystemStatsService.php.html#99"><abbr title="Mark\Service\SystemStatsService::getLogEntryCount">getLogEntryCount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/SystemStatsService.php.html#116"><abbr title="Mark\Service\SystemStatsService::getDatabaseSizes">getDatabaseSizes</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="src/Service/SystemStatsServiceFactory.php.html#13"><abbr title="Mark\Service\SystemStatsServiceFactory::__invoke">__invoke</abbr></a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#203"><abbr title="Mark\Service\MarkUserRepository::createMarkUserFromData">createMarkUserFromData</abbr></a></td><td class="text-right">240</td></tr>
+       <tr><td><a href="src/Handler/HealthHandler.php.html#104"><abbr title="Mark\Handler\HealthHandler::getDatabaseHealth">getDatabaseHealth</abbr></a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="src/Handler/LoginHandler.php.html#56"><abbr title="Mark\Handler\LoginHandler::handleLoginAttempt">handleLoginAttempt</abbr></a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="src/Middleware/MarkAuthenticationMiddleware.php.html#28"><abbr title="Mark\Middleware\MarkAuthenticationMiddleware::process">process</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="src/Handler/HealthHandler.php.html#79"><abbr title="Mark\Handler\HealthHandler::calculateOverallStatus">calculateOverallStatus</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="src/Handler/HealthHandler.php.html#173"><abbr title="Mark\Handler\HealthHandler::getRecommendations">getRecommendations</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#64"><abbr title="Mark\Service\MarkUserRepository::findAll">findAll</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#84"><abbr title="Mark\Service\MarkUserRepository::findByRole">findByRole</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="src/Handler/LoginHandler.php.html#29"><abbr title="Mark\Handler\LoginHandler::handle">handle</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#105"><abbr title="Mark\Service\MarkUserRepository::findRecentlyActive">findRecentlyActive</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="src/Service/SystemStatsService.php.html#40"><abbr title="Mark\Service\SystemStatsService::getTotalUsers">getTotalUsers</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="src/Service/SystemStatsService.php.html#116"><abbr title="Mark\Service\SystemStatsService::getDatabaseSizes">getDatabaseSizes</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#173"><abbr title="Mark\Entity\MarkUser::isMarkUser">isMarkUser</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="src/Handler/DashboardHandler.php.html#31"><abbr title="Mark\Handler\DashboardHandler::handle">handle</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="src/Handler/HealthHandler.php.html#28"><abbr title="Mark\Handler\HealthHandler::handle">handle</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="src/Handler/HealthHandler.php.html#129"><abbr title="Mark\Handler\HealthHandler::getDiskHealth">getDiskHealth</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="src/Handler/HealthHandler.php.html#199"><abbr title="Mark\Handler\HealthHandler::formatBytes">formatBytes</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="src/Middleware/SupermarkAuthorizationMiddleware.php.html#22"><abbr title="Mark\Middleware\SupermarkAuthorizationMiddleware::process">process</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#22"><abbr title="Mark\Service\MarkUserRepository::findById">findById</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#35"><abbr title="Mark\Service\MarkUserRepository::findByUsername">findByUsername</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#48"><abbr title="Mark\Service\MarkUserRepository::findByEmail">findByEmail</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="src/Service/SystemStatsService.php.html#64"><abbr title="Mark\Service\SystemStatsService::getTotalMarks">getTotalMarks</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="src/Service/SystemStatsService.php.html#78"><abbr title="Mark\Service\SystemStatsService::getDiskUsage">getDiskUsage</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="src/Service/SystemStatsService.php.html#99"><abbr title="Mark\Service\SystemStatsService::getLogEntryCount">getLogEntryCount</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#108"><abbr title="Mark\Entity\MarkUser::addRole">addRole</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="src/Entity/MarkUser.php.html#165"><abbr title="Mark\Entity\MarkUser::isEditor">isEditor</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="src/Handler/HealthHandler.php.html#144"><abbr title="Mark\Handler\HealthHandler::getCacheHealth">getCacheHealth</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="src/Handler/LogoutHandler.php.html#18"><abbr title="Mark\Handler\LogoutHandler::handle">handle</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="src/Handler/MarkCreateHandler.php.html#26"><abbr title="Mark\Handler\MarkCreateHandler::handle">handle</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="src/Handler/MarkEditHandler.php.html#26"><abbr title="Mark\Handler\MarkEditHandler::handle">handle</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="src/Handler/SettingsHandler.php.html#26"><abbr title="Mark\Handler\SettingsHandler::handle">handle</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#125"><abbr title="Mark\Service\MarkUserRepository::save">save</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#134"><abbr title="Mark\Service\MarkUserRepository::insert">insert</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#154"><abbr title="Mark\Service\MarkUserRepository::update">update</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="src/Service/MarkUserRepository.php.html#175"><abbr title="Mark\Service\MarkUserRepository::delete">delete</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="src/Service/SystemStatsService.php.html#92"><abbr title="Mark\Service\SystemStatsService::getCacheFileCount">getCacheFileCount</abbr></a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 10.1.16</a> using <a href="https://www.php.net/" target="_top">PHP 8.4.8</a> and <a href="https://phpunit.de/">PHPUnit 10.5.47</a> at Sun Jul 6 16:18:34 UTC 2025.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../../_js/jquery.min.js?v=10.1.16" type="text/javascript"></script>
+  <script src="../../_js/d3.min.js?v=10.1.16" type="text/javascript"></script>
+  <script src="../../_js/nv.d3.min.js?v=10.1.16" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([34,0,0,0,0,0,0,0,0,0,0,0], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([105,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,5,"<a href=\"src\/ConfigProvider.php.html#13\">Mark\\ConfigProvider<\/a>"],[0,28,"<a href=\"src\/Entity\/MarkUser.php.html#13\">Mark\\Entity\\MarkUser<\/a>"],[0,1,"<a href=\"src\/Handler\/Api\/HealthHandler.php.html#17\">Mark\\Handler\\Api\\HealthHandler<\/a>"],[0,1,"<a href=\"src\/Handler\/Api\/StatsHandler.php.html#17\">Mark\\Handler\\Api\\StatsHandler<\/a>"],[0,1,"<a href=\"src\/Handler\/BackupCreateHandler.php.html#17\">Mark\\Handler\\BackupCreateHandler<\/a>"],[0,2,"<a href=\"src\/Handler\/BackupHandler.php.html#18\">Mark\\Handler\\BackupHandler<\/a>"],[0,1,"<a href=\"src\/Handler\/CacheClearHandler.php.html#17\">Mark\\Handler\\CacheClearHandler<\/a>"],[0,2,"<a href=\"src\/Handler\/CacheHandler.php.html#18\">Mark\\Handler\\CacheHandler<\/a>"],[0,4,"<a href=\"src\/Handler\/DashboardHandler.php.html#22\">Mark\\Handler\\DashboardHandler<\/a>"],[0,1,"<a href=\"src\/Handler\/DashboardHandlerFactory.php.html#12\">Mark\\Handler\\DashboardHandlerFactory<\/a>"],[0,2,"<a href=\"src\/Handler\/DatabaseHandler.php.html#18\">Mark\\Handler\\DatabaseHandler<\/a>"],[0,34,"<a href=\"src\/Handler\/HealthHandler.php.html#20\">Mark\\Handler\\HealthHandler<\/a>"],[0,1,"<a href=\"src\/Handler\/HealthHandlerFactory.php.html#11\">Mark\\Handler\\HealthHandlerFactory<\/a>"],[0,15,"<a href=\"src\/Handler\/LoginHandler.php.html#21\">Mark\\Handler\\LoginHandler<\/a>"],[0,1,"<a href=\"src\/Handler\/LoginHandlerFactory.php.html#11\">Mark\\Handler\\LoginHandlerFactory<\/a>"],[0,2,"<a href=\"src\/Handler\/LogoutHandler.php.html#16\">Mark\\Handler\\LogoutHandler<\/a>"],[0,1,"<a href=\"src\/Handler\/LogoutHandlerFactory.php.html#9\">Mark\\Handler\\LogoutHandlerFactory<\/a>"],[0,2,"<a href=\"src\/Handler\/LogsHandler.php.html#18\">Mark\\Handler\\LogsHandler<\/a>"],[0,3,"<a href=\"src\/Handler\/MarkCreateHandler.php.html#19\">Mark\\Handler\\MarkCreateHandler<\/a>"],[0,1,"<a href=\"src\/Handler\/MarkDeleteHandler.php.html#17\">Mark\\Handler\\MarkDeleteHandler<\/a>"],[0,3,"<a href=\"src\/Handler\/MarkEditHandler.php.html#19\">Mark\\Handler\\MarkEditHandler<\/a>"],[0,2,"<a href=\"src\/Handler\/MarkManagementHandler.php.html#18\">Mark\\Handler\\MarkManagementHandler<\/a>"],[0,3,"<a href=\"src\/Handler\/SettingsHandler.php.html#19\">Mark\\Handler\\SettingsHandler<\/a>"],[0,1,"<a href=\"src\/Handler\/UserDeleteHandler.php.html#17\">Mark\\Handler\\UserDeleteHandler<\/a>"],[0,2,"<a href=\"src\/Handler\/UserEditHandler.php.html#18\">Mark\\Handler\\UserEditHandler<\/a>"],[0,2,"<a href=\"src\/Handler\/UserManagementHandler.php.html#18\">Mark\\Handler\\UserManagementHandler<\/a>"],[0,8,"<a href=\"src\/Middleware\/MarkAuthenticationMiddleware.php.html#21\">Mark\\Middleware\\MarkAuthenticationMiddleware<\/a>"],[0,1,"<a href=\"src\/Middleware\/MarkAuthenticationMiddlewareFactory.php.html#10\">Mark\\Middleware\\MarkAuthenticationMiddlewareFactory<\/a>"],[0,4,"<a href=\"src\/Middleware\/SupermarkAuthorizationMiddleware.php.html#20\">Mark\\Middleware\\SupermarkAuthorizationMiddleware<\/a>"],[0,1,"<a href=\"src\/Middleware\/SupermarkAuthorizationMiddlewareFactory.php.html#9\">Mark\\Middleware\\SupermarkAuthorizationMiddlewareFactory<\/a>"],[0,49,"<a href=\"src\/Service\/MarkUserRepository.php.html#15\">Mark\\Service\\MarkUserRepository<\/a>"],[0,1,"<a href=\"src\/Service\/MarkUserRepositoryFactory.php.html#10\">Mark\\Service\\MarkUserRepositoryFactory<\/a>"],[0,21,"<a href=\"src\/Service\/SystemStatsService.php.html#15\">Mark\\Service\\SystemStatsService<\/a>"],[0,1,"<a href=\"src\/Service\/SystemStatsServiceFactory.php.html#11\">Mark\\Service\\SystemStatsServiceFactory<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,1,"<a href=\"src\/ConfigProvider.php.html#18\">Mark\\ConfigProvider::__invoke<\/a>"],[0,1,"<a href=\"src\/ConfigProvider.php.html#31\">Mark\\ConfigProvider::getDependencies<\/a>"],[0,1,"<a href=\"src\/ConfigProvider.php.html#84\">Mark\\ConfigProvider::getTemplates<\/a>"],[0,1,"<a href=\"src\/ConfigProvider.php.html#96\">Mark\\ConfigProvider::getMarkAuthenticationConfig<\/a>"],[0,1,"<a href=\"src\/ConfigProvider.php.html#112\">Mark\\ConfigProvider::getMarkAuthorizationConfig<\/a>"],[0,1,"<a href=\"src\/Entity\/MarkUser.php.html#29\">Mark\\Entity\\MarkUser::__construct<\/a>"],[0,1,"<a href=\"src\/Entity\/MarkUser.php.html#43\">Mark\\Entity\\MarkUser::getId<\/a>"],[0,1,"<a href=\"src\/Entity\/MarkUser.php.html#48\">Mark\\Entity\\MarkUser::setId<\/a>"],[0,1,"<a href=\"src\/Entity\/MarkUser.php.html#53\">Mark\\Entity\\MarkUser::getUsername<\/a>"],[0,1,"<a href=\"src\/Entity\/MarkUser.php.html#58\">Mark\\Entity\\MarkUser::setUsername<\/a>"],[0,1,"<a href=\"src\/Entity\/MarkUser.php.html#64\">Mark\\Entity\\MarkUser::getEmail<\/a>"],[0,1,"<a href=\"src\/Entity\/MarkUser.php.html#69\">Mark\\Entity\\MarkUser::setEmail<\/a>"],[0,1,"<a href=\"src\/Entity\/MarkUser.php.html#75\">Mark\\Entity\\MarkUser::getPasswordHash<\/a>"],[0,1,"<a href=\"src\/Entity\/MarkUser.php.html#80\">Mark\\Entity\\MarkUser::setPasswordHash<\/a>"],[0,1,"<a href=\"src\/Entity\/MarkUser.php.html#89\">Mark\\Entity\\MarkUser::getRoles<\/a>"],[0,1,"<a href=\"src\/Entity\/MarkUser.php.html#97\">Mark\\Entity\\MarkUser::setRoles<\/a>"],[0,1,"<a href=\"src\/Entity\/MarkUser.php.html#103\">Mark\\Entity\\MarkUser::hasRole<\/a>"],[0,2,"<a href=\"src\/Entity\/MarkUser.php.html#108\">Mark\\Entity\\MarkUser::addRole<\/a>"],[0,1,"<a href=\"src\/Entity\/MarkUser.php.html#116\">Mark\\Entity\\MarkUser::removeRole<\/a>"],[0,1,"<a href=\"src\/Entity\/MarkUser.php.html#122\">Mark\\Entity\\MarkUser::isActive<\/a>"],[0,1,"<a href=\"src\/Entity\/MarkUser.php.html#127\">Mark\\Entity\\MarkUser::setIsActive<\/a>"],[0,1,"<a href=\"src\/Entity\/MarkUser.php.html#133\">Mark\\Entity\\MarkUser::getCreatedAt<\/a>"],[0,1,"<a href=\"src\/Entity\/MarkUser.php.html#138\">Mark\\Entity\\MarkUser::getLastLoginAt<\/a>"],[0,1,"<a href=\"src\/Entity\/MarkUser.php.html#143\">Mark\\Entity\\MarkUser::setLastLoginAt<\/a>"],[0,1,"<a href=\"src\/Entity\/MarkUser.php.html#149\">Mark\\Entity\\MarkUser::getUpdatedAt<\/a>"],[0,1,"<a href=\"src\/Entity\/MarkUser.php.html#157\">Mark\\Entity\\MarkUser::isSupermark<\/a>"],[0,2,"<a href=\"src\/Entity\/MarkUser.php.html#165\">Mark\\Entity\\MarkUser::isEditor<\/a>"],[0,3,"<a href=\"src\/Entity\/MarkUser.php.html#173\">Mark\\Entity\\MarkUser::isMarkUser<\/a>"],[0,1,"<a href=\"src\/Entity\/MarkUser.php.html#187\">Mark\\Entity\\MarkUser::toArray<\/a>"],[0,1,"<a href=\"src\/Handler\/Api\/HealthHandler.php.html#19\">Mark\\Handler\\Api\\HealthHandler::handle<\/a>"],[0,1,"<a href=\"src\/Handler\/Api\/StatsHandler.php.html#19\">Mark\\Handler\\Api\\StatsHandler::handle<\/a>"],[0,1,"<a href=\"src\/Handler\/BackupCreateHandler.php.html#19\">Mark\\Handler\\BackupCreateHandler::handle<\/a>"],[0,1,"<a href=\"src\/Handler\/BackupHandler.php.html#20\">Mark\\Handler\\BackupHandler::__construct<\/a>"],[0,1,"<a href=\"src\/Handler\/BackupHandler.php.html#25\">Mark\\Handler\\BackupHandler::handle<\/a>"],[0,1,"<a href=\"src\/Handler\/CacheClearHandler.php.html#19\">Mark\\Handler\\CacheClearHandler::handle<\/a>"],[0,1,"<a href=\"src\/Handler\/CacheHandler.php.html#20\">Mark\\Handler\\CacheHandler::__construct<\/a>"],[0,1,"<a href=\"src\/Handler\/CacheHandler.php.html#25\">Mark\\Handler\\CacheHandler::handle<\/a>"],[0,1,"<a href=\"src\/Handler\/DashboardHandler.php.html#24\">Mark\\Handler\\DashboardHandler::__construct<\/a>"],[0,3,"<a href=\"src\/Handler\/DashboardHandler.php.html#31\">Mark\\Handler\\DashboardHandler::handle<\/a>"],[0,1,"<a href=\"src\/Handler\/DashboardHandlerFactory.php.html#14\">Mark\\Handler\\DashboardHandlerFactory::__invoke<\/a>"],[0,1,"<a href=\"src\/Handler\/DatabaseHandler.php.html#20\">Mark\\Handler\\DatabaseHandler::__construct<\/a>"],[0,1,"<a href=\"src\/Handler\/DatabaseHandler.php.html#25\">Mark\\Handler\\DatabaseHandler::handle<\/a>"],[0,1,"<a href=\"src\/Handler\/HealthHandler.php.html#22\">Mark\\Handler\\HealthHandler::__construct<\/a>"],[0,3,"<a href=\"src\/Handler\/HealthHandler.php.html#28\">Mark\\Handler\\HealthHandler::handle<\/a>"],[0,1,"<a href=\"src\/Handler\/HealthHandler.php.html#62\">Mark\\Handler\\HealthHandler::getSystemHealthData<\/a>"],[0,5,"<a href=\"src\/Handler\/HealthHandler.php.html#79\">Mark\\Handler\\HealthHandler::calculateOverallStatus<\/a>"],[0,10,"<a href=\"src\/Handler\/HealthHandler.php.html#104\">Mark\\Handler\\HealthHandler::getDatabaseHealth<\/a>"],[0,3,"<a href=\"src\/Handler\/HealthHandler.php.html#129\">Mark\\Handler\\HealthHandler::getDiskHealth<\/a>"],[0,2,"<a href=\"src\/Handler\/HealthHandler.php.html#144\">Mark\\Handler\\HealthHandler::getCacheHealth<\/a>"],[0,1,"<a href=\"src\/Handler\/HealthHandler.php.html#157\">Mark\\Handler\\HealthHandler::getSystemInfo<\/a>"],[0,5,"<a href=\"src\/Handler\/HealthHandler.php.html#173\">Mark\\Handler\\HealthHandler::getRecommendations<\/a>"],[0,3,"<a href=\"src\/Handler\/HealthHandler.php.html#199\">Mark\\Handler\\HealthHandler::formatBytes<\/a>"],[0,1,"<a href=\"src\/Handler\/HealthHandlerFactory.php.html#13\">Mark\\Handler\\HealthHandlerFactory::__invoke<\/a>"],[0,1,"<a href=\"src\/Handler\/LoginHandler.php.html#23\">Mark\\Handler\\LoginHandler::__construct<\/a>"],[0,4,"<a href=\"src\/Handler\/LoginHandler.php.html#29\">Mark\\Handler\\LoginHandler::handle<\/a>"],[0,10,"<a href=\"src\/Handler\/LoginHandler.php.html#56\">Mark\\Handler\\LoginHandler::handleLoginAttempt<\/a>"],[0,1,"<a href=\"src\/Handler\/LoginHandlerFactory.php.html#13\">Mark\\Handler\\LoginHandlerFactory::__invoke<\/a>"],[0,2,"<a href=\"src\/Handler\/LogoutHandler.php.html#18\">Mark\\Handler\\LogoutHandler::handle<\/a>"],[0,1,"<a href=\"src\/Handler\/LogoutHandlerFactory.php.html#11\">Mark\\Handler\\LogoutHandlerFactory::__invoke<\/a>"],[0,1,"<a href=\"src\/Handler\/LogsHandler.php.html#20\">Mark\\Handler\\LogsHandler::__construct<\/a>"],[0,1,"<a href=\"src\/Handler\/LogsHandler.php.html#25\">Mark\\Handler\\LogsHandler::handle<\/a>"],[0,1,"<a href=\"src\/Handler\/MarkCreateHandler.php.html#21\">Mark\\Handler\\MarkCreateHandler::__construct<\/a>"],[0,2,"<a href=\"src\/Handler\/MarkCreateHandler.php.html#26\">Mark\\Handler\\MarkCreateHandler::handle<\/a>"],[0,1,"<a href=\"src\/Handler\/MarkDeleteHandler.php.html#19\">Mark\\Handler\\MarkDeleteHandler::handle<\/a>"],[0,1,"<a href=\"src\/Handler\/MarkEditHandler.php.html#21\">Mark\\Handler\\MarkEditHandler::__construct<\/a>"],[0,2,"<a href=\"src\/Handler\/MarkEditHandler.php.html#26\">Mark\\Handler\\MarkEditHandler::handle<\/a>"],[0,1,"<a href=\"src\/Handler\/MarkManagementHandler.php.html#20\">Mark\\Handler\\MarkManagementHandler::__construct<\/a>"],[0,1,"<a href=\"src\/Handler\/MarkManagementHandler.php.html#25\">Mark\\Handler\\MarkManagementHandler::handle<\/a>"],[0,1,"<a href=\"src\/Handler\/SettingsHandler.php.html#21\">Mark\\Handler\\SettingsHandler::__construct<\/a>"],[0,2,"<a href=\"src\/Handler\/SettingsHandler.php.html#26\">Mark\\Handler\\SettingsHandler::handle<\/a>"],[0,1,"<a href=\"src\/Handler\/UserDeleteHandler.php.html#19\">Mark\\Handler\\UserDeleteHandler::handle<\/a>"],[0,1,"<a href=\"src\/Handler\/UserEditHandler.php.html#20\">Mark\\Handler\\UserEditHandler::__construct<\/a>"],[0,1,"<a href=\"src\/Handler\/UserEditHandler.php.html#25\">Mark\\Handler\\UserEditHandler::handle<\/a>"],[0,1,"<a href=\"src\/Handler\/UserManagementHandler.php.html#20\">Mark\\Handler\\UserManagementHandler::__construct<\/a>"],[0,1,"<a href=\"src\/Handler\/UserManagementHandler.php.html#25\">Mark\\Handler\\UserManagementHandler::handle<\/a>"],[0,1,"<a href=\"src\/Middleware\/MarkAuthenticationMiddleware.php.html#23\">Mark\\Middleware\\MarkAuthenticationMiddleware::__construct<\/a>"],[0,7,"<a href=\"src\/Middleware\/MarkAuthenticationMiddleware.php.html#28\">Mark\\Middleware\\MarkAuthenticationMiddleware::process<\/a>"],[0,1,"<a href=\"src\/Middleware\/MarkAuthenticationMiddlewareFactory.php.html#12\">Mark\\Middleware\\MarkAuthenticationMiddlewareFactory::__invoke<\/a>"],[0,3,"<a href=\"src\/Middleware\/SupermarkAuthorizationMiddleware.php.html#22\">Mark\\Middleware\\SupermarkAuthorizationMiddleware::process<\/a>"],[0,1,"<a href=\"src\/Middleware\/SupermarkAuthorizationMiddleware.php.html#43\">Mark\\Middleware\\SupermarkAuthorizationMiddleware::renderAccessDeniedPage<\/a>"],[0,1,"<a href=\"src\/Middleware\/SupermarkAuthorizationMiddlewareFactory.php.html#11\">Mark\\Middleware\\SupermarkAuthorizationMiddlewareFactory::__invoke<\/a>"],[0,1,"<a href=\"src\/Service\/MarkUserRepository.php.html#17\">Mark\\Service\\MarkUserRepository::__construct<\/a>"],[0,3,"<a href=\"src\/Service\/MarkUserRepository.php.html#22\">Mark\\Service\\MarkUserRepository::findById<\/a>"],[0,3,"<a href=\"src\/Service\/MarkUserRepository.php.html#35\">Mark\\Service\\MarkUserRepository::findByUsername<\/a>"],[0,3,"<a href=\"src\/Service\/MarkUserRepository.php.html#48\">Mark\\Service\\MarkUserRepository::findByEmail<\/a>"],[0,5,"<a href=\"src\/Service\/MarkUserRepository.php.html#64\">Mark\\Service\\MarkUserRepository::findAll<\/a>"],[0,5,"<a href=\"src\/Service\/MarkUserRepository.php.html#84\">Mark\\Service\\MarkUserRepository::findByRole<\/a>"],[0,4,"<a href=\"src\/Service\/MarkUserRepository.php.html#105\">Mark\\Service\\MarkUserRepository::findRecentlyActive<\/a>"],[0,2,"<a href=\"src\/Service\/MarkUserRepository.php.html#125\">Mark\\Service\\MarkUserRepository::save<\/a>"],[0,2,"<a href=\"src\/Service\/MarkUserRepository.php.html#134\">Mark\\Service\\MarkUserRepository::insert<\/a>"],[0,2,"<a href=\"src\/Service\/MarkUserRepository.php.html#154\">Mark\\Service\\MarkUserRepository::update<\/a>"],[0,2,"<a href=\"src\/Service\/MarkUserRepository.php.html#175\">Mark\\Service\\MarkUserRepository::delete<\/a>"],[0,1,"<a href=\"src\/Service\/MarkUserRepository.php.html#183\">Mark\\Service\\MarkUserRepository::usernameExists<\/a>"],[0,1,"<a href=\"src\/Service\/MarkUserRepository.php.html#191\">Mark\\Service\\MarkUserRepository::emailExists<\/a>"],[0,15,"<a href=\"src\/Service\/MarkUserRepository.php.html#203\">Mark\\Service\\MarkUserRepository::createMarkUserFromData<\/a>"],[0,1,"<a href=\"src\/Service\/MarkUserRepositoryFactory.php.html#12\">Mark\\Service\\MarkUserRepositoryFactory::__invoke<\/a>"],[0,1,"<a href=\"src\/Service\/SystemStatsService.php.html#17\">Mark\\Service\\SystemStatsService::__construct<\/a>"],[0,1,"<a href=\"src\/Service\/SystemStatsService.php.html#28\">Mark\\Service\\SystemStatsService::getSystemStats<\/a>"],[0,4,"<a href=\"src\/Service\/SystemStatsService.php.html#40\">Mark\\Service\\SystemStatsService::getTotalUsers<\/a>"],[0,3,"<a href=\"src\/Service\/SystemStatsService.php.html#64\">Mark\\Service\\SystemStatsService::getTotalMarks<\/a>"],[0,3,"<a href=\"src\/Service\/SystemStatsService.php.html#78\">Mark\\Service\\SystemStatsService::getDiskUsage<\/a>"],[0,2,"<a href=\"src\/Service\/SystemStatsService.php.html#92\">Mark\\Service\\SystemStatsService::getCacheFileCount<\/a>"],[0,3,"<a href=\"src\/Service\/SystemStatsService.php.html#99\">Mark\\Service\\SystemStatsService::getLogEntryCount<\/a>"],[0,4,"<a href=\"src\/Service\/SystemStatsService.php.html#116\">Mark\\Service\\SystemStatsService::getDatabaseSizes<\/a>"],[0,1,"<a href=\"src\/Service\/SystemStatsServiceFactory.php.html#13\">Mark\\Service\\SystemStatsServiceFactory::__invoke<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

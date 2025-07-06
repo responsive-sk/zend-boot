@@ -25,9 +25,6 @@ class PhpRenderer implements TemplateRendererInterface
     }
 
     /**
-     * @param array<string, mixed> $params
-     */
-    /**
      * @param mixed $params
      */
     public function render(string $name, $params = []): string
@@ -38,7 +35,6 @@ class PhpRenderer implements TemplateRendererInterface
         }
 
         $defaultParams = $this->defaultParams;
-        assert(is_array($defaultParams));
         $params = array_merge($defaultParams, $params);
 
         // Parse template name (namespace::template)
@@ -80,11 +76,14 @@ class PhpRenderer implements TemplateRendererInterface
     }
 
     /**
-     * @param $value
+     * @param mixed $value
      */
     public function addDefaultParam(string $templateName, string $param, $value): void
     {
         if (!isset($this->defaultParams[$templateName])) {
+            $this->defaultParams[$templateName] = [];
+        }
+        if (!is_array($this->defaultParams[$templateName])) {
             $this->defaultParams[$templateName] = [];
         }
         $this->defaultParams[$templateName][$param] = $value;

@@ -1,17 +1,17 @@
 <?php
 
-declare(strict_types=1);
-
-use Mezzio\Application;
-use Mezzio\MiddlewareFactory;
-use Psr\Container\ContainerInterface;
-
 /**
  * HDM Boot Protocol - Mark Routes
  *
  * Routes accessible only to mark users (mark, editor, supermark roles)
  * Separate from user routes for security and organization
  */
+
+declare(strict_types=1);
+
+use Mezzio\Application;
+use Mezzio\MiddlewareFactory;
+use Psr\Container\ContainerInterface;
 
 return static function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
 

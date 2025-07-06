@@ -6,11 +6,13 @@ namespace AppTest\Unit\Template;
 
 use App\Template\PhpRenderer;
 use Mezzio\Template\TemplatePath;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Unit test for PhpRenderer
  */
+#[CoversClass(PhpRenderer::class)]
 class PhpRendererTest extends TestCase
 {
     private PhpRenderer $renderer;

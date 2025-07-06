@@ -17,7 +17,7 @@ class CsrfMiddleware implements MiddlewareInterface
     {
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
-        if (!$session) {
+        if (!$session instanceof \Mezzio\Session\SessionInterface) {
             throw new \RuntimeException('Session middleware must be executed before CSRF middleware');
         }
 
@@ -46,6 +46,9 @@ class CsrfMiddleware implements MiddlewareInterface
     private function storeToken(\Mezzio\Session\SessionInterface $session, string $token): void
     {
         $tokens = $session->get('csrf_tokens', []);
+        if (!is_array($tokens)) {
+            $tokens = [];
+        }
         $tokens[] = $token;
 
         // Keep only last 5 tokens to prevent memory issues
@@ -61,13 +64,13 @@ class CsrfMiddleware implements MiddlewareInterface
         $parsedBody = $request->getParsedBody();
 
         // Check in POST data
-        if (is_array($parsedBody) && isset($parsedBody['csrf_token'])) {
+        if (is_array($parsedBody) && isset($parsedBody['csrf_token']) && is_string($parsedBody['csrf_token'])) {
             return $parsedBody['csrf_token'];
         }
 
         // Check in headers
         $headerToken = $request->getHeaderLine('X-CSRF-Token');
-        if ($headerToken) {
+        if ($headerToken !== '') {
             return $headerToken;
         }
 
@@ -81,9 +84,12 @@ class CsrfMiddleware implements MiddlewareInterface
         }
 
         $storedTokens = $session->get('csrf_tokens', []);
+        if (!is_array($storedTokens)) {
+            return false;
+        }
 
         foreach ($storedTokens as $index => $storedToken) {
-            if (hash_equals($storedToken, $submittedToken)) {
+            if (is_string($storedToken) && hash_equals($storedToken, $submittedToken)) {
                 // Remove used token
                 unset($storedTokens[$index]);
                 $session->set('csrf_tokens', array_values($storedTokens));

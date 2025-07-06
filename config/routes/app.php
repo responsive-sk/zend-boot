@@ -1,12 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Application Routes
  *
  * Main application routes that don't require authentication
  */
+
+declare(strict_types=1);
 
 return function (\Mezzio\Application $app): void {
 

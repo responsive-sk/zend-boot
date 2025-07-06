@@ -20,10 +20,10 @@ class UnifiedPathService implements PathServiceInterface
     private array $paths;
     private Filesystem $publicFs;
     private Filesystem $themesFs;
-    private Filesystem $uploadsFs;
 
     /**
      * @param array<string, mixed> $appConfig
+     * @param Filesystem $uploadsFs Unused parameter kept for interface compatibility
      */
     public function __construct(
         array $appConfig,
@@ -35,7 +35,8 @@ class UnifiedPathService implements PathServiceInterface
         $this->paths = is_array($pathsConfig) ? $pathsConfig : [];
         $this->publicFs = $publicFs;
         $this->themesFs = $themesFs;
-        $this->uploadsFs = $uploadsFs;
+        // Note: $uploadsFs parameter kept for interface compatibility but not stored
+        unset($uploadsFs); // Explicitly mark as unused to satisfy PHPStan
 
         // Ensure required directories exist
         $this->ensureDirectoriesExist();
@@ -119,7 +120,12 @@ class UnifiedPathService implements PathServiceInterface
     public function getRootPath(): string
     {
         $rootPath = $this->paths['root'] ?? getcwd();
-        return is_string($rootPath) ? $rootPath : getcwd();
+        if (is_string($rootPath)) {
+            return $rootPath;
+        }
+
+        $currentDir = getcwd();
+        return $currentDir !== false ? $currentDir : __DIR__;
     }
 
     /**

@@ -58,7 +58,6 @@ class ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f
             'Mezzio\\Router\\' => 14,
             'Mezzio\\LaminasView\\' => 19,
             'Mezzio\\Helper\\' => 14,
-            'Mezzio\\Csrf\\' => 12,
             'Mezzio\\Authorization\\Rbac\\' => 26,
             'Mezzio\\Authorization\\' => 21,
             'Mezzio\\Authentication\\Session\\' => 30,
@@ -74,14 +73,12 @@ class ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f
             'League\\Flysystem\\' => 17,
             'Laminas\\View\\' => 13,
             'Laminas\\Validator\\' => 18,
-            'Laminas\\Translator\\' => 19,
             'Laminas\\Stratigility\\' => 21,
             'Laminas\\Stdlib\\' => 15,
             'Laminas\\ServiceManager\\' => 23,
             'Laminas\\Permissions\\Rbac\\' => 25,
             'Laminas\\Json\\' => 13,
             'Laminas\\InputFilter\\' => 20,
-            'Laminas\\I18n\\' => 13,
             'Laminas\\Hydrator\\' => 17,
             'Laminas\\HttpHandlerRunner\\' => 26,
             'Laminas\\Form\\' => 13,
@@ -172,10 +169,6 @@ class ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f
         array (
             0 => __DIR__ . '/..' . '/mezzio/mezzio-helpers/src',
         ),
-        'Mezzio\\Csrf\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/mezzio/mezzio-csrf/src',
-        ),
         'Mezzio\\Authorization\\Rbac\\' => 
         array (
             0 => __DIR__ . '/..' . '/mezzio/mezzio-authorization-rbac/src',
@@ -224,10 +217,6 @@ class ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-validator/src',
         ),
-        'Laminas\\Translator\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laminas/laminas-translator/src',
-        ),
         'Laminas\\Stratigility\\' => 
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-stratigility/src',
@@ -251,10 +240,6 @@ class ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f
         'Laminas\\InputFilter\\' => 
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-inputfilter/src',
-        ),
-        'Laminas\\I18n\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laminas/laminas-i18n/src',
         ),
         'Laminas\\Hydrator\\' => 
         array (
