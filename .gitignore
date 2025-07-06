@@ -52,3 +52,4 @@ build/
 *.sha256
 DEPLOYMENT_INSTRUCTIONS.txt
 composer.lock.backup
+*.backup
