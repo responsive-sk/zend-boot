@@ -21,13 +21,13 @@ class SimpleAuthentication implements AuthenticationInterface
     {
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
-        if (!$session) {
+        if (!$session instanceof \Mezzio\Session\SessionInterface) {
             return null;
         }
 
         // Check if user is already authenticated in session
         $userData = $session->get('user');
-        if (is_array($userData) && isset($userData['identity'])) {
+        if (is_array($userData) && isset($userData['identity']) && is_string($userData['identity'])) {
             $user = $this->authService->findByCredential($userData['identity']);
             if ($user && $user->isActive()) {
                 return new AuthenticatedUser($user);
@@ -37,7 +37,12 @@ class SimpleAuthentication implements AuthenticationInterface
         // Try to authenticate from request data
         $parsedBody = $request->getParsedBody();
 
-        if (is_array($parsedBody) && isset($parsedBody['credential'], $parsedBody['password'])) {
+        if (
+            is_array($parsedBody) &&
+            isset($parsedBody['credential'], $parsedBody['password']) &&
+            is_string($parsedBody['credential']) &&
+            is_string($parsedBody['password'])
+        ) {
             $authenticatedUser = $this->authService->authenticate($parsedBody['credential'], $parsedBody['password']);
             return $authenticatedUser;
         }

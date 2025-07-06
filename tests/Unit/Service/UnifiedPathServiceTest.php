@@ -7,11 +7,13 @@ namespace AppTest\Unit\Service;
 use App\Service\UnifiedPathService;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Local\LocalFilesystemAdapter;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Unit test for UnifiedPathService
  */
+#[CoversClass(UnifiedPathService::class)]
 class UnifiedPathServiceTest extends TestCase
 {
     private UnifiedPathService $pathService;

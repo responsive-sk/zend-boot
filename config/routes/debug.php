@@ -1,12 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Debug Routes
  *
  * Development and debugging routes - should be disabled in production
  */
+
+declare(strict_types=1);
 
 return function (\Mezzio\Application $app): void {
 

@@ -73,19 +73,13 @@ try {
 }
 
 // Session functionality check
-try {
-    if (session_start()) {
-        $_SESSION['health_check'] = time();
-        $health['checks']['session'] = 'ok';
-        session_destroy();
-    } else {
-        $health['checks']['session'] = 'error';
-        $health['status'] = 'error';
-    }
-} catch (Exception $e) {
+if (session_start()) {
+    $_SESSION['health_check'] = time();
+    $health['checks']['session'] = 'ok';
+    session_destroy();
+} else {
     $health['checks']['session'] = 'error';
     $health['status'] = 'error';
-    $health['errors']['session'] = $e->getMessage();
 }
 
 // File system checks

@@ -22,7 +22,6 @@ Laminas\Form\ConfigProvider::class,
     \Mezzio\Authentication\Session\ConfigProvider::class,
     \Mezzio\Authorization\ConfigProvider::class,
     \Mezzio\Authorization\Rbac\ConfigProvider::class,
-    \Mezzio\Csrf\ConfigProvider::class,
 
     // User module (after Mezzio packages to override)
     \User\ConfigProvider::class,

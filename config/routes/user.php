@@ -1,12 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * User Module Routes
  *
  * All routes related to user authentication and management
  */
+
+declare(strict_types=1);
 
 return function (\Mezzio\Application $app): void {
 

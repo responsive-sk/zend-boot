@@ -1,0 +1,14 @@
+
+
+[1;37;40mCode Coverage Report:      [0m
+[1;37;40m  2025-07-06 16:18:34      [0m
+[1;37;40m                           [0m
+[1;37;40m Summary:                  [0m
+[37;41m  Classes:  0.00% (0/103)  [0m
+[37;41m  Methods:  4.01% (14/349) [0m
+[37;41m  Lines:    2.84% (61/2149)[0m
+
+App\Service\UnifiedPathService
+  [37;41mMethods:  44.00% (11/25)[0m   [30;43mLines:  63.33% ( 38/ 60)[0m
+App\Template\PhpRenderer
+  [37;41mMethods:  42.86% ( 3/ 7)[0m   [30;43mLines:  56.10% ( 23/ 41)[0m
