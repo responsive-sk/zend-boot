@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 /**
  * Master Database Initialization Script
- * 
+ *
  * HDM Boot Protocol Compliant - All System Databases
  * Initializes all three databases: user.db, mark.db, system.db
  */
@@ -73,20 +73,20 @@ if ($returnCode === 0) {
 echo str_repeat("=", 60) . "\n";
 if (empty($errors)) {
     echo "🎉 HDM Boot Protocol Database Initialization SUCCESSFUL!\n\n";
-    
+
     echo "📊 All databases initialized:\n";
     echo "   ✅ user.db   - User management system\n";
     echo "   ✅ mark.db   - Mark management system\n";
     echo "   ✅ system.db - Core system services\n\n";
-    
+
     echo "🔐 Default credentials:\n";
     echo "   👤 admin/admin123 (admin, user roles)\n";
     echo "   👤 user/user123 (user role)\n";
     echo "   👤 mark/mark123 (mark, user roles)\n\n";
-    
+
     echo "🎯 Your application is now HDM Boot Protocol compliant!\n";
     echo "🚀 Ready for production deployment.\n";
-    
+
     exit(0);
 } else {
     echo "❌ HDM Boot Protocol Database Initialization FAILED!\n\n";
@@ -95,6 +95,6 @@ if (empty($errors)) {
         echo "   - {$error}\n";
     }
     echo "\n🔧 Please check the error messages above and try again.\n";
-    
+
     exit(1);
 }

@@ -11,7 +11,7 @@
         <div class="container">
             <a class="navbar-brand" href="/">User Dashboard</a>
             <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="/user/logout">Logout</a>
+                <a class="nav-link" href="/user/logout">Odhlásiť</a>
             </div>
         </div>
     </nav>
@@ -21,7 +21,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="mb-0">Welcome, <?= $this->escapeHtml($username) ?>!</h4>
+                        <h4 class="mb-0">Vitajte, <?= $this->escapeHtml($username) ?>!</h4>
                     </div>
                     <div class="card-body">
                         <?php if ($flash_success): ?>
@@ -30,27 +30,27 @@
                             </div>
                         <?php endif; ?>
 
-                        <p>You are successfully logged in to your dashboard.</p>
+                        <p>Úspešne ste sa prihlásili do svojho dashboardu.</p>
 
-                        <h5>Your Details:</h5>
+                        <h5>Vaše Údaje:</h5>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <strong>Username:</strong> <?= $this->escapeHtml($username) ?>
+                                <strong>Používateľské meno:</strong> <?= $this->escapeHtml($username) ?>
                             </li>
                             <li class="list-group-item">
                                 <strong>Email:</strong> <?= $this->escapeHtml($userDetails['email'] ?? 'N/A') ?>
                             </li>
                             <li class="list-group-item">
-                                <strong>Roles:</strong>
+                                <strong>Role:</strong>
                                 <?php foreach ($roles as $role): ?>
                                     <span class="badge bg-secondary me-1"><?= $this->escapeHtml($role) ?></span>
                                 <?php endforeach; ?>
                             </li>
                             <li class="list-group-item">
-                                <strong>User ID:</strong> <?= $this->escapeHtml($userDetails['id'] ?? 'N/A') ?>
+                                <strong>ID Používateľa:</strong> <?= $this->escapeHtml($userDetails['id'] ?? 'N/A') ?>
                             </li>
                             <li class="list-group-item">
-                                <strong>Account Created:</strong> <?= $this->escapeHtml($userDetails['createdAt'] ?? 'N/A') ?>
+                                <strong>Účet Vytvorený:</strong> <?= $this->escapeHtml($userDetails['createdAt'] ?? 'N/A') ?>
                             </li>
                         </ul>
                     </div>
@@ -60,15 +60,15 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="mb-0">Quick Actions</h5>
+                        <h5 class="mb-0">Rýchle Akcie</h5>
                     </div>
                     <div class="card-body">
                         <div class="d-grid gap-2">
-                            <a href="/" class="btn btn-outline-primary">Home Page</a>
+                            <a href="/" class="btn btn-outline-primary">Domovská Stránka</a>
                             <?php if (in_array('admin', $roles)): ?>
                                 <a href="/user/admin" class="btn btn-outline-warning">Admin Panel</a>
                             <?php endif; ?>
-                            <a href="/user/logout" class="btn btn-outline-danger">Logout</a>
+                            <a href="/user/logout" class="btn btn-outline-danger">Odhlásiť</a>
                         </div>
                     </div>
                 </div>

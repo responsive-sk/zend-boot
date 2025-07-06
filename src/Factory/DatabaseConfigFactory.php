@@ -32,7 +32,7 @@ class DatabaseConfigFactory
 
     /**
      * Get secure database configuration
-     * @return array<string, array<string, string>>
+     * @return array<string, array<string, array<string, string>>>
      */
     public function getConfig(): array
     {

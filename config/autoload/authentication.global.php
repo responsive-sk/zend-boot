@@ -13,7 +13,7 @@ return [
             UserRepositoryInterface::class => \User\Service\MezzioUserRepository::class,
         ],
         'factories' => [
-            \User\Service\MezzioUserRepository::class => function($container) {
+            \User\Service\MezzioUserRepository::class => function ($container) {
                 return new \User\Service\MezzioUserRepository(
                     $container->get(\User\Service\AuthenticationService::class)
                 );

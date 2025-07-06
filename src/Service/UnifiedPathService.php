@@ -31,7 +31,8 @@ class UnifiedPathService implements PathServiceInterface
         Filesystem $themesFs,
         Filesystem $uploadsFs
     ) {
-        $this->paths = $appConfig['paths'] ?? [];
+        $pathsConfig = $appConfig['paths'] ?? [];
+        $this->paths = is_array($pathsConfig) ? $pathsConfig : [];
         $this->publicFs = $publicFs;
         $this->themesFs = $themesFs;
         $this->uploadsFs = $uploadsFs;
@@ -117,7 +118,8 @@ class UnifiedPathService implements PathServiceInterface
      */
     public function getRootPath(): string
     {
-        return $this->paths['root'] ?? getcwd();
+        $rootPath = $this->paths['root'] ?? getcwd();
+        return is_string($rootPath) ? $rootPath : getcwd();
     }
 
     /**

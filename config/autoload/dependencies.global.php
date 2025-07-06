@@ -11,7 +11,7 @@ return [
         'factories' => [
             // HDM Boot Protocol - Unified Path Service (PILLAR III)
             \App\Service\PathServiceInterface::class => \App\Service\UnifiedPathServiceFactory::class,
-            
+
             // Legacy aliases for backward compatibility - use factory
 
             \Mezzio\Template\TemplateRendererInterface::class => \Mezzio\LaminasView\LaminasViewRendererFactory::class,

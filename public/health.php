@@ -49,10 +49,15 @@ try {
         
         // Test query
         $stmt = $pdo->query('SELECT 1');
-        $result = $stmt->fetchColumn();
-        
-        if ($result === 1) {
-            $health['checks']['database'] = 'ok';
+        if ($stmt !== false) {
+            $result = $stmt->fetchColumn();
+
+            if ($result === 1) {
+                $health['checks']['database'] = 'ok';
+            } else {
+                $health['checks']['database'] = 'error';
+                $health['status'] = 'error';
+            }
         } else {
             $health['checks']['database'] = 'error';
             $health['status'] = 'error';
@@ -61,7 +66,7 @@ try {
         $health['checks']['database'] = 'not_configured';
         $health['status'] = 'warning';
     }
-} catch (Exception $e) {
+} catch (PDOException $e) {
     $health['checks']['database'] = 'error';
     $health['status'] = 'error';
     $health['errors']['database'] = $e->getMessage();

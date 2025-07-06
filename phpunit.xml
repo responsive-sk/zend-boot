@@ -11,14 +11,42 @@
          failOnRisky="true"
          failOnWarning="true">
     <testsuites>
-        <testsuite name="default">
-            <directory>tests</directory>
+        <testsuite name="Unit">
+            <directory>tests/Unit</directory>
+        </testsuite>
+        <testsuite name="Integration">
+            <directory>tests/Integration</directory>
+        </testsuite>
+        <testsuite name="Functional">
+            <directory>tests/Functional</directory>
         </testsuite>
     </testsuites>
 
     <source restrictDeprecations="true" restrictNotices="true" restrictWarnings="true">
         <include>
             <directory>src</directory>
+            <directory>modules</directory>
         </include>
+        <exclude>
+            <directory>modules/*/templates</directory>
+            <file>modules/*/src/ConfigProvider.php</file>
+        </exclude>
     </source>
+
+    <coverage>
+        <report>
+            <html outputDirectory="coverage-html"/>
+            <text outputFile="coverage.txt"/>
+            <clover outputFile="coverage.xml"/>
+        </report>
+    </coverage>
+
+    <logging>
+        <junit outputFile="tests/_output/report.xml"/>
+    </logging>
+
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <ini name="memory_limit" value="1G"/>
+    </php>
 </phpunit>

@@ -1,6 +1,11 @@
-# HDM Boot Protocol - Crontab Configuration
+# ⏰ HDM Boot Protocol - Crontab Configuration
 
-## Pravidelné maintenance scripty pre production
+Konfigurácia pravidelných maintenance skriptov pre production prostredie.
+
+**Status:** ✅ Production Ready v2.0.1
+**Posledná aktualizácia:** 2025-07-06
+
+## 📋 Pravidelné Maintenance Scripty
 
 ### Odporúčané cron jobs:
 
@@ -131,7 +136,7 @@ php bin/maintenance-db.php
 1. Overte write permissions na cache/logs directories
 2. Skontrolujte, či súbory nie sú locked
 
-## Production deployment checklist:
+## 📋 Production Deployment Checklist
 
 - [ ] Nastavené cron jobs
 - [ ] Logrotate konfigurácia
@@ -140,3 +145,24 @@ php bin/maintenance-db.php
 - [ ] Backup verification
 - [ ] Disk space monitoring
 - [ ] Error alerting
+
+---
+
+## 📚 Súvisiace Dokumenty
+
+### 🚀 Production a Deployment
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Production deployment guide
+- **[MAINTENANCE.md](MAINTENANCE.md)** - Údržba a monitoring scripts
+- **[APACHE_GUIDE.md](APACHE_GUIDE.md)** - Apache konfigurácia
+
+### 🔧 Konfigurácia a Support
+- **[CONFIGURATION.md](CONFIGURATION.md)** - Konfiguračné možnosti
+- **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** - Riešenie cron problémov
+- **[SECURITY_GUIDE.md](SECURITY_GUIDE.md)** - Security pre cron jobs
+
+### 📖 Základné Návody
+- **[APP_PROTOCOL.md](APP_PROTOCOL.md)** - HDM Boot Protocol
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Systémová architektúra
+- **[QUICK_START.md](QUICK_START.md)** - Rýchly štart
+
+**Späť na hlavnú:** [README.md](README.md)

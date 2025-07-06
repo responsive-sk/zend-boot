@@ -1,42 +1,38 @@
-# Mezzio User Management Application
+# 🚀 Mezzio Minimal - Production Ready Application
 
-Kompletná Mezzio aplikácia s user managementom, autentifikáciou a modernou bezpečnosťou.
+Moderná Mezzio aplikácia s pokročilým theme systémom, user managementom a production optimalizáciami.
 
-## 🚀 Funkcie
+## ✨ Kľúčové funkcie
 
-- ✅ **User Authentication** - Session-based prihlásenie s Mezzio PhpSession
-- ✅ **Role-based Authorization** - RBAC systém s admin/user rolami
-- ✅ **SQLite Database** - Oddelené databázy pre users a application data
-- ✅ **CSRF Protection** - Kompletná bezpečnosť formulárov
-- ✅ **Path Traversal Protection** - Bezpečné file operácie s Flysystem
-- ✅ **Template System** - Jednoduchý PHP template renderer bez cache
-- ✅ **Migration System** - Automatická inicializácia databáz
-- ✅ **Bootstrap 5** - Responzívny UI framework
-- ✅ **Security Best Practices** - Password hashing, session security, XSS protection
+- 🎨 **Dual Theme System** - Bootstrap 5.3 + TailwindCSS/Alpine.js
+- 👤 **User Management** - Kompletný user modul s autentifikáciou
+- 🔒 **Enterprise Security** - CSRF, Path traversal, CSP protection
+- ⚡ **Production Build** - 86% redukcia veľkosti (37MB → 5.8MB)
+- 📱 **SEO & Accessibility** - WCAG compliant, optimalizované pre vyhľadávače
+- 🛡️ **Apache Ready** - Kompletná .htaccess konfigurácia
 
-## 📋 Požiadavky
-
-- PHP 8.3+ (testované s PHP 8.4)
-- Composer
-
-## 🛠️ Inštalácia
+## 🚀 Quick Start
 
 ```bash
-# Klonuj repository
-git clone <repository-url>
-cd mezzio-minimal
-
-# Nainštaluj dependencies
+# 1. Inštalácia
 composer install
 
-# Inicializuj databázy a vytvor default users
+# 2. Inicializácia databáz
 php bin/migrate.php
 
-# Spusti development server
-php -S localhost:8080 -t public/
+# 3. Spustenie development servera
+composer serve                    # http://localhost:8080
+
+# 4. Production build
+composer build:production:package # → build/production/
 ```
 
-Aplikácia bude dostupná na `http://localhost:8080`
+## 🎯 Demo stránky
+
+- **`/`** - Domovská stránka s navigáciou
+- **`/bootstrap-demo`** - Bootstrap 5.3 theme showcase
+- **`/main-demo`** - TailwindCSS + Alpine.js demo
+- **`/user/login`** - User authentication systém
 
 ## 👤 Default Users
 
@@ -46,113 +42,77 @@ Aplikácia bude dostupná na `http://localhost:8080`
 | `user` | `user123` | user | Štandardný používateľ |
 | `mark` | `mark123` | mark, user | Mark management prístup |
 
-## 🗺️ Dostupné Routes
-
-### Verejné Routes
-- `/` - Domovská stránka s Bootstrap demo
-- `/bootstrap-demo` - Bootstrap komponenty showcase
-- `/main-demo` - Hlavná aplikácia demo
-- `/user/login` - Prihlásenie používateľa
-- `/user/register` - Registrácia používateľa
-- `/debug` - Debug informácie (development)
-
-### Chránené Routes
-- `/user/dashboard` - User dashboard (vyžaduje prihlásenie)
-- `/user/admin` - Admin panel (vyžaduje admin rolu)
-- `/user/logout` - Odhlásenie
-
-## 🧪 Development
-
-### Dostupné Composer scripty
-
-```bash
-# Spusti všetky kontroly
-composer check
-
-# Testovanie
-composer test
-composer test-coverage
-
-# Coding standards
-composer cs-check
-composer cs-fix
-
-# Statická analýza
-composer analyze
-
-# Refaktorovanie
-composer rector
-composer rector-fix
-
-# Development server
-composer serve
-```
-
-### Štruktúra projektu
-
-```
-├── public/              # Web root
-│   ├── index.php       # Application entry point
-│   └── assets/         # CSS, JS, images
-├── src/                # Core application
-│   ├── Handler/        # Request handlers
-│   ├── Helper/         # View helpers
-│   ├── Service/        # Business logic
-│   ├── Template/       # Template renderer
-│   └── Database/       # Database services
-├── modules/User/       # User management module
-│   ├── src/
-│   │   ├── Entity/     # User entity
-│   │   ├── Service/    # Authentication services
-│   │   ├── Handler/    # Login, dashboard handlers
-│   │   ├── Middleware/ # Auth & security middleware
-│   │   └── Form/       # Form validation
-│   ├── templates/      # User module templates
-│   └── test/           # Unit tests
-├── config/             # Configuration
-│   └── autoload/       # Auto-loaded configs
-├── data/               # SQLite databases
-├── docs/               # Documentation
-└── bin/                # CLI scripts
-```
-
 ## 📚 Dokumentácia
 
-- **[User Module Guide](docs/USER_MODULE.md)** - Kompletný návod na User modul
-- **[API Reference](docs/API_REFERENCE.md)** - Detailná API dokumentácia
-- **[Deployment Guide](docs/DEPLOYMENT.md)** - Production deployment návod
+### 📖 Základné
+- **[QUICK_START.md](QUICK_START.md)** - Detailný návod na spustenie
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Architektúra a theme systém
+- **[CHANGELOG.md](CHANGELOG.md)** - História zmien a verzie
+
+### 🏗️ Development
+- **[USER_MODULE.md](USER_MODULE.md)** - User modul a autentifikácia
+- **[API_REFERENCE.md](API_REFERENCE.md)** - API dokumentácia
+- **[CONFIGURATION.md](CONFIGURATION.md)** - Konfiguračné možnosti
+
+### 🚀 Production
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Production deployment
+- **[SECURITY_GUIDE.md](SECURITY_GUIDE.md)** - Bezpečnostný návod
+- **[APACHE_GUIDE.md](APACHE_GUIDE.md)** - Apache konfigurácia
+
+### 🔧 Maintenance
+- **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** - Riešenie problémov
+- **[MAINTENANCE.md](MAINTENANCE.md)** - Údržba a monitoring
+- **[TODO.md](TODO.md)** - Plánované vylepšenia
+
+### 📚 Reference
+- **[ACCESSIBILITY.md](ACCESSIBILITY.md)** - SEO & accessibility guide
+- **[APP_PROTOCOL.md](APP_PROTOCOL.md)** - HDM Boot Protocol
+- **[CRONTAB.md](CRONTAB.md)** - Cron jobs konfigurácia
+- **[TEMPLATE.md](TEMPLATE.md)** - Template pre nové dokumenty
+
+## 🏗️ Architektúra
+
+```
+mezzio-minimal/
+├── public/                      # Web root
+│   ├── themes/                 # Built assets (versioned)
+│   └── .htaccess              # Apache security config
+├── src/                        # Core application
+│   ├── Handler/               # Request handlers
+│   └── Helper/                # AssetHelper pre dynamic loading
+├── modules/User/              # User management module
+│   ├── src/                   # User services & entities
+│   └── templates/             # User templates
+├── themes/                    # Theme source files
+│   ├── bootstrap/             # Bootstrap 5.3 + Vite
+│   └── main/                  # TailwindCSS + Alpine.js
+├── build/                     # Production builds
+│   ├── production/            # Ready-to-deploy (5.8MB)
+│   └── releases/              # Versioned archives
+└── docs/                      # Dokumentácia
+```
+
+## ⚡ Performance
+
+- **86% redukcia veľkosti** - 37MB → 5.8MB production build
+- **Versioned assets** - Hash pre long-term cache strategy
+- **Gzip compression** - 70-80% redukcia asset veľkosti
+- **Optimized vendor** - Odstránené docs, tests, examples
 
 ## 🔒 Bezpečnosť
 
-- **Password Hashing** - PHP password_hash() s bcrypt
-- **Session Security** - HTTPOnly cookies, session regeneration
-- **CSRF Protection** - Tokeny pre všetky formuláre
+- **Apache .htaccess** - Security headers, directory protection
+- **Content Security Policy** - Alpine.js a Bootstrap compatible
 - **Path Traversal Protection** - Centralizovaná validácia ciest
-- **SQL Injection Protection** - Prepared statements
-- **XSS Protection** - Template escaping
-
-## 🧪 Testovanie
-
-```bash
-# Spusti všetky testy
-composer test
-
-# Test s coverage
-composer test-coverage
-
-# Špecifické testy
-./vendor/bin/phpunit modules/User/test/
-```
-
-## 📝 Poznámky
-
-- Aplikácia používa **PSR-7** HTTP messages
-- **PSR-15** middleware pattern
-- **PSR-11** dependency injection
-- **Mezzio authentication** podľa oficiálnej dokumentácie
-- Kód dodržiava **PSR-12** coding štandardy
-- **SQLite** pre development, **PostgreSQL/MySQL** pre production
+- **CSRF Protection** - Tokeny pre všetky formuláre
+- **Session Security** - HTTPOnly cookies, secure settings
 
 ## 📄 Licencia
 
 MIT License
+
+---
+
+**Status:** ✅ Production Ready v2.0.1
+**Posledná aktualizácia:** 2025-07-06
+**Build systém:** Vite + Composer optimalizácie

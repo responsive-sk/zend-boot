@@ -43,7 +43,7 @@ class CsrfMiddleware implements MiddlewareInterface
         return bin2hex(random_bytes(32));
     }
 
-    private function storeToken($session, string $token): void
+    private function storeToken(\Mezzio\Session\SessionInterface $session, string $token): void
     {
         $tokens = $session->get('csrf_tokens', []);
         $tokens[] = $token;
@@ -74,7 +74,7 @@ class CsrfMiddleware implements MiddlewareInterface
         return null;
     }
 
-    private function validateToken($session, ?string $submittedToken): bool
+    private function validateToken(\Mezzio\Session\SessionInterface $session, ?string $submittedToken): bool
     {
         if (!$submittedToken) {
             return false;
@@ -99,6 +99,7 @@ class CsrfMiddleware implements MiddlewareInterface
      */
     public static function getToken(ServerRequestInterface $request): string
     {
-        return $request->getAttribute('csrf_token', '');
+        $token = $request->getAttribute('csrf_token', '');
+        return is_string($token) ? $token : '';
     }
 }

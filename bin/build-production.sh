@@ -9,9 +9,26 @@
 set -e
 
 # Configuration
+BUILD_TARGET="${1:-production}"  # production, shared-hosting, shared-hosting-minimal
 BUILD_DIR="${BUILD_DIR:-./build}"
 PACKAGE_NAME="${PACKAGE_NAME:-mezzio-hdm-boot-protocol}"
 VERSION="${VERSION:-$(date +%Y%m%d_%H%M%S)}"
+
+# Target-specific configurations
+case "$BUILD_TARGET" in
+    "shared-hosting")
+        BUILD_DIR="${BUILD_DIR}/shared-hosting"
+        PACKAGE_NAME="${PACKAGE_NAME}-shared-hosting"
+        ;;
+    "shared-hosting-minimal")
+        BUILD_DIR="${BUILD_DIR}/shared-hosting-minimal"
+        PACKAGE_NAME="${PACKAGE_NAME}-shared-hosting-minimal"
+        ;;
+    "production"|*)
+        BUILD_DIR="${BUILD_DIR}/production"
+        PACKAGE_NAME="${PACKAGE_NAME}-production"
+        ;;
+esac
 EXCLUDE_PATTERNS=(
     ".git"
     ".gitignore"

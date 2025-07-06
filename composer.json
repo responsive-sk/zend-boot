@@ -61,12 +61,20 @@
         "build:themes": "cd themes/bootstrap && pnpm update && pnpm run build && cd ../main && pnpm update && pnpm run build",
         "build:themes:prod": "cd themes/bootstrap && pnpm run build:prod && cd ../main && pnpm run build:prod",
         "build:dev": "./bin/build-dev.sh",
-        "build:production": "./bin/build-production.sh",
-        "build:production:package": "./bin/build-to-directory.sh production",
+        "build:production": "./bin/build-production.sh production",
+        "build:shared-hosting": "./bin/build-production.sh shared-hosting",
+        "build:shared-hosting-minimal": "./bin/build-production.sh shared-hosting-minimal",
         "build:staging": "./bin/build-to-directory.sh staging",
         "build:release": "./bin/build-to-directory.sh release archive",
+        "deploy": "./bin/deploy.sh",
+        "db:init": "./bin/init-all-db.php",
+        "db:backup": "./bin/backup-databases.php",
+        "db:maintenance": "./bin/maintenance-db.php",
+        "system:health": "./bin/health-check.php",
+        "system:monitor": "./bin/monitor.sh",
+        "cache:clear": "./bin/cleanup-cache.php",
         "clean:themes": "rm -rf public/themes/*/assets/ public/themes/*/.vite/",
-        "clean:build": "rm -rf build/production build/staging"
+        "clean:build": "rm -rf build/production build/staging build/shared-hosting*"
     },
     "config": {
         "sort-packages": true,

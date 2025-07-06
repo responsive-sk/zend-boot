@@ -300,8 +300,29 @@ $container->registerCoreServices();
 
 ---
 
-**HDM Boot Protocol v1.0**  
-**Effective: 2025-06-24**  
-**Next Review: 2025-12-24**  
+## 📚 Súvisiace Dokumenty
+
+### 🏗️ Implementácia a Architecture
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Implementácia HDM Boot Protocol
+- **[USER_MODULE.md](USER_MODULE.md)** - User modul podľa HDM štandardov
+- **[API_REFERENCE.md](API_REFERENCE.md)** - API implementácia
+
+### 🚀 Production a Deployment
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Production deployment podľa HDM
+- **[SECURITY_GUIDE.md](SECURITY_GUIDE.md)** - HDM security štandardy
+- **[CRONTAB.md](CRONTAB.md)** - HDM maintenance protokol
+
+### 🔧 Konfigurácia a Support
+- **[CONFIGURATION.md](CONFIGURATION.md)** - HDM konfiguračné štandardy
+- **[MAINTENANCE.md](MAINTENANCE.md)** - HDM monitoring protokol
+- **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** - HDM troubleshooting
+
+**Späť na hlavnú:** [README.md](README.md)
+
+---
+
+**HDM Boot Protocol v1.0**
+**Effective: 2025-06-24**
+**Next Review: 2025-12-24**
 
 **This protocol is ACTIVE and MANDATORY for all HDM Boot implementations.**

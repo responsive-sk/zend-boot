@@ -27,7 +27,7 @@ class SimpleAuthentication implements AuthenticationInterface
 
         // Check if user is already authenticated in session
         $userData = $session->get('user');
-        if ($userData && isset($userData['identity'])) {
+        if (is_array($userData) && isset($userData['identity'])) {
             $user = $this->authService->findByCredential($userData['identity']);
             if ($user && $user->isActive()) {
                 return new AuthenticatedUser($user);
