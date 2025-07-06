@@ -6,7 +6,7 @@ return [
     'dependencies' => [
         'factories' => [
             // Register SessionPersistenceInterface manually (without Session Ext)
-            \Mezzio\Session\SessionPersistenceInterface::class => function($container) {
+            \Mezzio\Session\SessionPersistenceInterface::class => function ($container) {
                 return new \App\Session\SimpleSessionPersistence();
             },
         ],

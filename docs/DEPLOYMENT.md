@@ -1,10 +1,12 @@
-# Deployment Guide
+# 🚀 Deployment Guide
 
-## Production Deployment
+Kompletný návod na production deployment Mezzio Minimal aplikácie.
 
-### 1. Environment Setup
+## 🏭 Production Deployment
 
-#### Server Requirements
+### 1. Príprava Prostredia
+
+#### Požiadavky na Server
 
 - **PHP 8.1+** s extensions:
   - `pdo_sqlite` (development)

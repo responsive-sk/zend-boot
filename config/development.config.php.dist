@@ -1,0 +1,125 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * HDM Boot Protocol - Development Configuration Template
+ * 
+ * This file provides development-specific configuration overrides.
+ * Copy this file to development.config.php and customize as needed.
+ */
+
+use Laminas\ConfigAggregator\ConfigAggregator;
+
+return [
+    // Enable development mode
+    'debug' => true,
+    'config_cache_enabled' => false,
+    
+    // Development-specific dependencies
+    'dependencies' => [
+        'factories' => [
+            // Add development-specific services here
+        ],
+    ],
+    
+    // Development error handling
+    'whoops' => [
+        'json_exceptions' => [
+            'display' => true,
+            'show_trace' => true,
+            'ajax_only' => true,
+        ],
+    ],
+    
+    // Development logging
+    'logging' => [
+        'level' => 'debug',
+        'handlers' => [
+            'default' => [
+                'type' => 'stream',
+                'options' => [
+                    'stream' => 'data/logs/development.log',
+                    'level' => 'debug',
+                ],
+            ],
+        ],
+    ],
+    
+    // Development database settings
+    'database' => [
+        'user' => [
+            'driver' => 'sqlite',
+            'database' => 'data/user.db',
+            'options' => [
+                'enable_foreign_keys' => true,
+                'journal_mode' => 'WAL',
+                'synchronous' => 'NORMAL',
+                'cache_size' => 2000,
+                'temp_store' => 'MEMORY',
+            ],
+        ],
+        'mark' => [
+            'driver' => 'sqlite',
+            'database' => 'data/mark.db',
+            'options' => [
+                'enable_foreign_keys' => true,
+                'journal_mode' => 'WAL',
+                'synchronous' => 'NORMAL',
+                'cache_size' => 2000,
+                'temp_store' => 'MEMORY',
+            ],
+        ],
+        'system' => [
+            'driver' => 'sqlite',
+            'database' => 'data/system.db',
+            'options' => [
+                'enable_foreign_keys' => true,
+                'journal_mode' => 'WAL',
+                'synchronous' => 'NORMAL',
+                'cache_size' => 2000,
+                'temp_store' => 'MEMORY',
+            ],
+        ],
+    ],
+    
+    // Development session settings
+    'session' => [
+        'cookie_lifetime' => 7200, // 2 hours for development
+        'gc_maxlifetime' => 7200,
+        'cookie_secure' => false,   // Allow HTTP in development
+        'cookie_httponly' => true,
+        'cookie_samesite' => 'Lax',
+        'name' => 'HDMDEV_SESSION',
+    ],
+    
+    // Development template settings
+    'templates' => [
+        'cache_enabled' => false,   // Disable template caching in development
+        'debug' => true,
+    ],
+    
+    // Development-specific paths
+    'hdm_paths' => [
+        'cache_enabled' => false,   // Disable path caching in development
+        'debug_mode' => true,
+    ],
+    
+    // Development CSRF settings
+    'csrf' => [
+        'timeout' => 3600,          // 1 hour for development
+    ],
+    
+    // Development authentication settings
+    'authentication' => [
+        'session_timeout' => 7200,  // 2 hours for development
+        'remember_me_timeout' => 86400, // 1 day for development
+    ],
+    
+    // Development asset settings
+    'assets' => [
+        'cache_enabled' => false,
+        'minify_enabled' => false,
+        'version_strategy' => 'timestamp',
+    ],
+];

@@ -98,7 +98,7 @@ class UserRepository
         $users = [];
 
         while ($data = $stmt->fetch()) {
-            if ($data !== false) {
+            if (is_array($data)) {
                 $user = $this->createUserFromData($data);
                 if ($user->hasRole($role)) {
                     $users[] = $user;
@@ -124,7 +124,7 @@ class UserRepository
 
         $users = [];
         while ($data = $stmt->fetch()) {
-            if ($data !== false) {
+            if (is_array($data)) {
                 $users[] = $this->createUserFromData($data);
             }
         }

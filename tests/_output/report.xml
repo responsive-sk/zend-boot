@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="/home/ian/Desktop/06/mezzio-minimal/phpunit.xml" tests="11" assertions="23" errors="0" failures="0" skipped="0" time="0.012586">
+    <testsuite name="Unit" tests="11" assertions="23" errors="0" failures="0" skipped="0" time="0.012586">
+      <testsuite name="AppTest\Unit\Service\UnifiedPathServiceTest" file="/home/ian/Desktop/06/mezzio-minimal/tests/Unit/Service/UnifiedPathServiceTest.php" tests="7" assertions="12" errors="0" failures="0" skipped="0" time="0.010221">
+        <testcase name="testGetRootPath" file="/home/ian/Desktop/06/mezzio-minimal/tests/Unit/Service/UnifiedPathServiceTest.php" line="41" class="AppTest\Unit\Service\UnifiedPathServiceTest" classname="AppTest.Unit.Service.UnifiedPathServiceTest" assertions="2" time="0.006741"/>
+        <testcase name="testStorageMethod" file="/home/ian/Desktop/06/mezzio-minimal/tests/Unit/Service/UnifiedPathServiceTest.php" line="48" class="AppTest\Unit\Service\UnifiedPathServiceTest" classname="AppTest.Unit.Service.UnifiedPathServiceTest" assertions="2" time="0.000746"/>
+        <testcase name="testCacheMethod" file="/home/ian/Desktop/06/mezzio-minimal/tests/Unit/Service/UnifiedPathServiceTest.php" line="62" class="AppTest\Unit\Service\UnifiedPathServiceTest" classname="AppTest.Unit.Service.UnifiedPathServiceTest" assertions="2" time="0.000562"/>
+        <testcase name="testTemplatesMethod" file="/home/ian/Desktop/06/mezzio-minimal/tests/Unit/Service/UnifiedPathServiceTest.php" line="69" class="AppTest\Unit\Service\UnifiedPathServiceTest" classname="AppTest.Unit.Service.UnifiedPathServiceTest" assertions="1" time="0.000522"/>
+        <testcase name="testModuleTemplatesMethod" file="/home/ian/Desktop/06/mezzio-minimal/tests/Unit/Service/UnifiedPathServiceTest.php" line="75" class="AppTest\Unit\Service\UnifiedPathServiceTest" classname="AppTest.Unit.Service.UnifiedPathServiceTest" assertions="2" time="0.000561"/>
+        <testcase name="testAppTemplatesMethod" file="/home/ian/Desktop/06/mezzio-minimal/tests/Unit/Service/UnifiedPathServiceTest.php" line="82" class="AppTest\Unit\Service\UnifiedPathServiceTest" classname="AppTest.Unit.Service.UnifiedPathServiceTest" assertions="1" time="0.000510"/>
+        <testcase name="testLogsMethod" file="/home/ian/Desktop/06/mezzio-minimal/tests/Unit/Service/UnifiedPathServiceTest.php" line="55" class="AppTest\Unit\Service\UnifiedPathServiceTest" classname="AppTest.Unit.Service.UnifiedPathServiceTest" assertions="2" time="0.000580"/>
+      </testsuite>
+      <testsuite name="AppTest\Unit\Template\PhpRendererTest" file="/home/ian/Desktop/06/mezzio-minimal/tests/Unit/Template/PhpRendererTest.php" tests="4" assertions="11" errors="0" failures="0" skipped="0" time="0.002365">
+        <testcase name="testGetPathsReturnsTemplatePathArray" file="/home/ian/Desktop/06/mezzio-minimal/tests/Unit/Template/PhpRendererTest.php" line="33" class="AppTest\Unit\Template\PhpRendererTest" classname="AppTest.Unit.Template.PhpRendererTest" assertions="5" time="0.000830"/>
+        <testcase name="testAddDefaultParam" file="/home/ian/Desktop/06/mezzio-minimal/tests/Unit/Template/PhpRendererTest.php" line="49" class="AppTest\Unit\Template\PhpRendererTest" classname="AppTest.Unit.Template.PhpRendererTest" assertions="1" time="0.000286"/>
+        <testcase name="testAddPath" file="/home/ian/Desktop/06/mezzio-minimal/tests/Unit/Template/PhpRendererTest.php" line="23" class="AppTest\Unit\Template\PhpRendererTest" classname="AppTest.Unit.Template.PhpRendererTest" assertions="3" time="0.000648"/>
+        <testcase name="testRenderThrowsExceptionForMissingTemplate" file="/home/ian/Desktop/06/mezzio-minimal/tests/Unit/Template/PhpRendererTest.php" line="57" class="AppTest\Unit\Template\PhpRendererTest" classname="AppTest.Unit.Template.PhpRendererTest" assertions="2" time="0.000602"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

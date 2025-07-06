@@ -1,18 +1,22 @@
-# Mezzio User Module Documentation
+# 👤 User Module Documentation
 
-## Overview
+## Prehľad
 
-Kompletný User modul pre Mezzio aplikácie s autentifikáciou, autorizáciou a session managementom. Implementovaný podľa oficiálnej Mezzio dokumentácie s modernou architektúrou a bezpečnostnými best practices.
+Kompletný User modul pre Mezzio Minimal aplikáciu s autentifikáciou, autorizáciou a session managementom. Implementovaný s modernou architektúrou a bezpečnostnými best practices.
 
-## Features
+**Status:** ✅ Production Ready v2.0.1
+**Posledná aktualizácia:** 2025-07-06
+
+## ✨ Funkcie
 
 - ✅ **Session-based Authentication** - Oficiálny Mezzio PhpSession adapter
-- ✅ **Role-based Authorization** - RBAC systém s admin/user rolami
+- ✅ **Role-based Authorization** - RBAC systém s admin/user/mark rolami
 - ✅ **SQLite Database** - Oddelené databázy (user.db, mark.db)
 - ✅ **CSRF Protection** - Bezpečnosť formulárov
 - ✅ **Path Traversal Protection** - Centralizovaná validácia ciest
-- ✅ **Template System** - Jednoduchý PHP template renderer
+- ✅ **Template System** - PHP template renderer s escaping
 - ✅ **Migration System** - Automatická inicializácia databáz
+- ✅ **Production Ready** - Optimalizované pre production deployment
 
 ## Architecture
 

@@ -32,7 +32,7 @@ class TemplateConfigFactory
 
     /**
      * Get secure template configuration
-     * @return array<string, array<string, array<string>>>
+     * @return array<string, array<string, array<string, array<int, string>>>>
      */
     public function getConfig(): array
     {

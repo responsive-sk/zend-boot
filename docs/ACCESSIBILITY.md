@@ -1,14 +1,16 @@
-# Accessibility & SEO Best Practices
+# ♿ Accessibility & SEO Guide
 
-## Implemented Accessibility Features
+Kompletný návod na accessibility a SEO optimalizácie v Mezzio Minimal aplikácii.
 
-### 1. Semantic HTML Structure
+## ✅ Implementované Accessibility Funkcie
+
+### 1. Sémantická HTML Štruktúra
 - ✅ Proper heading hierarchy (h1 → h2 → h3 → h4)
 - ✅ `lang` attribute on `<html>` element
 - ✅ Navigation with `role="navigation"` and `aria-label`
 - ✅ Descriptive `aria-label` attributes on links
 
-### 2. SEO Optimization
+### 2. SEO Optimalizácia
 - ✅ Meta descriptions on all pages
 - ✅ Proper page titles with context
 - ✅ Keywords meta tags
@@ -16,7 +18,7 @@
 - ✅ Valid robots.txt file
 - ✅ XML sitemap
 
-### 3. Color Contrast
+### 3. Farebný Kontrast
 - ✅ Improved color contrast ratios
 - ✅ Dark text on light backgrounds
 - ✅ Sufficient contrast for links and buttons
@@ -91,3 +93,24 @@ h1 - Page Title
 - [ ] JSON-LD structured data
 - [ ] Canonical URLs
 - [ ] Hreflang attributes (for multi-language)
+
+---
+
+## 📚 Súvisiace Dokumenty
+
+### 🏗️ Development a Architecture
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Theme systém a SEO architektúra
+- **[USER_MODULE.md](USER_MODULE.md)** - User accessibility features
+- **[API_REFERENCE.md](API_REFERENCE.md)** - Accessibility API
+
+### 🚀 Production a Deployment
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** - SEO production setup
+- **[APACHE_GUIDE.md](APACHE_GUIDE.md)** - SEO headers konfigurácia
+- **[SECURITY_GUIDE.md](SECURITY_GUIDE.md)** - Security vs accessibility balance
+
+### 🔧 Konfigurácia a Support
+- **[CONFIGURATION.md](CONFIGURATION.md)** - SEO konfiguračné možnosti
+- **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** - SEO a accessibility problémy
+- **[MAINTENANCE.md](MAINTENANCE.md)** - SEO monitoring
+
+**Späť na hlavnú:** [README.md](README.md)

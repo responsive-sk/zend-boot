@@ -30,7 +30,7 @@ class RequireRoleMiddleware implements MiddlewareInterface
 
         // Check if user has any of the required roles
         foreach ($this->requiredRoles as $role) {
-            if ($this->authorization->isGranted($role, $user)) {
+            if ($this->authorization->isGranted($role, $request)) {
                 return $handler->handle($request);
             }
         }

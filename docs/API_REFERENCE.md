@@ -1,10 +1,12 @@
-# User Module API Reference
+# 📚 API Reference - User Module
 
-## Classes
+Kompletná API dokumentácia pre User modul a core komponenty.
+
+## 🏗️ Classes
 
 ### User\Entity\User
 
-Hlavná User entita s kompletnou funkcionalitou.
+Hlavná User entita s kompletnou funkcionalitou pre správu používateľov.
 
 #### Constructor
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Template;
 
 use Mezzio\Template\TemplateRendererInterface;
+use Mezzio\Template\TemplatePath;
 
 class PhpRenderer implements TemplateRendererInterface
 {
@@ -65,11 +66,17 @@ class PhpRenderer implements TemplateRendererInterface
     }
 
     /**
-     * @return array<string, array<string>>
+     * @return TemplatePath[]
      */
     public function getPaths(): array
     {
-        return $this->paths;
+        $templatePaths = [];
+        foreach ($this->paths as $namespace => $paths) {
+            foreach ($paths as $path) {
+                $templatePaths[] = new TemplatePath($path, $namespace === '' ? null : $namespace);
+            }
+        }
+        return $templatePaths;
     }
 
     /**
