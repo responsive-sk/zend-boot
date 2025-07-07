@@ -73,15 +73,19 @@ return [
 ];
 ```
 
-#### Environment Variables
+#### Database Configuration
 
-```bash
-# .env file
-DB_HOST=localhost
-DB_PORT=3306
-DB_NAME=mezzio_users
-DB_USER=app_user
-DB_PASS=secure_password
+```php
+// config/autoload/database.local.php
+return [
+    'database' => [
+        'user' => [
+            'driver' => 'mysql',
+            'host' => 'localhost',
+            'port' => 3306,
+            'database' => 'mezzio_users',
+            'username' => 'app_user',
+            'password' => 'secure_password',
 
 REDIS_HOST=127.0.0.1
 REDIS_PORT=6379

@@ -55,7 +55,7 @@ cp public/sitemap.xml "$BUILD_DIR/public/" 2>/dev/null || true
 # 3. Install dependencies based on build type
 cd "$BUILD_DIR"
 
-if [ "$BUILD_TYPE" = "production" ]; then
+if [ "$BUILD_TYPE" = "production" ] || [ "$BUILD_TYPE" = "shared-hosting-minimal" ]; then
     print_status "Installing production dependencies..."
     composer install --no-dev --optimize-autoloader --no-interaction
 elif [ "$BUILD_TYPE" = "staging" ]; then
@@ -76,6 +76,9 @@ if [ ! -d "node_modules" ]; then
     pnpm install
 fi
 
+# Fix esbuild permissions if needed
+find node_modules -name "esbuild" -type f -exec chmod +x {} \; 2>/dev/null || true
+
 if [ "$BUILD_TYPE" = "production" ]; then
     pnpm run build:prod
 else
@@ -90,6 +93,9 @@ if [ ! -d "node_modules" ]; then
     pnpm install
 fi
 
+# Fix esbuild permissions if needed
+find node_modules -name "esbuild" -type f -exec chmod +x {} \; 2>/dev/null || true
+
 if [ "$BUILD_TYPE" = "production" ]; then
     pnpm run build:prod
 else
@@ -98,7 +104,7 @@ fi
 cd ../..
 
 # 5. Optimize for production
-if [ "$BUILD_TYPE" = "production" ]; then
+if [ "$BUILD_TYPE" = "production" ] || [ "$BUILD_TYPE" = "shared-hosting-minimal" ]; then
     print_status "Optimizing for production..."
 
     # Remove development files
@@ -111,15 +117,41 @@ if [ "$BUILD_TYPE" = "production" ]; then
     rm -f themes/*/pnpm-lock.yaml 2>/dev/null || true
 
     # Optimize vendor
-    find vendor/ -type d -name "docs" -exec rm -rf {} + 2>/dev/null || true
-    find vendor/ -type d -name "test" -exec rm -rf {} + 2>/dev/null || true
-    find vendor/ -type d -name "tests" -exec rm -rf {} + 2>/dev/null || true
+    find vendor/ -type d -name "docs" -exec rm -rf {} \; 2>/dev/null || true
+    find vendor/ -type d -name "test" -exec rm -rf {} \; 2>/dev/null || true
+    find vendor/ -type d -name "tests" -exec rm -rf {} \; 2>/dev/null || true
+    find vendor/ -type d -name "Test" -exec rm -rf {} \; 2>/dev/null || true
     find vendor/ -name "*.md" -delete 2>/dev/null || true
     find vendor/ -name "LICENSE*" -delete 2>/dev/null || true
     find vendor/ -name "README*" -delete 2>/dev/null || true
+    find vendor/ -name "CHANGELOG*" -delete 2>/dev/null || true
+    find vendor/ -name "UPGRADE*" -delete 2>/dev/null || true
 
     # Generate optimized autoloader
     composer dump-autoload --optimize --no-dev --classmap-authoritative
+fi
+
+# 5.1. Additional optimizations for shared-hosting-minimal
+if [ "$BUILD_TYPE" = "shared-hosting-minimal" ]; then
+    print_status "Applying minimal hosting optimizations..."
+
+    # Remove additional development artifacts
+    rm -rf themes/*/src/ 2>/dev/null || true
+    rm -f themes/*/package.json 2>/dev/null || true
+    rm -f themes/*/vite.config.js 2>/dev/null || true
+    rm -f themes/*/tailwind.config.js 2>/dev/null || true
+    rm -f themes/*/postcss.config.js 2>/dev/null || true
+
+    # Remove vendor binaries (not needed in shared hosting)
+    rm -rf vendor/bin/ 2>/dev/null || true
+
+    # Remove additional vendor documentation
+    find vendor/ -name "CHANGELOG*" -delete 2>/dev/null || true
+    find vendor/ -name "UPGRADE*" -delete 2>/dev/null || true
+    find vendor/ -name "*.dist" -delete 2>/dev/null || true
+
+    # Remove empty directories
+    find vendor/ -type d -empty -delete 2>/dev/null || true
 fi
 
 # 6. Create build info
@@ -148,7 +180,7 @@ Build Features:
 ✅ Versioned assets with hash
 ✅ Apache .htaccess configuration
 ✅ Optimized autoloader
-$([ "$BUILD_TYPE" = "production" ] && echo "✅ Production optimized" || echo "⚠️  Development build")
+$([ "$BUILD_TYPE" = "production" ] && echo "✅ Production optimized" || [ "$BUILD_TYPE" = "shared-hosting-minimal" ] && echo "✅ Minimal hosting optimized" || echo "⚠️  Development build")
 EOF
 
 # 7. Set proper permissions
@@ -189,6 +221,11 @@ if [ "$BUILD_TYPE" = "production" ]; then
     print_success "🚀 Production build ready for deployment!"
     echo "   - Upload contents of $BUILD_DIR to your server"
     echo "   - Point web server document root to $BUILD_DIR/public/"
+elif [ "$BUILD_TYPE" = "shared-hosting-minimal" ]; then
+    print_success "🏠 Minimal shared hosting build ready!"
+    echo "   - Upload contents of $BUILD_DIR to your shared hosting"
+    echo "   - Configure document root to point to public/ directory"
+    echo "   - Set open_basedir restriction if available"
 elif [ "$BUILD_TYPE" = "staging" ]; then
     print_success "🧪 Staging build ready for testing!"
 else

@@ -77,6 +77,11 @@ class SystemStatsService
 
     private function getDiskUsage(): float
     {
+        // Check if disk functions are available (some shared hosting providers disable them)
+        if (!function_exists('disk_free_space') || !function_exists('disk_total_space')) {
+            return 0.0; // Return 0% usage when functions are not available
+        }
+
         $rootPath = $this->pathService->storage();
         $freeBytes = disk_free_space($rootPath);
         $totalBytes = disk_total_space($rootPath);

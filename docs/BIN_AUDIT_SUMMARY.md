@@ -132,7 +132,7 @@ $ ls -la bin/ | grep "^-rwx"
 - **Missing Files:** Žiadne chýbajúce súbory v composer.json
 
 ### ⚠️ Zostávajúce Bezpečnostné Odporúčania
-1. **Hardcoded Paths:** Externalizovať do .env súboru
+1. **Hardcoded Paths:** Externalizovať do PHP config súborov
 2. **Input Validation:** Pridať validáciu vstupov v skriptoch
 3. **Error Handling:** Vylepšiť error handling v bash skriptoch
 

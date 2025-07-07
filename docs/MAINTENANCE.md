@@ -328,7 +328,7 @@ echo "🔒 Running security check..."
 find /var/www/mezzio-app -type f -perm /o+w -exec echo "⚠️ World-writable file: {}" \;
 
 # Check for sensitive files in web root
-if find public/ -name "*.env" -o -name "*.log" -o -name "*.sql" | grep -q .; then
+if find public/ -name "*.log" -o -name "*.sql" -o -name "*.local.php" | grep -q .; then
     echo "❌ Sensitive files found in public directory"
 fi
 

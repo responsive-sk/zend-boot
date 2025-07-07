@@ -183,17 +183,19 @@ chmod -R 644 /var/www/html/config /var/www/html/src
 
 ### Content Security Policy
 ```apache
-Content-Security-Policy: default-src 'self'; 
-script-src 'self' 'unsafe-inline' 'unsafe-eval'; 
-style-src 'self' 'unsafe-inline'; 
-img-src 'self' data: blob: https://picsum.photos; 
-font-src 'self'
+Content-Security-Policy: default-src 'self';
+script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com;
+style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com;
+img-src 'self' data: blob: https://picsum.photos;
+font-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com;
+connect-src 'self'
 ```
 
 **Poznámky:**
 - **`'unsafe-eval'`**: Potrebné pre Alpine.js reactive expressions
 - **`blob:`**: Potrebné pre Bootstrap dynamické obrázky
 - **`'unsafe-inline'`**: Pre inline štýly a scripty
+- **CDN domény**: Povolené pre Bootstrap a FontAwesome z CDN
 
 ## 📈 Performance Optimizations
 
