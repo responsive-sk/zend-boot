@@ -67,20 +67,43 @@ try {
     file_put_contents($backupPath . '/manifest.json', json_encode($manifest, JSON_PRETTY_PRINT));
     echo "📋 Created backup manifest\n";
 
-    // Create compressed archive
+    // Create compressed archive using PHP (shared hosting compatible)
     $archivePath = $backupDir . "/hdm_backup_{$timestamp}.tar.gz";
-    $command = "cd " . escapeshellarg($backupPath) . " && tar -czf " . escapeshellarg($archivePath) . " .";
-    exec($command, $output, $returnCode);
 
-    if ($returnCode === 0) {
-        $archiveSize = filesize($archivePath);
-        echo "📦 Created compressed backup: " . basename($archivePath) . " (" . formatBytes($archiveSize) . ")\n";
+    if (class_exists('ZipArchive')) {
+        // Use ZIP instead of tar.gz for better shared hosting compatibility
+        $zipPath = $backupDir . "/hdm_backup_{$timestamp}.zip";
+        $zip = new ZipArchive();
 
-        // Remove uncompressed backup directory
-        exec("rm -rf " . escapeshellarg($backupPath));
-        echo "🧹 Cleaned up temporary files\n";
+        if ($zip->open($zipPath, ZipArchive::CREATE) === TRUE) {
+            $files = new RecursiveIteratorIterator(
+                new RecursiveDirectoryIterator($backupPath),
+                RecursiveIteratorIterator::LEAVES_ONLY
+            );
+
+            foreach ($files as $file) {
+                if (!$file->isDir()) {
+                    $filePath = $file->getRealPath();
+                    $relativePath = substr($filePath, strlen($backupPath) + 1);
+                    $zip->addFile($filePath, $relativePath);
+                }
+            }
+
+            $zip->close();
+            $archiveSize = filesize($zipPath);
+            echo "📦 Created compressed backup: " . basename($zipPath) . " (" . formatBytes($archiveSize) . ")\n";
+
+            // Remove uncompressed backup directory using PHP
+            removeDirectory($backupPath);
+            echo "🧹 Cleaned up temporary files\n";
+
+            $archivePath = $zipPath; // Update for logging
+        } else {
+            echo "❌ Failed to create ZIP backup\n";
+        }
     } else {
-        echo "❌ Failed to create compressed backup\n";
+        echo "⚠️ ZipArchive not available, keeping uncompressed backup\n";
+        $archivePath = null; // No archive created
     }
 
     // Clean old backups (keep last 7 days)
@@ -111,17 +134,45 @@ function formatBytes(int $bytes): string
 function cleanOldBackups(string $backupDir, int $daysToKeep): int
 {
     $cutoffTime = time() - ($daysToKeep * 24 * 3600);
-    $pattern = $backupDir . '/hdm_backup_*.tar.gz';
+    $patterns = [
+        $backupDir . '/hdm_backup_*.tar.gz',
+        $backupDir . '/hdm_backup_*.zip'
+    ];
     $count = 0;
 
-    foreach (glob($pattern) as $file) {
-        if (filemtime($file) < $cutoffTime) {
-            unlink($file);
-            $count++;
+    foreach ($patterns as $pattern) {
+        foreach (glob($pattern) as $file) {
+            if (filemtime($file) < $cutoffTime) {
+                unlink($file);
+                $count++;
+            }
         }
     }
 
     return $count;
+}
+
+/**
+ * Remove directory recursively (shared hosting compatible)
+ */
+function removeDirectory(string $dir): bool
+{
+    if (!is_dir($dir)) {
+        return false;
+    }
+
+    $files = array_diff(scandir($dir), ['.', '..']);
+
+    foreach ($files as $file) {
+        $path = $dir . '/' . $file;
+        if (is_dir($path)) {
+            removeDirectory($path);
+        } else {
+            unlink($path);
+        }
+    }
+
+    return rmdir($dir);
 }
 
 /**

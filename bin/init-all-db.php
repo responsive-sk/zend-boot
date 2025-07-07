@@ -8,7 +8,12 @@ declare(strict_types=1);
  *
  * HDM Boot Protocol Compliant - All System Databases
  * Initializes all three databases: user.db, mark.db, system.db
+ *
+ * SHARED HOSTING COMPATIBLE - No exec() functions used
  */
+
+// Bootstrap the application
+require_once __DIR__ . '/../vendor/autoload.php';
 
 echo "🚀 HDM Boot Protocol - Complete Database Initialization\n";
 echo "=======================================================\n\n";
@@ -19,54 +24,72 @@ echo "   2. Mark Database (mark.db)\n";
 echo "   3. System Database (system.db)\n\n";
 
 $errors = [];
-$basePath = __DIR__;
 
-// Initialize User Database
-echo "🔄 Step 1/3: Initializing User Database...\n";
-echo str_repeat("-", 50) . "\n";
-$output = [];
-$returnCode = 0;
-exec("php {$basePath}/init-user-db.php 2>&1", $output, $returnCode);
+try {
+    // Get container and services
+    $container = require __DIR__ . '/../config/container.php';
+    $hdmPaths = $container->get(\App\Service\PathServiceInterface::class);
 
-if ($returnCode === 0) {
-    echo implode("\n", $output) . "\n";
-    echo "✅ User database initialization completed\n\n";
-} else {
-    $errors[] = "User database initialization failed";
-    echo "❌ User database initialization failed:\n";
-    echo implode("\n", $output) . "\n\n";
-}
+    // Initialize User Database with default data
+    echo "🔄 Step 1/3: Initializing User Database with default data...\n";
+    echo str_repeat("-", 50) . "\n";
 
-// Initialize Mark Database
-echo "🔄 Step 2/3: Initializing Mark Database...\n";
-echo str_repeat("-", 50) . "\n";
-$output = [];
-$returnCode = 0;
-exec("php {$basePath}/init-mark-db.php 2>&1", $output, $returnCode);
+    try {
+        // Get PDO connection for user database
+        $userPdo = $container->get('pdo.user');
 
-if ($returnCode === 0) {
-    echo implode("\n", $output) . "\n";
-    echo "✅ Mark database initialization completed\n\n";
-} else {
-    $errors[] = "Mark database initialization failed";
-    echo "❌ Mark database initialization failed:\n";
-    echo implode("\n", $output) . "\n\n";
-}
+        // Create and run user migration
+        $userMigration = new \App\Database\UserMigration($userPdo);
+        $userMigration->migrate();
 
-// Initialize System Database
-echo "🔄 Step 3/3: Initializing System Database...\n";
-echo str_repeat("-", 50) . "\n";
-$output = [];
-$returnCode = 0;
-exec("php {$basePath}/init-system-db.php 2>&1", $output, $returnCode);
 
-if ($returnCode === 0) {
-    echo implode("\n", $output) . "\n";
-    echo "✅ System database initialization completed\n\n";
-} else {
-    $errors[] = "System database initialization failed";
-    echo "❌ System database initialization failed:\n";
-    echo implode("\n", $output) . "\n\n";
+        echo "✅ User database initialization completed\n\n";
+    } catch (Exception $e) {
+        $errors[] = "User database initialization failed: " . $e->getMessage();
+        echo "❌ User database initialization failed: " . $e->getMessage() . "\n\n";
+    }
+
+    // Initialize Mark Database with default data
+    echo "🔄 Step 2/3: Initializing Mark Database with default data...\n";
+    echo str_repeat("-", 50) . "\n";
+
+    try {
+        // Get PDO connection for mark database
+        $markPdo = $container->get('pdo.mark');
+
+        // Create and run mark migration
+        $markMigration = new \App\Database\MarkMigration($markPdo);
+        $markMigration->migrate();
+
+
+        echo "✅ Mark database initialization completed\n\n";
+    } catch (Exception $e) {
+        $errors[] = "Mark database initialization failed: " . $e->getMessage();
+        echo "❌ Mark database initialization failed: " . $e->getMessage() . "\n\n";
+    }
+
+    // Initialize System Database with default data
+    echo "🔄 Step 3/3: Initializing System Database with default data...\n";
+    echo str_repeat("-", 50) . "\n";
+
+    try {
+        // Get PDO connection for system database
+        $systemPdo = $container->get('pdo.system');
+
+        // Create and run system migration
+        $systemMigration = new \App\Database\SystemMigration($systemPdo);
+        $systemMigration->migrate();
+
+
+        echo "✅ System database initialization completed\n\n";
+    } catch (Exception $e) {
+        $errors[] = "System database initialization failed: " . $e->getMessage();
+        echo "❌ System database initialization failed: " . $e->getMessage() . "\n\n";
+    }
+
+} catch (Exception $e) {
+    $errors[] = "Failed to initialize container: " . $e->getMessage();
+    echo "❌ Failed to initialize container: " . $e->getMessage() . "\n\n";
 }
 
 // Final summary

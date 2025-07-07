@@ -4,20 +4,21 @@ declare(strict_types=1);
 
 /**
  * Production Database Configuration Template
- * 
+ *
  * Copy this file to database.local.php and configure for your environment
+ * Edit the database credentials below for your production environment
  * This file should NOT be committed to version control
  */
 
 return [
     'database' => [
         'user' => [
-            'driver' => $_ENV['DB_DRIVER'] ?? 'mysql',
-            'host' => $_ENV['DB_HOST'] ?? 'localhost',
-            'port' => (int) ($_ENV['DB_PORT'] ?? 3306),
-            'database' => $_ENV['DB_NAME'] ?? 'mezzio_users',
-            'username' => $_ENV['DB_USER'] ?? 'app_user',
-            'password' => $_ENV['DB_PASS'] ?? '',
+            'driver' => 'mysql',
+            'host' => 'localhost',
+            'port' => 3306,
+            'database' => 'mezzio_users',
+            'username' => 'app_user',
+            'password' => 'secure_password_here',
             'charset' => 'utf8mb4',
             'options' => [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -26,12 +27,12 @@ return [
             ],
         ],
         'mark' => [
-            'driver' => $_ENV['DB_DRIVER'] ?? 'mysql',
-            'host' => $_ENV['DB_HOST'] ?? 'localhost',
-            'port' => (int) ($_ENV['DB_PORT'] ?? 3306),
-            'database' => $_ENV['DB_MARK_NAME'] ?? 'mezzio_mark',
-            'username' => $_ENV['DB_USER'] ?? 'app_user',
-            'password' => $_ENV['DB_PASS'] ?? '',
+            'driver' => 'mysql',
+            'host' => 'localhost',
+            'port' => 3306,
+            'database' => 'mezzio_mark',
+            'username' => 'app_user',
+            'password' => 'secure_password_here',
             'charset' => 'utf8mb4',
             'options' => [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -40,12 +41,12 @@ return [
             ],
         ],
         'system' => [
-            'driver' => $_ENV['DB_DRIVER'] ?? 'mysql',
-            'host' => $_ENV['DB_HOST'] ?? 'localhost',
-            'port' => (int) ($_ENV['DB_PORT'] ?? 3306),
-            'database' => $_ENV['DB_SYSTEM_NAME'] ?? 'mezzio_system',
-            'username' => $_ENV['DB_USER'] ?? 'app_user',
-            'password' => $_ENV['DB_PASS'] ?? '',
+            'driver' => 'mysql',
+            'host' => 'localhost',
+            'port' => 3306,
+            'database' => 'mezzio_system',
+            'username' => 'app_user',
+            'password' => 'secure_password_here',
             'charset' => 'utf8mb4',
             'options' => [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

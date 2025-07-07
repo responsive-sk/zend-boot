@@ -62,7 +62,13 @@ class EnvironmentHandler
      */
     private static function configureErrorReporting(): void
     {
-        $environment = $_ENV['APP_ENV'] ?? 'production';
+        // Default to production mode for security
+        $environment = 'production';
+
+        // Check if development mode is enabled via Laminas development mode
+        if (file_exists('config/development.config.php')) {
+            $environment = 'development';
+        }
 
         switch ($environment) {
             case 'development':
@@ -93,7 +99,12 @@ class EnvironmentHandler
      */
     public static function getEnvironment(): string
     {
-        return $_ENV['APP_ENV'] ?? 'production';
+        // Check if development mode is enabled via Laminas development mode
+        if (file_exists('config/development.config.php')) {
+            return 'development';
+        }
+
+        return 'production';
     }
 
     /**
@@ -101,7 +112,7 @@ class EnvironmentHandler
      */
     public static function isDevelopment(): bool
     {
-        return in_array(self::getEnvironment(), ['development', 'dev'], true);
+        return self::getEnvironment() === 'development';
     }
 
     /**
@@ -109,7 +120,7 @@ class EnvironmentHandler
      */
     public static function isProduction(): bool
     {
-        return in_array(self::getEnvironment(), ['production', 'prod'], true);
+        return self::getEnvironment() === 'production';
     }
 
     /**
@@ -117,6 +128,7 @@ class EnvironmentHandler
      */
     public static function isTesting(): bool
     {
-        return in_array(self::getEnvironment(), ['testing', 'test'], true);
+        // Testing mode can be detected by PHPUnit environment
+        return defined('PHPUNIT_COMPOSER_INSTALL') || getenv('PHPUNIT_RUNNING') === 'true';
     }
 }

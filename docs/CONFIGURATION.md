@@ -339,21 +339,15 @@ return [
 }
 ```
 
-### Environment Variables
+### Environment Detection
 
-```bash
-# .env (development)
-APP_ENV=development
-DEBUG=true
-DATABASE_URL=sqlite:data/user.db
-SESSION_SECURE=false
+The application automatically detects the environment:
 
-# .env.production
-APP_ENV=production
-DEBUG=false
-DATABASE_URL=pgsql://user:pass@localhost/db
-SESSION_SECURE=true
-```
+- **Development Mode**: When `config/development.config.php` exists (enabled via `composer development-enable`)
+- **Production Mode**: Default mode when development config is not present
+- **Testing Mode**: Automatically detected during PHPUnit test execution
+
+Configuration is handled through PHP configuration files in `config/autoload/` directory.
 
 ## 🔍 Debugging Configuration
 

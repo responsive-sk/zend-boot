@@ -60,7 +60,6 @@
         "build:themes:prod": "cd themes/bootstrap && pnpm run build:prod && cd ../main && pnpm run build:prod",
         "build:dev": "./bin/build-dev.sh",
         "build:production": "./bin/build-production.sh production",
-        "build:shared-hosting": "./bin/build-production.sh shared-hosting",
         "build:shared-hosting-minimal": "./bin/build-production.sh shared-hosting-minimal",
         "build:staging": "./bin/build-to-directory.sh staging",
         "build:release": "./bin/build-to-directory.sh release archive",

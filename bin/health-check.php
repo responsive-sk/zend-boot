@@ -158,6 +158,12 @@ function checkDiskSpace(HdmPathService $hdmPaths): array
 {
     $health = ['healthy' => true, 'details' => []];
 
+    // Check if disk functions are available (some shared hosting providers disable them)
+    if (!function_exists('disk_free_space') || !function_exists('disk_total_space')) {
+        $health['details']['disk_space'] = "ℹ️ Disk space check unavailable (functions disabled)";
+        return $health;
+    }
+
     $rootPath = dirname($hdmPaths->storage());
     $freeBytes = disk_free_space($rootPath);
     $totalBytes = disk_total_space($rootPath);

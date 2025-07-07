@@ -149,8 +149,8 @@ chmod +x bin/*.php
 
 ### 3. Bezpečnostné Vylepšenia
 ```bash
-# Vytvoriť .env súbor pre konfiguráciu
 # Odstrániť hardcoded values zo skriptov
+# Použiť PHP config súbory namiesto environment variables
 ```
 
 ## 📈 Kvalita Kódu
@@ -196,7 +196,7 @@ chmod +x bin/*.php
    - Nastaviť development mode správne
 
 2. **Bezpečnostné vylepšenia:**
-   - Externalizovať konfigurácie do .env
+   - Externalizovať konfigurácie do PHP config súborov
    - Pridať input validation do skriptov
    - Implementovať proper error handling
 
