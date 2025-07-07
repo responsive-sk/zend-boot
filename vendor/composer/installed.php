@@ -3,7 +3,7 @@
         'name' => 'mezzio/minimal-app',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'a99968205f80e89db37996ef7c42ee52741318c4',
+        'reference' => '1f8af314875b54c3a5e8ccf7bc58d23a85f91fc6',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -343,7 +343,7 @@
         'mezzio/minimal-app' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'a99968205f80e89db37996ef7c42ee52741318c4',
+            'reference' => '1f8af314875b54c3a5e8ccf7bc58d23a85f91fc6',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
