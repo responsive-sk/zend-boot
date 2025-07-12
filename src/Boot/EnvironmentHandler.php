@@ -49,12 +49,13 @@ class EnvironmentHandler
     }
 
     /**
-     * Change working directory to project root
+     * Change working directory to project root using Paths service
      */
     private static function changeToProjectRoot(): void
     {
-        $projectRoot = dirname(__DIR__, 2);
-        chdir($projectRoot);
+        // Load paths configuration to get project root
+        $paths = require dirname(__DIR__, 2) . '/config/paths.php';
+        chdir($paths->base());
     }
 
     /**

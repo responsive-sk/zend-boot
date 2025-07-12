@@ -180,6 +180,116 @@
         </div>
     </div>
 
+    <!-- Orbit CMS Sekcia -->
+    <?php if (isset($orbit_stats)): ?>
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-satellite me-2"></i>Orbit CMS - Content Management</h5>
+                </div>
+                <div class="card-body">
+                    <!-- Orbit Štatistiky -->
+                    <div class="row mb-3">
+                        <div class="col-md-2">
+                            <div class="text-center">
+                                <h4 class="text-primary mb-0"><?= $this->escapeHtml($orbit_stats['total_content'] ?? 0) ?></h4>
+                                <small class="text-muted">Celkom obsahu</small>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="text-center">
+                                <h4 class="text-success mb-0"><?= $this->escapeHtml($orbit_stats['published_content'] ?? 0) ?></h4>
+                                <small class="text-muted">Publikované</small>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="text-center">
+                                <h4 class="text-info mb-0"><?= $this->escapeHtml($orbit_stats['docs_count'] ?? 0) ?></h4>
+                                <small class="text-muted">Dokumentácia</small>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="text-center">
+                                <h4 class="text-warning mb-0"><?= $this->escapeHtml($orbit_stats['pages_count'] ?? 0) ?></h4>
+                                <small class="text-muted">Stránky</small>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="text-center">
+                                <h4 class="text-secondary mb-0"><?= $this->escapeHtml($orbit_stats['posts_count'] ?? 0) ?></h4>
+                                <small class="text-muted">Články</small>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="text-center">
+                                <h4 class="text-dark mb-0"><?= $this->escapeHtml($orbit_stats['categories_count'] ?? 0) ?></h4>
+                                <small class="text-muted">Kategórie</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Orbit Akcie -->
+                    <div class="row">
+                        <div class="col-md-3 mb-2">
+                            <a href="/mark/orbit/content" class="btn btn-outline-primary w-100">
+                                <i class="fas fa-edit me-2"></i>Správa Obsahu
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="/mark/orbit/content/create" class="btn btn-outline-success w-100">
+                                <i class="fas fa-plus me-2"></i>Nový Obsah
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="/mark/orbit/media" class="btn btn-outline-info w-100">
+                                <i class="fas fa-images me-2"></i>Médiá
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="/mark/orbit/search" class="btn btn-outline-warning w-100">
+                                <i class="fas fa-search me-2"></i>Vyhľadávanie
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Nedávny Orbit Obsah -->
+                    <?php if (!empty($orbit_stats['recent_content'])): ?>
+                    <hr>
+                    <h6><i class="fas fa-clock me-2"></i>Nedávny Obsah</h6>
+                    <div class="row">
+                        <?php foreach (array_slice($orbit_stats['recent_content'], 0, 3) as $content): ?>
+                        <div class="col-md-4">
+                            <div class="card card-body bg-light">
+                                <h6 class="card-title mb-1">
+                                    <a href="<?= $this->escapeHtmlAttr($content['url']) ?>" class="text-decoration-none">
+                                        <?= $this->escapeHtml($content['title']) ?>
+                                    </a>
+                                </h6>
+                                <small class="text-muted">
+                                    <span class="badge bg-secondary me-1"><?= $this->escapeHtml($content['type']) ?></span>
+                                    <?php if ($content['updated_at']): ?>
+                                        <?= $this->escapeHtml($content['updated_at']->format('d.m.Y')) ?>
+                                    <?php endif; ?>
+                                </small>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                    <?php endif; ?>
+
+                    <?php if (isset($orbit_stats['error'])): ?>
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Orbit CMS chyba: <?= $this->escapeHtml($orbit_stats['error']) ?>
+                    </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
+
     <!-- Nedávna Aktivita -->
     <div class="row">
         <div class="col-md-8">

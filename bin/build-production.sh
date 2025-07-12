@@ -41,8 +41,10 @@ get_exclude_patterns() {
         ".phpunit.result.cache"
         "composer.lock"
         "*.log"
-        "data/cache/*"
-        "data/sessions/*"
+        "var/cache/*"
+        "var/sessions/*"
+        "data"
+        "logs"
         "config/autoload/*.local.php"
         ".env"
         "build"
@@ -223,6 +225,41 @@ optimize_autoloader() {
     success "Autoloader optimized"
 }
 
+# Clean vendor for minimal production
+clean_vendor_for_minimal() {
+    if [ "$BUILD_TARGET" = "shared-hosting-minimal" ]; then
+        log "Cleaning vendor for minimal production build..."
+
+        # Remove test directories
+        find "$BUILD_DIR/vendor" -type d -name "test" -exec rm -rf {} + 2>/dev/null || true
+        find "$BUILD_DIR/vendor" -type d -name "tests" -exec rm -rf {} + 2>/dev/null || true
+        find "$BUILD_DIR/vendor" -type d -name "Test" -exec rm -rf {} + 2>/dev/null || true
+        find "$BUILD_DIR/vendor" -type d -name "Tests" -exec rm -rf {} + 2>/dev/null || true
+
+        # Remove documentation
+        find "$BUILD_DIR/vendor" -name "*.md" -delete 2>/dev/null || true
+        find "$BUILD_DIR/vendor" -name "README*" -delete 2>/dev/null || true
+        find "$BUILD_DIR/vendor" -name "CHANGELOG*" -delete 2>/dev/null || true
+        find "$BUILD_DIR/vendor" -name "LICENSE*" -delete 2>/dev/null || true
+        find "$BUILD_DIR/vendor" -name "CONTRIBUTING*" -delete 2>/dev/null || true
+        find "$BUILD_DIR/vendor" -type d -name "doc" -exec rm -rf {} + 2>/dev/null || true
+        find "$BUILD_DIR/vendor" -type d -name "docs" -exec rm -rf {} + 2>/dev/null || true
+
+        # Remove development files
+        find "$BUILD_DIR/vendor" -name "phpunit.xml*" -delete 2>/dev/null || true
+        find "$BUILD_DIR/vendor" -name "phpcs.xml*" -delete 2>/dev/null || true
+        find "$BUILD_DIR/vendor" -name "phpstan.neon*" -delete 2>/dev/null || true
+        find "$BUILD_DIR/vendor" -name ".travis.yml" -delete 2>/dev/null || true
+        find "$BUILD_DIR/vendor" -name ".github" -type d -exec rm -rf {} + 2>/dev/null || true
+        find "$BUILD_DIR/vendor" -name "examples" -type d -exec rm -rf {} + 2>/dev/null || true
+
+        # Remove empty directories
+        find "$BUILD_DIR/vendor" -type d -empty -delete 2>/dev/null || true
+
+        success "Vendor cleaned for minimal production"
+    fi
+}
+
 # Minimize bin scripts for shared hosting
 minimize_bin_scripts() {
     if [ "$BUILD_TARGET" = "shared-hosting-minimal" ]; then
@@ -256,16 +293,66 @@ minimize_bin_scripts() {
 create_directories() {
     log "Creating necessary directories..."
 
-    mkdir -p "$BUILD_DIR/logs"
-    mkdir -p "$BUILD_DIR/data/cache"
-    mkdir -p "$BUILD_DIR/data/sessions"
+    # Create var/ structure (modern paths)
+    mkdir -p "$BUILD_DIR/var/logs"
+    mkdir -p "$BUILD_DIR/var/cache"
+    mkdir -p "$BUILD_DIR/var/sessions"
+    mkdir -p "$BUILD_DIR/var/storage"
+    mkdir -p "$BUILD_DIR/var/uploads"
+
+    # Create content structure
+    mkdir -p "$BUILD_DIR/content/pages"
+    mkdir -p "$BUILD_DIR/content/posts"
+    mkdir -p "$BUILD_DIR/content/docs"
 
     # Create .gitkeep files to preserve empty directories
-    touch "$BUILD_DIR/logs/.gitkeep"
-    touch "$BUILD_DIR/data/cache/.gitkeep"
-    touch "$BUILD_DIR/data/sessions/.gitkeep"
+    touch "$BUILD_DIR/var/logs/.gitkeep"
+    touch "$BUILD_DIR/var/cache/.gitkeep"
+    touch "$BUILD_DIR/var/sessions/.gitkeep"
+    touch "$BUILD_DIR/var/uploads/.gitkeep"
 
     success "Directories created"
+}
+
+# Build themes for production
+build_themes() {
+    log "Building themes for production..."
+
+    # Check if themes directory exists
+    if [ ! -d "templates/themes" ]; then
+        log "No themes directory found, skipping theme build"
+        return 0
+    fi
+
+    # Build each theme
+    for theme_dir in templates/themes/*/; do
+        if [ -d "$theme_dir" ]; then
+            theme_name=$(basename "$theme_dir")
+            log "Building theme: $theme_name"
+
+            # Check if package.json exists
+            if [ -f "$theme_dir/package.json" ]; then
+                cd "$theme_dir"
+
+                # Install dependencies if node_modules doesn't exist
+                if [ ! -d "node_modules" ]; then
+                    log "Installing theme dependencies for $theme_name..."
+                    npm install --silent
+                fi
+
+                # Build theme
+                log "Building production assets for $theme_name..."
+                npm run build --silent
+
+                cd - > /dev/null
+                log "Theme $theme_name built successfully"
+            else
+                log "No package.json found for theme $theme_name, skipping"
+            fi
+        fi
+    done
+
+    success "Themes built for production"
 }
 
 # Set production file permissions
@@ -470,8 +557,11 @@ validate_build() {
         "modules"
         "src"
         "vendor"
-        "logs"
-        "data"
+        "var"
+        "var/storage"
+        "var/logs"
+        "var/cache"
+        "var/sessions"
     )
     
     for dir in "${required_dirs[@]}"; do
@@ -496,8 +586,10 @@ main() {
     clean_build
     install_production_dependencies
     copy_application_files
+    build_themes
     create_production_configs
     optimize_autoloader
+    clean_vendor_for_minimal
     minimize_bin_scripts
     create_directories
     set_production_permissions

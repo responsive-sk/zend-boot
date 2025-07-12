@@ -7,6 +7,7 @@ namespace App\Boot;
 use Mezzio\Application;
 use Mezzio\MiddlewareFactory;
 use Psr\Container\ContainerInterface;
+use ResponsiveSk\Slim4Paths\Paths;
 
 /**
  * HDM Boot Protocol - Application Bootstrap
@@ -19,6 +20,7 @@ class ApplicationBootstrap
     private ContainerInterface $container;
     private Application $app;
     private MiddlewareFactory $factory;
+    private Paths $paths;
 
     public function __construct(ContainerInterface $container)
     {
@@ -31,6 +33,10 @@ class ApplicationBootstrap
         $factory = $container->get(MiddlewareFactory::class);
         assert($factory instanceof MiddlewareFactory);
         $this->factory = $factory;
+
+        $paths = $container->get(Paths::class);
+        assert($paths instanceof Paths);
+        $this->paths = $paths;
     }
 
     /**
@@ -60,15 +66,16 @@ class ApplicationBootstrap
     }
 
     /**
-     * Load all route configurations
+     * Load all route configurations using Paths service
      */
     private function loadRoutes(): void
     {
         $routeConfigs = [
-            'app' => __DIR__ . '/../../config/routes/app.php',
-            'user' => __DIR__ . '/../../config/routes/user.php',
-            'mark' => __DIR__ . '/../../config/routes/mark.php',
-            'debug' => __DIR__ . '/../../config/routes/debug.php',
+            'app' => $this->paths->getPath($this->paths->get('routes'), 'app.php'),
+            'user' => $this->paths->getPath($this->paths->get('routes'), 'user.php'),
+            'mark' => $this->paths->getPath($this->paths->get('routes'), 'mark.php'),
+            'orbit' => $this->paths->getPath($this->paths->get('routes'), 'orbit.php'),
+            'debug' => $this->paths->getPath($this->paths->get('routes'), 'debug.php'),
         ];
 
         foreach ($routeConfigs as $name => $configPath) {
@@ -90,6 +97,11 @@ class ApplicationBootstrap
             case 'mark':
                 // Mark routes need factory and container
                 $routeLoader($this->app, $this->factory, $this->container);
+                break;
+
+            case 'orbit':
+                // Orbit routes need app and container
+                $routeLoader($this->app, $this->container);
                 break;
 
             case 'app':

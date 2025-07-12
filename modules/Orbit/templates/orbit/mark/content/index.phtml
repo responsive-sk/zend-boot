@@ -1,0 +1,213 @@
+<?php
+/**
+ * Orbit CMS - Mark Content Index Template
+ * 
+ * @var array $content_by_type
+ * @var string|null $current_type
+ * @var int $total_content
+ * @var string $title
+ */
+
+$this->layout('layout::home', ['title' => $title]);
+?>
+
+<div class="container mt-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1><i class="fas fa-satellite me-2"></i>Orbit CMS - Správa Obsahu</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/mark">Mark Dashboard</a></li>
+                    <li class="breadcrumb-item active">Orbit CMS</li>
+                </ol>
+            </nav>
+        </div>
+        <div>
+            <a href="/mark/orbit/content/create" class="btn btn-success">
+                <i class="fas fa-plus me-2"></i>Nový Obsah
+            </a>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4><?= $total_content ?></h4>
+                            <p class="mb-0">Celkom obsahu</p>
+                        </div>
+                        <div>
+                            <i class="fas fa-file-alt fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <?php foreach ($content_by_type as $type => $content_list): ?>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4><?= count($content_list) ?></h4>
+                            <p class="mb-0"><?= ucfirst($type) ?></p>
+                        </div>
+                        <div>
+                            <i class="fas fa-<?= $type === 'docs' ? 'book' : ($type === 'post' ? 'edit' : 'file') ?> fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+
+    <!-- Content Tabs -->
+    <div class="card">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link <?= !$current_type ? 'active' : '' ?>" 
+                       href="/mark/orbit/content">Všetko</a>
+                </li>
+                <?php foreach (array_keys($content_by_type) as $type): ?>
+                <li class="nav-item">
+                    <a class="nav-link <?= $current_type === $type ? 'active' : '' ?>" 
+                       href="/mark/orbit/content/<?= $type ?>">
+                        <?= ucfirst($type) ?> (<?= count($content_by_type[$type]) ?>)
+                    </a>
+                </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        
+        <div class="card-body">
+            <?php if (empty($content_by_type)): ?>
+                <div class="text-center py-5">
+                    <i class="fas fa-file-alt fa-3x text-muted mb-3"></i>
+                    <h4>Žiadny obsah</h4>
+                    <p class="text-muted">Zatiaľ nebol vytvorený žiadny obsah.</p>
+                    <a href="/mark/orbit/content/create" class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>Vytvoriť prvý obsah
+                    </a>
+                </div>
+            <?php else: ?>
+                <?php foreach ($content_by_type as $type => $content_list): ?>
+                    <?php if (!$current_type || $current_type === $type): ?>
+                    <div class="content-section">
+                        <?php if (!$current_type): ?>
+                        <h5 class="border-bottom pb-2 mb-3">
+                            <i class="fas fa-<?= $type === 'docs' ? 'book' : ($type === 'post' ? 'edit' : 'file') ?> me-2"></i>
+                            <?= ucfirst($type) ?>
+                        </h5>
+                        <?php endif; ?>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Názov</th>
+                                        <th>Slug</th>
+                                        <th>Kategória</th>
+                                        <th>Stav</th>
+                                        <th>Aktualizované</th>
+                                        <th>Akcie</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($content_list as $content): ?>
+                                    <tr>
+                                        <td>
+                                            <strong><?= $this->escapeHtml($content->getTitle()) ?></strong>
+                                            <?php if ($content->isFeatured()): ?>
+                                                <span class="badge bg-warning ms-2">Featured</span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <code><?= $this->escapeHtml($content->getSlug()) ?></code>
+                                        </td>
+                                        <td>
+                                            <?php if ($content->getCategory()): ?>
+                                                <span class="badge" style="background-color: <?= $content->getCategory()->getColor() ?>">
+                                                    <?= $this->escapeHtml($content->getCategory()->getName()) ?>
+                                                </span>
+                                            <?php else: ?>
+                                                <span class="text-muted">-</span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($content->isPublished()): ?>
+                                                <span class="badge bg-success">Publikované</span>
+                                            <?php else: ?>
+                                                <span class="badge bg-secondary">Koncept</span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($content->getUpdatedAt()): ?>
+                                                <?= $content->getUpdatedAt()->format('d.m.Y H:i') ?>
+                                            <?php else: ?>
+                                                <span class="text-muted">-</span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <a href="<?= $content->getUrl() ?>" 
+                                                   class="btn btn-outline-primary" 
+                                                   target="_blank" 
+                                                   title="Zobraziť">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a href="/mark/orbit/content/<?= $content->getType() ?>/<?= $content->getId() ?>/edit" 
+                                                   class="btn btn-outline-secondary" 
+                                                   title="Editovať">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <form method="POST" 
+                                                      action="/mark/orbit/content/<?= $content->getType() ?>/<?= $content->getId() ?>/delete" 
+                                                      style="display: inline;"
+                                                      onsubmit="return confirm('Naozaj chcete zmazať tento obsah?')">
+                                                    <button type="submit" 
+                                                            class="btn btn-outline-danger" 
+                                                            title="Zmazať">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+
+<style>
+.content-section:not(:last-child) {
+    margin-bottom: 2rem;
+}
+
+.table th {
+    border-top: none;
+    font-weight: 600;
+    color: #495057;
+}
+
+.btn-group-sm .btn {
+    padding: 0.25rem 0.5rem;
+}
+
+.badge {
+    font-size: 0.75em;
+}
+</style>

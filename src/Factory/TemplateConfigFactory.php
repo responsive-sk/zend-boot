@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace App\Factory;
 
 use App\Service\UnifiedPathService;
-use League\Flysystem\Filesystem;
-use League\Flysystem\Local\LocalFilesystemAdapter;
+use ResponsiveSk\Slim4Paths\Paths;
 
 /**
  * HDM Boot Protocol - Template Configuration Factory
@@ -20,14 +19,9 @@ class TemplateConfigFactory
 
     public function __construct()
     {
-        // Create minimal config for UnifiedPathService
-        $config = ['paths' => ['root' => getcwd()]];
-
-        // Create dummy filesystems for constructor
-        $dummyAdapter = new LocalFilesystemAdapter('.');
-        $dummyFs = new Filesystem($dummyAdapter);
-
-        $this->pathService = new UnifiedPathService($config, $dummyFs, $dummyFs, $dummyFs);
+        // Load paths configuration
+        $paths = require dirname(__DIR__, 2) . '/config/paths.php';
+        $this->pathService = new UnifiedPathService($paths);
     }
 
     /**

@@ -18,6 +18,12 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
     // Mark authentication middleware - only mark users can access these routes
     $markAuthMiddleware = $container->get(\Mark\Middleware\MarkAuthenticationMiddleware::class);
 
+    // Mark root redirect to dashboard
+    $app->get('/mark[/]', [
+        $markAuthMiddleware,
+        \Mark\Handler\DashboardHandler::class,
+    ], 'mark.index');
+
     // System Dashboard - only for mark users
     $app->get('/mark/dashboard', [
         $markAuthMiddleware,

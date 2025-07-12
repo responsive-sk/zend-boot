@@ -23,48 +23,50 @@ $health = [
     'metrics' => []
 ];
 
+// Load dependencies and paths
+require_once __DIR__ . "/../vendor/autoload.php";
+
+// Load paths configuration
+$paths = require __DIR__ . '/../config/paths.php';
+
 // Database connectivity check
 try {
-    require_once __DIR__ . "/../vendor/autoload.php";
+
     // Load configuration
     $config = require __DIR__ . '/../config/config.php';
-    $dbConfig = $config['database']['user'] ?? null;
-    
-    if ($dbConfig) {
-        $dsn = sprintf(
-            '%s:host=%s;port=%d;dbname=%s;charset=%s',
-            $dbConfig['driver'],
-            $dbConfig['host'],
-            $dbConfig['port'],
-            $dbConfig['database'],
-            $dbConfig['charset'] ?? 'utf8mb4'
-        );
-        
-        $pdo = new PDO(
-            $dsn,
-            $dbConfig['username'],
-            $dbConfig['password'],
-            $dbConfig['options'] ?? []
-        );
-        
-        // Test query
-        $stmt = $pdo->query('SELECT 1');
-        if ($stmt !== false) {
-            $result = $stmt->fetchColumn();
 
-            if ($result === 1) {
-                $health['checks']['database'] = 'ok';
+    // SQLite Database connectivity check
+    $userDbPath = $paths->getPath($paths->base(), $paths->get('user_db'));
+
+    if (file_exists($userDbPath)) {
+        try {
+            $pdo = new PDO('sqlite:' . $userDbPath);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            // Test query
+            $stmt = $pdo->query('SELECT 1');
+            if ($stmt !== false) {
+                $result = $stmt->fetchColumn();
+
+                if ($result === 1) {
+                    $health['checks']['database'] = 'ok';
+                } else {
+                    $health['checks']['database'] = 'error';
+                    $health['status'] = 'error';
+                }
             } else {
                 $health['checks']['database'] = 'error';
                 $health['status'] = 'error';
             }
-        } else {
+        } catch (PDOException $e) {
             $health['checks']['database'] = 'error';
             $health['status'] = 'error';
+            $health['errors']['database'] = 'SQLite error: ' . $e->getMessage();
         }
     } else {
-        $health['checks']['database'] = 'not_configured';
+        $health['checks']['database'] = 'warning';
         $health['status'] = 'warning';
+        $health['errors']['database'] = 'SQLite database file not found (will be created on first use)';
     }
 } catch (PDOException $e) {
     $health['checks']['database'] = 'error';
@@ -82,15 +84,24 @@ if (session_start()) {
     $health['status'] = 'error';
 }
 
-// File system checks
-$dataDir = __DIR__ . '/../data';
-$logsDir = __DIR__ . '/../logs';
+// File system checks using Paths service
+$varDir = $paths->getPath($paths->base(), $paths->get('var'));
+$logsDir = $paths->getPath($paths->base(), $paths->get('logs'));
+$storageDir = $paths->getPath($paths->base(), $paths->get('storage'));
 
-// Check if data directory is writable
-if (is_dir($dataDir) && is_writable($dataDir)) {
-    $health['checks']['data_directory'] = 'ok';
+// Check if var directory is writable
+if (is_dir($varDir) && is_writable($varDir)) {
+    $health['checks']['var_directory'] = 'ok';
 } else {
-    $health['checks']['data_directory'] = 'error';
+    $health['checks']['var_directory'] = 'error';
+    $health['status'] = 'error';
+}
+
+// Check if storage directory is writable
+if (is_dir($storageDir) && is_writable($storageDir)) {
+    $health['checks']['storage_directory'] = 'ok';
+} else {
+    $health['checks']['storage_directory'] = 'error';
     $health['status'] = 'error';
 }
 

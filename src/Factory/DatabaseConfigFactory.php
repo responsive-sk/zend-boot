@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
-use App\Service\UnifiedPathService;
+use App\Service\PathServiceInterface;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Local\LocalFilesystemAdapter;
 
@@ -16,18 +16,11 @@ use League\Flysystem\Local\LocalFilesystemAdapter;
  */
 class DatabaseConfigFactory
 {
-    private UnifiedPathService $pathService;
+    private PathServiceInterface $pathService;
 
-    public function __construct()
+    public function __construct(PathServiceInterface $pathService)
     {
-        // Create minimal config for UnifiedPathService
-        $config = ['paths' => ['root' => getcwd()]];
-
-        // Create dummy filesystems for constructor
-        $dummyAdapter = new LocalFilesystemAdapter('.');
-        $dummyFs = new Filesystem($dummyAdapter);
-
-        $this->pathService = new UnifiedPathService($config, $dummyFs, $dummyFs, $dummyFs);
+        $this->pathService = $pathService;
     }
 
     /**

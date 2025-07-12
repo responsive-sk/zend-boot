@@ -525,40 +525,61 @@
     <?php if (isset($jsUrl)): ?>
         <script src="<?= $jsUrl ?>"></script>
     <?php endif; ?>
-    
+
+    <!-- Dark Mode Toggle Button -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon">🌙</span>
+    </button>
+
     <!-- Dark Mode Script -->
     <script>
-        // Dark mode functionality
-        const themeToggle = document.getElementById('theme-toggle');
-        const html = document.documentElement;
-        const themeIcon = document.querySelector('.theme-toggle-icon');
-        
-        // Check for saved theme preference or default to light mode
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        html.setAttribute('data-theme', currentTheme);
-        updateThemeIcon(currentTheme);
-        
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateThemeIcon(newTheme);
-        });
-        
-        function updateThemeIcon(theme) {
-            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
-        }
-        
-        // Respect system preference
-        if (!localStorage.getItem('theme')) {
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            if (prefersDark) {
-                html.setAttribute('data-theme', 'dark');
-                updateThemeIcon('dark');
+        (function() {
+            // Dark mode functionality
+            console.log('Initializing dark mode...');
+            const themeToggle = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+            const themeIcon = document.querySelector('.theme-toggle-icon');
+
+            console.log('themeToggle:', themeToggle);
+            console.log('themeIcon:', themeIcon);
+
+            if (!themeToggle || !themeIcon) {
+                console.warn('Theme toggle elements not found');
+                return;
             }
-        }
+
+            function updateThemeIcon(theme) {
+                if (themeIcon) {
+                    themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+                }
+            }
+
+            // Check for saved theme preference or default to light mode
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            html.setAttribute('data-theme', currentTheme);
+            updateThemeIcon(currentTheme);
+
+            themeToggle.addEventListener('click', () => {
+                console.log('Theme toggle clicked!');
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+                console.log('Switching from', currentTheme, 'to', newTheme);
+
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon(newTheme);
+            });
+
+            // Respect system preference
+            if (!localStorage.getItem('theme')) {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (prefersDark) {
+                    html.setAttribute('data-theme', 'dark');
+                    updateThemeIcon('dark');
+                }
+            }
+        })();
     </script>
 </body>
 </html>

@@ -7,6 +7,7 @@ namespace Mark\Handler;
 use Mark\Service\MarkUserRepository;
 use Mark\Service\SystemStatsService;
 use Mezzio\Template\TemplateRendererInterface;
+use Orbit\Service\OrbitManager;
 use Psr\Container\ContainerInterface;
 
 class DashboardHandlerFactory
@@ -22,6 +23,9 @@ class DashboardHandlerFactory
         $statsService = $container->get(SystemStatsService::class);
         assert($statsService instanceof SystemStatsService);
 
-        return new DashboardHandler($template, $markUserRepository, $statsService);
+        $orbitManager = $container->get(OrbitManager::class);
+        assert($orbitManager instanceof OrbitManager);
+
+        return new DashboardHandler($template, $markUserRepository, $statsService, $orbitManager);
     }
 }

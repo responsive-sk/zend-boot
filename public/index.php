@@ -12,6 +12,9 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 use App\Boot\ApplicationFactory;
 
+// Initialize paths configuration
+$paths = require dirname(__DIR__) . '/config/paths.php';
+
 // Create and run application
 $app = ApplicationFactory::create();
 $app->run();

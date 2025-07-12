@@ -67,8 +67,7 @@ class ConfigProvider
                 Middleware\RequireLoginMiddleware::class => Middleware\RequireLoginMiddlewareFactory::class,
                 Middleware\RequireRoleMiddleware::class => Middleware\RequireRoleMiddlewareFactory::class,
 
-                // Authorization
-                AuthorizationInterface::class => LaminasRbac::class,
+                // Authorization - handled by authorization.global.php
             ],
             'aliases' => [
                 'authentication' => AuthenticationInterface::class,

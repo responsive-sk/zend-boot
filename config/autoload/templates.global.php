@@ -2,24 +2,30 @@
 
 declare(strict_types=1);
 
+// Load paths configuration
+$paths = require dirname(__DIR__) . '/paths.php';
+
 return [
     'templates' => [
         'extension' => 'phtml',
         'paths' => [
             // User module templates
-            'user' => [__DIR__ . '/../../modules/User/templates/user'],
+            'user' => [$paths->get('user_templates') . '/user'],
 
             // Mark module templates (HDM Boot Protocol)
-            'mark' => [__DIR__ . '/../../modules/Mark/templates/mark'],
+            'mark' => [$paths->get('mark_templates') . '/mark'],
+
+            // Orbit module templates
+            'orbit' => [$paths->get('orbit_templates') . '/orbit'],
 
             // App templates
-            'app' => [__DIR__ . '/../../templates/app'],
+            'app' => [$paths->get('app_templates')],
 
             // Layout templates
-            'layout' => [__DIR__ . '/../../templates/layout'],
+            'layout' => [$paths->get('layouts')],
 
             // Default templates path (must be last)
-            'default' => [__DIR__ . '/../../templates'],
+            'default' => [$paths->get('templates')],
         ],
     ],
 ];

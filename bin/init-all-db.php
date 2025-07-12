@@ -21,7 +21,8 @@ echo "=======================================================\n\n";
 echo "📋 Initializing all HDM Boot Protocol databases...\n";
 echo "   1. User Database (user.db)\n";
 echo "   2. Mark Database (mark.db)\n";
-echo "   3. System Database (system.db)\n\n";
+echo "   3. System Database (system.db)\n";
+echo "   4. Orbit CMS Database (orbit.db)\n\n";
 
 $errors = [];
 
@@ -97,10 +98,32 @@ echo str_repeat("=", 60) . "\n";
 if (empty($errors)) {
     echo "🎉 HDM Boot Protocol Database Initialization SUCCESSFUL!\n\n";
 
+    // Initialize Orbit CMS Database
+    echo "🔄 Step 4/4: Initializing Orbit CMS Database...\n";
+    echo str_repeat("-", 50) . "\n";
+
+    try {
+        $orbitScript = __DIR__ . '/migrate-orbit-db.php';
+        if (file_exists($orbitScript)) {
+            // Execute Orbit migration
+            ob_start();
+            include $orbitScript;
+            $output = ob_get_clean();
+            echo $output;
+            echo "✅ Orbit CMS database initialization completed\n\n";
+        } else {
+            throw new Exception("Orbit migration script not found: $orbitScript");
+        }
+    } catch (Exception $e) {
+        $errors[] = "Orbit CMS database initialization failed: " . $e->getMessage();
+        echo "❌ Orbit CMS database initialization failed: " . $e->getMessage() . "\n\n";
+    }
+
     echo "📊 All databases initialized:\n";
     echo "   ✅ user.db   - User management system\n";
     echo "   ✅ mark.db   - Mark management system\n";
-    echo "   ✅ system.db - Core system services\n\n";
+    echo "   ✅ system.db - Core system services\n";
+    echo "   ✅ orbit.db  - Orbit CMS content management\n\n";
 
     echo "🔐 Default credentials:\n";
     echo "   👤 admin/admin123 (admin, user roles)\n";

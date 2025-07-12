@@ -5,7 +5,9 @@ declare(strict_types=1);
 use Laminas\ConfigAggregator\ArrayProvider;
 use Laminas\ConfigAggregator\ConfigAggregator;
 
-$cacheConfig = ['config_cache_path' => 'data/cache/config-cache.php'];
+// Load paths configuration for cache path
+$paths = require __DIR__ . '/paths.php';
+$cacheConfig = ['config_cache_path' => $paths->getPath($paths->base(), $paths->get('legacy_cache') . '/config-cache.php')];
 
 $aggregator = new ConfigAggregator([
     \Mezzio\Router\FastRouteRouter\ConfigProvider::class,
@@ -29,11 +31,11 @@ Laminas\Form\ConfigProvider::class,
     // Mark module (HDM Boot Protocol - mark users only)
     \Mark\ConfigProvider::class,
 
+    // Orbit CMS module
+    \Orbit\ConfigProvider::class,
+
     // Include cache configuration
     new ArrayProvider($cacheConfig),
-
-    // Load paths configuration
-    new ArrayProvider(require __DIR__ . '/autoload/paths.global.php'),
 
     // Load dependencies configuration
     new ArrayProvider(require __DIR__ . '/autoload/dependencies.global.php'),
@@ -49,6 +51,9 @@ Laminas\Form\ConfigProvider::class,
 
     // Load authentication configuration
     new ArrayProvider(require __DIR__ . '/autoload/authentication.global.php'),
+
+    // Load authorization configuration
+    new ArrayProvider(require __DIR__ . '/autoload/authorization.global.php'),
 
     // Load application config
     new ArrayProvider([

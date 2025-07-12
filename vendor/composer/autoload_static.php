@@ -43,6 +43,10 @@ class ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f
         array (
             'User\\' => 5,
         ),
+        'R' => 
+        array (
+            'ResponsiveSk\\Slim4Paths\\' => 24,
+        ),
         'P' => 
         array (
             'Psr\\Log\\' => 8,
@@ -50,6 +54,10 @@ class ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
             'PhpParser\\' => 10,
+        ),
+        'O' => 
+        array (
+            'Orbit\\' => 6,
         ),
         'M' => 
         array (
@@ -67,10 +75,6 @@ class ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f
         ),
         'L' => 
         array (
-            'League\\MimeTypeDetection\\' => 25,
-            'League\\Flysystem\\Local\\' => 23,
-            'League\\Flysystem\\InMemory\\' => 26,
-            'League\\Flysystem\\' => 17,
             'Laminas\\View\\' => 13,
             'Laminas\\Validator\\' => 18,
             'Laminas\\Stratigility\\' => 21,
@@ -126,6 +130,10 @@ class ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f
         array (
             0 => __DIR__ . '/../..' . '/modules/User/src',
         ),
+        'ResponsiveSk\\Slim4Paths\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/responsive-sk/slim4-paths/src',
+        ),
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/src',
@@ -147,6 +155,10 @@ class ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f
         'PhpParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
+        ),
+        'Orbit\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/modules/Orbit/src',
         ),
         'Mezzio\\Template\\' => 
         array (
@@ -192,22 +204,6 @@ class ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f
         'Mark\\' => 
         array (
             0 => __DIR__ . '/../..' . '/modules/Mark/src',
-        ),
-        'League\\MimeTypeDetection\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/league/mime-type-detection/src',
-        ),
-        'League\\Flysystem\\Local\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/league/flysystem-local',
-        ),
-        'League\\Flysystem\\InMemory\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/league/flysystem-memory',
-        ),
-        'League\\Flysystem\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/league/flysystem/src',
         ),
         'Laminas\\View\\' => 
         array (

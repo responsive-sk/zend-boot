@@ -12,8 +12,6 @@
         "laminas/laminas-servicemanager": "^3.22",
         "laminas/laminas-stratigility": "^3.11",
         "laminas/laminas-validator": "^2.64",
-        "league/flysystem": "^3.0",
-        "league/flysystem-local": "^3.0",
         "mezzio/mezzio": "^3.20",
         "mezzio/mezzio-authentication": "^1.11",
         "mezzio/mezzio-authentication-session": "^1.10",
@@ -22,13 +20,13 @@
         "mezzio/mezzio-fastroute": "^3.1",
         "mezzio/mezzio-laminasviewrenderer": "^2.18",
         "mezzio/mezzio-session": "^1.16",
-        "mezzio/mezzio-template": "^2.11"
+        "mezzio/mezzio-template": "^2.11",
+        "responsive-sk/slim4-paths": "^5.0"
     },
     "require-dev": {
         "filp/whoops": "^2.15",
         "laminas/laminas-development-mode": "^3.12",
-        "league/flysystem-memory": "^3.29",
-        "phpstan/phpstan": "^1.10",
+        "phpstan/phpstan": "^1.12",
         "phpunit/phpunit": "^10.5",
         "rector/rector": "^1.0",
         "squizlabs/php_codesniffer": "^3.8"
@@ -37,7 +35,8 @@
         "psr-4": {
             "App\\": "src/",
             "User\\": "modules/User/src/",
-            "Mark\\": "modules/Mark/src/"
+            "Mark\\": "modules/Mark/src/",
+            "Orbit\\": "modules/Orbit/src/"
         }
     },
     "scripts": {

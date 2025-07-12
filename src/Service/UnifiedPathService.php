@@ -4,39 +4,25 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use League\Flysystem\Filesystem;
-use League\Flysystem\FilesystemException;
+use ResponsiveSk\Slim4Paths\Paths;
 
 /**
  * HDM Boot Protocol - Unified Path Service
  *
  * PILLAR III: Secure Path Resolution
- * Combines legacy PathService + HdmPathService functionality
- * Single source of truth for all path operations
+ * Modern wrapper around ResponsiveSk\Slim4Paths with custom MezzioOrbit preset
+ * Maintains interface compatibility while using advanced path management
  */
 class UnifiedPathService implements PathServiceInterface
 {
-    /** @var array<string, string> */
-    private array $paths;
-    private Filesystem $publicFs;
-    private Filesystem $themesFs;
+    private Paths $paths;
 
     /**
-     * @param array<string, mixed> $appConfig
-     * @param Filesystem $uploadsFs Unused parameter kept for interface compatibility
+     * @param Paths $paths Modern path service with MezzioOrbit preset
      */
-    public function __construct(
-        array $appConfig,
-        Filesystem $publicFs,
-        Filesystem $themesFs,
-        Filesystem $uploadsFs
-    ) {
-        $pathsConfig = $appConfig['paths'] ?? [];
-        $this->paths = is_array($pathsConfig) ? $pathsConfig : [];
-        $this->publicFs = $publicFs;
-        $this->themesFs = $themesFs;
-        // Note: $uploadsFs parameter kept for interface compatibility but not stored
-        unset($uploadsFs); // Explicitly mark as unused to satisfy PHPStan
+    public function __construct(Paths $paths)
+    {
+        $this->paths = $paths;
 
         // Ensure required directories exist
         $this->ensureDirectoriesExist();
@@ -51,7 +37,7 @@ class UnifiedPathService implements PathServiceInterface
      */
     public function storage(string $filename = ''): string
     {
-        return $this->resolvePath('var/storage', $filename);
+        return $this->paths->getPath($this->paths->get('storage'), $filename);
     }
 
     /**
@@ -59,7 +45,7 @@ class UnifiedPathService implements PathServiceInterface
      */
     public function logs(string $filename = ''): string
     {
-        return $this->resolvePath('var/logs', $filename);
+        return $this->paths->getPath($this->paths->get('logs'), $filename);
     }
 
     /**
@@ -67,7 +53,7 @@ class UnifiedPathService implements PathServiceInterface
      */
     public function cache(string $filename = ''): string
     {
-        return $this->resolvePath('var/cache', $filename);
+        return $this->paths->getPath($this->paths->get('cache'), $filename);
     }
 
     /**
@@ -75,7 +61,7 @@ class UnifiedPathService implements PathServiceInterface
      */
     public function sessions(string $filename = ''): string
     {
-        return $this->resolvePath('var/sessions', $filename);
+        return $this->paths->getPath($this->paths->get('sessions'), $filename);
     }
 
     /**
@@ -83,7 +69,7 @@ class UnifiedPathService implements PathServiceInterface
      */
     public function uploads(string $filename = ''): string
     {
-        return $this->resolvePath('var/uploads', $filename);
+        return $this->paths->getPath($this->paths->get('uploads'), $filename);
     }
 
     /**
@@ -91,7 +77,7 @@ class UnifiedPathService implements PathServiceInterface
      */
     public function templates(string $filename = ''): string
     {
-        return $this->resolvePath('templates', $filename);
+        return $this->paths->getPath($this->paths->get('templates'), $filename);
     }
 
     /**
@@ -99,7 +85,7 @@ class UnifiedPathService implements PathServiceInterface
      */
     public function appTemplates(string $filename = ''): string
     {
-        return $this->resolvePath('templates/app', $filename);
+        return $this->paths->getPath($this->paths->get('app_templates'), $filename);
     }
 
     /**
@@ -107,7 +93,8 @@ class UnifiedPathService implements PathServiceInterface
      */
     public function moduleTemplates(string $module, string $namespace, string $filename = ''): string
     {
-        return $this->resolvePath("modules/{$module}/templates/{$namespace}", $filename);
+        $modulePath = $this->paths->getPath($this->paths->get('modules'), $module);
+        return $this->paths->getPath($modulePath, "templates/{$namespace}/{$filename}");
     }
 
     // ========================================
@@ -119,13 +106,7 @@ class UnifiedPathService implements PathServiceInterface
      */
     public function getRootPath(): string
     {
-        $rootPath = $this->paths['root'] ?? getcwd();
-        if (is_string($rootPath)) {
-            return $rootPath;
-        }
-
-        $currentDir = getcwd();
-        return $currentDir !== false ? $currentDir : __DIR__;
+        return $this->paths->base();
     }
 
     /**
@@ -133,7 +114,7 @@ class UnifiedPathService implements PathServiceInterface
      */
     public function getPublicPath(): string
     {
-        return $this->paths['public'] ?? 'public';
+        return $this->paths->get('public');
     }
 
     /**
@@ -141,7 +122,7 @@ class UnifiedPathService implements PathServiceInterface
      */
     public function getThemesPath(): string
     {
-        return $this->paths['themes'] ?? 'public/themes';
+        return $this->paths->get('themes');
     }
 
     /**
@@ -169,49 +150,49 @@ class UnifiedPathService implements PathServiceInterface
     }
 
     /**
-     * Read public file
+     * Read public file using Paths filesystem
      */
     public function readPublicFile(string $path): string
     {
         try {
-            return $this->publicFs->read($path);
-        } catch (FilesystemException $e) {
+            return $this->paths->readFile('public', $path);
+        } catch (\Exception $e) {
             throw new \RuntimeException("Unable to read public file: {$path}", 0, $e);
         }
     }
 
     /**
-     * Read theme file
+     * Read theme file using Paths filesystem
      */
     public function readThemeFile(string $path): string
     {
         try {
-            return $this->themesFs->read($path);
-        } catch (FilesystemException $e) {
+            return $this->paths->readFile('themes', $path);
+        } catch (\Exception $e) {
             throw new \RuntimeException("Unable to read theme file: {$path}", 0, $e);
         }
     }
 
     /**
-     * Check if public file exists
+     * Check if public file exists using Paths filesystem
      */
     public function publicFileExists(string $path): bool
     {
         try {
-            return $this->publicFs->fileExists($path);
-        } catch (FilesystemException $e) {
+            return $this->paths->fileExists('public', $path);
+        } catch (\Exception $e) {
             return false;
         }
     }
 
     /**
-     * Check if theme file exists
+     * Check if theme file exists using Paths filesystem
      */
     public function themeFileExists(string $path): bool
     {
         try {
-            return $this->themesFs->fileExists($path);
-        } catch (FilesystemException $e) {
+            return $this->paths->fileExists('themes', $path);
+        } catch (\Exception $e) {
             return false;
         }
     }
@@ -236,49 +217,7 @@ class UnifiedPathService implements PathServiceInterface
     // Core Path Resolution Methods
     // ========================================
 
-    /**
-     * Resolve path safely with validation
-     */
-    private function resolvePath(string $basePath, string $filename = ''): string
-    {
-        // Get absolute base path
-        $rootPath = $this->getRootPath();
-        $fullBasePath = $rootPath . DIRECTORY_SEPARATOR . $basePath;
 
-        // Normalize path
-        $normalizedPath = realpath($fullBasePath) ?: $fullBasePath;
-
-        // Ensure directory exists
-        if (!is_dir($normalizedPath)) {
-            mkdir($normalizedPath, 0755, true);
-        }
-
-        // If no filename, return base path
-        if (empty($filename)) {
-            return $normalizedPath;
-        }
-
-        // Sanitize filename and return full path
-        $sanitizedFilename = $this->sanitizeFilename($filename);
-        return $normalizedPath . DIRECTORY_SEPARATOR . $sanitizedFilename;
-    }
-
-    /**
-     * Sanitize filename to prevent path traversal
-     */
-    private function sanitizeFilename(string $filename): string
-    {
-        // Remove path traversal attempts
-        $filename = str_replace(['../', '..\\', '../', '..\\'], '', $filename);
-
-        // Remove null bytes
-        $filename = str_replace("\0", '', $filename);
-
-        // Normalize directory separators
-        $filename = str_replace('\\', '/', $filename);
-
-        return ltrim($filename, '/');
-    }
 
     /**
      * Ensure required directories exist
@@ -286,17 +225,22 @@ class UnifiedPathService implements PathServiceInterface
     private function ensureDirectoriesExist(): void
     {
         $requiredDirs = [
-            'var/storage',
-            'var/logs',
-            'var/cache',
-            'var/sessions',
-            'var/uploads',
+            'storage',
+            'logs',
+            'cache',
+            'sessions',
+            'uploads',
             'templates',
-            'templates/app'
+            'app_templates'
         ];
 
         foreach ($requiredDirs as $dir) {
-            $this->resolvePath($dir);
+            $dirPath = $this->paths->get($dir);
+            if (!is_dir($dirPath)) {
+                if (!mkdir($dirPath, 0755, true) && !is_dir($dirPath)) {
+                    throw new \RuntimeException("Failed to create directory: {$dirPath}");
+                }
+            }
         }
     }
 
@@ -305,6 +249,6 @@ class UnifiedPathService implements PathServiceInterface
      */
     public function path(string $relativePath): string
     {
-        return $this->resolvePath($relativePath);
+        return $this->paths->getPath($this->paths->base(), $relativePath);
     }
 }

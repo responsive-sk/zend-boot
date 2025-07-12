@@ -144,3 +144,36 @@ Options -Indexes
 
 # Disable server signature
 ServerSignature Off
+
+# ============================================================================
+# SHARED HOSTING OPTIMIZATIONS
+# ============================================================================
+
+# PHP Settings for shared hosting
+<IfModule mod_php.c>
+    # Hide PHP version
+    php_flag expose_php off
+
+    # Memory and execution limits
+    php_value memory_limit 128M
+    php_value max_execution_time 30
+
+    # Error reporting (disabled for production)
+    php_flag display_errors off
+    php_flag log_errors on
+
+    # Session security
+    php_value session.cookie_httponly 1
+    php_value session.use_strict_mode 1
+</IfModule>
+
+# Block access to sensitive directories
+RedirectMatch 404 /\.git
+RedirectMatch 404 /\.env
+RedirectMatch 404 /composer\.(json|lock)
+RedirectMatch 404 /config/
+RedirectMatch 404 /src/
+RedirectMatch 404 /modules/
+RedirectMatch 404 /vendor/
+RedirectMatch 404 /var/
+RedirectMatch 404 /data/

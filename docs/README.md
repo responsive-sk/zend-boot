@@ -44,31 +44,36 @@ composer build:production:package # → build/production/
 
 ## 📚 Dokumentácia
 
-### 📖 Základné
+### 🇸🇰 Slovenská dokumentácia (odporúčané)
+**Dokumentácia bola presunutá do `content/docs/` pre Orbit CMS integráciu.**
+
+- **[../content/docs/sk/README.md](../content/docs/sk/README.md)** - Hlavný prehľad (slovensky)
+- **[../content/docs/sk/RYCHLY_START.md](../content/docs/sk/RYCHLY_START.md)** - Rýchly štart
+- **[../content/docs/sk/ARCHITEKTURA.md](../content/docs/sk/ARCHITEKTURA.md)** - Architektúra systému
+- **[../content/docs/sk/KONFIGURACIA.md](../content/docs/sk/KONFIGURACIA.md)** - Konfigurácia
+- **[../content/docs/sk/USER_MODUL.md](../content/docs/sk/USER_MODUL.md)** - User management
+- **[../content/docs/sk/BEZPECNOST.md](../content/docs/sk/BEZPECNOST.md)** - Bezpečnosť
+- **[../content/docs/sk/DEPLOYMENT.md](../content/docs/sk/DEPLOYMENT.md)** - Production deployment
+- **[../content/docs/sk/RIESENIE_PROBLEMOV.md](../content/docs/sk/RIESENIE_PROBLEMOV.md)** - Troubleshooting
+
+### 🇬🇧 English Documentation (reference)
 - **[QUICK_START.md](QUICK_START.md)** - Detailný návod na spustenie
 - **[ARCHITECTURE.md](ARCHITECTURE.md)** - Architektúra a theme systém
-- **[CHANGELOG.md](CHANGELOG.md)** - História zmien a verzie
-
-### 🏗️ Development
 - **[USER_MODULE.md](USER_MODULE.md)** - User modul a autentifikácia
 - **[API_REFERENCE.md](API_REFERENCE.md)** - API dokumentácia
 - **[CONFIGURATION.md](CONFIGURATION.md)** - Konfiguračné možnosti
-
-### 🚀 Production
 - **[DEPLOYMENT.md](DEPLOYMENT.md)** - Production deployment
 - **[SECURITY_GUIDE.md](SECURITY_GUIDE.md)** - Bezpečnostný návod
 - **[APACHE_GUIDE.md](APACHE_GUIDE.md)** - Apache konfigurácia
-
-### 🔧 Maintenance
 - **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** - Riešenie problémov
 - **[MAINTENANCE.md](MAINTENANCE.md)** - Údržba a monitoring
-- **[TODO.md](TODO.md)** - Plánované vylepšenia
-
-### 📚 Reference
 - **[ACCESSIBILITY.md](ACCESSIBILITY.md)** - SEO & accessibility guide
-- **[APP_PROTOCOL.md](APP_PROTOCOL.md)** - HDM Boot Protocol
-- **[CRONTAB.md](CRONTAB.md)** - Cron jobs konfigurácia
-- **[TEMPLATE.md](TEMPLATE.md)** - Template pre nové dokumenty
+
+### Archive a Štandardy
+- **[DOCUMENTATION_STYLE_GUIDE.md](DOCUMENTATION_STYLE_GUIDE.md)** - Štýl guide pre dokumentáciu
+- **[archive/](archive/)** - Technické audity a staršie dokumenty
+- **[CHANGELOG.md](CHANGELOG.md)** - História zmien a verzie
+- **[TODO.md](TODO.md)** - Plánované vylepšenia
 
 ## 🏗️ Architektúra
 
