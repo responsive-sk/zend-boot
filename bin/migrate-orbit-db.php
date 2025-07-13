@@ -8,9 +8,17 @@
 
 declare(strict_types=1);
 
+// Load paths configuration
 $rootDir = dirname(__DIR__);
-$dbPath = $rootDir . '/data/orbit.db';
+require_once $rootDir . '/vendor/autoload.php';
+
+// Get paths configuration
+$paths = require $rootDir . '/config/paths.php';
+$dbPath = $paths->getPath($paths->base(), $paths->get('orbit_db'));
 $dataDir = dirname($dbPath);
+
+// Make paths global for functions
+global $paths;
 
 echo "🗄️  Orbit CMS Database Migration\n";
 echo "=================================\n\n";
@@ -211,8 +219,8 @@ function seedData(PDO $pdo): void
  */
 function indexExistingContent(PDO $pdo): void
 {
-    global $rootDir;
-    $contentDir = $rootDir . '/content';
+    global $paths;
+    $contentDir = $paths->getPath($paths->base(), $paths->get('content'));
     
     if (!is_dir($contentDir)) {
         return;

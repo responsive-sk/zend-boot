@@ -35,9 +35,16 @@ return static function (Application $app, ContainerInterface $container): void {
         \Orbit\Handler\BlogHandler::class,
     ], 'orbit.blog.index');
 
+    // Blog with Tailwind theme
+    $app->get('/blog-tailwind[/]', [
+        \Orbit\Handler\BlogTailwindHandler::class,
+    ], 'orbit.blog.tailwind');
+
     $app->get('/blog/{slug:.+}', [
         \Orbit\Handler\PostHandler::class,
     ], 'orbit.blog.post');
+
+
 
     // Category routes (TODO: implement handlers)
     // $app->get('/category/{slug:.+}', [\Orbit\Handler\CategoryHandler::class,], 'orbit.category.view');
@@ -48,49 +55,57 @@ return static function (Application $app, ContainerInterface $container): void {
     // Search routes (TODO: implement handlers)
     // $app->get('/search', [\Orbit\Handler\SearchHandler::class,], 'orbit.search');
     
-    // Mark management routes (protected) - TODO: implement handlers
-    // $app->route('/mark/orbit[/]', [
-    //     \User\Middleware\RequireLoginMiddleware::class,
-    //     \User\Middleware\RequireRoleMiddleware::class,
-    //     \Orbit\Handler\MarkDashboardHandler::class,
-    // ], ['GET'], 'orbit.mark.dashboard');
-    
+    // Mark management routes (protected) - using Mark authentication
+    $app->route('/mark/orbit[/]', [
+        \Mark\Middleware\MarkAuthenticationMiddleware::class,
+        \Orbit\Handler\MarkDashboardHandler::class,
+    ], ['GET'], 'orbit.mark.dashboard');
+
     $app->route('/mark/orbit/content[/]', [
-        \User\Middleware\RequireLoginMiddleware::class,
-        \User\Middleware\RequireRoleMiddleware::class,
+        \Mark\Middleware\MarkAuthenticationMiddleware::class,
         \Orbit\Handler\MarkContentHandler::class,
     ], ['GET'], 'orbit.mark.content.index');
-    
+
     $app->route('/mark/orbit/content/{type:page|post|docs}[/]', [
-        \User\Middleware\RequireLoginMiddleware::class,
-        \User\Middleware\RequireRoleMiddleware::class,
+        \Mark\Middleware\MarkAuthenticationMiddleware::class,
         \Orbit\Handler\MarkContentHandler::class,
     ], ['GET'], 'orbit.mark.content.type');
-    
+
+    $app->route('/mark/orbit/content/create', [
+        \Mark\Middleware\MarkAuthenticationMiddleware::class,
+        \Orbit\Handler\MarkContentHandler::class,
+    ], ['GET', 'POST'], 'orbit.mark.content.create.general');
+
     $app->route('/mark/orbit/content/{type:page|post|docs}/create', [
-        \User\Middleware\RequireLoginMiddleware::class,
-        \User\Middleware\RequireRoleMiddleware::class,
+        \Mark\Middleware\MarkAuthenticationMiddleware::class,
         \Orbit\Handler\MarkContentHandler::class,
     ], ['GET', 'POST'], 'orbit.mark.content.create');
-    
+
     $app->route('/mark/orbit/content/{type:page|post|docs}/{id:\d+}/edit', [
-        \User\Middleware\RequireLoginMiddleware::class,
-        \User\Middleware\RequireRoleMiddleware::class,
+        \Mark\Middleware\MarkAuthenticationMiddleware::class,
         \Orbit\Handler\MarkContentHandler::class,
     ], ['GET', 'POST'], 'orbit.mark.content.edit');
-    
+
     $app->route('/mark/orbit/content/{type:page|post|docs}/{id:\d+}/delete', [
-        \User\Middleware\RequireLoginMiddleware::class,
-        \User\Middleware\RequireRoleMiddleware::class,
+        \Mark\Middleware\MarkAuthenticationMiddleware::class,
         \Orbit\Handler\MarkContentHandler::class,
     ], ['POST'], 'orbit.mark.content.delete');
     
-    // TODO: implement handlers
-    // $app->route('/mark/orbit/editor', [
-    //     \User\Middleware\RequireLoginMiddleware::class,
-    //     \User\Middleware\RequireRoleMiddleware::class,
-    //     \Orbit\Handler\MarkEditorHandler::class,
-    // ], ['GET', 'POST'], 'orbit.mark.editor');
+    // Advanced Editor
+    $app->route('/mark/orbit/editor[/]', [
+        \Mark\Middleware\MarkAuthenticationMiddleware::class,
+        \Orbit\Handler\MarkEditorHandler::class,
+    ], ['GET'], 'orbit.mark.editor');
+
+    $app->route('/mark/orbit/editor/{id:\d+}', [
+        \Mark\Middleware\MarkAuthenticationMiddleware::class,
+        \Orbit\Handler\MarkEditorHandler::class,
+    ], ['GET'], 'orbit.mark.editor.edit');
+
+    $app->route('/mark/orbit/editor/preview', [
+        \Mark\Middleware\MarkAuthenticationMiddleware::class,
+        \Orbit\Handler\MarkEditorHandler::class,
+    ], ['POST'], 'orbit.mark.editor.preview');
 
     // $app->route('/mark/orbit/media[/]', [
     //     \User\Middleware\RequireLoginMiddleware::class,

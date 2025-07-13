@@ -1,0 +1,336 @@
+<?php
+/**
+ * Orbit CMS - Post View Template (Tailwind CSS)
+ *
+ * @var \Orbit\Entity\Content $content
+ */
+
+$this->layout('layout::orbit-main', [
+    'title' => $content->getTitle() . ' - Blog',
+    'description' => $content->getExcerpt() ?: 'Blog príspevok z Orbit CMS'
+]);
+?>
+
+<!-- Breadcrumbs -->
+<div class="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <nav class="flex items-center space-x-2 text-sm" aria-label="Breadcrumb">
+            <a href="/" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
+                <i class="fas fa-home"></i>
+            </a>
+            <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+            <a href="/blog" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
+                Blog
+            </a>
+            <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+            <span class="text-gray-900 dark:text-white font-medium truncate">
+                <?= $this->escapeHtml($content->getTitle()) ?>
+            </span>
+        </nav>
+    </div>
+</div>
+
+<!-- Article -->
+<article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Article Header -->
+    <header class="mb-12">
+        <!-- Meta Info -->
+        <div class="flex flex-wrap items-center gap-4 mb-6 text-sm text-gray-500 dark:text-gray-400">
+            <div class="flex items-center">
+                <i class="fas fa-calendar me-2"></i>
+                <?php 
+                $date = $content->getPublishedAt() ?? $content->getCreatedAt();
+                echo $date ? $date->format('d. F Y') : 'Neznámy dátum';
+                ?>
+            </div>
+            
+            <?php if ($content->getUpdatedAt() && $content->getUpdatedAt() != $content->getCreatedAt()): ?>
+                <div class="flex items-center">
+                    <i class="fas fa-edit me-2"></i>
+                    Aktualizované: <?= $content->getUpdatedAt()->format('d.m.Y') ?>
+                </div>
+            <?php endif; ?>
+            
+            <?php if ($content->getCategory()): ?>
+                <span class="inline-flex items-center px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full">
+                    <i class="fas fa-folder me-1"></i>
+                    <?= $this->escapeHtml($content->getCategory()->getName()) ?>
+                </span>
+            <?php endif; ?>
+            
+            <?php if ($content->isFeatured()): ?>
+                <span class="inline-flex items-center px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded-full">
+                    <i class="fas fa-star me-1"></i>Odporúčané
+                </span>
+            <?php endif; ?>
+        </div>
+        
+        <!-- Title -->
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+            <?= $this->escapeHtml($content->getTitle()) ?>
+        </h1>
+        
+        <!-- Excerpt -->
+        <?php if ($content->getExcerpt()): ?>
+            <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
+                <?= $this->escapeHtml($content->getExcerpt()) ?>
+            </p>
+        <?php endif; ?>
+        
+        <!-- Tags -->
+        <?php if ($content->getTags()): ?>
+            <div class="flex flex-wrap gap-2">
+                <?php foreach ($content->getTags() as $tag): ?>
+                    <span class="inline-flex items-center px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm rounded-full">
+                        <i class="fas fa-tag me-1"></i>
+                        <?= $this->escapeHtml($tag->getName()) ?>
+                    </span>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+    </header>
+
+    <!-- Article Content -->
+    <div class="prose prose-lg dark:prose-invert max-w-none">
+        <?php if ($content->getRenderedContent()): ?>
+            <?= $content->getRenderedContent() ?>
+        <?php else: ?>
+            <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-6">
+                <div class="flex items-center">
+                    <i class="fas fa-exclamation-triangle text-yellow-600 dark:text-yellow-400 me-3"></i>
+                    <p class="text-yellow-800 dark:text-yellow-200 font-medium">
+                        Obsah príspevku sa nepodarilo načítať.
+                    </p>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+
+    <!-- Article Footer -->
+    <footer class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <!-- Back to Blog -->
+            <div>
+                <a href="/blog" 
+                   class="inline-flex items-center px-6 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                    <i class="fas fa-arrow-left me-2"></i>
+                    Späť na blog
+                </a>
+            </div>
+            
+            <!-- Social Sharing -->
+            <div x-data="{ copied: false }" class="flex items-center gap-3">
+                <span class="text-sm text-gray-600 dark:text-gray-400 font-medium">Zdieľať:</span>
+                
+                <button @click="sharePost('facebook')" 
+                        class="inline-flex items-center justify-center w-10 h-10 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    <i class="fab fa-facebook-f"></i>
+                </button>
+                
+                <button @click="sharePost('twitter')" 
+                        class="inline-flex items-center justify-center w-10 h-10 bg-sky-500 text-white rounded-lg hover:bg-sky-600 transition-colors">
+                    <i class="fab fa-twitter"></i>
+                </button>
+                
+                <button @click="sharePost('linkedin')" 
+                        class="inline-flex items-center justify-center w-10 h-10 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors">
+                    <i class="fab fa-linkedin-in"></i>
+                </button>
+                
+                <button @click="copyLink()" 
+                        :class="copied ? 'bg-green-600 hover:bg-green-700' : 'bg-gray-600 hover:bg-gray-700'"
+                        class="inline-flex items-center justify-center w-10 h-10 text-white rounded-lg transition-colors">
+                    <i :class="copied ? 'fas fa-check' : 'fas fa-link'"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+</article>
+
+<!-- Related Posts (placeholder for future implementation) -->
+<section class="bg-gray-50 dark:bg-gray-800 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+            Súvisiace príspevky
+        </h2>
+        
+        <div class="text-center">
+            <p class="text-gray-600 dark:text-gray-300 mb-6">
+                Funkcia súvisiacich príspevkov bude dostupná v budúcej verzii.
+            </p>
+            <a href="/blog" 
+               class="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                <i class="fas fa-list me-2"></i>
+                Zobraziť všetky príspevky
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- JavaScript for sharing -->
+<script>
+document.addEventListener('alpine:init', () => {
+    window.sharePost = function(platform) {
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent(<?= json_encode($content->getTitle()) ?>);
+        
+        let shareUrl = '';
+        
+        switch(platform) {
+            case 'facebook':
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                break;
+            case 'twitter':
+                shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+                break;
+            case 'linkedin':
+                shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                break;
+        }
+        
+        if (shareUrl) {
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+        }
+    };
+    
+    window.copyLink = function() {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+            // Alpine.js will handle the UI update through x-data
+            this.copied = true;
+            setTimeout(() => {
+                this.copied = false;
+            }, 2000);
+        });
+    };
+});
+</script>
+
+<!-- Custom styles for prose content -->
+<style>
+.prose {
+    color: rgb(55 65 81);
+}
+
+.dark .prose {
+    color: rgb(209 213 219);
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+    color: rgb(17 24 39);
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.dark .prose h1, .dark .prose h2, .dark .prose h3, 
+.dark .prose h4, .dark .prose h5, .dark .prose h6 {
+    color: rgb(243 244 246);
+}
+
+.prose p {
+    margin-bottom: 1.5rem;
+    line-height: 1.75;
+}
+
+.prose img {
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    margin: 2rem 0;
+}
+
+.prose blockquote {
+    border-left: 4px solid rgb(59 130 246);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    background-color: rgb(239 246 255);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+.dark .prose blockquote {
+    background-color: rgb(30 58 138 / 0.1);
+    border-left-color: rgb(96 165 250);
+}
+
+.prose code {
+    background-color: rgb(243 244 246);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.dark .prose code {
+    background-color: rgb(55 65 81);
+    color: rgb(209 213 219);
+}
+
+.prose pre {
+    background-color: rgb(17 24 39);
+    color: rgb(243 244 246);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 2rem 0;
+}
+
+.prose pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+    font-weight: normal;
+}
+
+.prose a {
+    color: rgb(59 130 246);
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.prose a:hover {
+    color: rgb(29 78 216);
+}
+
+.dark .prose a {
+    color: rgb(96 165 250);
+}
+
+.dark .prose a:hover {
+    color: rgb(147 197 253);
+}
+
+.prose ul, .prose ol {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+}
+
+.prose li {
+    margin: 0.5rem 0;
+}
+
+.prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+}
+
+.prose th, .prose td {
+    border: 1px solid rgb(229 231 235);
+    padding: 0.75rem;
+    text-align: left;
+}
+
+.dark .prose th, .dark .prose td {
+    border-color: rgb(75 85 99);
+}
+
+.prose th {
+    background-color: rgb(249 250 251);
+    font-weight: 600;
+}
+
+.dark .prose th {
+    background-color: rgb(55 65 81);
+}
+</style>

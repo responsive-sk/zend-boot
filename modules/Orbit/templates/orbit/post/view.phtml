@@ -13,81 +13,104 @@ $this->headTitle($content->getTitle() . ' - Blog');
 $this->headMeta()->appendName('description', $content->getExcerpt() ?: 'Blog príspevok');
 ?>
 
-<div class="container mt-4">
-    <!-- Breadcrumbs -->
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Domov</a></li>
-            <li class="breadcrumb-item"><a href="/blog">Blog</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><?= $this->escapeHtml($content->getTitle()) ?></li>
-        </ol>
-    </nav>
+<!-- Breadcrumbs -->
+<section class="breadcrumb-section">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Domov</a></li>
+                <li class="breadcrumb-item"><a href="/blog">Blog</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><?= $this->escapeHtml($content->getTitle()) ?></li>
+            </ol>
+        </nav>
+    </div>
+</section>
 
-    <!-- Post Header -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <article class="blog-post">
-                <header class="mb-4">
-                    <h1 class="display-5 fw-bold"><?= $this->escapeHtml($content->getTitle()) ?></h1>
-                    
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <!-- Featured Image -->
+                <?php
+                $metadata = $content->getMetaData();
+                $image = $metadata['image'] ?? null;
+                if ($image): ?>
+                    <div class="hero-image mb-4">
+                        <img src="<?= $this->escapeHtmlAttr($image) ?>"
+                             alt="<?= $this->escapeHtmlAttr($content->getTitle()) ?>"
+                             class="img-fluid rounded shadow-lg"
+                             style="width: 100%; max-height: 500px; object-fit: cover;">
+                    </div>
+                <?php endif; ?>
+
+                <div class="text-center">
+                    <h1 class="hero-title"><?= $this->escapeHtml($content->getTitle()) ?></h1>
+
                     <!-- Meta informácie -->
-                    <div class="text-muted mb-3">
-                        <div class="row align-items-center">
-                            <div class="col-md-6">
+                    <div class="hero-meta mb-4">
+                        <div class="d-flex flex-wrap justify-content-center align-items-center gap-3">
+                            <span class="meta-item">
                                 <i class="fas fa-calendar me-2"></i>
-                                <?php 
+                                <?php
                                 $date = $content->getPublishedAt() ?? $content->getCreatedAt();
                                 echo $date ? $date->format('d. F Y') : 'Neznámy dátum';
                                 ?>
-                                
-                                <?php if ($content->getUpdatedAt() && $content->getUpdatedAt() != $content->getCreatedAt()): ?>
-                                    <span class="ms-3">
-                                        <i class="fas fa-edit me-1"></i>
-                                        Aktualizované: <?= $content->getUpdatedAt()->format('d.m.Y') ?>
-                                    </span>
-                                <?php endif; ?>
-                            </div>
-                            
-                            <div class="col-md-6 text-md-end">
-                                <?php if ($content->getCategory()): ?>
-                                    <span class="badge bg-primary me-2">
-                                        <i class="fas fa-folder me-1"></i>
-                                        <?= $this->escapeHtml($content->getCategory()->getName()) ?>
-                                    </span>
-                                <?php endif; ?>
-                                
-                                <?php if ($content->isFeatured()): ?>
-                                    <span class="badge bg-warning">
-                                        <i class="fas fa-star me-1"></i>Odporúčané
-                                    </span>
-                                <?php endif; ?>
-                            </div>
+                            </span>
+
+                            <?php if ($content->getCategory()): ?>
+                                <span class="meta-badge">
+                                    <i class="fas fa-folder me-1"></i>
+                                    <?= $this->escapeHtml($content->getCategory()->getName()) ?>
+                                </span>
+                            <?php endif; ?>
+
+                            <?php if ($content->isFeatured()): ?>
+                                <span class="meta-badge featured">
+                                    <i class="fas fa-star me-1"></i>Odporúčané
+                                </span>
+                            <?php endif; ?>
                         </div>
-                    </div>
-                    
+
+                        <?php if ($content->getExcerpt()): ?>
+                            <p class="hero-subtitle mt-3">
+                                <?= $this->escapeHtml($content->getExcerpt()) ?>
+                            </p>
+                        <?php endif; ?>
+
                     <!-- Tags -->
                     <?php if ($content->getTags()): ?>
-                        <div class="mb-3">
+                        <div class="hero-tags">
                             <?php foreach ($content->getTags() as $tag): ?>
-                                <span class="badge bg-secondary me-1">
+                                <span class="tag-badge">
                                     <i class="fas fa-tag me-1"></i><?= $this->escapeHtml($tag->getName()) ?>
                                 </span>
                             <?php endforeach; ?>
                         </div>
                     <?php endif; ?>
-                </header>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-                <!-- Post Content -->
-                <div class="post-content">
+<!-- Content Section -->
+<section class="content-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="post-article">
                     <?php if ($content->getRenderedContent()): ?>
-                        <?= $content->getRenderedContent() ?>
+                        <div class="post-content">
+                            <?= $content->getRenderedContent() ?>
+                        </div>
                     <?php else: ?>
                         <div class="alert alert-warning">
                             <i class="fas fa-exclamation-triangle me-2"></i>
                             Obsah príspevku sa nepodarilo načítať.
                         </div>
                     <?php endif; ?>
-                </div>
+                </article>
 
                 <!-- Post Footer -->
                 <footer class="mt-5 pt-4 border-top">

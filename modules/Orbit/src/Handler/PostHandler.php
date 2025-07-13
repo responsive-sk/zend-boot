@@ -41,7 +41,7 @@ class PostHandler implements RequestHandlerInterface
         $content = $this->orbitManager->loadContentFromFile($content);
         
         return new HtmlResponse(
-            $this->template->render('orbit::post/view', [
+            $this->template->render('orbit::post/view-test', [
                 'content' => $content,
             ])
         );

@@ -1,0 +1,400 @@
+<?php
+/**
+ * Orbit CMS - Advanced Editor Template
+ *
+ * @var \Orbit\Entity\Content|null $content
+ * @var array $categories
+ * @var array $tags
+ * @var string $title
+ */
+
+$this->layout('layout::home', ['title' => $title]);
+?>
+
+<div class="container-fluid mt-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1><i class="fas fa-code me-2"></i>Orbit Editor</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/mark">Mark Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="/mark/orbit">Orbit CMS</a></li>
+                    <li class="breadcrumb-item active">Editor</li>
+                </ol>
+            </nav>
+        </div>
+        <div>
+            <button type="button" class="btn btn-outline-info me-2" id="previewBtn">
+                <i class="fas fa-eye me-2"></i>Náhľad
+            </button>
+            <button type="button" class="btn btn-success" id="saveBtn">
+                <i class="fas fa-save me-2"></i>Uložiť
+            </button>
+        </div>
+    </div>
+
+    <!-- Editor Interface -->
+    <div class="row">
+        <!-- Left Panel - Editor -->
+        <div class="col-lg-8">
+            <div class="card h-100">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-edit me-2"></i>Markdown Editor
+                        </h5>
+                        <div class="btn-group btn-group-sm" role="group">
+                            <button type="button" class="btn btn-outline-secondary active" id="editTab">
+                                <i class="fas fa-edit me-1"></i>Edit
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary" id="previewTab">
+                                <i class="fas fa-eye me-1"></i>Preview
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary" id="splitTab">
+                                <i class="fas fa-columns me-1"></i>Split
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="editor-container">
+                        <!-- Markdown Editor -->
+                        <div class="editor-pane" id="editorPane">
+                            <textarea class="form-control border-0 h-100" 
+                                      id="markdownEditor" 
+                                      placeholder="Začnite písať váš obsah v Markdown formáte..."
+                                      style="resize: none; min-height: 600px;"><?= $content ? $this->escapeHtml($content->getRawContent()) : '' ?></textarea>
+                        </div>
+                        
+                        <!-- Preview Pane -->
+                        <div class="preview-pane d-none" id="previewPane">
+                            <div class="p-4 h-100 overflow-auto" id="previewContent" style="min-height: 600px;">
+                                <p class="text-muted">Náhľad sa zobrazí po napísaní obsahu...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Panel - Metadata -->
+        <div class="col-lg-4">
+            <!-- Content Info -->
+            <?php if ($content): ?>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h6 class="card-title mb-0">
+                        <i class="fas fa-info-circle me-2"></i>Informácie o obsahu
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <small class="text-muted">ID:</small><br>
+                            <strong><?= $content->getId() ?></strong>
+                        </div>
+                        <div class="col-6">
+                            <small class="text-muted">Typ:</small><br>
+                            <strong><?= ucfirst($content->getType()) ?></strong>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-6">
+                            <small class="text-muted">Vytvorené:</small><br>
+                            <small><?= $content->getCreatedAt()?->format('d.m.Y H:i') ?? '-' ?></small>
+                        </div>
+                        <div class="col-6">
+                            <small class="text-muted">Aktualizované:</small><br>
+                            <small><?= $content->getUpdatedAt()?->format('d.m.Y H:i') ?? '-' ?></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
+            
+            <!-- Metadata Form -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h6 class="card-title mb-0">
+                        <i class="fas fa-cog me-2"></i>Metadata
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <form id="metadataForm">
+                        <!-- Title -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Názov *</label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="title" 
+                                   name="title" 
+                                   value="<?= $content ? $this->escapeHtmlAttr($content->getTitle()) : '' ?>"
+                                   required>
+                        </div>
+                        
+                        <!-- Slug -->
+                        <div class="mb-3">
+                            <label for="slug" class="form-label">URL slug *</label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="slug" 
+                                   name="slug" 
+                                   value="<?= $content ? $this->escapeHtmlAttr($content->getSlug()) : '' ?>"
+                                   required>
+                        </div>
+                        
+                        <!-- Type -->
+                        <div class="mb-3">
+                            <label for="type" class="form-label">Typ obsahu</label>
+                            <select class="form-select" id="type" name="type">
+                                <option value="post" <?= $content && $content->getType() === 'post' ? 'selected' : '' ?>>Blog príspevok</option>
+                                <option value="page" <?= $content && $content->getType() === 'page' ? 'selected' : '' ?>>Stránka</option>
+                                <option value="docs" <?= $content && $content->getType() === 'docs' ? 'selected' : '' ?>>Dokumentácia</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Status -->
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" 
+                                       type="checkbox" 
+                                       id="published" 
+                                       name="published" 
+                                       value="1"
+                                       <?= $content && $content->isPublished() ? 'checked' : '' ?>>
+                                <label class="form-check-label" for="published">
+                                    Publikované
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Featured -->
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" 
+                                       type="checkbox" 
+                                       id="featured" 
+                                       name="featured" 
+                                       value="1"
+                                       <?= $content && $content->isFeatured() ? 'checked' : '' ?>>
+                                <label class="form-check-label" for="featured">
+                                    Odporúčané
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Category -->
+                        <?php if (!empty($categories)): ?>
+                        <div class="mb-3">
+                            <label for="category_id" class="form-label">Kategória</label>
+                            <select class="form-select" id="category_id" name="category_id">
+                                <option value="">-- Vyberte kategóriu --</option>
+                                <?php foreach ($categories as $category): ?>
+                                    <option value="<?= $category->getId() ?>"
+                                            <?= $content && $content->getCategory() && $content->getCategory()->getId() == $category->getId() ? 'selected' : '' ?>>
+                                        <?= $this->escapeHtml($category->getName()) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <?php endif; ?>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Markdown Help -->
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title mb-0">
+                        <i class="fab fa-markdown me-2"></i>Markdown Nápoveda
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="markdown-help">
+                        <div class="mb-2">
+                            <code># Nadpis 1</code><br>
+                            <code>## Nadpis 2</code><br>
+                            <code>### Nadpis 3</code>
+                        </div>
+                        <div class="mb-2">
+                            <code>**tučné**</code><br>
+                            <code>*kurzíva*</code>
+                        </div>
+                        <div class="mb-2">
+                            <code>[odkaz](url)</code><br>
+                            <code>![obrázok](url)</code>
+                        </div>
+                        <div class="mb-2">
+                            <code>`kód`</code><br>
+                            <code>```blok kódu```</code>
+                        </div>
+                        <div class="mb-2">
+                            <code>- zoznam</code><br>
+                            <code>1. číslovaný</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const editor = document.getElementById('markdownEditor');
+    const previewContent = document.getElementById('previewContent');
+    const editTab = document.getElementById('editTab');
+    const previewTab = document.getElementById('previewTab');
+    const splitTab = document.getElementById('splitTab');
+    const editorPane = document.getElementById('editorPane');
+    const previewPane = document.getElementById('previewPane');
+    
+    let currentMode = 'edit';
+    
+    // Tab switching
+    editTab.addEventListener('click', () => switchMode('edit'));
+    previewTab.addEventListener('click', () => switchMode('preview'));
+    splitTab.addEventListener('click', () => switchMode('split'));
+    
+    function switchMode(mode) {
+        currentMode = mode;
+        
+        // Update tab states
+        document.querySelectorAll('.btn-group .btn').forEach(btn => btn.classList.remove('active'));
+        
+        switch (mode) {
+            case 'edit':
+                editTab.classList.add('active');
+                editorPane.classList.remove('d-none');
+                previewPane.classList.add('d-none');
+                break;
+            case 'preview':
+                previewTab.classList.add('active');
+                editorPane.classList.add('d-none');
+                previewPane.classList.remove('d-none');
+                updatePreview();
+                break;
+            case 'split':
+                splitTab.classList.add('active');
+                editorPane.classList.remove('d-none');
+                previewPane.classList.remove('d-none');
+                editorPane.style.width = '50%';
+                previewPane.style.width = '50%';
+                updatePreview();
+                break;
+        }
+    }
+    
+    // Auto-update preview in split mode
+    editor.addEventListener('input', function() {
+        if (currentMode === 'split' || currentMode === 'preview') {
+            debounce(updatePreview, 500)();
+        }
+    });
+    
+    function updatePreview() {
+        const markdown = editor.value;
+        
+        fetch('/mark/orbit/editor/preview', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ markdown: markdown })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                previewContent.innerHTML = data.html || '<p class="text-muted">Žiadny obsah na zobrazenie...</p>';
+            }
+        })
+        .catch(error => {
+            console.error('Preview error:', error);
+            previewContent.innerHTML = '<p class="text-danger">Chyba pri načítavaní náhľadu</p>';
+        });
+    }
+    
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+    
+    // Auto-generate slug from title
+    const titleInput = document.getElementById('title');
+    const slugInput = document.getElementById('slug');
+    
+    titleInput.addEventListener('input', function() {
+        if (!slugInput.value || slugInput.dataset.autoGenerated !== 'false') {
+            const slug = this.value
+                .toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-')
+                .trim('-');
+            slugInput.value = slug;
+            slugInput.dataset.autoGenerated = 'true';
+        }
+    });
+    
+    slugInput.addEventListener('input', function() {
+        this.dataset.autoGenerated = 'false';
+    });
+});
+</script>
+
+<style>
+.editor-container {
+    display: flex;
+    height: 600px;
+}
+
+.editor-pane, .preview-pane {
+    flex: 1;
+    border-right: 1px solid var(--border-color);
+}
+
+.preview-pane {
+    border-right: none;
+    background-color: #f8f9fa;
+}
+
+.markdown-help code {
+    font-size: 0.8rem;
+    background-color: #f8f9fa;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+#markdownEditor {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+#markdownEditor:focus {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.card {
+    border: 1px solid var(--border-color);
+}
+
+.card-header {
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+</style>

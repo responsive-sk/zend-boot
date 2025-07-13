@@ -1,0 +1,35 @@
+<?php
+/**
+ * Orbit CMS - Post View Template (Test)
+ *
+ * @var \Orbit\Entity\Content $content
+ */
+
+$this->layout('layout::home', [
+    'title' => $content->getTitle() . ' - Blog'
+]);
+
+$this->headTitle($content->getTitle() . ' - Blog');
+$this->headMeta()->appendName('description', $content->getExcerpt() ?: 'Blog príspevok');
+?>
+
+<div class="container mt-4">
+    <h1><?= $this->escapeHtml($content->getTitle()) ?></h1>
+    
+    <?php 
+    $metadata = $content->getMetaData();
+    $image = $metadata['image'] ?? null;
+    if ($image): ?>
+        <img src="<?= $this->escapeHtmlAttr($image) ?>" alt="<?= $this->escapeHtmlAttr($content->getTitle()) ?>" class="img-fluid mb-4">
+    <?php endif; ?>
+    
+    <div class="content">
+        <?php if ($content->getRenderedContent()): ?>
+            <?= $content->getRenderedContent() ?>
+        <?php else: ?>
+            <p>Obsah sa nepodarilo načítať.</p>
+        <?php endif; ?>
+    </div>
+    
+    <a href="/blog" class="btn btn-primary mt-4">Späť na blog</a>
+</div>

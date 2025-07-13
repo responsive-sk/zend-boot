@@ -290,7 +290,7 @@ class ContentRepository
         $metaData = json_decode($row['meta_data'] ?? '{}', true);
         assert(is_array($metaData));
         $content->setMetaData($metaData);
-        $content->setContentHash($row['content_hash']);
+        $content->setContentHash($row['content_hash'] ?? '');
         $content->setPublished((bool) $row['published']);
         $content->setFeatured((bool) $row['featured']);
         $content->setCategoryId($row['category_id'] ? (int) $row['category_id'] : null);

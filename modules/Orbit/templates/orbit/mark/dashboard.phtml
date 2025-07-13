@@ -1,0 +1,330 @@
+<?php
+/**
+ * Orbit CMS - Mark Dashboard Template
+ *
+ * @var array $stats
+ * @var array $recent_content
+ * @var array $categories
+ * @var array $tags
+ * @var string $title
+ */
+
+$this->layout('layout::home', ['title' => $title]);
+?>
+
+<div class="container mt-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1><i class="fas fa-satellite me-2"></i>Orbit CMS Dashboard</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/mark">Mark Dashboard</a></li>
+                    <li class="breadcrumb-item active">Orbit CMS</li>
+                </ol>
+            </nav>
+        </div>
+        <div>
+            <a href="/mark/orbit/editor" class="btn btn-primary me-2">
+                <i class="fas fa-code me-2"></i>Editor
+            </a>
+            <a href="/mark/orbit/content/create" class="btn btn-success">
+                <i class="fas fa-plus me-2"></i>Nový Obsah
+            </a>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4><?= $stats['total'] ?></h4>
+                            <p class="mb-0">Celkom obsahu</p>
+                        </div>
+                        <div>
+                            <i class="fas fa-file-alt fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4><?= $stats['published'] ?></h4>
+                            <p class="mb-0">Publikované</p>
+                        </div>
+                        <div>
+                            <i class="fas fa-check-circle fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4><?= $stats['draft'] ?></h4>
+                            <p class="mb-0">Koncepty</p>
+                        </div>
+                        <div>
+                            <i class="fas fa-edit fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4><?= $stats['featured'] ?></h4>
+                            <p class="mb-0">Odporúčané</p>
+                        </div>
+                        <div>
+                            <i class="fas fa-star fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Type Stats -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-edit fa-3x text-primary mb-3"></i>
+                    <h4><?= $stats['by_type']['post'] ?></h4>
+                    <p class="text-muted">Blog príspevky</p>
+                    <a href="/mark/orbit/content/post" class="btn btn-outline-primary btn-sm">Spravovať</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-file fa-3x text-success mb-3"></i>
+                    <h4><?= $stats['by_type']['page'] ?></h4>
+                    <p class="text-muted">Stránky</p>
+                    <a href="/mark/orbit/content/page" class="btn btn-outline-success btn-sm">Spravovať</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-book fa-3x text-info mb-3"></i>
+                    <h4><?= $stats['by_type']['docs'] ?></h4>
+                    <p class="text-muted">Dokumentácia</p>
+                    <a href="/mark/orbit/content/docs" class="btn btn-outline-info btn-sm">Spravovať</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-bolt me-2"></i>Rýchle akcie
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a href="/mark/orbit/content/post/create" class="btn btn-outline-primary">
+                            <i class="fas fa-plus me-2"></i>Nový blog príspevok
+                        </a>
+                        <a href="/mark/orbit/content/page/create" class="btn btn-outline-success">
+                            <i class="fas fa-plus me-2"></i>Nová stránka
+                        </a>
+                        <a href="/mark/orbit/content/docs/create" class="btn btn-outline-info">
+                            <i class="fas fa-plus me-2"></i>Nová dokumentácia
+                        </a>
+                        <hr>
+                        <a href="/mark/orbit/editor" class="btn btn-outline-primary">
+                            <i class="fas fa-code me-2"></i>Pokročilý editor
+                        </a>
+                        <a href="/mark/orbit/content" class="btn btn-outline-secondary">
+                            <i class="fas fa-list me-2"></i>Všetok obsah
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-tags me-2"></i>Kategórie a tagy
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <h6>Kategórie (<?= count($categories) ?>)</h6>
+                            <?php if (empty($categories)): ?>
+                                <p class="text-muted small">Žiadne kategórie</p>
+                            <?php else: ?>
+                                <?php foreach (array_slice($categories, 0, 3) as $category): ?>
+                                    <span class="badge me-1 mb-1" style="background-color: <?= $category->getColor() ?>">
+                                        <?= $this->escapeHtml($category->getName()) ?>
+                                    </span>
+                                <?php endforeach; ?>
+                                <?php if (count($categories) > 3): ?>
+                                    <span class="text-muted small">+<?= count($categories) - 3 ?> ďalších</span>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
+                        <div class="col-6">
+                            <h6>Tagy (<?= count($tags) ?>)</h6>
+                            <?php if (empty($tags)): ?>
+                                <p class="text-muted small">Žiadne tagy</p>
+                            <?php else: ?>
+                                <?php foreach (array_slice($tags, 0, 3) as $tag): ?>
+                                    <span class="badge bg-secondary me-1 mb-1">
+                                        <?= $this->escapeHtml($tag->getName()) ?>
+                                    </span>
+                                <?php endforeach; ?>
+                                <?php if (count($tags) > 3): ?>
+                                    <span class="text-muted small">+<?= count($tags) - 3 ?> ďalších</span>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Content -->
+    <?php if (!empty($recent_content)): ?>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">
+                <i class="fas fa-clock me-2"></i>Nedávny obsah
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Názov</th>
+                            <th>Typ</th>
+                            <th>Stav</th>
+                            <th>Aktualizované</th>
+                            <th>Akcie</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($recent_content as $content): ?>
+                        <tr>
+                            <td>
+                                <strong><?= $this->escapeHtml($content->getTitle()) ?></strong>
+                                <?php if ($content->isFeatured()): ?>
+                                    <span class="badge bg-warning ms-2">Featured</span>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <span class="badge bg-light text-dark">
+                                    <?= ucfirst($content->getType()) ?>
+                                </span>
+                            </td>
+                            <td>
+                                <?php if ($content->isPublished()): ?>
+                                    <span class="badge bg-success">Publikované</span>
+                                <?php else: ?>
+                                    <span class="badge bg-secondary">Koncept</span>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <?php if ($content->getUpdatedAt()): ?>
+                                    <?= $content->getUpdatedAt()->format('d.m.Y H:i') ?>
+                                <?php else: ?>
+                                    <span class="text-muted">-</span>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <a href="<?= $content->getUrl() ?>" 
+                                       class="btn btn-outline-primary" 
+                                       target="_blank" 
+                                       title="Zobraziť">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="/mark/orbit/content/<?= $content->getType() ?>/<?= $content->getId() ?>/edit" 
+                                       class="btn btn-outline-secondary" 
+                                       title="Editovať">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center mt-3">
+                <a href="/mark/orbit/content" class="btn btn-outline-primary">
+                    <i class="fas fa-list me-2"></i>Zobraziť všetok obsah
+                </a>
+            </div>
+        </div>
+    </div>
+    <?php else: ?>
+    <div class="card">
+        <div class="card-body text-center py-5">
+            <i class="fas fa-file-alt fa-3x text-muted mb-3"></i>
+            <h4>Žiadny obsah</h4>
+            <p class="text-muted">Zatiaľ nebol vytvorený žiadny obsah.</p>
+            <a href="/mark/orbit/content/create" class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>Vytvoriť prvý obsah
+            </a>
+        </div>
+    </div>
+    <?php endif; ?>
+</div>
+
+<style>
+.card {
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.card-header {
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.table th {
+    border-top: none;
+    font-weight: 600;
+    color: #495057;
+}
+
+.btn-group-sm .btn {
+    padding: 0.25rem 0.5rem;
+}
+
+.badge {
+    font-size: 0.75em;
+}
+</style>

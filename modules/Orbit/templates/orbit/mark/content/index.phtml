@@ -24,6 +24,9 @@ $this->layout('layout::home', ['title' => $title]);
             </nav>
         </div>
         <div>
+            <a href="/mark/orbit/editor" class="btn btn-primary me-2">
+                <i class="fas fa-code me-2"></i>Editor
+            </a>
             <a href="/mark/orbit/content/create" class="btn btn-success">
                 <i class="fas fa-plus me-2"></i>Nový Obsah
             </a>
@@ -162,10 +165,15 @@ $this->layout('layout::home', ['title' => $title]);
                                                    title="Zobraziť">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
-                                                <a href="/mark/orbit/content/<?= $content->getType() ?>/<?= $content->getId() ?>/edit" 
-                                                   class="btn btn-outline-secondary" 
+                                                <a href="/mark/orbit/content/<?= $content->getType() ?>/<?= $content->getId() ?>/edit"
+                                                   class="btn btn-outline-secondary"
                                                    title="Editovať">
                                                     <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a href="/mark/orbit/editor/<?= $content->getId() ?>"
+                                                   class="btn btn-outline-info"
+                                                   title="Pokročilý editor">
+                                                    <i class="fas fa-code"></i>
                                                 </a>
                                                 <form method="POST" 
                                                       action="/mark/orbit/content/<?= $content->getType() ?>/<?= $content->getId() ?>/delete" 

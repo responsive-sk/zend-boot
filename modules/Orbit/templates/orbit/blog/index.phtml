@@ -16,72 +16,90 @@ $this->headTitle($title ?? 'Blog');
 $this->headMeta()->appendName('description', 'Blog príspevky - najnovšie články a novinky');
 ?>
 
-<div class="container mt-4">
-    <!-- Header -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="text-center">
-                <h1><i class="fas fa-blog me-2"></i><?= $this->escapeHtml($title ?? 'Blog') ?></h1>
-                <p class="lead">Najnovšie články a novinky</p>
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <div class="hero-icon mb-4">
+                    <i class="fas fa-blog"></i>
+                </div>
+                <h1 class="hero-title"><?= $this->escapeHtml($title ?? 'Blog') ?></h1>
+                <p class="hero-subtitle">
+                    Najnovšie články, novinky a poznatky z vývoja a používania Orbit CMS
+                </p>
             </div>
         </div>
     </div>
+</section>
 
-    <?php if (!empty($posts)): ?>
-        <!-- Blog Posts -->
-        <div class="row">
-            <?php foreach ($posts as $post): ?>
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="/blog/<?= $this->escapeHtmlAttr($post->getSlug()) ?>" class="text-decoration-none">
-                                    <?= $this->escapeHtml($post->getTitle()) ?>
-                                </a>
-                            </h5>
-                            
-                            <!-- Meta informácie -->
-                            <div class="text-muted small mb-2">
-                                <i class="fas fa-calendar me-1"></i>
-                                <?php 
-                                $date = $post->getPublishedAt() ?? $post->getCreatedAt();
-                                echo $date ? $date->format('d.m.Y') : 'Neznámy dátum';
-                                ?>
-                                
-                                <?php if ($post->getCategory()): ?>
-                                    <span class="ms-2">
-                                        <i class="fas fa-folder me-1"></i>
-                                        <span class="badge bg-primary"><?= $this->escapeHtml($post->getCategory()->getName()) ?></span>
-                                    </span>
-                                <?php endif; ?>
-                            </div>
-                            
-                            <!-- Excerpt -->
-                            <?php if ($post->getExcerpt()): ?>
-                                <p class="card-text"><?= $this->escapeHtml($post->getExcerpt()) ?></p>
+<!-- Blog Posts Section -->
+<section class="portfolio-section">
+    <div class="container">
+        <?php if (!empty($posts)): ?>
+            <div class="portfolio-grid">
+                <?php foreach ($posts as $post): ?>
+                    <div class="portfolio-card">
+                        <!-- Portfolio Image/Header -->
+                        <div class="portfolio-image">
+                            <?php
+                            $metadata = $post->getMetaData();
+                            $image = $metadata['image'] ?? null;
+                            if ($image): ?>
+                                <img src="<?= $this->escapeHtmlAttr($image) ?>" alt="<?= $this->escapeHtmlAttr($post->getTitle()) ?>" />
                             <?php endif; ?>
-                            
-                            <!-- Tags -->
-                            <?php if ($post->getTags()): ?>
-                                <div class="mb-2">
-                                    <?php foreach ($post->getTags() as $tag): ?>
-                                        <span class="badge bg-secondary me-1">
-                                            <i class="fas fa-tag me-1"></i><?= $this->escapeHtml($tag->getName()) ?>
-                                        </span>
-                                    <?php endforeach; ?>
+
+                            <?php if ($post->isFeatured()): ?>
+                                <div class="image-label">
+                                    <i class="fas fa-star me-1"></i>Odporúčané
+                                </div>
+                            <?php else: ?>
+                                <div class="image-label">
+                                    <i class="fas fa-blog me-1"></i>Blog Post
                                 </div>
                             <?php endif; ?>
                         </div>
-                        
-                        <div class="card-footer bg-transparent">
-                            <a href="/blog/<?= $this->escapeHtmlAttr($post->getSlug()) ?>" class="btn btn-outline-primary btn-sm">
-                                <i class="fas fa-arrow-right me-1"></i>Čítať viac
-                            </a>
+
+                        <!-- Portfolio Content -->
+                        <div class="portfolio-content">
+                            <h3>
+                                <a href="/blog/<?= $this->escapeHtmlAttr($post->getSlug()) ?>">
+                                    <?= $this->escapeHtml($post->getTitle()) ?>
+                                </a>
+                            </h3>
+
+                            <p class="portfolio-tech">
+                                <i class="fas fa-calendar me-1"></i>
+                                <?php
+                                $date = $post->getPublishedAt() ?? $post->getCreatedAt();
+                                echo $date ? $date->format('d.m.Y') : 'Neznámy dátum';
+                                ?>
+                                <?php if ($post->getCategory()): ?>
+                                    • <?= $this->escapeHtml($post->getCategory()->getName()) ?>
+                                <?php endif; ?>
+                            </p>
+
+                            <?php if ($post->getExcerpt()): ?>
+                                <p><?= $this->escapeHtml($post->getExcerpt()) ?></p>
+                            <?php endif; ?>
+
+                            <!-- Portfolio Stats (Tags) -->
+                            <?php if ($post->getTags()): ?>
+                                <div class="portfolio-stats">
+                                    <?php foreach (array_slice($post->getTags(), 0, 3) as $tag): ?>
+                                        <span class="stat">
+                                            <i class="fas fa-tag me-1"></i><?= $this->escapeHtml($tag->getName()) ?>
+                                        </span>
+                                    <?php endforeach; ?>
+                                    <?php if (count($post->getTags()) > 3): ?>
+                                        <span class="stat">+<?= count($post->getTags()) - 3 ?> ďalších</span>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
+                <?php endforeach; ?>
+            </div>
 
         <!-- Pagination -->
         <?php if (isset($pagination) && $pagination['pages'] > 1): ?>
@@ -119,19 +137,23 @@ $this->headMeta()->appendName('description', 'Blog príspevky - najnovšie člá
             </div>
         <?php endif; ?>
 
-    <?php else: ?>
-        <!-- Žiadne príspevky -->
-        <div class="row">
-            <div class="col-12">
-                <div class="alert alert-info text-center">
-                    <i class="fas fa-info-circle me-2"></i>
-                    <strong>Žiadne príspevky</strong><br>
-                    Momentálne nie sú publikované žiadne blog príspevky.
+        <?php else: ?>
+            <!-- Empty State -->
+            <div class="text-center py-5">
+                <div class="hero-icon mb-4">
+                    <i class="fas fa-file-alt"></i>
                 </div>
+                <h3>Žiadne príspevky</h3>
+                <p class="text-muted mb-4">
+                    Momentálne nie sú publikované žiadne blog príspevky.
+                </p>
+                <a href="/mark/orbit/content" class="btn btn-primary">
+                    <i class="fas fa-plus me-2"></i>Vytvoriť prvý príspevok
+                </a>
             </div>
-        </div>
-    <?php endif; ?>
-</div>
+        <?php endif; ?>
+    </div>
+</section>
 
 <!-- Search functionality -->
 <?php if ($searchEnabled ?? false): ?>

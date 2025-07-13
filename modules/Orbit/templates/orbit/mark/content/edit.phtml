@@ -1,0 +1,369 @@
+<?php
+/**
+ * Orbit CMS - Edit Content Template
+ *
+ * @var \Orbit\Entity\Content $content
+ * @var array $categories
+ * @var array $tags
+ * @var array $form_data
+ * @var string $error
+ * @var string $title
+ */
+
+$this->layout('layout::home', [
+    'title' => $title ?? 'Editácia obsahu - Orbit CMS'
+]);
+
+// Use form_data if available, otherwise use content data
+$formData = $form_data ?? [
+    'title' => $content->getTitle(),
+    'slug' => $content->getSlug(),
+    'description' => $content->getMetaData()['description'] ?? '',
+    'keywords' => $content->getMetaData()['keywords'] ?? '',
+    'author' => $content->getMetaData()['author'] ?? '',
+    'body' => $content->getBody(),
+    'published' => $content->isPublished(),
+    'featured' => $content->isFeatured(),
+    'category_id' => $content->getCategory()?->getId(),
+];
+?>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <div class="hero-icon mb-4">
+                    <i class="fas fa-edit"></i>
+                </div>
+                <h1 class="hero-title">Editácia: <?= $this->escapeHtml($content->getTitle()) ?></h1>
+                <p class="hero-subtitle">
+                    <?= $content->getType() === 'post' ? 'Blog príspevok' : ($content->getType() === 'page' ? 'Stránka' : 'Obsah') ?>
+                    • Posledná úprava: <?= $content->getUpdatedAt()?->format('d.m.Y H:i') ?? 'Nikdy' ?>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Success/Error Messages -->
+<?php if (isset($_GET['updated'])): ?>
+    <div class="container">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>
+            Obsah bol úspešne aktualizovaný!
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    </div>
+<?php endif; ?>
+
+<?php if (isset($_GET['created'])): ?>
+    <div class="container">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>
+            Obsah bol úspešne vytvorený!
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    </div>
+<?php endif; ?>
+
+<!-- Content Form Section -->
+<section class="content-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                
+                <!-- Error Message -->
+                <?php if (isset($error)): ?>
+                    <div class="alert alert-danger mb-4">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <?= $this->escapeHtml($error) ?>
+                    </div>
+                <?php endif; ?>
+                
+                <!-- Edit Form -->
+                <form method="POST" class="content-form">
+                    <div class="row">
+                        <!-- Left Column - Main Content -->
+                        <div class="col-lg-8">
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">
+                                        <i class="fas fa-edit me-2"></i>Obsah
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Title -->
+                                    <div class="mb-3">
+                                        <label for="title" class="form-label">Názov *</label>
+                                        <input type="text" 
+                                               class="form-control" 
+                                               id="title" 
+                                               name="title" 
+                                               value="<?= $this->escapeHtmlAttr($formData['title']) ?>"
+                                               required>
+                                    </div>
+                                    
+                                    <!-- Slug -->
+                                    <div class="mb-3">
+                                        <label for="slug" class="form-label">URL slug *</label>
+                                        <input type="text" 
+                                               class="form-control" 
+                                               id="slug" 
+                                               name="slug" 
+                                               value="<?= $this->escapeHtmlAttr($formData['slug']) ?>"
+                                               required>
+                                        <div class="form-text">URL adresa (napr. moj-prvy-prispevok)</div>
+                                    </div>
+                                    
+                                    <!-- Description -->
+                                    <div class="mb-3">
+                                        <label for="description" class="form-label">Krátky popis</label>
+                                        <textarea class="form-control" 
+                                                  id="description" 
+                                                  name="description" 
+                                                  rows="3"><?= $this->escapeHtml($formData['description']) ?></textarea>
+                                        <div class="form-text">Krátky popis pre SEO a náhľady</div>
+                                    </div>
+                                    
+                                    <!-- Content Body -->
+                                    <div class="mb-3">
+                                        <label for="body" class="form-label">Obsah (Markdown) *</label>
+                                        <textarea class="form-control markdown-editor" 
+                                                  id="body" 
+                                                  name="body" 
+                                                  rows="20" 
+                                                  required><?= $this->escapeHtml($formData['body']) ?></textarea>
+                                        <div class="form-text">
+                                            Použite <a href="https://www.markdownguide.org/basic-syntax/" target="_blank">Markdown syntax</a> pre formátovanie
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Column - Metadata -->
+                        <div class="col-lg-4">
+                            <!-- Content Info -->
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-header">
+                                    <h6 class="card-title mb-0">
+                                        <i class="fas fa-info-circle me-2"></i>Informácie
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <small class="text-muted">ID:</small><br>
+                                            <strong><?= $content->getId() ?></strong>
+                                        </div>
+                                        <div class="col-6">
+                                            <small class="text-muted">Typ:</small><br>
+                                            <strong><?= ucfirst($content->getType()) ?></strong>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <small class="text-muted">Vytvorené:</small><br>
+                                            <small><?= $content->getCreatedAt()?->format('d.m.Y H:i') ?? '-' ?></small>
+                                        </div>
+                                        <div class="col-6">
+                                            <small class="text-muted">Aktualizované:</small><br>
+                                            <small><?= $content->getUpdatedAt()?->format('d.m.Y H:i') ?? '-' ?></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Publish Settings -->
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-header">
+                                    <h6 class="card-title mb-0">
+                                        <i class="fas fa-cog me-2"></i>Nastavenia
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Status -->
+                                    <div class="mb-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" 
+                                                   type="checkbox" 
+                                                   id="published" 
+                                                   name="published" 
+                                                   value="1"
+                                                   <?= $formData['published'] ? 'checked' : '' ?>>
+                                            <label class="form-check-label" for="published">
+                                                Publikované
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Featured -->
+                                    <?php if ($content->getType() === 'post'): ?>
+                                        <div class="mb-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" 
+                                                       type="checkbox" 
+                                                       id="featured" 
+                                                       name="featured" 
+                                                       value="1"
+                                                       <?= $formData['featured'] ? 'checked' : '' ?>>
+                                                <label class="form-check-label" for="featured">
+                                                    Odporúčané
+                                                </label>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                    
+                                    <!-- Category -->
+                                    <?php if (!empty($categories)): ?>
+                                        <div class="mb-3">
+                                            <label for="category_id" class="form-label">Kategória</label>
+                                            <select class="form-select" id="category_id" name="category_id">
+                                                <option value="">-- Vyberte kategóriu --</option>
+                                                <?php foreach ($categories as $category): ?>
+                                                    <option value="<?= $category->getId() ?>"
+                                                            <?= $formData['category_id'] == $category->getId() ? 'selected' : '' ?>>
+                                                        <?= $this->escapeHtml($category->getName()) ?>
+                                                    </option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                            
+                            <!-- SEO Settings -->
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-header">
+                                    <h6 class="card-title mb-0">
+                                        <i class="fas fa-search me-2"></i>SEO
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Keywords -->
+                                    <div class="mb-3">
+                                        <label for="keywords" class="form-label">Kľúčové slová</label>
+                                        <input type="text" 
+                                               class="form-control" 
+                                               id="keywords" 
+                                               name="keywords" 
+                                               value="<?= $this->escapeHtmlAttr($formData['keywords']) ?>">
+                                        <div class="form-text">Oddelené čiarkami</div>
+                                    </div>
+                                    
+                                    <!-- Author -->
+                                    <div class="mb-3">
+                                        <label for="author" class="form-label">Autor</label>
+                                        <input type="text" 
+                                               class="form-control" 
+                                               id="author" 
+                                               name="author" 
+                                               value="<?= $this->escapeHtmlAttr($formData['author']) ?>">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Actions -->
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <div class="d-grid gap-2">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save me-2"></i>Uložiť zmeny
+                                        </button>
+                                        <a href="<?= $content->getUrl() ?>"
+                                           class="btn btn-outline-info"
+                                           target="_blank">
+                                            <i class="fas fa-eye me-2"></i>Náhľad
+                                        </a>
+                                        <a href="/mark/orbit/editor/<?= $content->getId() ?>"
+                                           class="btn btn-outline-primary">
+                                            <i class="fas fa-code me-2"></i>Pokročilý editor
+                                        </a>
+                                        <a href="/mark/orbit/content/<?= $content->getType() ?>" class="btn btn-outline-secondary">
+                                            <i class="fas fa-arrow-left me-2"></i>Späť na zoznam
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Auto-generate slug from title -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const titleInput = document.getElementById('title');
+    const slugInput = document.getElementById('slug');
+
+    titleInput.addEventListener('input', function() {
+        if (!slugInput.value || slugInput.dataset.autoGenerated !== 'false') {
+            const slug = this.value
+                .toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-')
+                .trim('-');
+            slugInput.value = slug;
+            slugInput.dataset.autoGenerated = 'true';
+        }
+    });
+
+    slugInput.addEventListener('input', function() {
+        this.dataset.autoGenerated = 'false';
+    });
+});
+</script>
+
+<style>
+.content-form .card {
+    border: 1px solid var(--border-color);
+}
+
+.content-form .card-header {
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.markdown-editor {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.form-text {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 4rem 0 2rem;
+}
+
+.hero-icon i {
+    font-size: 3rem;
+    opacity: 0.8;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.content-section {
+    padding: 3rem 0;
+}
+</style>

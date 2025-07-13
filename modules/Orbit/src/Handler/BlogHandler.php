@@ -31,12 +31,22 @@ class BlogHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+        // DEBUG: Log that BlogHandler is being called
+        error_log('BlogHandler::handle() called for: ' . $request->getUri()->getPath());
+
         $posts = $this->orbitManager->getAllContent('post', true);
         
         return new HtmlResponse(
             $this->template->render('orbit::blog/index', [
                 'posts' => $posts,
                 'title' => 'Blog',
+                'searchEnabled' => true,
+                'pagination' => [
+                    'page' => 1,
+                    'per_page' => 10,
+                    'total' => count($posts),
+                    'pages' => 1,
+                ],
             ])
         );
     }

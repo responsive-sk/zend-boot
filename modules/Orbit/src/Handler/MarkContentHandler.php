@@ -182,13 +182,19 @@ class MarkContentHandler implements RequestHandlerInterface
             $categories = $this->orbitManager->getAllCategories();
             $tags = $this->orbitManager->getAllTags();
 
+            // Better error message for unique constraint violations
+            $errorMessage = $e->getMessage();
+            if (str_contains($errorMessage, 'UNIQUE constraint failed: orbit_content.slug')) {
+                $errorMessage = "URL slug '{$data['slug']}' už existuje. Prosím, použite iný slug.";
+            }
+
             return new HtmlResponse(
                 $this->template->render('orbit::mark/content/create', [
                     'content_type' => $type ?? 'page',
                     'categories' => $categories,
                     'tags' => $tags,
                     'form_data' => $data,
-                    'error' => $e->getMessage(),
+                    'error' => $errorMessage,
                     'title' => 'Nový Obsah - Orbit CMS',
                 ])
             );
@@ -218,10 +224,16 @@ class MarkContentHandler implements RequestHandlerInterface
             $this->orbitManager->updateContent($content, $updateData);
             
             return new RedirectResponse("/mark/orbit/content/{$content->getType()}/{$content->getId()}/edit?updated=1");
-            
+
         } catch (\Exception $e) {
             $categories = $this->orbitManager->getAllCategories();
             $tags = $this->orbitManager->getAllTags();
+
+            // Better error message for unique constraint violations
+            $errorMessage = $e->getMessage();
+            if (str_contains($errorMessage, 'UNIQUE constraint failed: orbit_content.slug')) {
+                $errorMessage = "URL slug '{$data['slug']}' už existuje. Prosím, použite iný slug.";
+            }
 
             return new HtmlResponse(
                 $this->template->render('orbit::mark/content/edit', [
@@ -229,7 +241,7 @@ class MarkContentHandler implements RequestHandlerInterface
                     'categories' => $categories,
                     'tags' => $tags,
                     'form_data' => $data,
-                    'error' => $e->getMessage(),
+                    'error' => $errorMessage,
                     'title' => 'Editácia: ' . $content->getTitle(),
                 ])
             );

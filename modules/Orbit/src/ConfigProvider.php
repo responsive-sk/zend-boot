@@ -17,9 +17,13 @@ use Orbit\Service\FileDriver\JsonDriver;
 use Orbit\Handler\DocsHandler;
 use Orbit\Handler\PageHandler;
 use Orbit\Handler\BlogHandler;
+use Orbit\Handler\BlogTailwindHandler;
 use Orbit\Handler\PostHandler;
+
 use Orbit\Handler\ApiSearchHandler;
 use Orbit\Handler\MarkContentHandler;
+use Orbit\Handler\MarkDashboardHandler;
+use Orbit\Handler\MarkEditorHandler;
 use Orbit\Factory\OrbitManagerFactory;
 use Orbit\Factory\ContentRepositoryFactory;
 use Orbit\Factory\CategoryRepositoryFactory;
@@ -30,9 +34,13 @@ use Orbit\Factory\JsonDriverFactory;
 use Orbit\Factory\DocsHandlerFactory;
 use Orbit\Factory\PageHandlerFactory;
 use Orbit\Factory\BlogHandlerFactory;
+use Orbit\Factory\BlogTailwindHandlerFactory;
 use Orbit\Factory\PostHandlerFactory;
+
 use Orbit\Factory\ApiSearchHandlerFactory;
 use Orbit\Factory\MarkContentHandlerFactory;
+use Orbit\Factory\MarkDashboardHandlerFactory;
+use Orbit\Factory\MarkEditorHandlerFactory;
 
 /**
  * Orbit CMS Configuration Provider
@@ -67,9 +75,13 @@ class ConfigProvider
                 DocsHandler::class => DocsHandlerFactory::class,
                 PageHandler::class => PageHandlerFactory::class,
                 BlogHandler::class => BlogHandlerFactory::class,
+                BlogTailwindHandler::class => BlogTailwindHandlerFactory::class,
                 PostHandler::class => PostHandlerFactory::class,
+
                 ApiSearchHandler::class => ApiSearchHandlerFactory::class,
                 MarkContentHandler::class => MarkContentHandlerFactory::class,
+                MarkDashboardHandler::class => MarkDashboardHandlerFactory::class,
+                MarkEditorHandler::class => MarkEditorHandlerFactory::class,
             ],
             'aliases' => [
                 'orbit.manager' => OrbitManager::class,

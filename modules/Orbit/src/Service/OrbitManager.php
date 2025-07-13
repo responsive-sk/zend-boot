@@ -75,8 +75,14 @@ class OrbitManager
     public function createContent(string $type, array $data): Content
     {
         $this->validateContentType($type);
-        
+
         $slug = $data['slug'] ?? $this->generateSlug($data['title']);
+
+        // Check if slug already exists
+        if ($this->slugExists($type, $slug)) {
+            $slug = $this->generateUniqueSlug($type, $slug);
+        }
+
         $filePath = $this->generateFilePath($type, $slug);
         
         $content = new Content($type, $slug, $data['title'], $filePath);
@@ -248,6 +254,25 @@ class OrbitManager
         $slug = preg_replace('/[^a-z0-9\s-]/', '', $slug) ?? $slug;
         $slug = preg_replace('/[\s-]+/', '-', $slug) ?? $slug;
         return trim($slug, '-');
+    }
+
+    private function slugExists(string $type, string $slug): bool
+    {
+        $content = $this->contentRepository->findByTypeAndSlug($type, $slug);
+        return $content !== null;
+    }
+
+    private function generateUniqueSlug(string $type, string $baseSlug): string
+    {
+        $counter = 1;
+        $slug = $baseSlug;
+
+        while ($this->slugExists($type, $slug)) {
+            $slug = $baseSlug . '-' . $counter;
+            $counter++;
+        }
+
+        return $slug;
     }
 
     private function generateFilePath(string $type, string $slug): string
