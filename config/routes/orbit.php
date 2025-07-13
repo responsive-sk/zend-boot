@@ -30,9 +30,14 @@ return static function (Application $app, ContainerInterface $container): void {
         \Orbit\Handler\PageHandler::class,
     ], 'orbit.page.view');
     
-    // Blog routes (TODO: implement handlers)
-    // $app->get('/blog[/]', [\Orbit\Handler\BlogHandler::class,], 'orbit.blog.index');
-    // $app->get('/blog/{slug:.+}', [\Orbit\Handler\PostHandler::class,], 'orbit.blog.post');
+    // Blog routes
+    $app->get('/blog[/]', [
+        \Orbit\Handler\BlogHandler::class,
+    ], 'orbit.blog.index');
+
+    $app->get('/blog/{slug:.+}', [
+        \Orbit\Handler\PostHandler::class,
+    ], 'orbit.blog.post');
 
     // Category routes (TODO: implement handlers)
     // $app->get('/category/{slug:.+}', [\Orbit\Handler\CategoryHandler::class,], 'orbit.category.view');

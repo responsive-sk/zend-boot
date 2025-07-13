@@ -43,9 +43,10 @@ class OrbitManagerFactory
         $driverClasses = $orbitConfig['drivers'] ?? [];
         assert(is_array($driverClasses));
 
-        foreach ($driverClasses as $driverClass) {
+        foreach ($driverClasses as $driverName => $driverClass) {
+            assert(is_string($driverName));
             assert(is_string($driverClass));
-            $drivers[] = $container->get($driverClass);
+            $drivers[$driverName] = $container->get($driverClass);
         }
 
         return new OrbitManager(

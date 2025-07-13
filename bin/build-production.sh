@@ -196,6 +196,56 @@ copy_application_files() {
     success "Application files copied"
 }
 
+# Copy runtime data (databases, templates, content)
+copy_runtime_data() {
+    log "Copying runtime data for $BUILD_TARGET build..."
+
+    # Copy databases if they exist
+    if [ -d "var/storage" ] && [ "$(ls -A var/storage/*.db 2>/dev/null)" ]; then
+        log "Copying databases..."
+        mkdir -p "$BUILD_DIR/var/storage"
+        cp var/storage/*.db "$BUILD_DIR/var/storage/" 2>/dev/null || true
+        success "Databases copied"
+    fi
+
+    # Copy Orbit templates if they exist
+    if [ -d "modules/Orbit/templates" ]; then
+        log "Copying Orbit templates..."
+
+        # Ensure all Orbit template directories exist in build
+        mkdir -p "$BUILD_DIR/modules/Orbit/templates/orbit"
+
+        # Copy blog templates
+        if [ -d "modules/Orbit/templates/orbit/blog" ]; then
+            cp -r modules/Orbit/templates/orbit/blog "$BUILD_DIR/modules/Orbit/templates/orbit/" 2>/dev/null || true
+            log "   ✅ Blog templates copied"
+        fi
+
+        # Copy post templates
+        if [ -d "modules/Orbit/templates/orbit/post" ]; then
+            cp -r modules/Orbit/templates/orbit/post "$BUILD_DIR/modules/Orbit/templates/orbit/" 2>/dev/null || true
+            log "   ✅ Post templates copied"
+        fi
+
+        # Copy docs templates
+        if [ -d "modules/Orbit/templates/orbit/docs" ]; then
+            cp -r modules/Orbit/templates/orbit/docs "$BUILD_DIR/modules/Orbit/templates/orbit/" 2>/dev/null || true
+            log "   ✅ Docs templates copied"
+        fi
+
+        success "Orbit templates copied"
+    fi
+
+    # Copy content directory if it exists
+    if [ -d "content" ]; then
+        log "Copying content directory..."
+        cp -r content "$BUILD_DIR/" 2>/dev/null || true
+        success "Content directory copied"
+    fi
+
+    success "Runtime data copied"
+}
+
 # Create production configuration templates
 create_production_configs() {
     log "Creating production configuration templates..."
@@ -586,6 +636,7 @@ main() {
     clean_build
     install_production_dependencies
     copy_application_files
+    copy_runtime_data
     build_themes
     create_production_configs
     optimize_autoloader

@@ -16,6 +16,8 @@ use Orbit\Service\FileDriver\MarkdownDriver;
 use Orbit\Service\FileDriver\JsonDriver;
 use Orbit\Handler\DocsHandler;
 use Orbit\Handler\PageHandler;
+use Orbit\Handler\BlogHandler;
+use Orbit\Handler\PostHandler;
 use Orbit\Handler\ApiSearchHandler;
 use Orbit\Handler\MarkContentHandler;
 use Orbit\Factory\OrbitManagerFactory;
@@ -27,6 +29,8 @@ use Orbit\Factory\MarkdownDriverFactory;
 use Orbit\Factory\JsonDriverFactory;
 use Orbit\Factory\DocsHandlerFactory;
 use Orbit\Factory\PageHandlerFactory;
+use Orbit\Factory\BlogHandlerFactory;
+use Orbit\Factory\PostHandlerFactory;
 use Orbit\Factory\ApiSearchHandlerFactory;
 use Orbit\Factory\MarkContentHandlerFactory;
 
@@ -62,6 +66,8 @@ class ConfigProvider
                 // Handlers
                 DocsHandler::class => DocsHandlerFactory::class,
                 PageHandler::class => PageHandlerFactory::class,
+                BlogHandler::class => BlogHandlerFactory::class,
+                PostHandler::class => PostHandlerFactory::class,
                 ApiSearchHandler::class => ApiSearchHandlerFactory::class,
                 MarkContentHandler::class => MarkContentHandlerFactory::class,
             ],

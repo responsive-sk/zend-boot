@@ -24,6 +24,9 @@ return [
             // Layout templates
             'layout' => [$paths->get('layouts')],
 
+            // Error templates
+            'error' => [$paths->get('error_templates')],
+
             // Default templates path (must be last)
             'default' => [$paths->get('templates')],
         ],

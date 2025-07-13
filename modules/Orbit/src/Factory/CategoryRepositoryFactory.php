@@ -6,6 +6,7 @@ namespace Orbit\Factory;
 
 use Orbit\Service\CategoryRepository;
 use Psr\Container\ContainerInterface;
+use ResponsiveSk\Slim4Paths\Paths;
 use PDO;
 
 /**
@@ -15,6 +16,10 @@ class CategoryRepositoryFactory
 {
     public function __invoke(ContainerInterface $container): CategoryRepository
     {
+        // Get Paths service for secure path resolution
+        $paths = $container->get(Paths::class);
+        assert($paths instanceof Paths);
+
         $config = $container->get('config');
         assert(is_array($config));
 
@@ -24,8 +29,9 @@ class CategoryRepositoryFactory
         $dbConfig = $orbitConfig['database'] ?? [];
         assert(is_array($dbConfig));
 
-        $dsn = $dbConfig['dsn'] ?? '';
-        assert(is_string($dsn));
+        // Use Paths service to resolve database path
+        $orbitDbPath = $paths->getPath($paths->base(), $paths->get('orbit_db'));
+        $dsn = 'sqlite:' . $orbitDbPath;
 
         $username = $dbConfig['username'] ?? null;
         assert(is_string($username) || $username === null);
@@ -35,6 +41,14 @@ class CategoryRepositoryFactory
 
         $options = $dbConfig['options'] ?? [];
         assert(is_array($options));
+
+        // Ensure database directory exists
+        $dbDir = dirname($orbitDbPath);
+        if (!is_dir($dbDir)) {
+            if (!mkdir($dbDir, 0755, true) && !is_dir($dbDir)) {
+                throw new \RuntimeException("Failed to create database directory: {$dbDir}");
+            }
+        }
 
         $pdo = new PDO($dsn, $username, $password, $options);
 

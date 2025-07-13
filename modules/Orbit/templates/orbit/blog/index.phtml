@@ -1,0 +1,143 @@
+<?php
+/**
+ * Orbit CMS - Blog Index Template
+ * 
+ * @var array $posts
+ * @var array $pagination
+ * @var string $title
+ * @var bool $searchEnabled
+ */
+
+$this->layout('layout::home', [
+    'title' => $title ?? 'Blog'
+]);
+
+$this->headTitle($title ?? 'Blog');
+$this->headMeta()->appendName('description', 'Blog príspevky - najnovšie články a novinky');
+?>
+
+<div class="container mt-4">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="text-center">
+                <h1><i class="fas fa-blog me-2"></i><?= $this->escapeHtml($title ?? 'Blog') ?></h1>
+                <p class="lead">Najnovšie články a novinky</p>
+            </div>
+        </div>
+    </div>
+
+    <?php if (!empty($posts)): ?>
+        <!-- Blog Posts -->
+        <div class="row">
+            <?php foreach ($posts as $post): ?>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="/blog/<?= $this->escapeHtmlAttr($post->getSlug()) ?>" class="text-decoration-none">
+                                    <?= $this->escapeHtml($post->getTitle()) ?>
+                                </a>
+                            </h5>
+                            
+                            <!-- Meta informácie -->
+                            <div class="text-muted small mb-2">
+                                <i class="fas fa-calendar me-1"></i>
+                                <?php 
+                                $date = $post->getPublishedAt() ?? $post->getCreatedAt();
+                                echo $date ? $date->format('d.m.Y') : 'Neznámy dátum';
+                                ?>
+                                
+                                <?php if ($post->getCategory()): ?>
+                                    <span class="ms-2">
+                                        <i class="fas fa-folder me-1"></i>
+                                        <span class="badge bg-primary"><?= $this->escapeHtml($post->getCategory()->getName()) ?></span>
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+                            
+                            <!-- Excerpt -->
+                            <?php if ($post->getExcerpt()): ?>
+                                <p class="card-text"><?= $this->escapeHtml($post->getExcerpt()) ?></p>
+                            <?php endif; ?>
+                            
+                            <!-- Tags -->
+                            <?php if ($post->getTags()): ?>
+                                <div class="mb-2">
+                                    <?php foreach ($post->getTags() as $tag): ?>
+                                        <span class="badge bg-secondary me-1">
+                                            <i class="fas fa-tag me-1"></i><?= $this->escapeHtml($tag->getName()) ?>
+                                        </span>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                        
+                        <div class="card-footer bg-transparent">
+                            <a href="/blog/<?= $this->escapeHtmlAttr($post->getSlug()) ?>" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-arrow-right me-1"></i>Čítať viac
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- Pagination -->
+        <?php if (isset($pagination) && $pagination['pages'] > 1): ?>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <nav aria-label="Blog pagination">
+                        <ul class="pagination justify-content-center">
+                            <!-- Previous -->
+                            <?php if ($pagination['page'] > 1): ?>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=<?= $pagination['page'] - 1 ?>">
+                                        <i class="fas fa-chevron-left"></i> Predchádzajúca
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                            
+                            <!-- Page numbers -->
+                            <?php for ($i = 1; $i <= $pagination['pages']; $i++): ?>
+                                <li class="page-item <?= $i === $pagination['page'] ? 'active' : '' ?>">
+                                    <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                                </li>
+                            <?php endfor; ?>
+                            
+                            <!-- Next -->
+                            <?php if ($pagination['page'] < $pagination['pages']): ?>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=<?= $pagination['page'] + 1 ?>">
+                                        Ďalšia <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        <?php endif; ?>
+
+    <?php else: ?>
+        <!-- Žiadne príspevky -->
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-info text-center">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Žiadne príspevky</strong><br>
+                    Momentálne nie sú publikované žiadne blog príspevky.
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+</div>
+
+<!-- Search functionality -->
+<?php if ($searchEnabled ?? false): ?>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // TODO: Implementovať vyhľadávanie v blog príspevkoch
+});
+</script>
+<?php endif; ?>
