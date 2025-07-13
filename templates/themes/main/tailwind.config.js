@@ -2,9 +2,10 @@
 export default {
   content: [
     "./src/**/*.{html,js,ts,jsx,tsx}",
-    "../../src/**/*.{php,phtml}",
-    "../../public/**/*.{php,phtml}",
-    "../../templates/**/*.phtml"
+    "../../../src/**/*.{php,phtml}",
+    "../../../public/**/*.{php,phtml}",
+    "../../../templates/**/*.phtml",
+    "../../../modules/**/*.phtml"
   ],
   darkMode: 'class',
   theme: {
