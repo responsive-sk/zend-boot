@@ -1,0 +1,85 @@
+<?php
+$layout('layout::default', [
+    'title' => 'Who We Are',
+    'description' => 'Meet the team behind this innovative Mezzio Light application',
+    'author' => 'Dotkernel Team'
+]);
+?>
+
+<div class="page-intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="display-4">Who We Are</h1>
+                <p class="lead">Meet the team behind this innovative Mezzio Light application</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Development Team</h2>
+            <p>Our application is built by a dedicated team of developers who believe in modern PHP practices and clean architecture.</p>
+            
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <h3>Core Values</h3>
+                    <ul>
+                        <li><strong>Quality First:</strong> We prioritize code quality with PHPStan level MAX</li>
+                        <li><strong>Developer Experience:</strong> Clean, maintainable code that's easy to work with</li>
+                        <li><strong>Performance:</strong> Optimized for speed and efficiency</li>
+                        <li><strong>Security:</strong> Built-in protection against common vulnerabilities</li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-6">
+                    <h3>Technical Expertise</h3>
+                    <ul>
+                        <li><strong>PHP 8.2+:</strong> Modern PHP with strict types</li>
+                        <li><strong>PSR Standards:</strong> Following PHP-FIG recommendations</li>
+                        <li><strong>Mezzio Framework:</strong> Middleware-based architecture</li>
+                        <li><strong>Template Engines:</strong> Modular approach with Plates core</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3>Our Approach</h3>
+            <p>We believe in:</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Modular Design</h5>
+                            <p class="card-text">Core infrastructure with optional modules for maximum flexibility.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Type Safety</h5>
+                            <p class="card-text">Strict types and comprehensive PHPStan analysis for reliability.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">User Experience</h5>
+                            <p class="card-text">Dark theme, responsive design, and modern UI patterns.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-5">
+                <h3>Contact Us</h3>
+                <p>Want to learn more about our development approach or contribute to the project?</p>
+                <a href="<?= $url('page::about') ?>" class="btn btn-primary">Learn More</a>
+                <a href="https://github.com/dotkernel/light/" class="btn btn-outline-primary" target="_blank">View on GitHub</a>
+            </div>
+        </div>
+    </div>
+</div>

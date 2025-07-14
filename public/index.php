@@ -11,6 +11,15 @@ if (PHP_SAPI === 'cli-server' && $_SERVER['SCRIPT_FILENAME'] !== __FILE__) {
 }
 
 chdir(dirname(__DIR__));
+
+// Auto-create var/ structure for shared hosting compatibility
+$varDirs = ['var', 'var/data', 'var/cache', 'var/logs', 'var/tmp', 'var/sessions'];
+foreach ($varDirs as $dir) {
+    if (!is_dir($dir)) {
+        @mkdir($dir, 0755, true);
+    }
+}
+
 require 'vendor/autoload.php';
 
 /**
@@ -24,7 +33,9 @@ require 'vendor/autoload.php';
     $app = $container->get(Application::class);
 
     // Execute programmatic/declarative middleware pipeline and routing configuration statements
-    (require 'config/pipeline.php')($app);
+    $pipeline = require 'config/pipeline.php';
+    assert(is_callable($pipeline));
+    $pipeline($app);
 
     $app->run();
 })();

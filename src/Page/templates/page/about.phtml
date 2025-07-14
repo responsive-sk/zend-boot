@@ -1,0 +1,80 @@
+<?php
+$layout('layout::default', [
+    'title' => 'About Us',
+    'description' => 'Learn more about our Mezzio Light application and its architecture',
+    'author' => 'Dotkernel Team'
+]);
+?>
+
+<div class="page-intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="display-4">About Us</h1>
+                <p class="lead">Learn more about our Mezzio Light application and its architecture</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Our Mission</h2>
+            <p>We believe in creating robust, maintainable web applications using modern PHP practices and proven architectural patterns.</p>
+            
+            <h3>Technology Stack</h3>
+            <ul>
+                <li><strong>Framework:</strong> Mezzio (PSR-15 compliant)</li>
+                <li><strong>Template Engine:</strong> Plates (Core) with optional Twig/Blade modules</li>
+                <li><strong>Path Management:</strong> responsive-sk/slim4-paths</li>
+                <li><strong>Asset Pipeline:</strong> Vite with pnpm</li>
+                <li><strong>Quality Assurance:</strong> PHPStan level MAX</li>
+            </ul>
+            
+            <h3>Architecture Principles</h3>
+            <ul>
+                <li><strong>Modular Design:</strong> Core infrastructure with optional modules</li>
+                <li><strong>PSR Compliance:</strong> Following PHP-FIG standards</li>
+                <li><strong>Type Safety:</strong> Strict types and comprehensive annotations</li>
+                <li><strong>Security First:</strong> Path traversal protection and input validation</li>
+            </ul>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Quick Stats</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li><strong>PHP Version:</strong> 8.2+</li>
+                        <li><strong>Template Engine:</strong> Plates</li>
+                        <li><strong>Dark Theme:</strong> Yes</li>
+                        <li><strong>Mobile Ready:</strong> Yes</li>
+                        <li><strong>Production Ready:</strong> Yes</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5>Features</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li>✓ Centralized path management</li>
+                        <li>✓ Modular template engines</li>
+                        <li>✓ Dark/light theme switching</li>
+                        <li>✓ Asset compilation pipeline</li>
+                        <li>✓ Production optimization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+</div>

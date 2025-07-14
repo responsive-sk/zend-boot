@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 class ConfigProviderTest extends TestCase
 {
-    /** @var array<string, array<string, mixed>>*/
+    /** @var array<string, mixed> */
     protected array $config = [];
 
     protected function setup(): void
@@ -35,18 +35,22 @@ class ConfigProviderTest extends TestCase
 
     public function testDependenciesHasDelegators(): void
     {
+        $this->assertIsArray($this->config['dependencies']);
         $this->assertArrayHasKey('delegators', $this->config['dependencies']);
-        $this->assertIsArray($this->config['dependencies']['delegators']);
-        $this->assertArrayHasKey(Application::class, $this->config['dependencies']['delegators']);
-        $this->assertIsArray($this->config['dependencies']['delegators'][Application::class]);
+        $dependencies = $this->config['dependencies'];
+        $this->assertIsArray($dependencies);
+        $this->assertIsArray($dependencies['delegators']);
+        $this->assertArrayHasKey(Application::class, $dependencies['delegators']);
+        $this->assertIsArray($dependencies['delegators'][Application::class]);
         $this->assertContainsEquals(
             RoutesDelegator::class,
-            $this->config['dependencies']['delegators'][Application::class]
+            $dependencies['delegators'][Application::class]
         );
     }
 
     public function testDependenciesHasFactories(): void
     {
+        $this->assertIsArray($this->config['dependencies']);
         $this->assertArrayHasKey('factories', $this->config['dependencies']);
         $this->assertIsArray($this->config['dependencies']['factories']);
         $this->assertArrayHasKey(PageService::class, $this->config['dependencies']['factories']);
@@ -54,6 +58,7 @@ class ConfigProviderTest extends TestCase
 
     public function testDependenciesHasAliases(): void
     {
+        $this->assertIsArray($this->config['dependencies']);
         $this->assertArrayHasKey('aliases', $this->config['dependencies']);
         $this->assertIsArray($this->config['dependencies']['aliases']);
         $this->assertArrayHasKey(PageServiceInterface::class, $this->config['dependencies']['aliases']);
@@ -61,6 +66,7 @@ class ConfigProviderTest extends TestCase
 
     public function testGetTemplates(): void
     {
+        $this->assertIsArray($this->config['templates']);
         $this->assertArrayHasKey('paths', $this->config['templates']);
         $this->assertIsArray($this->config['templates']['paths']);
         $this->assertArrayHasKey('page', $this->config['templates']['paths']);

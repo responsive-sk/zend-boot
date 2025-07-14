@@ -1,0 +1,42 @@
+<?php
+$layout('layout::default', [
+    'title' => 'Page Not Found',
+    'description' => 'The page you are looking for could not be found',
+    'author' => 'Dotkernel Team'
+]);
+?>
+
+<div class="page-intro bg-danger text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1 class="display-1">404</h1>
+                <h2>Page Not Found</h2>
+                <p class="lead">The page you are looking for could not be found.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2 text-center">
+            <h3>What happened?</h3>
+            <p>The page you requested does not exist or has been moved to a different location.</p>
+            
+            <div class="mt-4">
+                <a href="<?= $url('app::index') ?>" class="btn btn-primary me-2">Go Home</a>
+                <button onclick="history.back()" class="btn btn-outline-secondary">Go Back</button>
+            </div>
+
+            <div class="mt-5">
+                <h4>Helpful Links</h4>
+                <ul class="list-unstyled">
+                    <li><a href="<?= $url('app::index') ?>">Home Page</a></li>
+                    <li><a href="<?= $url('page::about') ?>">About Us</a></li>
+                    <li><a href="<?= $url('page::who-we-are') ?>">Who We Are</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content="<?= $e($description ?? 'Mezzio Light Application') ?>"/>
+    <meta name="author" content="<?= $e($author ?? 'Dotkernel Team') ?>"/>
+    <meta name="generator" content="Mezzio"/>
+    <meta name="theme-color" content="#ffffff"/>
+
+    <title><?= $e($title ?? 'Mezzio Light Application') ?></title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="<?= $asset('images/app/favicon/apple-touch-icon.png') ?>"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= $asset('images/app/favicon/favicon-32x32.png') ?>"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= $asset('images/app/favicon/favicon-16x16.png') ?>"/>
+    <link rel="manifest" href="<?= $asset('images/app/favicon/site.webmanifest') ?>"/>
+    <link rel="mask-icon" href="<?= $asset('images/app/favicon/safari-pinned-tab.svg') ?>" color="#5bbad5"/>
+    <meta name="msapplication-TileColor" content="#da532c"/>
+
+    <link rel="stylesheet" href="<?= $asset('css/app.css') ?>"/>
+</head>
+
+<body class="app <?= $body_class ?? '' ?>" data-bs-theme="light">
+    <div class="app-wrapper">
+        <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="<?= $url('app::index') ?>">
+                    <img src="<?= $asset('images/app/logo.svg') ?>" width="30" height="30" alt="Mezzio"/>
+                    Mezzio Light
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
+                        aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarHeader">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="pageDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+                            <div class="dropdown-menu" aria-labelledby="pageDropdown">
+                                <a class="dropdown-item" href="<?= $url('page::about') ?>">About Us</a>
+                                <a class="dropdown-item" href="<?= $url('page::who-we-are') ?>">Who We Are</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://github.com/dotkernel/light/" target="_blank">GitHub</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://docs.dotkernel.org/light-documentation/" target="_blank">Documentation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= $url('app::paths-example') ?>">Paths Example</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="<?= $url('app::index') ?>">Disabled</a>
+                        </li>
+                    </ul>
+
+                    <!-- Theme Toggle -->
+                    <div class="d-flex align-items-center">
+                        <span class="me-2 text-muted small">Theme:</span>
+                        <label class="theme-toggle">
+                            <input type="checkbox" id="themeToggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="app-content">
+            <?= $content ?? '' ?>
+        </div>
+
+        <footer class="app-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>&copy; <?= date('Y') ?> Mezzio Light Application. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <p>Powered by <a href="https://getmezzio.org/" target="_blank">Mezzio</a></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="<?= $asset('js/app.js') ?>"></script>
+</body>
+</html>

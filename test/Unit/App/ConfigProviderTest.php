@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class ConfigProviderTest extends TestCase
 {
-    /** @var array<string, array<string, mixed>>*/
+    /** @var array<string, mixed> */
     protected array $config = [];
 
     protected function setup(): void
@@ -27,6 +27,7 @@ class ConfigProviderTest extends TestCase
 
     public function testDependenciesHasFactories(): void
     {
+        $this->assertIsArray($this->config['dependencies']);
         $this->assertArrayHasKey('factories', $this->config['dependencies']);
         $this->assertIsArray($this->config['dependencies']['factories']);
         $this->assertArrayHasKey(GetIndexViewHandler::class, $this->config['dependencies']['factories']);
@@ -39,6 +40,7 @@ class ConfigProviderTest extends TestCase
 
     public function testGetTemplates(): void
     {
+        $this->assertIsArray($this->config['templates']);
         $this->assertArrayHasKey('paths', $this->config['templates']);
         $this->assertIsArray($this->config['templates']['paths']);
         $this->assertArrayHasKey('app', $this->config['templates']['paths']);

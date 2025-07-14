@@ -1,0 +1,49 @@
+<?php
+$layout('layout::default', [
+    'title' => 'Application Error',
+    'description' => 'An unexpected error occurred',
+    'author' => 'Dotkernel Team'
+]);
+?>
+
+<div class="page-intro bg-danger text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1 class="display-1">500</h1>
+                <h2>Application Error</h2>
+                <p class="lead">An unexpected error occurred.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2 text-center">
+            <h3>Something went wrong</h3>
+            <p>We're sorry, but something went wrong on our end. Please try again later.</p>
+            
+            <?php if (isset($error) && $error): ?>
+                <div class="alert alert-danger mt-4">
+                    <h5>Error Details:</h5>
+                    <p><?= $e($error) ?></p>
+                </div>
+            <?php endif; ?>
+
+            <div class="mt-4">
+                <a href="<?= $url('app::index') ?>" class="btn btn-primary me-2">Go Home</a>
+                <button onclick="location.reload()" class="btn btn-outline-secondary">Try Again</button>
+            </div>
+
+            <div class="mt-5">
+                <h4>Need Help?</h4>
+                <p>If this problem persists, please contact our support team.</p>
+                <ul class="list-unstyled">
+                    <li><a href="<?= $url('app::index') ?>">Home Page</a></li>
+                    <li><a href="<?= $url('page::about') ?>">About Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
