@@ -90,7 +90,7 @@ return [
                         'name'    => 'stream',
                         'level'   => Logger::ALERT,
                         'options' => [
-                            'stream' => __DIR__ . '/../../log/error-log-{Y}-{m}-{d}.log',
+                            'stream' => __DIR__ . '/../../var/logs/error-log-{Y}-{m}-{d}.log',
                             // explicitly log all messages
                             'filters'   => [
                                 'allMessages' => [

@@ -11,7 +11,7 @@ return [
         'assets_version'  => null,
         'autoescape'      => 'html',
         'auto_reload'     => true,
-        'cache_dir'       => 'data/cache/twig',
+        'cache_dir'       => 'var/cache/twig',
         'extensions'      => [],
         'globals'         => [],
         'optimizations'   => -1,

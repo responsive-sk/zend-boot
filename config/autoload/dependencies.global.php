@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use Dot\ErrorHandler\ErrorHandlerInterface;
 use Dot\ErrorHandler\LogErrorHandler;
+use Light\Core\Factory\PathsAwareTwigEnvironmentFactory;
+use Twig\Environment;
 
 return [
     // Provides application-wide services.
@@ -22,6 +24,9 @@ return [
             // Fully\Qualified\InterfaceName::class => Fully\Qualified\ClassName::class,
         ],
         // Use 'factories' for services provided by callbacks/factory classes.
-        'factories' => [],
+        'factories' => [
+            // Override default Twig Environment factory with our Paths-aware version
+            Environment::class => PathsAwareTwigEnvironmentFactory::class,
+        ],
     ],
 ];
