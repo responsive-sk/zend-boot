@@ -25,12 +25,6 @@
             "laminas/laminas-component-installer": true
         }
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "./packages/slim4-paths"
-        }
-    ],
     "require": {
         "php": "~8.2.0 || ~8.3.0 || ~8.4.0",
         "dotkernel/dot-errorhandler": "^4.2.1",
