@@ -1,11 +1,11 @@
 {
     "name": "dotkernel/light",
     "type": "project",
-    "description": "Dotkernel Light Application",
+    "description": "Light PSR-15 compliant Application",
     "license": "MIT",
     "homepage": "https://github.com/dotkernel/light",
     "keywords": [
-        "dotkernel",
+        "responsive-sk",
         "mezzio",
         "laminas",
         "middleware"
@@ -25,6 +25,12 @@
             "laminas/laminas-component-installer": true
         }
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./packages/slim4-paths"
+        }
+    ],
     "require": {
         "php": "~8.2.0 || ~8.3.0 || ~8.4.0",
         "dotkernel/dot-errorhandler": "^4.2.1",
@@ -32,7 +38,8 @@
         "laminas/laminas-config-aggregator": "^1.17.0",
         "mezzio/mezzio": "^3.20.1",
         "mezzio/mezzio-fastroute": "^3.12.0",
-        "mezzio/mezzio-twigrenderer": "^2.17.0"
+        "mezzio/mezzio-helpers": "^5.18",
+        "responsive-sk/slim4-paths": "^6.0"
     },
     "require-dev": {
         "filp/whoops": "^2.17.0",
@@ -47,6 +54,7 @@
     },
     "autoload": {
         "psr-4": {
+            "Light\\Core\\": "src/Core/src/",
             "Light\\App\\": "src/App/src/",
             "Light\\Page\\": "src/Page/src/"
         }
