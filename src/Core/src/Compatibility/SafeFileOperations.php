@@ -11,9 +11,11 @@ use function file_put_contents;
 use function is_dir;
 use function mkdir;
 
+use const LOCK_EX;
+
 /**
  * Safe file operations for shared hosting environments
- * 
+ *
  * Provides fallbacks for file operations that might fail on shared hosting
  * due to permission restrictions or disabled functions.
  */
@@ -21,7 +23,7 @@ class SafeFileOperations
 {
     /**
      * Safely create directory with fallbacks
-     * 
+     *
      * @param string $path Directory path to create
      * @param int $mode Directory permissions (ignored on some shared hosts)
      * @return bool True if directory exists or was created
@@ -31,7 +33,7 @@ class SafeFileOperations
         if (is_dir($path)) {
             return true;
         }
-        
+
         try {
             // Try recursive creation first
             return mkdir($path, $mode, true);
@@ -45,10 +47,10 @@ class SafeFileOperations
             }
         }
     }
-    
+
     /**
      * Safely write file with fallbacks
-     * 
+     *
      * @param string $file File path
      * @param string $content Content to write
      * @param bool $useLock Whether to use file locking
@@ -68,10 +70,10 @@ class SafeFileOperations
             }
         }
     }
-    
+
     /**
      * Safely change file permissions
-     * 
+     *
      * @param string $path File or directory path
      * @param int $mode Permissions mode
      * @return bool True if successful (or if chmod is not available)
@@ -85,10 +87,10 @@ class SafeFileOperations
             return true;
         }
     }
-    
+
     /**
      * Create var directory structure safely
-     * 
+     *
      * @param string $basePath Base application path
      * @return bool True if all directories exist or were created
      */
@@ -105,43 +107,43 @@ class SafeFileOperations
             'var/tmp',
             'var/sessions',
         ];
-        
+
         $success = true;
         foreach ($varDirs as $dir) {
             $fullPath = $basePath . '/' . $dir;
-            if (!self::createDirectory($fullPath)) {
+            if (! self::createDirectory($fullPath)) {
                 $success = false;
             }
         }
-        
+
         return $success;
     }
-    
+
     /**
      * Create .gitignore files for var directories
-     * 
+     *
      * @param string $basePath Base application path
      * @return bool True if successful
      */
     public static function createVarGitignores(string $basePath): bool
     {
         $gitignoreContent = "*\n!.gitignore\n";
-        
+
         $dirs = [
             'var/cache',
             'var/logs',
             'var/tmp',
             'var/sessions',
         ];
-        
+
         $success = true;
         foreach ($dirs as $dir) {
             $gitignorePath = $basePath . '/' . $dir . '/.gitignore';
-            if (!self::safeWrite($gitignorePath, $gitignoreContent, false)) {
+            if (! self::safeWrite($gitignorePath, $gitignoreContent, false)) {
                 $success = false;
             }
         }
-        
+
         return $success;
     }
 }

@@ -69,6 +69,7 @@ class ConfigProviderTest extends TestCase
         $this->assertIsArray($this->config['templates']);
         $this->assertArrayHasKey('paths', $this->config['templates']);
         $this->assertIsArray($this->config['templates']['paths']);
-        $this->assertArrayHasKey('page', $this->config['templates']['paths']);
+        // Template paths are now managed by TemplatePathProvider
+        // No hardcoded paths in ConfigProvider anymore
     }
 }

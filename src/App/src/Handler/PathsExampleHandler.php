@@ -41,9 +41,9 @@ class PathsExampleHandler implements RequestHandlerInterface
             'upload_file' => $this->paths->buildPath('var/uploads/example.jpg'),
 
             // Asset paths (using buildPath for files)
-            'css_file'    => $this->paths->buildPath('public/css/app.css'),
-            'js_file'     => $this->paths->buildPath('public/js/main.js'),
-            'image_file'  => $this->paths->buildPath('public/images/logo.png'),
+            'css_file'   => $this->paths->buildPath('public/css/app.css'),
+            'js_file'    => $this->paths->buildPath('public/js/main.js'),
+            'image_file' => $this->paths->buildPath('public/images/logo.png'),
 
             // All configured paths
             'all_paths' => $this->paths->all(),

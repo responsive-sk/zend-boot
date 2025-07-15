@@ -15,7 +15,7 @@ chdir(dirname(__DIR__));
 // Auto-create var/ structure for shared hosting compatibility
 $varDirs = ['var', 'var/data', 'var/cache', 'var/logs', 'var/tmp', 'var/sessions'];
 foreach ($varDirs as $dir) {
-    if (!is_dir($dir)) {
+    if (! is_dir($dir)) {
         @mkdir($dir, 0755, true);
     }
 }

@@ -11,7 +11,7 @@ use Mezzio\Template\TemplateRendererInterface;
 
 /**
  * Core module configuration provider
- * 
+ *
  * Provides core infrastructure services following Zend4Boot protocol
  * and PSR-15 compliance. This module contains shared services used
  * across the entire application.
@@ -20,7 +20,7 @@ class ConfigProvider
 {
     /**
      * Return configuration for this module
-     * 
+     *
      * @return array<string, mixed>
      */
     public function __invoke(): array
@@ -29,10 +29,10 @@ class ConfigProvider
             'dependencies' => $this->getDependencies(),
         ];
     }
-    
+
     /**
      * Return dependency configuration
-     * 
+     *
      * @return array<string, mixed>
      */
     public function getDependencies(): array

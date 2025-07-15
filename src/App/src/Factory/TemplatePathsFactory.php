@@ -24,6 +24,9 @@ class TemplatePathsFactory
      *     }
      * }
      */
+    /**
+     * @return array{paths: array{app: array{string}, error: array{string}, layout: array{string}, partial: array{string}}}
+     */
     public function __invoke(ContainerInterface $container): array
     {
         $paths = $container->get(Paths::class);
@@ -31,10 +34,10 @@ class TemplatePathsFactory
 
         return [
             'paths' => [
-                'app'     => [$paths->src('App/templates/app')],
-                'error'   => [$paths->src('App/templates/error')],
-                'layout'  => [$paths->src('App/templates/layout')],
-                'partial' => [$paths->src('App/templates/partial')],
+                'app'     => [$paths->buildPath('src/App/templates/app')],
+                'error'   => [$paths->buildPath('src/App/templates/error')],
+                'layout'  => [$paths->buildPath('src/App/templates/layout')],
+                'partial' => [$paths->buildPath('src/App/templates/partial')],
             ],
         ];
     }

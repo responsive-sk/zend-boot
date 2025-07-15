@@ -15,7 +15,7 @@ use function is_array;
 
 /**
  * Factory for Native PHP template renderer
- * 
+ *
  * Creates NativePhpRenderer with proper dependencies.
  * Follows PSR-11 container interface and Zend4Boot protocol.
  */
@@ -25,7 +25,6 @@ class NativePhpRendererFactory
      * Create NativePhpRenderer instance
      *
      * @param ContainerInterface $container DI container
-     * @return TemplateRendererInterface
      */
     public function __invoke(ContainerInterface $container): TemplateRendererInterface
     {
