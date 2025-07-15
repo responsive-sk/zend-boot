@@ -22,33 +22,34 @@ class PathsExampleHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        // Demonstrate various path methods
+        // Demonstrate various path methods (v6.0 API)
         $pathsInfo = [
-            'base_path'      => $this->paths->base(),
-            'config_path'    => $this->paths->config(),
-            'src_path'       => $this->paths->src(),
-            'public_path'    => $this->paths->public(),
-            'templates_path' => $this->paths->templates(),
-            'cache_path'     => $this->paths->cache(),
-            'logs_path'      => $this->paths->logs(),
-            'uploads_path'   => $this->paths->uploads(),
+            'base_path'      => $this->paths->getPath('base'),
+            'config_path'    => $this->paths->getPath('config'),
+            'src_path'       => $this->paths->getPath('src'),
+            'public_path'    => $this->paths->getPath('public'),
+            'templates_path' => $this->paths->getPath('templates'),
+            'cache_path'     => $this->paths->getPath('cache'),
+            'logs_path'      => $this->paths->getPath('logs'),
+            'uploads_path'   => $this->paths->getPath('uploads'),
+            'var_path'       => $this->paths->getPath('var'),
+            'data_path'      => $this->paths->getPath('data'),
 
-            // Specific file examples
-            'config_file' => $this->paths->config('config.php'),
-            'log_file'    => $this->paths->logs('app.log'),
-            'upload_file' => $this->paths->uploads('example.jpg'),
+            // Specific file examples using buildPath
+            'config_file' => $this->paths->buildPath('config/config.php'),
+            'log_file'    => $this->paths->buildPath('var/logs/app.log'),
+            'upload_file' => $this->paths->buildPath('var/uploads/example.jpg'),
 
-            // Asset paths
-            'css_path'    => $this->paths->css('app.css'),
-            'js_path'     => $this->paths->js('main.js'),
-            'images_path' => $this->paths->images('logo.png'),
+            // Asset paths (using buildPath for files)
+            'css_file'    => $this->paths->buildPath('public/css/app.css'),
+            'js_file'     => $this->paths->buildPath('public/js/main.js'),
+            'image_file'  => $this->paths->buildPath('public/images/logo.png'),
 
             // All configured paths
             'all_paths' => $this->paths->all(),
 
-            // Available presets
-            'available_presets' => Paths::getAvailablePresets(),
-            'preset_info'       => Paths::getPresetInfo(),
+            // Base path info
+            'base_path_info' => $this->paths->getBasePath(),
         ];
 
         return new JsonResponse([

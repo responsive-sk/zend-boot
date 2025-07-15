@@ -21,14 +21,14 @@ class GetIndexViewHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        // Example of using Paths service in template data
+        // Example of using Paths service in template data (v6.0 API)
         $templateData = [
             'paths' => [
-                'public' => $this->paths->public(),
-                'assets' => $this->paths->assets(),
-                'css'    => $this->paths->css(),
-                'js'     => $this->paths->js(),
-                'images' => $this->paths->images(),
+                'public' => $this->paths->getPath('public'),
+                'base'   => $this->paths->getPath('base'),
+                'var'    => $this->paths->getPath('var'),
+                'logs'   => $this->paths->getPath('logs'),
+                'cache'  => $this->paths->getPath('cache'),
             ],
         ];
 
