@@ -10,12 +10,12 @@ declare(strict_types=1);
 
 return [
     // Base URL for sitemap.xml and robots.txt
-    'base_url' => 'https://dotkernel-light.sk',
+    'base_url' => 'https://ozi.responsive.sk',
     
     // Build settings
     'build' => [
         'directory' => './build',
-        'package_name' => 'dotkernel-light',
+        'package_name' => 'responsive-light',
         'version' => 'auto', // 'auto' = timestamp, or specify version like '1.0.0'
     ],
     
@@ -55,13 +55,13 @@ return [
     // Environment-specific overrides
     'environments' => [
         'production' => [
-            'base_url' => 'https://dotkernel-light.sk',
+            'base_url' => 'https://responsive.sk',
         ],
         'staging' => [
-            'base_url' => 'https://staging.dotkernel-light.sk',
+            'base_url' => 'https://responsive.sk',
         ],
         'development' => [
-            'base_url' => 'http://localhost:8080',
+            'base_url' => 'http://localhost:8000',
         ],
     ],
 ];

@@ -50,3 +50,19 @@ package-lock.json
 
 # Ignore the file .DS_Store in all directories
 **/.DS_Store
+
+# Build artifacts
+build/
+*.tar.gz
+*.tar.gz.sha256
+
+# Theme node_modules and build files
+src/App/templates/themes/*/node_modules/
+src/App/templates/themes/*/dist/
+src/App/templates/themes/*/.vite/
+
+# Log files
+var/logs/*.log
+
+# Backup files
+*.backup
