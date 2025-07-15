@@ -14,7 +14,7 @@ $layout('layout::default', [
                 <p class="lead">A PSR-15 compliant application skeleton with modular template architecture</p>
                 <hr class="my-4">
                 <p>This application demonstrates the power of modular design with Plates as the core template engine.</p>
-                <a class="btn btn-primary btn-lg" href="<?= $url('page::about') ?>" role="button">Learn more</a>
+                <a class="btn btn-primary btn-lg" href="<?= $url('page::about') ?>" role="button" aria-label="Learn more about DotKernel Light application and its architecture">Learn more</a>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@ $layout('layout::default', [
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">PSR-15 Compliant</h5>
+                    <h3 class="card-title">PSR-15 Compliant</h3>
                     <p class="card-text">Built on Mezzio framework following PSR-15 middleware standards for maximum interoperability.</p>
                     <a href="https://www.php-fig.org/psr/psr-15/" class="btn btn-outline-primary" target="_blank">Learn about PSR-15</a>
                 </div>
@@ -34,7 +34,7 @@ $layout('layout::default', [
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Modular Templates</h5>
+                    <h3 class="card-title">Modular Templates</h3>
                     <p class="card-text">Core uses Plates for speed and reliability. Optional Twig and Blade modules available.</p>
                     <a href="<?= $url('page::who-we-are') ?>" class="btn btn-outline-primary">Template Info</a>
                 </div>
@@ -43,7 +43,7 @@ $layout('layout::default', [
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Dark Theme</h5>
+                    <h3 class="card-title">Dark Theme</h3>
                     <p class="card-text">Built-in dark/light theme switching with localStorage persistence and system detection.</p>
                     <button class="btn btn-outline-primary" onclick="ThemeUtils.toggleTheme()">Toggle Theme</button>
                 </div>
@@ -61,7 +61,7 @@ $layout('layout::default', [
                     <strong>Zend4Boot Protocol:</strong> Modular architecture with src/Core/ and modules/ structure
                 </li>
                 <li class="list-group-item">
-                    <strong>Paths Service:</strong> Centralized path management using responsive-sk/slim4-paths
+                    <strong>Paths Service:</strong> Centralized path management using <a href="https://github.com/responsive-sk/slim4-paths" target="_blank" rel="noopener" aria-label="Visit responsive-sk/slim4-paths GitHub repository">responsive-sk/slim4-paths</a>
                 </li>
                 <li class="list-group-item">
                     <strong>Mark Convention:</strong> Admin functionality uses 'mark' instead of 'admin' for security
