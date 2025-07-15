@@ -34,6 +34,7 @@ show_usage() {
     echo "  BUILD_DIR=./build       # Build output directory"
     echo "  PACKAGE_NAME=dotkernel-light # Package name prefix"
     echo "  VERSION=auto            # Version (auto = timestamp)"
+    echo "  BASE_URL=https://example.com # Base URL for sitemap and robots.txt"
 }
 
 # Function to check requirements
@@ -86,6 +87,7 @@ show_build_info() {
     echo "Build Directory: ${BUILD_DIR:-./build}"
     echo "Package Name: ${PACKAGE_NAME:-dotkernel-light}"
     echo "Version: ${VERSION:-auto}"
+    echo "Base URL: ${BASE_URL:-https://example.com}"
     echo "Compatible with: slim4-paths v6.0"
     echo "========================="
     echo ""

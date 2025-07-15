@@ -1,0 +1,67 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Build Configuration Template
+ * 
+ * Copy this file to build.php and customize for your project
+ */
+
+return [
+    // CHANGE THIS: Your domain URL
+    'base_url' => 'https://yourdomain.com',
+    
+    // Build settings
+    'build' => [
+        'directory' => './build',
+        'package_name' => 'dotkernel-light',
+        'version' => 'auto', // 'auto' = timestamp, or specify version like '1.0.0'
+    ],
+    
+    // Web files configuration
+    'web_files' => [
+        'robots_txt' => [
+            'enabled' => true,
+            'crawl_delay' => 1,
+            'additional_disallow' => [
+                // Add custom paths to disallow
+                // '/admin/',
+                // '/api/internal/',
+            ],
+        ],
+        
+        'sitemap_xml' => [
+            'enabled' => true,
+            'additional_urls' => [
+                // Add custom URLs to sitemap
+                // [
+                //     'loc' => '/contact',
+                //     'changefreq' => 'monthly',
+                //     'priority' => '0.7',
+                // ],
+            ],
+        ],
+        
+        'htaccess_optimizations' => [
+            'enabled' => true,
+            'security_headers' => true,
+            'cache_control' => true,
+            'compression' => true,
+            'browser_caching' => true,
+        ],
+    ],
+    
+    // Environment-specific overrides
+    'environments' => [
+        'production' => [
+            'base_url' => 'https://yourdomain.com',
+        ],
+        'staging' => [
+            'base_url' => 'https://staging.yourdomain.com',
+        ],
+        'development' => [
+            'base_url' => 'http://localhost:8080',
+        ],
+    ],
+];

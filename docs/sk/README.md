@@ -9,6 +9,7 @@ Táto sekcia obsahuje slovenskú dokumentáciu pre DotKernel Light aplikáciu.
 
 ### Build systém a deployment
 - [**Build System**](BUILD_SYSTEM.md) - Nový build systém kompatibilný so slim4-paths v6.0 a var/ directory štruktúrou
+- [**Base URL Configuration**](BASE_URL_CONFIGURATION.md) - Kompletný návod na konfiguráciu base URL pre sitemap.xml, robots.txt a deployment
 
 ### Integrácie a migrácie
 - [**Paths Integration**](PATHS_INTEGRATION.md) - Integrácia responsive-sk/slim4-paths v6.0 s breaking changes, memory efficiency a var/ directory štruktúrou

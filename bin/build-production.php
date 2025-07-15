@@ -156,6 +156,7 @@ class ProductionBuilder
             $this->copyRuntimeData();
             $this->buildAssets();
             $this->createProductionConfigs();
+            $this->setupWebFiles();
             $this->optimizeAutoloader();
             $this->cleanVendorForMinimal();
             $this->minimizeBinScripts();
@@ -333,6 +334,285 @@ class ProductionBuilder
         }
 
         $this->success("Production configuration templates ready");
+    }
+
+    private function setupWebFiles(): void
+    {
+        $this->log("Setting up web files (robots.txt, .htaccess, sitemap.xml)...");
+
+        $this->setupRobotsTxt();
+        $this->optimizeHtaccess();
+        $this->generateSitemap();
+
+        $this->success("Web files configured");
+    }
+
+    private function setupRobotsTxt(): void
+    {
+        $robotsDistPath = $this->buildDir . '/public/robots.txt.dist';
+        $robotsPath = $this->buildDir . '/public/robots.txt';
+
+        if (!file_exists($robotsDistPath)) {
+            $this->warning("robots.txt.dist not found, creating default robots.txt");
+            $this->createDefaultRobotsTxt($robotsPath);
+            return;
+        }
+
+        // Create production robots.txt
+        $robotsContent = $this->createProductionRobotsTxt();
+        file_put_contents($robotsPath, $robotsContent);
+
+        // Remove .dist file for production
+        if (file_exists($robotsDistPath)) {
+            unlink($robotsDistPath);
+        }
+
+        $this->log("Production robots.txt created");
+    }
+
+    private function createProductionRobotsTxt(): string
+    {
+        $sitemapUrl = $this->getSitemapUrl();
+
+        return <<<EOF
+# Production robots.txt for DotKernel Light
+# Generated automatically during build process
+
+User-agent: *
+Allow: /
+
+# Disallow sensitive directories
+Disallow: /config/
+Disallow: /src/
+Disallow: /var/
+Disallow: /vendor/
+Disallow: /bin/
+Disallow: /.git/
+
+# Allow assets
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /fonts/
+
+# Sitemap
+Sitemap: {$sitemapUrl}
+
+# Crawl delay (optional - adjust as needed)
+Crawl-delay: 1
+
+EOF;
+    }
+
+    private function optimizeHtaccess(): void
+    {
+        $htaccessPath = $this->buildDir . '/public/.htaccess';
+
+        if (!file_exists($htaccessPath)) {
+            $this->warning(".htaccess not found, creating optimized version");
+            $this->createOptimizedHtaccess($htaccessPath);
+            return;
+        }
+
+        // Read current .htaccess
+        $currentContent = file_get_contents($htaccessPath);
+
+        // Add production optimizations
+        $optimizedContent = $this->addHtaccessOptimizations($currentContent);
+
+        file_put_contents($htaccessPath, $optimizedContent);
+
+        $this->log("Optimized .htaccess for production");
+    }
+
+    private function addHtaccessOptimizations(string $currentContent): string
+    {
+        $optimizations = <<<EOF
+
+# Production optimizations added by build system
+# Security headers
+<IfModule mod_headers.c>
+    # Security headers
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options DENY
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+    # Cache control for static assets
+    <FilesMatch "\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+
+    # Cache control for HTML
+    <FilesMatch "\.(html|htm)$">
+        Header set Cache-Control "public, max-age=3600"
+    </FilesMatch>
+</IfModule>
+
+# Compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+</IfModule>
+
+# Browser caching
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/ico "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# Security - Hide sensitive files
+<FilesMatch "(^#.*#|\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|sw[op])|~)$">
+    Order allow,deny
+    Deny from all
+    Satisfy All
+</FilesMatch>
+
+# Prevent access to sensitive directories
+RedirectMatch 404 /\.git
+RedirectMatch 404 /\.svn
+RedirectMatch 404 /config/
+RedirectMatch 404 /src/
+RedirectMatch 404 /var/
+RedirectMatch 404 /vendor/
+RedirectMatch 404 /bin/
+
+EOF;
+
+        return $currentContent . $optimizations;
+    }
+
+    private function createOptimizedHtaccess(string $htaccessPath): void
+    {
+        $content = <<<EOF
+RewriteEngine On
+
+# The following rule allows authentication to work with fast-cgi
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+# The following rule tells Apache that if the requested filename exists, simply serve it.
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+
+# The following rewrites all other queries to index.php
+RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\2$
+RewriteRule ^(.*) - [E=BASE:%1]
+RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC,L]
+
+EOF;
+
+        $optimizedContent = $this->addHtaccessOptimizations($content);
+        file_put_contents($htaccessPath, $optimizedContent);
+    }
+
+    private function generateSitemap(): void
+    {
+        $sitemapPath = $this->buildDir . '/public/sitemap.xml';
+
+        $sitemap = $this->createBasicSitemap();
+        file_put_contents($sitemapPath, $sitemap);
+
+        $this->log("Basic sitemap.xml generated");
+    }
+
+    private function createBasicSitemap(): string
+    {
+        $baseUrl = $this->getBaseUrl();
+        $lastmod = date('Y-m-d');
+
+        return <<<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>{$baseUrl}</loc>
+        <lastmod>{$lastmod}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>{$baseUrl}/page/about</loc>
+        <lastmod>{$lastmod}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>{$baseUrl}/page/who-we-are</loc>
+        <lastmod>{$lastmod}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+</urlset>
+EOF;
+    }
+
+    private function createDefaultRobotsTxt(string $robotsPath): void
+    {
+        $content = $this->createProductionRobotsTxt();
+        file_put_contents($robotsPath, $content);
+    }
+
+    private function getBaseUrl(): string
+    {
+        // Priority: Environment variable > Build config > Default
+        $baseUrl = getenv('BASE_URL') ?: ($_ENV['BASE_URL'] ?? null);
+
+        if ($baseUrl === null) {
+            $config = $this->getBuildConfig();
+            $baseUrl = $config['base_url'];
+        }
+
+        // Remove trailing slash
+        return rtrim($baseUrl, '/');
+    }
+
+    private function getBuildConfig(): array
+    {
+        static $config = null;
+
+        if ($config !== null) {
+            return $config;
+        }
+
+        $configFile = 'config/build.php';
+
+        if (!file_exists($configFile)) {
+            $config = ['base_url' => 'https://yourdomain.com'];
+            return $config;
+        }
+
+        $config = require $configFile;
+
+        // Apply environment-specific overrides if available
+        $environment = getenv('BUILD_ENV') ?: ($_ENV['BUILD_ENV'] ?? 'production');
+        if (isset($config['environments'][$environment])) {
+            $config = array_merge($config, $config['environments'][$environment]);
+        }
+        return $config;
+    }
+
+    private function getSitemapUrl(): string
+    {
+        return $this->getBaseUrl() . '/sitemap.xml';
     }
 
     private function optimizeAutoloader(): void

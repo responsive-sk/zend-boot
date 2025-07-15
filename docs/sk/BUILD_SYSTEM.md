@@ -141,7 +141,14 @@ pnpm install && pnpm run build  # Ak je pnpm dostupný
 npm install && npm run build    # Fallback na npm
 ```
 
-### 4. Vendor optimization
+### 4. Web files setup
+```bash
+# Automaticky vytvorí production robots.txt
+# Optimalizuje .htaccess s cache a security headers
+# Generuje základný sitemap.xml
+```
+
+### 5. Vendor optimization
 ```bash
 # Pre minimal builds
 find vendor/ -name "test*" -type d -exec rm -rf {} +
@@ -160,6 +167,9 @@ export PACKAGE_NAME="my-app"
 
 # Version
 export VERSION="1.0.0"
+
+# Base URL pre sitemap a robots.txt
+export BASE_URL="https://mydomain.com"
 
 # Spustenie s custom nastaveniami
 ./bin/build.sh production
@@ -271,6 +281,104 @@ ls -la build/*/
 ### 4. Deployment test
 ```bash
 # Test na staging prostredí
+```
+
+## Web Files Management
+
+Build systém automaticky spravuje dôležité web súbory:
+
+### robots.txt
+- **Automatická konverzia** z `robots.txt.dist` na production `robots.txt`
+- **Security rules** - blokuje prístup k citlivým adresárom
+- **Sitemap reference** - automaticky pridá odkaz na sitemap.xml
+- **Crawl delay** - optimalizované pre production
+
+```txt
+# Príklad production robots.txt
+User-agent: *
+Allow: /
+
+# Disallow sensitive directories
+Disallow: /config/
+Disallow: /src/
+Disallow: /var/
+Disallow: /vendor/
+
+# Sitemap
+Sitemap: https://yourdomain.com/sitemap.xml
+```
+
+### .htaccess optimalizácie
+- **Security headers** - X-Content-Type-Options, X-Frame-Options, X-XSS-Protection
+- **Cache control** - optimalizované pre static assets (1 rok) a HTML (1 hodina)
+- **Compression** - gzip/deflate pre všetky text súbory
+- **Browser caching** - expires headers pre rôzne typy súborov
+- **Directory protection** - blokuje prístup k citlivým adresárom
+
+### sitemap.xml generovanie
+- **Základný sitemap** - homepage a základné stránky
+- **Automatické lastmod** - aktuálny dátum buildu
+- **Configurable base URL** - cez `BASE_URL` environment variable
+- **SEO optimalizované** - priority a changefreq nastavené
+
+```xml
+<!-- Príklad generovaného sitemap.xml -->
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://yourdomain.com</loc>
+        <lastmod>2025-07-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+</urlset>
+```
+
+### Konfigurácia Base URL
+
+Build systém podporuje 3 spôsoby nastavenia base URL (v poradí priority):
+
+#### 1. Environment variable (najvyššia priorita)
+```bash
+# Priamo pri spustení
+BASE_URL="https://mydomain.sk" ./bin/build.sh production
+
+# Alebo export a potom spustenie
+export BASE_URL="https://mydomain.sk"
+./bin/build.sh production
+```
+
+#### 2. Konfiguračný súbor (odporúčané)
+```bash
+# Skopírujte template
+cp config/build.php.dist config/build.php
+
+# Upravte config/build.php
+```
+
+```php
+<?php
+return [
+    'base_url' => 'https://mydomain.sk',
+
+    'environments' => [
+        'production' => [
+            'base_url' => 'https://mydomain.sk',
+        ],
+        'staging' => [
+            'base_url' => 'https://staging.mydomain.sk',
+        ],
+    ],
+];
+```
+
+#### 3. Environment-specific builds
+```bash
+# Production build
+BUILD_ENV=production ./bin/build.sh production
+
+# Staging build
+BUILD_ENV=staging ./bin/build.sh production
 ```
 
 Nový build systém je plne kompatibilný so slim4-paths v6.0 a pripravený na produkčné použitie!
