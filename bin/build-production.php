@@ -671,7 +671,7 @@ class ProductionBuilder
         $this->log("Creating deployment package...");
 
         $packageFile = "{$this->packageName}_{$this->version}.tar.gz";
-        $packagePath = dirname($this->buildDir) . '/' . $packageFile;
+        $packagePath = getcwd() . '/' . $packageFile;
 
         // Create tarball
         $currentDir = getcwd();
@@ -721,7 +721,7 @@ DotKernel Light - Shared Hosting Deployment Instructions
 ========================================================
 
 Package: {$packageFile}
-Created: {date('Y-m-d H:i:s')}
+Created: " . date('Y-m-d H:i:s') . "
 Build Type: Shared Hosting Minimal
 Compatible with: slim4-paths v6.0
 
@@ -790,7 +790,7 @@ DotKernel Light - Production Deployment Instructions
 ===================================================
 
 Package: {$packageFile}
-Created: {date('Y-m-d H:i:s')}
+Created: " . date('Y-m-d H:i:s') . "
 Build Type: Production
 Compatible with: slim4-paths v6.0
 
@@ -861,7 +861,7 @@ EOF;
     private function displayBuildSummary(): void
     {
         $packageFile = "{$this->packageName}_{$this->version}.tar.gz";
-        $packagePath = dirname($this->buildDir) . '/' . $packageFile;
+        $packagePath = getcwd() . '/' . $packageFile;
         $fileSize    = file_exists($packagePath) ? filesize($packagePath) : false;
         $size        = $fileSize !== false ? $this->formatBytes($fileSize) : 'Unknown';
 
