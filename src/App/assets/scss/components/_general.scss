@@ -69,13 +69,13 @@ a:hover {
 }
 
 p {
-  color: #B1B1B1;
+  color: #666666; /* Improved contrast from #B1B1B1 to #666666 */
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 300;
 }
 
 label {
-  color: #B1B1B1;
+  color: #666666; /* Improved contrast from #B1B1B1 to #666666 */
 }
 
 #wrapper {
@@ -137,12 +137,13 @@ label {
   p {
     margin-bottom: 0;
     font-size: 14px;
+    color: #333333; /* Improved contrast for footer text */
   }
 
   .enjoy {
     margin-bottom: 5px;
     font-size: 20px;
-    color: #3B3B3B;
+    color: #2C2C2C; /* Improved contrast from #3B3B3B to #2C2C2C */
     font-family: 'Montserrat', sans-serif;
     font-weight: 200;
   }

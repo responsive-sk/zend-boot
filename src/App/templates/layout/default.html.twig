@@ -29,10 +29,10 @@
 
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <div class="container">
-                        <a href="/" class="navbar-brand">
+                        <a href="/" class="navbar-brand" aria-label="Go to homepage">
                             <img src="{{ asset('images/app/logo.svg') }}"
                                  onerror="this.onerror=null; this.src='{{ asset('images/app/logo.png') }}';"
-                                 alt="Dotkernel" />
+                                 alt="Dotkernel Light Application Logo" />
                         </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
                                 aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,10 +49,10 @@
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="https://github.com/dotkernel/light/" target="_blank">GitHub</a>
+                                    <a class="nav-link" href="https://github.com/dotkernel/light/" target="_blank" rel="noopener" aria-label="Visit DotKernel Light GitHub repository">GitHub</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="https://docs.dotkernel.org/light-documentation/" target="_blank">Documentation</a>
+                                    <a class="nav-link" href="https://docs.dotkernel.org/light-documentation/" target="_blank" rel="noopener" aria-label="Read DotKernel Light documentation">Documentation</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('app::paths-example') }}">Paths Example</a>
@@ -65,9 +65,9 @@
                             <!-- Theme Toggle -->
                             <div class="d-flex align-items-center">
                                 <span class="me-2 text-muted small">Theme:</span>
-                                <label class="theme-toggle">
-                                    <input type="checkbox" id="themeToggle">
-                                    <span class="slider"></span>
+                                <label class="theme-toggle" for="themeToggle">
+                                    <input type="checkbox" id="themeToggle" aria-label="Toggle between light and dark theme">
+                                    <span class="slider" aria-hidden="true"></span>
                                 </label>
                             </div>
                         </div>
@@ -76,7 +76,7 @@
             </header>
 
             <!-- Content Wrapper. Contains page content -->
-            <div class="app-content content-wrapper">
+            <main class="app-content content-wrapper" role="main">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     {% block page_title %}{% endblock %}
@@ -86,7 +86,7 @@
                 <section class="content">
                     {% block content %}{% endblock %}
                 </section>
-            </div>
+            </main>
 
             <div id="push"></div>
         </div>
@@ -97,7 +97,7 @@
                     enjoy dotkernel
                 </p>
                 <p>
-                    © 2024 - {{ 'now'|date('Y') }} Dotkernel by Apidemia
+                    © 2024 - {{ 'now'|date('Y') }} Mezzio Light Application. All rights reserved. Powered by <a href="https://getmezzio.org/" target="_blank" rel="noopener" aria-label="Visit Mezzio framework website">Mezzio</a>
                 </p>
             </div>
         </footer>
