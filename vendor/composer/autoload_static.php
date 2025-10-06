@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f
+class ComposerStaticInitb16bbf322fbc981b18085021bb33a8cb
 {
     public static $files = array (
         'c9d07b32a2e02bc0fc582d4f0c1b56cc' => __DIR__ . '/..' . '/laminas/laminas-servicemanager/src/autoload.php',
@@ -991,6 +991,7 @@ class ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f
         'PHPUnit\\TextUI\\CliArguments\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/TextUI/Configuration/Cli/Exception.php',
         'PHPUnit\\TextUI\\CliArguments\\XmlConfigurationFileFinder' => __DIR__ . '/..' . '/phpunit/phpunit/src/TextUI/Configuration/Cli/XmlConfigurationFileFinder.php',
         'PHPUnit\\TextUI\\Command\\AtLeastVersionCommand' => __DIR__ . '/..' . '/phpunit/phpunit/src/TextUI/Command/Commands/AtLeastVersionCommand.php',
+        'PHPUnit\\TextUI\\Command\\CheckPhpConfigurationCommand' => __DIR__ . '/..' . '/phpunit/phpunit/src/TextUI/Command/Commands/CheckPhpConfigurationCommand.php',
         'PHPUnit\\TextUI\\Command\\Command' => __DIR__ . '/..' . '/phpunit/phpunit/src/TextUI/Command/Command.php',
         'PHPUnit\\TextUI\\Command\\GenerateConfigurationCommand' => __DIR__ . '/..' . '/phpunit/phpunit/src/TextUI/Command/Commands/GenerateConfigurationCommand.php',
         'PHPUnit\\TextUI\\Command\\ListGroupsCommand' => __DIR__ . '/..' . '/phpunit/phpunit/src/TextUI/Command/Commands/ListGroupsCommand.php',
@@ -1480,9 +1481,9 @@ class ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitaccc02ead8b0cb47ee2d4d631cc9021f::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitb16bbf322fbc981b18085021bb33a8cb::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitb16bbf322fbc981b18085021bb33a8cb::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitb16bbf322fbc981b18085021bb33a8cb::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -6,6 +6,7 @@ namespace App\Template;
 
 use Mezzio\Template\TemplateRendererInterface;
 use Mezzio\Template\TemplatePath;
+use Psr\SimpleCache\CacheInterface;
 
 class PhpRenderer implements TemplateRendererInterface
 {
@@ -13,6 +14,9 @@ class PhpRenderer implements TemplateRendererInterface
     private array $paths = [];
     /** @var array<string, mixed> */
     private array $defaultParams = [];
+    private ?CacheInterface $cache = null;
+    private bool $cacheEnabled = false;
+    private int $cacheTtl = 3600;
 
     /**
      * @param array<string, mixed> $config
@@ -22,6 +26,23 @@ class PhpRenderer implements TemplateRendererInterface
         if (isset($config['paths']) && is_array($config['paths'])) {
             $this->paths = $config['paths'];
         }
+    }
+
+    /**
+     * Set cache service for template caching
+     */
+    public function setCache(CacheInterface $cache, int $ttl = 3600): void
+    {
+        $this->cache = $cache;
+        $this->cacheTtl = $ttl;
+    }
+
+    /**
+     * Enable or disable template caching
+     */
+    public function enableCache(bool $enabled = true): void
+    {
+        $this->cacheEnabled = $enabled && $this->cache !== null;
     }
 
     /**
@@ -37,6 +58,16 @@ class PhpRenderer implements TemplateRendererInterface
         $defaultParams = $this->defaultParams;
         $params = array_merge($defaultParams, $params);
 
+        // Check cache if enabled
+        if ($this->cacheEnabled && $this->cache) {
+            $cacheKey = $this->getCacheKey($name, $params);
+            $cachedContent = $this->cache->get($cacheKey);
+
+            if ($cachedContent !== null) {
+                return $cachedContent;
+            }
+        }
+
         // Parse template name (namespace::template)
         if (strpos($name, '::') !== false) {
             [$namespace, $template] = explode('::', $name, 2);
@@ -49,7 +80,15 @@ class PhpRenderer implements TemplateRendererInterface
             throw new \RuntimeException("Template '{$name}' not found");
         }
 
-        return $this->renderTemplate($templatePath, $params);
+        $content = $this->renderTemplate($templatePath, $params);
+
+        // Store in cache if enabled
+        if ($this->cacheEnabled && $this->cache) {
+            $cacheKey = $this->getCacheKey($name, $params);
+            $this->cache->set($cacheKey, $content, $this->cacheTtl);
+        }
+
+        return $content;
     }
 
     public function addPath(string $path, ?string $namespace = null): void
@@ -87,6 +126,31 @@ class PhpRenderer implements TemplateRendererInterface
             $this->defaultParams[$templateName] = [];
         }
         $this->defaultParams[$templateName][$param] = $value;
+    }
+
+    /**
+     * Clear template cache for specific template
+     */
+    public function clearTemplateCache(string $name, array $params = []): bool
+    {
+        if ($this->cacheEnabled && $this->cache) {
+            $cacheKey = $this->getCacheKey($name, $params);
+            return $this->cache->delete($cacheKey);
+        }
+
+        return false;
+    }
+
+    /**
+     * Clear all template cache
+     */
+    public function clearAllCache(): bool
+    {
+        if ($this->cacheEnabled && $this->cache) {
+            return $this->cache->clear();
+        }
+
+        return false;
     }
 
     private function findTemplate(string $namespace, string $template): ?string
@@ -132,5 +196,12 @@ class PhpRenderer implements TemplateRendererInterface
         }
 
         return $content;
+    }
+
+    private function getCacheKey(string $name, array $params): string
+    {
+        $paramHash = md5(serialize($params));
+        $templateHash = md5($name . serialize($this->paths));
+        return "template.{$templateHash}.{$paramHash}";
     }
 }

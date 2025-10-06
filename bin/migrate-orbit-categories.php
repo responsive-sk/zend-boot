@@ -8,8 +8,17 @@
 
 declare(strict_types=1);
 
+// Load paths configuration
 $rootDir = dirname(__DIR__);
-$dbPath = $rootDir . '/data/orbit.db';
+require_once $rootDir . '/vendor/autoload.php';
+
+// Get paths configuration
+$paths = require $rootDir . '/config/paths.php';
+$dbPath = $paths->getPath($paths->base(), $paths->get('orbit_db'));
+$dataDir = dirname($dbPath);
+
+// Make paths global for functions
+global $paths;
 
 if (!file_exists($dbPath)) {
     echo "❌ Orbit databáza neexistuje. Spusti najprv: php bin/migrate-orbit-db.php\n";

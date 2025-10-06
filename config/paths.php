@@ -87,12 +87,6 @@ $customPaths = [
     'user_db' => 'var/storage/user.db',
     'system_db' => 'var/storage/system.db',
 
-    // === LEGACY COMPATIBILITY (DEPRECATED - USE VAR/) ===
-    'legacy_data' => 'data',
-    'legacy_cache' => 'data/cache',
-    'legacy_uploads' => 'data/uploads',
-    'legacy_db' => 'data',
-
     // === PACKAGES ===
     'packages' => 'packages',
     'slim4_paths' => 'packages/slim4-paths',

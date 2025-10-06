@@ -7,92 +7,24 @@ namespace App\Boot;
 /**
  * HDM Boot Protocol - Environment Handler
  *
- * Handles environment setup and validation
+ * Basic environment detection
  */
 class EnvironmentHandler
 {
     /**
      * Setup environment for web server
-     * @return bool Returns false for static files on built-in server
      */
     public static function setupWebEnvironment(): bool
     {
         // Handle built-in PHP server static files
-        if (self::isBuiltInServer() && !self::isPhpScript()) {
-            return false; // Let PHP built-in server handle static files
+        if (PHP_SAPI === 'cli-server') {
+            $scriptFilename = $_SERVER['SCRIPT_FILENAME'] ?? '';
+            if (!str_ends_with($scriptFilename, '.php')) {
+                return false; // Let PHP server handle static files
+            }
         }
-
-        // Change to project root
-        self::changeToProjectRoot();
-
-        // Set error reporting based on environment
-        self::configureErrorReporting();
 
         return true;
-    }
-
-    /**
-     * Check if running on built-in PHP server
-     */
-    private static function isBuiltInServer(): bool
-    {
-        return PHP_SAPI === 'cli-server';
-    }
-
-    /**
-     * Check if current request is for a PHP script
-     */
-    private static function isPhpScript(): bool
-    {
-        $scriptFilename = $_SERVER['SCRIPT_FILENAME'] ?? '';
-        return str_ends_with($scriptFilename, 'index.php') || str_ends_with($scriptFilename, '.php');
-    }
-
-    /**
-     * Change working directory to project root using Paths service
-     */
-    private static function changeToProjectRoot(): void
-    {
-        // Load paths configuration to get project root
-        $paths = require dirname(__DIR__, 2) . '/config/paths.php';
-        chdir($paths->base());
-    }
-
-    /**
-     * Configure error reporting based on environment
-     */
-    private static function configureErrorReporting(): void
-    {
-        // Default to production mode for security
-        $environment = 'production';
-
-        // Check if development mode is enabled via Laminas development mode
-        if (file_exists('config/development.config.php')) {
-            $environment = 'development';
-        }
-
-        switch ($environment) {
-            case 'development':
-            case 'dev':
-                error_reporting(E_ALL);
-                ini_set('display_errors', '1');
-                break;
-
-            case 'testing':
-            case 'test':
-                error_reporting(E_ALL);
-                ini_set('display_errors', '0');
-                ini_set('log_errors', '1');
-                break;
-
-            case 'production':
-            case 'prod':
-            default:
-                error_reporting(E_ERROR | E_WARNING | E_PARSE);
-                ini_set('display_errors', '0');
-                ini_set('log_errors', '1');
-                break;
-        }
     }
 
     /**
@@ -100,12 +32,7 @@ class EnvironmentHandler
      */
     public static function getEnvironment(): string
     {
-        // Check if development mode is enabled via Laminas development mode
-        if (file_exists('config/development.config.php')) {
-            return 'development';
-        }
-
-        return 'production';
+        return $_ENV['APP_ENV'] ?? $_SERVER['APP_ENV'] ?? 'production';
     }
 
     /**
@@ -129,7 +56,22 @@ class EnvironmentHandler
      */
     public static function isTesting(): bool
     {
-        // Testing mode can be detected by PHPUnit environment
-        return defined('PHPUNIT_COMPOSER_INSTALL') || getenv('PHPUNIT_RUNNING') === 'true';
+        return self::getEnvironment() === 'testing';
+    }
+
+    /**
+     * Get cache TTL based on environment
+     */
+    public static function getCacheTtl(string $cacheType = 'default'): int
+    {
+        return self::isProduction() ? 3600 : 60;
+    }
+
+    /**
+     * Check if caching should be enabled
+     */
+    public static function isCacheEnabled(): bool
+    {
+        return self::isProduction();
     }
 }

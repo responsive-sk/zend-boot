@@ -29,6 +29,79 @@ class UnifiedPathService implements PathServiceInterface
     }
 
     // ========================================
+    // CACHE PATH METHODS - HDM Boot Protocol
+    // ========================================
+
+    /**
+     * Get cache directory path with enhanced functionality
+     */
+    public function cache(string $filename = ''): string
+    {
+        $cachePath = $this->paths->getPath($this->paths->get('cache'), $filename);
+
+        // Ensure cache directory exists and is writable
+        if ($filename === '' && !is_dir($cachePath)) {
+            if (!mkdir($cachePath, 0755, true) && !is_dir($cachePath)) {
+                throw new \RuntimeException("Failed to create cache directory: {$cachePath}");
+            }
+
+            // Set proper permissions for cache directory
+            chmod($cachePath, 0755);
+        }
+
+        return $cachePath;
+    }
+
+    /**
+     * Get cache file path with namespace support
+     */
+    public function cacheFile(string $namespace, string $key): string
+    {
+        $safeNamespace = preg_replace('/[^a-zA-Z0-9_-]/', '_', $namespace);
+        $safeKey = md5($key);
+
+        // Create namespace directory if it doesn't exist
+        $namespaceDir = $this->cache($safeNamespace);
+        if (!is_dir($namespaceDir)) {
+            mkdir($namespaceDir, 0755, true);
+        }
+
+        return $this->cache("{$safeNamespace}/{$safeKey}.cache");
+    }
+
+    /**
+     * Get config cache path
+     */
+    public function configCache(): string
+    {
+        return $this->cache('config-cache.php');
+    }
+
+    /**
+     * Get template cache path
+     */
+    public function templateCache(): string
+    {
+        return $this->cache('templates');
+    }
+
+    /**
+     * Get route cache path
+     */
+    public function routeCache(): string
+    {
+        return $this->cache('routes.cache');
+    }
+
+    /**
+     * Get compiled templates path
+     */
+    public function compiledTemplates(): string
+    {
+        return $this->cache('compiled-templates');
+    }
+
+    // ========================================
     // HDM Boot Protocol Storage Methods
     // ========================================
 
@@ -46,14 +119,6 @@ class UnifiedPathService implements PathServiceInterface
     public function logs(string $filename = ''): string
     {
         return $this->paths->getPath($this->paths->get('logs'), $filename);
-    }
-
-    /**
-     * Get cache directory path
-     */
-    public function cache(string $filename = ''): string
-    {
-        return $this->paths->getPath($this->paths->get('cache'), $filename);
     }
 
     /**
@@ -216,8 +281,6 @@ class UnifiedPathService implements PathServiceInterface
     // ========================================
     // Core Path Resolution Methods
     // ========================================
-
-
 
     /**
      * Ensure required directories exist
